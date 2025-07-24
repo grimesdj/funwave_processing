@@ -32,15 +32,15 @@ for jj = 1:Ndirs
     % 1) get current run subdirectory to process:
     runID    = run_dirs{jj};
     % 2) get the archived info structure:
-    infoFile = dir([runBathy,'*','info','*',runID,'.mat']);
+    infoFile = dir([matDIR,filesep,'*','info','*',runID,'.mat']);
     if length(infoFile)>1
-        fprintf('multiple run-info files for: %s\n',runID)
-        fprintf('using filename: %s\n',infoFile(1).name);
+        fprintf('\tmultiple run-info files for:\t %s\n',runID)
+        fprintf('\tusing filename:\t\t\t %s\n',infoFile(1).name);
     end
     info  = load([infoFile(1).folder,filesep,infoFile(1).name]);
     %
     % 3) load the output times and dts
-    info.timeFile = [info.rootOut,'time_dt.out'];
+    info.timeFile = [info.rootSim,'time_dt.out'];
     save(info.fileName,'-struct','info')
     Tdt = load(info.timeFile);
     t   = Tdt(:,1);
@@ -49,7 +49,7 @@ for jj = 1:Ndirs
     %
     % 4) convert the funwave output ascii files to .mat
     fLog = convert_funwave_output_to_mat(info.rootOut,[info.rootMat,info.rootName],vars,t,dT,1,1,rmfiles,300)
-
+    
 
 
 end
