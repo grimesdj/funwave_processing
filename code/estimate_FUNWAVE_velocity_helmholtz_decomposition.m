@@ -90,6 +90,10 @@ t0   = t(1);
 dt   = median(diff(t));
 Navg   = 30;
 Nplt   = 10;
+%
+if ~exist([info.rootSim,filesep,'figures'],'file')
+    eval('!mkdir -p ', [info.rootSim,filesep,'figures'])
+end
 vidName= sprintf([info.rootSim,filesep,'figures',filesep,info.rootName,'vorticity_avg%ds'],round(Navg*dt));
 % $$$ vidName1= sprintf([info.rootSim,filesep,'figures',filesep,info.rootName,'rotational_streamfunction_avg%ds'],round(Navg*dt));
 %

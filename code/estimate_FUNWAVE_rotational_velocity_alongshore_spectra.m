@@ -317,7 +317,7 @@ f2ax1.YAxis.Scale='log';
 grid(f2ax1,'on')
 %
 f2ax2  = axes('units','centimeters','position',ppos1);
-loglog(f2ax2,xp,sqrt(sum(VORT_spec_binned,1)*dk,'-k','linewidth',2)
+loglog(f2ax2,xp,sqrt(sum(VORT_spec_binned,1)*dk),'-k','linewidth',2)
 hold(f2ax2,'on')
 xlabel(f2ax2,' $x$~[m]','interpreter','latex')
 ylabel(f2ax2,'$\sigma_{\omega}$~[(1/s)]','interpreter','latex','fontsize',12)
