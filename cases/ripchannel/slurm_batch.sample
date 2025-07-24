@@ -1,0 +1,22 @@
+### RUN-SPECIFIC HEADER MATERIAL ######
+###!/bin/bash
+### Create Array of Run Directories
+### run_dirs=("run_dir_1" "run_dir_2" "run_dir_3")
+
+ulimit -s unlimited
+# loop through dirs and submit
+for dir in "${run_dirs[@]}"; do
+    job_name="${dir##*_}"
+    output_file="$dir.out"
+
+sbatch --time=20160 \
+       --job-name="$job_name" \
+       --output="$output_file" \
+       --chdir="$dir" \
+       --ntasks=128\
+       --cpus-per-task=1\
+       --mail-user=coastesthydro@gmail.com \
+       --mail-type=BEGIN,END,FAIL       \
+       mpirun -n 128 ../../../software/funwave/funwave--mpiifort-parallel-double input.txt
+
+done
