@@ -25,10 +25,18 @@ avg_xsl   = round(mean(xsl));
 mask0     = info.mask;
 %
 % full alongshore domain
-iX = find(x0>=75  & x0<=525);
-nx = length(iX);
-ny = length(y0);
-subDomain = [1 ny iX(1) iX(end)];
+if ~isfield(info,'subDomain')
+    iX = find(x0>=0  & x0<=400);
+    nx = length(iX);
+    ny = length(y0);
+    subDomain = [1 ny iX(1) iX(end)];
+else
+    subDomain = info.subDomain;
+end
+% $$$ iX = find(x0>=25  & x0<=525);
+% $$$ nx = length(iX);
+% $$$ ny = length(y0);
+% $$$ subDomain = [1 ny iX(1) iX(end)];
 %
 % [u,v,x,y,h,t,mask] = load_funwave_u_v(info.rootMat,info.rootName,info.bathyFile,subDomain);
 % map bottom points to eta points
@@ -261,7 +269,7 @@ clims    = vel_range/2*[-1 1];
 clrs     = clims(1):diff(clims)/255:clims(2);
 cm       = cmocean('balance');
 fig1 = figure;
-a1 = subplot(1,2,1)
+a1 = subplot(1,2,1);
 imagesc(x,y,Urot_avg,clims),colormap(cm),caxis(clims)
 xlabel(a1,'crosshore [m]','interpreter','latex')
 ylabel(a1,'alongshore [m]','interpreter','latex')
@@ -285,7 +293,7 @@ clims    = vel_range/2*[-1 1];
 clrs     = clims(1):diff(clims)/255:clims(2);
 cm       = cmocean('balance');
 fig1v2 = figure;
-a1 = subplot(1,2,1)
+a1 = subplot(1,2,1);
 imagesc(x,y,U_avg,clims),colormap(cm),caxis(clims)
 xlabel(a1,'crosshore [m]','interpreter','latex')
 ylabel(a1,'alongshore [m]','interpreter','latex')
@@ -317,6 +325,34 @@ set(f0l1,'location','northeast','interpreter','latex')
 set(gca,'xlim',[75 525],'ticklabelinterpreter','latex','tickdir','out')
 exportgraphics(fig2,[info.rootSim,filesep,'figures',filesep,info.rootName,'Erot_eddy_kinetic_energy.pdf'])
 %
+% make a (U,V) hovmoller plot at xsl+100m...
+ix = find(x-xsl_avg>=125,1,'first');
+t           = ROT.t;
+HOVMOLLER_U = squeeze(ROT.Urot(1:ny,ix,:));
+HOVMOLLER_V = squeeze(ROT.Vrot(1:ny,ix,:));
+%
+vel_range = max(sqrt(Eddy(:)));
+clims    = vel_range*[-1 1];
+clrs     = clims(1):diff(clims)/255:clims(2);
+cm       = cmocean('balance');
+fig2v2 = figure;
+a1 = subplot(1,2,1);
+imagesc(t,y,HOVMOLLER_U,clims),colormap(cm),caxis(clims)
+xlabel(a1,'time [s]','interpreter','latex')
+ylabel(a1,'alongshore [m]','interpreter','latex')
+title('$U_\mathrm{rot}$','interpreter','latex')
+set(a1,'xlim',[75 500],'ticklabelinterpreter','latex','tickdir','out','ydir','normal')
+a2 = subplot(1,2,2);
+imagesc(t,y,HOVMOLLER_V,clims),colormap(cm),caxis(clims)
+xlabel(a2,'time [s]','interpreter','latex')
+ylabel(a2,'alongshore [m]','interpreter','latex')
+title(a2,'$V_\mathrm{rot}$','interpreter','latex')
+set(a2,'xlim',[75 500],'ticklabelinterpreter','latex','tickdir','out','ydir','normal')
+a3 = axes('position',[0.85 0.15 0.025 0.2]);
+imagesc(0,clrs,reshape(cm,256,1,3))
+ylabel(a3,'[m/s]~~','rotation',0,'interpreter','latex','horizontalalignment','right')
+set(a3,'ticklabelinterpreter','latex','fontsize',10,'tickdir','out','xtick',[])
+exportgraphics(fig1v2,[info.rootSim,filesep,'figures',filesep,info.rootName,'HOVMOLLER_U_V.pdf'])
 %
 close all
 %

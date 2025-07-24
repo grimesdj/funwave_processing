@@ -33,12 +33,12 @@ Iy = sum(Fy,3,'omitnan')*dt;
 [curlI0,cav] = curl(xx,yy,Ix,Iy);
 %
 % along/cross-shore average to de-alias the under-resolved propagation
-Nfx = round(5/dx); if iseven(Nfx), Nfx = Nfx+1; end
+Nfx = round(info.dt*sqrt(info.Hs*9.8)/dx); if iseven(Nfx), Nfx = Nfx+1; end
 FILT= hamming(Nfx); FILT = FILT/sum(FILT);
 %
 curlI = conv2(curlI0,FILT*FILT','same');
 %
-VORT = rot_vel.VORT(:,:,[1 end]);
+VORT  = rot_vel.VORT(:,:,[1 end]);
 dVORT = diff(VORT,1,3).*info.mask;
 %
 %
@@ -82,8 +82,14 @@ exportgraphics(fig0,[info.rootSim,filesep,'figures',filesep,info.rootName,'rotat
 % map to alongshore uniform coordinates and estimate spectra
 % 4b) plot y-avg[], y-rms[], and y-spectra[] of Prot_avg
 % first, map to shoreline coordinates
-curlI_yavg = griddata(x_map,yy,curlI,xx,yy);
-dVORT_yavg = griddata(x_map,yy,dVORT,xx,yy);
+if std(xsl)>=3
+    fprintf('\tmapping to shoreline coordinates\n')
+    curlI_yavg = griddata(x_map,yy,curlI,xx,yy);
+    dVORT_yavg = griddata(x_map,yy,dVORT,xx,yy);
+else
+    curlI_yavg = curlI;
+    dVORT_yavg = dVORT;
+end
 % estimate spectra
 [coh,ky,curlI_spec,dVORT_spec,curlI_dVORT_cospec] = alongshore_coherence_estimate(info,curlI_yavg,dVORT_yavg);
 % $$$ [curlI_spec,ky] = alongshore_spectra_estimate(info,curlI_yavg);
@@ -277,7 +283,12 @@ exportgraphics(fig0,[info.rootSim,filesep,'figures',filesep,info.rootName,'rotat
 %
 % 4b) plot y-avg[], y-rms[], and y-spectra[] of Prot_avg
 % first, map to shoreline coordinates
-Prot_avg_yavg = griddata(x_map,yy,Prot_avg,xx,yy);
+if std(xsl)>=3
+    fprintf('\tmapping to shoreline coordinates\n')
+    Prot_avg_yavg = griddata(x_map,yy,Prot_avg,xx,yy);
+else
+    Prot_avg_yavg = Prot_avg;    
+end
 % estimate spectra
 [Prot_avg_spec,ky] = alongshore_spectra_estimate(info,Prot_avg_yavg);
 % estimate y-rms
@@ -422,7 +433,12 @@ for jj=1:Nframes
     %
     % now estimate alongshore stats on the wave-average
     % first, map to shoreline coordinates
-    Prot_var_yavg_tmp = griddata(x_map,yy,Prot_var_smooth,xx,yy);
+    if std(xsl)>=3
+        fprintf('\tmapping to shoreline coordinates\n')
+        Prot_var_yavg_tmp = griddata(x_map,yy,Prot_var_smooth,xx,yy);
+    else
+        Prot_var_yavg_tmp = Prot_var_smooth;
+    end
     % estimate spectra
     [Prot_var_spec_tmp,~] = alongshore_spectra_estimate(info,Prot_var_yavg_tmp);
     % estimate y-rms
@@ -644,7 +660,12 @@ exportgraphics(fig0,[info.rootSim,filesep,'figures',filesep,info.rootName,'rotat
 xsl        = info.x_shoreline';
 x_map      = x-xsl;
 [xx,yy]    = meshgrid(x-mean(xsl),y);
-Eavg_map   = griddata(x_map,yy,Eavg,xx,yy);
+if std(xsl)>=3
+    fprintf('\tmapping to shoreline coordinates\n')
+    Eavg_map   = griddata(x_map,yy,Eavg,xx,yy);
+else
+    Eavg_map   = Eavg;
+end
 %
 alims = [-25 325 0 1500];
 clims = [-1 1]*1e-2;

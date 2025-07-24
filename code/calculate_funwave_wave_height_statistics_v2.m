@@ -91,6 +91,11 @@ else
 end
 xsl = x(ixsl);
 %
+% $$$ % map to alongshore uniform domain
+% $$$ x_map   = x-xsl;
+% $$$ [xx,yy] = meshgrid(x-mean(xsl),waves.y);
+% $$$ Hs_map  = griddata( x_map, repmat(y,1,length(x)),Hs_xy,xx,yy);
+%
 %
 % $$$ cm = cmocean('ballance');
 % $$$ figure

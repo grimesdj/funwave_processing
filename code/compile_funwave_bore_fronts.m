@@ -78,7 +78,7 @@ r0 = 5;% this is 2.5m in x, and 5m in y (dx=0.5,dy=1) meters
 % for cross shore bin averages
 if ~exist('Xbins','var');
     db = 2;
-    Xbins = [75:db:250];
+    Xbins = [25:db:250];
 else
     db = Xbins(2)-Xbins(1);
 end

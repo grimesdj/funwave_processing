@@ -4,7 +4,7 @@ function info = estimate_FUNWAVE_run_wave_stats(info);
 %
 % calculate wave frequency spectra, wave height, front statistics
 % and breaking-wave rotational forcing. Analysis is limited to the region:
-%       75 m <= x <=  575 m
+%       25 m <= x <=  400 m
 %     -200 m <= y <= 1300 m
 % get the input (x,y,h) grid file
 load(info.bathyFile)
@@ -13,10 +13,14 @@ y0=y;
 h0=h;
 %
 % full alongshore domain
-iX = find(x0>=75  & x0<=525);
-nx = length(iX);
-ny = length(y0);
-subDomain = [1 ny iX(1) iX(end)];
+if ~isfield(info,'subDomain')
+    iX = find(x0>=0  & x0<=400);
+    nx = length(iX);
+    ny = length(y0);
+    subDomain = [1 ny iX(1) iX(end)];
+else
+    subDomain = info.subDomain;
+end
 %
 if ~all(ismember('first30sec',info.runName))
 %

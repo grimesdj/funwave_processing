@@ -10,10 +10,14 @@ y0=y;
 h0=h;
 %
 % full alongshore domain
-iX = find(x0>=75  & x0<=525);
-nx = length(iX);
-ny = length(y0);
-subDomain = [1 ny iX(1) iX(end)];
+if ~isfield(info,'subDomain')
+    iX = find(x0>=0  & x0<=400);
+    nx = length(iX);
+    ny = length(y0);
+    subDomain = [1 ny iX(1) iX(end)];
+else
+    subDomain = info.subDomain;
+end
 %
 % map bottom points to eta points
 x = x(subDomain(3):subDomain(4));
@@ -50,10 +54,17 @@ VORT_avg = mean(VORT,3,'omitnan');
 %
 % 4b) plot y-avg[], y-rms[], and y-spectra[] of Prot_avg
 % first, map to shoreline coordinates
-Urot_avg_map = griddata(x_map,yy,Urot_avg,xx,yy);
-Vrot_avg_map = griddata(x_map,yy,Vrot_avg,xx,yy);
-VORT_avg_map = griddata(x_map,yy,VORT_avg,xx,yy);
-% estimate spectra
+if std(xsl)>=3
+    fprintf('\tmapping to shoreline coordinates\n')
+    Urot_avg_map = griddata(x_map,yy,Urot_avg,xx,yy);
+    Vrot_avg_map = griddata(x_map,yy,Vrot_avg,xx,yy);
+    VORT_avg_map = griddata(x_map,yy,VORT_avg,xx,yy);
+else
+    Urot_avg_map = Urot_avg;
+    Vrot_avg_map = Vrot_avg;
+    VORT_avg_map = VORT_avg;
+end
+    % estimate spectra
 [Urot_avg_spec,ky] = alongshore_spectra_estimate(info,Urot_avg_map);
 [Vrot_avg_spec,ky] = alongshore_spectra_estimate(info,Vrot_avg_map);
 [VORT_avg_spec,ky] = alongshore_spectra_estimate(info,VORT_avg_map);
@@ -69,12 +80,20 @@ Urot_spec     = nan(Nk,Nx,Nt);
 Vrot_spec     = nan(Nk,Nx,Nt);
 VORT_spec     = nan(Nk,Nx,Nt);
 KEflux        = nan(Nx,Nt);
+%
 for jj = 1:Nt
     % 4b) plot y-avg[], y-rms[], and y-spectra[] of Prot_avg
-    % first, map to shoreline coordinates
-    Urot_map = griddata(x_map,yy,Urot(:,:,jj)-Urot_avg,xx,yy);
-    Vrot_map = griddata(x_map,yy,Vrot(:,:,jj)-Vrot_avg,xx,yy);
-    VORT_map = griddata(x_map,yy,VORT(:,:,jj)-VORT_avg,xx,yy);
+    % first, map to shoreline coordinates if std(xsl)>3m (FRF shorelines can be crazy)
+    if std(xsl)>=3
+        fprintf('\tmapping to shoreline coordinates\n')
+        Urot_map = griddata(x_map,yy,Urot(:,:,jj)-Urot_avg,xx,yy);
+        Vrot_map = griddata(x_map,yy,Vrot(:,:,jj)-Vrot_avg,xx,yy);
+        VORT_map = griddata(x_map,yy,VORT(:,:,jj)-VORT_avg,xx,yy);
+    else
+        Urot_map = Urot(:,:,jj)-Urot_avg;
+        Vrot_map = Vrot(:,:,jj)-Vrot_avg;
+        VORT_map = VORT(:,:,jj)-VORT_avg;
+    end
     % estimate spectra
     [Utmp_spec,ky] = alongshore_spectra_estimate(info,Urot_map);
     [Vtmp_spec,ky] = alongshore_spectra_estimate(info,Vrot_map);
