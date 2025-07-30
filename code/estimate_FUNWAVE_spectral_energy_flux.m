@@ -125,13 +125,14 @@ semilogx(ax,ky,real(Pavg))
 grid on
 xlabel(ax,'$k_y$ [m$^{-1}$]','interpreter','latex')
 ylabel(ax,'$\Pi(k_y,x)$ [m$^{2}$s$^{-3}/k_y$]','interpreter','latex')
+title(info.runName,'interpreter','latex')
 set(ax,'ColorOrder',cm,'xtick',[1e-3 1e-2 1e-1],'xlim',[1e-3 1e-1],...
        'tickdir','out','ticklabelinterpreter','latex')
 %
 % get title string
-subdirs = split(info.rootSim,'/');
-runID   = subdirs{end-1};
-title(ax,runID,'interpreter','latex')
+% $$$ subdirs = split(info.rootSim,'/');
+% $$$ runID   = subdirs{end-1};
+% $$$ title(ax,runID,'interpreter','latex')
 %
 %
 cb  = axes('units','centimeters','position',cbpos);

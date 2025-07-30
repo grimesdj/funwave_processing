@@ -181,9 +181,8 @@ end
 ylabel(f0ax0,'$S_{\langle u\rangle,\langle u\rangle}$~[(m/s)$^2$/$\Delta k$]','interpreter','latex','fontsize',12)
 % f0l1  = legend(p0,'$S_{u,u}$');
 % set(f0l1,'interpreter','latex','fontsize',12)
+title(info.runName,'interpreter','latex')
 set(f0ax0,'tickdir','out','ticklabelinterpreter','latex','xlim',-25+[0 300],'xticklabel',[],'xlim',[ky(2) min(1,ky(end))])
-f0ax0.XAxis.Scale='log';
-f0ax0.YAxis.Scale='log';
 grid(f0ax0,'on')
 %
 % y-avg & y-rms fields
@@ -247,6 +246,7 @@ end
 ylabel(f0ax0,'$S_{u,u}$~[(m/s)$^2$/$\Delta k$]','interpreter','latex','fontsize',12)
 % f0l1  = legend(p0,'$S_{u,u}$');
 % set(f0l1,'interpreter','latex','fontsize',12)
+title(info.runName,'interpreter','latex')
 set(f0ax0,'tickdir','out','ticklabelinterpreter','latex','xlim',-25+[0 300],'xticklabel',[],'xlim',[ky(2) min(1,ky(end))])
 f0ax0.XAxis.Scale='log';
 f0ax0.YAxis.Scale='log';
@@ -263,6 +263,7 @@ end
 ylabel(f0ax1,'$S_{v,v}$','interpreter','latex','fontsize',12)
 %f0l1  = legend(p1,'');
 % set(f0l1,'interpreter','latex','fontsize',12)
+title(info.runName,'interpreter','latex')
 set(f0ax1,'tickdir','out','ticklabelinterpreter','latex','xlim',-25+[0 300],'xticklabel',[],'xlim',[ky(2) min(1,ky(end))])
 f0ax1.XAxis.Scale='log';
 f0ax1.YAxis.Scale='log';
@@ -319,6 +320,7 @@ p0 = plot(f2ax0,xp,sqrt(sum(Urot_avg_spec_binned,1)*dk),'-r',xp,sqrt(sum(Vrot_av
 ylabel(f2ax0,'$\sigma$~[m/s]','interpreter','latex','fontsize',12)
 f2l1  = legend(p0,'$\langle u\rangle$','$\langle v\rangle$');
 set(f2l1,'interpreter','latex','fontsize',12)
+title(info.runName,'interpreter','latex')
 set(f2ax1,'tickdir','out','ticklabelinterpreter','latex','xlim',-25+[0 300],'xticklabel',[],'xlim',[ky(2) min(1,ky(end))])
 f2ax0.XAxis.Scale='log';
 f2ax0.YAxis.Scale='log';

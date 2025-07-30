@@ -77,7 +77,7 @@ for jj = 1:nv
         fin = [rin,files(kk).name];
         if ( (kk==1 | flag) & ~isBINARY )
             % read in first file to get domain dimensions
-            dum = load(fin);
+            dum = load(fin,'-ascii');
             [ny,nx] = size(dum);
             %
             % if only partially saving variables...
@@ -102,7 +102,7 @@ for jj = 1:nv
             dum = dum';% so I'm transposing so rows are y-coord and columns are x-coord
             fclose(fid);
         else
-            dum = load(fin);
+            dum = load(fin,'-ascii');
         end
         eval([var,'(:,:,kk-Nk*Nt)=(dum(1:dy:ny,1:dx:nx));']),
         if (kk-Nk*Nt)==Nt

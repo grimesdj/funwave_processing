@@ -61,6 +61,7 @@ imagesc(f0ax1,y',xp',curlI'), caxis(f0ax1,clims), colormap(f0ax1,cm),
 hold(f0ax1,'on'), plot(f0ax1,y,xsl-mean(xsl),'--k')
 ylabel(f0ax1,'$x$ [m]','interpreter','latex')
 text(f0ax1,1250,145,'c) $\nabla\times \Sigma \vec{F}_\mathrm{br}\,\Delta t$','interpreter','latex','fontsize',12)
+title(info.runName,'interpreter','latex')
 set(f0ax1,'tickdir','out','ticklabelinterpreter','latex','ylim',-25+[0 200],'ydir','normal','xdir','reverse','xticklabel',[])
  % product of means
 f0ax2  = axes('units','centimeters','position',ppos1);
@@ -132,6 +133,7 @@ ylabel(f1ax1,'$\mathrm{rms}_y(\cdot)$~[1/s]','interpreter','latex')
 f1ax1.YAxis.Exponent=-2;
 f1l1  = legend('$\Delta \omega_z$','$\nabla\times \Sigma \vec{F}_\mathrm{br}$');
 set(f1l1,'interpreter','latex','fontsize',12)
+title(info.runName,'interpreter','latex')
 set(f1ax1,'tickdir','out','ticklabelinterpreter','latex','xlim',-25+[0 300])
 %
 f1ax2  = axes('units','centimeters','position',ppos1);
@@ -198,6 +200,7 @@ f2ax2.XAxis.Scale='log';
 xlabel(f2ax2,' $k_y$~[m$^{-1}$]','interpreter','latex')
 ylabel(f2ax2,' [1/s]','interpreter','latex')
 grid(f2ax2,'on')
+title(info.runName,'interpreter','latex')
 set(f2ax2,'tickdir','out','ticklabelinterpreter','latex','box','on','ylim',[0 1])
 %
 f2cb = axes('units','centimeters','position',cbpos);

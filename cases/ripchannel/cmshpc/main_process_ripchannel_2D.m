@@ -3,7 +3,7 @@
 runBATHYlist = {'planar2D'};
 reproc  = 1;% 1=reprocess ascii to mat
 rmfiles = 0;% 1=remove original ascii files when finished
-for ii=1:length(runBATHYs)
+for ii=1:length(runBATHYlist)
 runBATHY = runBATHYlist{ii};
 %
 runDIR   = ['/scratch/grimesdj/ripchannel/',runBATHY];
@@ -41,7 +41,7 @@ for jj = 1:Ndirs
     end
     info  = load([infoFile(1).folder,filesep,infoFile(1).name]);
     %
-    if reproc
+    if reproc & jj>1
         % 3) load the output times and dts
         info.timeFile = [info.rootSim,'time_dt.out'];
         Tdt = load(info.timeFile);
@@ -49,6 +49,7 @@ for jj = 1:Ndirs
         dt  = gradient(t);
         dT  = Tdt(:,2); clear Tdt
         info.dt = mean(dt);
+        info.bathyFile = [info.rootMat,filesep,runBATHY,'_depth.mat'];
         save(info.fileName,'-struct','info')
         %
         % 4) convert the funwave output ascii files to .mat
@@ -58,23 +59,22 @@ for jj = 1:Ndirs
     info.subDomain = [1 3000 1 500];
     %
     % 5) process full run wave stats
-    fprintf('\t estimating wave stats 1hr simulation: %s %s \n', runDay,runID)    
+    fprintf('\t estimating wave stats 1hr simulation: %s \n', runID)    
     info = estimate_FUNWAVE_run_wave_stats(info);
     %
     % 6) estimate velocity decomposition (U_rot, U_irr), alongshore spectra, ...
+    fprintf('\t estimating velocity deocmposition: %s \n', runID)        
     info = estimate_FUNWAVE_velocity_helmholtz_decomposition(info);
     info = estimate_FUNWAVE_rotational_velocity_alongshore_spectra(info);
     info = estimate_FUNWAVE_spectral_energy_flux(info);    
     
     % 7) estimate rotational power input and rotational impulse
+    fprintf('\t estimating power and impulse: %s \n', runID)            
     info = estimate_FUNWAVE_rotational_power_input(info);
     info = estimate_FUNWAVE_rotational_impulse(info);
 
 
-
 end
-
-
 
 
 end
