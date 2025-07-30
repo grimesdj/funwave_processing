@@ -65,6 +65,7 @@ for jj = 1:Ndirs
     % 6) estimate velocity decomposition (U_rot, U_irr), alongshore spectra, ...
     fprintf('\t estimating velocity deocmposition: %s \n', runID)        
     info = estimate_FUNWAVE_velocity_helmholtz_decomposition(info);
+    info = process_FUNWAVE_virtual_moorings(info);    
     info = estimate_FUNWAVE_rotational_velocity_alongshore_spectra(info);
     info = estimate_FUNWAVE_spectral_energy_flux(info);    
     
