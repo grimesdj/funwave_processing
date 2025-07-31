@@ -42,6 +42,7 @@ ny = length(y);
 %
 [yy,xx]   = meshgrid(y',x');
 %
+dx = x(2)-x(1);
 nx = length(x);
 ny = length(y);
 %
@@ -73,7 +74,7 @@ t   = t0;
 nt  = length(t);
 dt  = mean(diff(t));
 % small search radius as the signal is binary
-r0 = 5;% this is 2.5m in x, and 5m in y (dx=0.5,dy=1) meters
+r0 = floor(2.5/dx);% this is 2.5m in x, and 5m in y for (dx=0.5,dy=1) meters
 %
 % for cross shore bin averages
 if ~exist('Xbins','var');
