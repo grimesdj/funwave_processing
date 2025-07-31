@@ -21,6 +21,7 @@ Nw = length(bw);
 
 % loop over the boundaries, take the average x-location of each front
 rclog = {};
+N     = [];
 for ii = 1:Nw
     rc     = bw{ii};
     N(ii)  = size(rc,1);

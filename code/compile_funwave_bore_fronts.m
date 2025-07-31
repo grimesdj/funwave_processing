@@ -93,6 +93,9 @@ for kk = 1:length(t);
         for ww = 1:length(rclog)
             % convert row/col to x/y
             rc = rclog{ww};
+            if isempty(rc)
+                continue
+            end
             cf = rc(:,2);
 	    rf = rc(:,1);
             xf = x(rf)';
