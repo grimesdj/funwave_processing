@@ -344,7 +344,7 @@ freq_new = freq_new(:);
 % build new directions
 dire_new = 0*freq_new;
 max_theta_new = floor(max_theta/(2*dt))*dt;
-n_new = length(freq_new); if iseven(n_new); n_new = n_new-1; end
+n_new = length(freq_new); if ~mod(n_new,2); n_new = n_new-1; end
 dire_new(1:2:length(freq_new))   = mod([ 0:dt:floor(n_new*dt/2)],max_theta_new);
 dire_new(2:2:length(freq_new))   =-(dt+mod([0:dt:floor(length(freq_new)/2-1)*dt],max_theta_new));
 % map directions to nearest mode

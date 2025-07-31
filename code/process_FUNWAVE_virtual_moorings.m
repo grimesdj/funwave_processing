@@ -50,6 +50,7 @@ for ii = 1:Nf
     [tu,uni] = unique(t);
     if ii==1
         dt   = 0.125;
+        fprintf('\n\t!!!warning: assuming dt = %f s !!!!\n',dt)
         time = [0:dt:t(end)-dt]';
         Nt   = length(time);
         % stuff for computing spectra

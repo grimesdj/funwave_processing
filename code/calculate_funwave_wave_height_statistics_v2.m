@@ -117,7 +117,7 @@ df0   = max(0.0125,1/(nt*dt));
 chnk  = max(floor(nt*mean(dt)*df0),1);
 inds  = 1:chnk*floor(1/(dt*df0));
 eta_t_xy = dum2(inds,:);
-[Snn,freqs] = mywelch(eta_t_xy,dt,chnk,0.0);
+[Snn,freqs] = welch_method(eta_t_xy,dt,chnk,0.0);
 % some nans due to spetra of masked regions
 Snn = real(Snn);
 df      = freqs(2)-freqs(1);

@@ -172,38 +172,43 @@ set(fig0,'position',pos,'papersize',ps,'paperposition',[0 0 ps])
 % y-avg & y-rms fields
 f0ax0  = axes('units','centimeters','position',ppos3);
 % $$$ p0 = loglog(f0ax0,ky,mean(Urot_avg_spec_binned,2,'omitnan'),'-r','linewidth',2);
+f0ax0.XAxis.Scale='log';
+f0ax0.YAxis.Scale='log';
 hold(f0ax0,'on')
 cm2   = cmocean('thermal',Nb);
 for ii = 1:Nb
     loglog(f0ax0,ky,Urot_avg_spec_binned(:,ii),'-','color',cm2(ii,:),'linewidth',2),
 end
+p0 = loglog(f0ax0,ky,mean(Urot_spec_binned,2,'omitnan'),'--r','linewidth',1);
 %
 ylabel(f0ax0,'$S_{\langle u\rangle,\langle u\rangle}$~[(m/s)$^2$/$\Delta k$]','interpreter','latex','fontsize',12)
 % f0l1  = legend(p0,'$S_{u,u}$');
 % set(f0l1,'interpreter','latex','fontsize',12)
-set(f0ax0,'tickdir','out','ticklabelinterpreter','latex','xlim',-25+[0 300],'xticklabel',[],'xlim',[ky(2) min(1,ky(end))])
-f0ax0.XAxis.Scale='log';
-f0ax0.YAxis.Scale='log';
+title(info.runName,'interpreter','latex')
+set(f0ax0,'tickdir','out','ticklabelinterpreter','latex','xlim',[1e-3 1],'xticklabel',[],'xminortick','on','box','on','ylim',[min(min(Urot_avg_spec_binned(:)),min(Vrot_avg_spec_binned(:)))  max(max(Urot_avg_spec_binned(:)),max(Vrot_avg_spec_binned(:)))])
 grid(f0ax0,'on')
 %
 % y-avg & y-rms fields
 f0ax1  = axes('units','centimeters','position',ppos2);
 % p1 = loglog(f0ax1,ky,mean(Vrot_avg_spec_binned,2,'omitnan'),'-b','linewidth',2);
+f0ax1.XAxis.Scale='log';
+f0ax1.YAxis.Scale='log';
 hold(f0ax1,'on')
 for ii = 1:Nb
     loglog(f0ax1,ky,Vrot_avg_spec_binned(:,ii),'-','color',cm2(ii,:),'linewidth',2),
 end
+p0 = loglog(f0ax1,ky,mean(Vrot_spec_binned,2,'omitnan'),'--r','linewidth',1);
 %xlabel(f0ax1,' $k_y$~[1/m]','interpreter','latex')
 ylabel(f0ax1,'$S_{\langle v\rangle,\langle v\rangle}$','interpreter','latex','fontsize',12)
 %f0l1  = legend(p1,'');
 % set(f0l1,'interpreter','latex','fontsize',12)
-set(f0ax1,'tickdir','out','ticklabelinterpreter','latex','xlim',-25+[0 300],'xticklabel',[],'xlim',[ky(2) min(1,ky(end))])
-f0ax1.XAxis.Scale='log';
-f0ax1.YAxis.Scale='log';
+set(f0ax1,'tickdir','out','ticklabelinterpreter','latex','xlim',[1e-3 1],'xticklabel',[],'xminortick','on','box','on','ylim',[min(min(Urot_avg_spec_binned(:)),min(Vrot_avg_spec_binned(:)))  max(max(Urot_avg_spec_binned(:)),max(Vrot_avg_spec_binned(:)))])
 grid(f0ax1,'on')
 %
 f0ax2  = axes('units','centimeters','position',ppos1);
 % loglog(f0ax2,ky,mean(VORT_avg_spec_binned,2,'omitnan'),'-k','linewidth',2)
+f0ax2.XAxis.Scale='log';
+f0ax2.YAxis.Scale='log';
 hold(f0ax2,'on')
 for ii = 1:Nb
     loglog(f0ax2,ky,VORT_avg_spec_binned(:,ii),'-','color',cm2(ii,:),'linewidth',2),
@@ -213,9 +218,7 @@ xlabel(f0ax2,' $k_y$~[1/m]','interpreter','latex')
 ylabel(f0ax2,'$S_{\langle \omega\rangle\langle \omega\rangle}$~[(1/s)$^2$/$\Delta k$]','interpreter','latex','fontsize',12)
 % f0l2  = legend('$S_{\omega,\omega}$');
 % set(f0l2,'interpreter','latex','fontsize',12)
-set(f0ax2,'tickdir','out','ticklabelinterpreter','latex','xlim',-25+[0 300],'xlim',[ky(2) min(1,ky(end))])
-f0ax2.XAxis.Scale='log';
-f0ax2.YAxis.Scale='log';
+set(f0ax2,'tickdir','out','ticklabelinterpreter','latex','xlim',[1e-3 1],'xminortick','on','box','on')
 grid(f0ax2,'on')
 set(f0ax2,'tickdir','out','ticklabelinterpreter','latex','box','on')
 %
@@ -237,51 +240,54 @@ set(fig1,'position',pos,'papersize',ps,'paperposition',[0 0 ps])
 %
 % y-avg & y-rms fields
 f0ax0  = axes('units','centimeters','position',ppos3);
-p0 = loglog(f0ax0,ky,mean(Urot_spec_binned,2,'omitnan'),'-r','linewidth',2);
+f0ax0.XAxis.Scale='log';
+f0ax0.YAxis.Scale='log';
 hold(f0ax0,'on')
 cm2   = cmocean('thermal',Nb);
 for ii = 1:Nb
     loglog(f0ax0,ky,Urot_spec_binned(:,ii),'-','color',cm2(ii,:),'linewidth',2),
 end
+p0 = loglog(f0ax0,ky,mean(Urot_avg_spec_binned,2,'omitnan'),'--r','linewidth',1);
 %
 ylabel(f0ax0,'$S_{u,u}$~[(m/s)$^2$/$\Delta k$]','interpreter','latex','fontsize',12)
 % f0l1  = legend(p0,'$S_{u,u}$');
 % set(f0l1,'interpreter','latex','fontsize',12)
-set(f0ax0,'tickdir','out','ticklabelinterpreter','latex','xlim',-25+[0 300],'xticklabel',[],'xlim',[ky(2) min(1,ky(end))])
-f0ax0.XAxis.Scale='log';
-f0ax0.YAxis.Scale='log';
+title(info.runName,'interpreter','latex')
+set(f0ax0,'tickdir','out','ticklabelinterpreter','latex','xlim',[1e-3 1],'xminortick','on','box','on','ylim',[min(min(Urot_spec_binned(:)),min(Vrot_spec_binned(:)))  max(max(Urot_spec_binned(:)),max(Vrot_spec_binned(:)))])
 grid(f0ax0,'on')
 %
 % y-avg & y-rms fields
 f0ax1  = axes('units','centimeters','position',ppos2);
-% p1 = loglog(f0ax1,ky,mean(Vrot_spec_binned,2,'omitnan'),'-b','linewidth',2);
+f0ax1.XAxis.Scale='log';
+f0ax1.YAxis.Scale='log';
 hold(f0ax1,'on')
 for ii = 1:Nb
     loglog(f0ax1,ky,Vrot_spec_binned(:,ii),'-','color',cm2(ii,:),'linewidth',2),
 end
+p1 = loglog(f0ax1,ky,mean(Vrot_avg_spec_binned,2,'omitnan'),'--r','linewidth',1);
 %xlabel(f0ax1,' $k_y$~[1/m]','interpreter','latex')
 ylabel(f0ax1,'$S_{v,v}$','interpreter','latex','fontsize',12)
 %f0l1  = legend(p1,'');
 % set(f0l1,'interpreter','latex','fontsize',12)
-set(f0ax1,'tickdir','out','ticklabelinterpreter','latex','xlim',-25+[0 300],'xticklabel',[],'xlim',[ky(2) min(1,ky(end))])
-f0ax1.XAxis.Scale='log';
-f0ax1.YAxis.Scale='log';
+title(info.runName,'interpreter','latex')
+set(f0ax1,'tickdir','out','ticklabelinterpreter','latex','xlim',[1e-3 1],'xminortick','on','box','on','ylim',[min(min(Urot_spec_binned(:)),min(Vrot_spec_binned(:)))  max(max(Urot_spec_binned(:)),max(Vrot_spec_binned(:)))])
 grid(f0ax1,'on')
 %
 f0ax2  = axes('units','centimeters','position',ppos1);
 % loglog(f0ax2,ky,mean(VORT_spec_binned,2,'omitnan'),'-k','linewidth',2)
+f0ax2.XAxis.Scale='log';
+f0ax2.YAxis.Scale='log';
 hold(f0ax2,'on')
 for ii = 1:Nb
     loglog(f0ax2,ky,VORT_spec_binned(:,ii),'-','color',cm2(ii,:),'linewidth',2),
 end
+p1 = loglog(f0ax2,ky,mean(VORT_avg_spec_binned,2,'omitnan'),'--r','linewidth',1);
 %
 xlabel(f0ax2,' $k_y$~[1/m]','interpreter','latex')
 ylabel(f0ax2,'$S_{\omega\omega}$~[(1/s)$^2$/$\Delta k$]','interpreter','latex','fontsize',12)
 % f0l2  = legend('$S_{\omega,\omega}$');
 % set(f0l2,'interpreter','latex','fontsize',12)
-set(f0ax2,'tickdir','out','ticklabelinterpreter','latex','xlim',-25+[0 300],'xlim',[ky(2) min(1,ky(end))])
-f0ax2.XAxis.Scale='log';
-f0ax2.YAxis.Scale='log';
+set(f0ax2,'tickdir','out','ticklabelinterpreter','latex',,'xlim',[1e-3 1],'xminortick','on','box','on')
 grid(f0ax2,'on')
 set(f0ax2,'tickdir','out','ticklabelinterpreter','latex','box','on')
 %
@@ -314,39 +320,36 @@ set(fig2,'position',pos,'papersize',ps,'paperposition',[0 0 ps])
 % y-avg & y-rms fields
 f2ax0  = axes('units','centimeters','position',ppos3);
 dk = ky(2)-ky(1);
-p0 = plot(f2ax0,xp,sqrt(sum(Urot_avg_spec_binned,1)*dk),'-r',xp,sqrt(sum(Vrot_avg_spec_binned,1)*dk),'-b',advX,advUrot,'sk','linewidth',2);
+p0 = plot(f2ax0,xp,sqrt(sum(Urot_avg_spec,1)*dk),'-r',xp,sqrt(sum(Vrot_avg_spec,1)*dk),'-b',advX,advUrot,'sk','linewidth',2);
 %
 ylabel(f2ax0,'$\sigma$~[m/s]','interpreter','latex','fontsize',12)
 f2l1  = legend(p0,'$\langle u\rangle$','$\langle v\rangle$');
 set(f2l1,'interpreter','latex','fontsize',12)
-set(f2ax1,'tickdir','out','ticklabelinterpreter','latex','xlim',-25+[0 300],'xticklabel',[],'xlim',[ky(2) min(1,ky(end))])
-f2ax0.XAxis.Scale='log';
-f2ax0.YAxis.Scale='log';
+title(info.runName,'interpreter','latex')
+set(f2ax1,'tickdir','out','ticklabelinterpreter','latex','xlim',-25+[0 300],'xticklabel',[])
 grid(f2ax0,'on')
 %
 % y-avg & y-rms fields
 f2ax1  = axes('units','centimeters','position',ppos2);
-p1 = plot(f2ax1,xp,sqrt(sum(Urot_spec_binned,1)*dk),'-r',xp,sqrt(sum(Vrot_spec_binned,1)*dk),'-b',advX,advUrot,'sk','linewidth',2);
+p1 = plot(f2ax1,xp,sqrt(sum(Urot_spec,1)*dk),'-r',xp,sqrt(sum(Vrot_spec,1)*dk),'-b',advX,advUrot,'sk','linewidth',2);
 ylabel(f2ax1,'$\sigma$~[m/s]','interpreter','latex','fontsize',12)
 f2l1  = legend(p0,'$u''$','$v''$');
 set(f2l1,'interpreter','latex','fontsize',12)
-set(f2ax1,'tickdir','out','ticklabelinterpreter','latex','xlim',-25+[0 300],'xticklabel',[],'xlim',[ky(2) min(1,ky(end))])
-f2ax1.XAxis.Scale='log';
-f2ax1.YAxis.Scale='log';
+set(f2ax1,'tickdir','out','ticklabelinterpreter','latex','xlim',-25+[0 300],'xticklabel',[])
 grid(f2ax1,'on')
 %
 f2ax2  = axes('units','centimeters','position',ppos1);
-loglog(f2ax2,xp,sqrt(sum(VORT_spec_binned,1)*dk),'-k','linewidth',2)
+plot(f2ax2,xp,sqrt(sum(VORT_spec,1)*dk),'-k','linewidth',2)
 hold(f2ax2,'on')
 xlabel(f2ax2,' $x$~[m]','interpreter','latex')
 ylabel(f2ax2,'$\sigma_{\omega}$~[(1/s)]','interpreter','latex','fontsize',12)
 % f2l2  = legend('$S_{\omega,\omega}$');
 % set(f2l2,'interpreter','latex','fontsize',12)
-set(f2ax2,'tickdir','out','ticklabelinterpreter','latex','xlim',-25+[0 300],'xlim',[ky(2) min(1,ky(end))])
+set(f2ax2,'tickdir','out','ticklabelinterpreter','latex','xlim',-25+[0 300])
 f2ax2.XAxis.Scale='log';
 f2ax2.YAxis.Scale='log';
 grid(f2ax2,'on')
 set(f2ax2,'tickdir','out','ticklabelinterpreter','latex','box','on')
 %
-exportgraphics(fig2,[info.rootSim,filesep,'figures',filesep,info.rootName,'rotational_velocity_and_vorticity_spectra.pdf'])
+exportgraphics(fig2,[info.rootSim,filesep,'figures',filesep,info.rootName,'rotational_velocity_and_vorticity_standard_deviation.pdf'])
 %

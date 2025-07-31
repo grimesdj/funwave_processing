@@ -73,6 +73,7 @@ imagesc(f0ax1,y',xp',Prot_avg'), caxis(f0ax1,clims), colormap(f0ax1,cm),
 hold(f0ax1,'on'), plot(f0ax1,y,xsl-mean(xsl),'--k')
 ylabel(f0ax1,'$x$ [m]','interpreter','latex')
 text(f0ax1,1250,145,'c) $\langle u_\mathrm{rot} \cdot F_\mathrm{br}\rangle$','interpreter','latex','fontsize',12)
+title(info.runName,'interpreter','latex')
 set(f0ax1,'tickdir','out','ticklabelinterpreter','latex','ylim',-25+[0 200],'ydir','normal','xdir','reverse','xticklabel',[])
 % product of means
 f0ax2  = axes('units','centimeters','position',ppos2);
@@ -134,6 +135,7 @@ ylabel(f1ax1,' ~[W/kg]','interpreter','latex')
 f1ax1.YAxis.Exponent=-2;
 f1l1  = legend('$\overline{\langle u_\mathrm{rot}\cdot F_\mathrm{br} \rangle}$','$\overline{{\langle u_\mathrm{rot}\cdot F_\mathrm{br} \rangle}^2}^{1/2}$');
 set(f1l1,'interpreter','latex','fontsize',12)
+title(info.runName,'interpreter','latex')
 set(f1ax1,'tickdir','out','ticklabelinterpreter','latex','xlim',-25+[0 300])
 %
 f1ax2  = axes('units','centimeters','position',ppos1);
@@ -204,7 +206,7 @@ open(vid)
 %
 mask = info.mask;
 % cross-shore average to de-alias the under-resolved propagation
-Nfx = round(10/dx); if iseven(Nfx), Nfx = Nfx+1; end
+Nfx = round(10/dx); if ~mod(Nfx,2), Nfx = Nfx+1; end
 FILT= hamming(Nfx); FILT = FILT/sum(FILT);
 for jj=1:Nframes
     ii = Nplt*(jj-1) + [1:Navg];
@@ -301,6 +303,7 @@ ylabel(f3ax1,' ~[W/kg]','interpreter','latex')
 f3ax1.YAxis.Exponent=-2;
 f3l1  = legend('$\overline{\langle \tilde{u}_\mathrm{rot}\cdot \tilde{F}_\mathrm{br} \rangle_\mathrm{60~s}}$','$\overline{{\langle \tilde{u}_\mathrm{rot}\cdot \tilde{F}_\mathrm{br} \rangle_\mathrm{60~s}}^2}^{1/2}$');
 set(f3l1,'interpreter','latex','fontsize',12)
+title(info.runName,'interpreter','latex')
 set(f3ax1,'tickdir','out','ticklabelinterpreter','latex','xlim',-25+[0 300])
 %
 f3ax2  = axes('units','centimeters','position',ppos1);
@@ -517,7 +520,7 @@ exportgraphics(fig0,[info.rootSim,filesep,'figures',filesep,info.rootName,'rotat
 %
 % compute k_y spectra on the time-averaged and shoreline mapped power input
 dy = info.dy;
-if iseven(Ny)
+if ~mod(Ny,2)
     inyq = 1;% don't double the nyquist frequency
     stop = Ny/2+1;
 else

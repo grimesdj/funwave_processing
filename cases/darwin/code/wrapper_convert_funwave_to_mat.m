@@ -18,7 +18,7 @@ t   = Tdt(:,1);
 dt  = gradient(t);
 dT  = Tdt(:,2); clear Tdt
 %
-fLog = convert_funwave_output_to_mat(info.rootOut,[info.rootMat,info.rootName],vars,t,dT,1,1,rmfiles,300)
+fLog = convert_darwin_output_to_mat(info.rootOut,[info.rootMat,info.rootName],vars,t,dT,1,1,rmfiles,300)
 %
 % 
 first30sec_time = [info.first30sOut,filesep,'time_dt.out'];
@@ -26,7 +26,7 @@ Tdt = load(first30sec_time);
 t   = Tdt(:,1);
 dt  = gradient(t);
 dT  = Tdt(:,2); clear Tdt
-fLog = convert_funwave_output_to_mat(info.first30sOut,[info.rootMat,info.rootName,'first30sec_'],vars,t,dT,1,1,rmfiles,300)
+fLog = convert_darwin_output_to_mat(info.first30sOut,[info.rootMat,info.rootName,'first30sec_'],vars,t,dT,1,1,rmfiles,300)
 end
 %
 %

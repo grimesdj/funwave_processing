@@ -1,7 +1,7 @@
 function [coh,ky,out1,out2,out12] = alongshore_coherence_estimate(info,in1,in2);
 dy = info.dy;
 Ny = info.Ny;
-if iseven(Ny)
+if ~mod(Ny,2)
     inyq = 1;% don't double the nyquist frequency
     stop = Ny/2+1;
 else
@@ -26,7 +26,7 @@ coh  = abs(out12)./sqrt(out1.*out2);
 %
 % average over 5-ky bins
 Nf  = 5;
-ff  = hamming(Nf)./hamming(Nf);
+ff  = hamming(Nf); ff = ff./sum(ff);
 out1 = conv2(out1,ff,'same');
 out2 = conv2(out2,ff,'same');
 out12= conv2(out12,ff,'same');
