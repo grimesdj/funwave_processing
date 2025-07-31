@@ -206,7 +206,7 @@ open(vid)
 %
 mask = info.mask;
 % cross-shore average to de-alias the under-resolved propagation
-Nfx = round(10/dx); if iseven(Nfx), Nfx = Nfx+1; end
+Nfx = round(10/dx); if ~mod(Nfx,2), Nfx = Nfx+1; end
 FILT= hamming(Nfx); FILT = FILT/sum(FILT);
 for jj=1:Nframes
     ii = Nplt*(jj-1) + [1:Navg];
@@ -520,7 +520,7 @@ exportgraphics(fig0,[info.rootSim,filesep,'figures',filesep,info.rootName,'rotat
 %
 % compute k_y spectra on the time-averaged and shoreline mapped power input
 dy = info.dy;
-if iseven(Ny)
+if ~mod(Ny,2)
     inyq = 1;% don't double the nyquist frequency
     stop = Ny/2+1;
 else

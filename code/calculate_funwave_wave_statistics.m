@@ -97,7 +97,7 @@ clear mask0 eta0 t0 u0 v0
 % determine a mean shoreline location
 % 5x5 filter
 NFx = 5;
-NFy = min(5,ny-2); if (NFy<=0), NFy=1; elseif iseven(NFy), NyF=NFy+1; end
+NFy = min(5,ny-2); if (NFy<=0), NFy=1; elseif ~mod(NFy,2), NyF=NFy+1; end
 filter = ones(NFy,NFx);filter = filter./sum(filter(:));
 mask0  = mean(mask,3);
 mask0  = conv2([ones(2*NFy+ny,NFx),[ones(NFy,nx);mask0;ones(NFy,nx)],ones(2*NFy+ny,NFx)],filter,'same');
