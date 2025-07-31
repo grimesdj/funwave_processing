@@ -1,6 +1,6 @@
-function [visc,mask] = get_funwave_viscocity_breaking_1D(runNAME,rawDIR,dx,dy,Navg);
+function [visc,mask] = get_funwave_viscocity_breaking_1D(runNAME,rawDIR);
 %
-% USAGE: [visc,mask] = get_funwave_viscocity_breaking_1D(runNAME,rawDIR,dx,dy,Navg);
+% USAGE: [visc,mask] = get_funwave_viscocity_breaking_1D(runNAME,rawDIR);
 %
 % runNAME: used for archiving stats
 % rawDIR:  location of raw ascii data files
