@@ -38,7 +38,7 @@ ylabel('$H_s$ [m]','interpreter','latex')
 set(gca,'xlim',[75 600],'ylim',[0 1.1*nanmax(Hs_xy(:))],'ticklabelinterpreter','latex','tickdir','out')
 f0l1 = legend([p0(1),p0(end)]','$H_\mathrm{s}(x,y)$','$\bar{H}_\mathrm{s}(x)$');
 set(f0l1,'location','southeast','interpreter','latex')
-title(info.runName,'interpreter','latex')
+title(info.runName)
 if ~exist([info.rootSim,filesep,'figures'],'dir')
     eval(['!mkdir ',[info.rootSim,filesep,'figures']])
 end
@@ -59,7 +59,7 @@ ylabel('$L$ [m]','interpreter','latex')
 set(gca,'xlim',[75 300],'ticklabelinterpreter','latex','tickdir','out')
 f1l1 = legend([p1(1), p1(2)]','$\bar{L}(l)=\exp\left(\overline{\log(l)}\right)$','$\bar{L}\pm\mathrm{std}(L)$');
 set(f1l1,'location','northeast','interpreter','latex')
-title(info.runName,'interpreter','latex')
+title(info.runName)
 if ~exist([info.rootSim,filesep,'figures'],'dir')
     eval(['!mkdir ',[info.rootSim,filesep,'figures']])
 end
@@ -70,7 +70,7 @@ p2 = plot(binned_stats.Xbins,binned_stats.N,'-k','linewidth',2);
 xlabel('crosshore [m]','interpreter','latex')
 ylabel('$N$ [crests/frame]','interpreter','latex')
 set(gca,'xlim',[75 300],'ticklabelinterpreter','latex','tickdir','out')
-title(info.runName,'interpreter','latex')
+title(info.runName)
 exportgraphics(fig2,[info.rootSim,filesep,'figures',filesep,info.rootName,'crests_per_frame_vs_x.pdf'])
 %
 close all

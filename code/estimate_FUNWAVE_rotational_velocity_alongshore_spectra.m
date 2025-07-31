@@ -184,7 +184,7 @@ p0 = loglog(f0ax0,ky,mean(Urot_spec_binned,2,'omitnan'),'--r','linewidth',1);
 ylabel(f0ax0,'$S_{\langle u\rangle,\langle u\rangle}$~[(m/s)$^2$/$\Delta k$]','interpreter','latex','fontsize',12)
 % f0l1  = legend(p0,'$S_{u,u}$');
 % set(f0l1,'interpreter','latex','fontsize',12)
-title(info.runName,'interpreter','latex')
+title(info.runName)
 set(f0ax0,'tickdir','out','ticklabelinterpreter','latex','xlim',[1e-3 1],'xticklabel',[],'xminortick','on','box','on','ylim',[min(min(Urot_avg_spec_binned(:)),min(Vrot_avg_spec_binned(:)))  max(max(Urot_avg_spec_binned(:)),max(Vrot_avg_spec_binned(:)))])
 grid(f0ax0,'on')
 %
@@ -252,7 +252,7 @@ p0 = loglog(f0ax0,ky,mean(Urot_avg_spec_binned,2,'omitnan'),'--r','linewidth',1)
 ylabel(f0ax0,'$S_{u,u}$~[(m/s)$^2$/$\Delta k$]','interpreter','latex','fontsize',12)
 % f0l1  = legend(p0,'$S_{u,u}$');
 % set(f0l1,'interpreter','latex','fontsize',12)
-title(info.runName,'interpreter','latex')
+title(info.runName)
 set(f0ax0,'tickdir','out','ticklabelinterpreter','latex','xlim',[1e-3 1],'xminortick','on','box','on','ylim',[min(min(Urot_spec_binned(:)),min(Vrot_spec_binned(:)))  max(max(Urot_spec_binned(:)),max(Vrot_spec_binned(:)))])
 grid(f0ax0,'on')
 %
@@ -269,7 +269,6 @@ p1 = loglog(f0ax1,ky,mean(Vrot_avg_spec_binned,2,'omitnan'),'--r','linewidth',1)
 ylabel(f0ax1,'$S_{v,v}$','interpreter','latex','fontsize',12)
 %f0l1  = legend(p1,'');
 % set(f0l1,'interpreter','latex','fontsize',12)
-title(info.runName,'interpreter','latex')
 set(f0ax1,'tickdir','out','ticklabelinterpreter','latex','xlim',[1e-3 1],'xminortick','on','box','on','ylim',[min(min(Urot_spec_binned(:)),min(Vrot_spec_binned(:)))  max(max(Urot_spec_binned(:)),max(Vrot_spec_binned(:)))])
 grid(f0ax1,'on')
 %
@@ -325,7 +324,7 @@ p0 = plot(f2ax0,xp,sqrt(sum(Urot_avg_spec,1)*dk),'-r',xp,sqrt(sum(Vrot_avg_spec,
 ylabel(f2ax0,'$\sigma$~[m/s]','interpreter','latex','fontsize',12)
 f2l1  = legend(p0,'$\langle u\rangle$','$\langle v\rangle$');
 set(f2l1,'interpreter','latex','fontsize',12)
-title(info.runName,'interpreter','latex')
+title(info.runName)
 set(f2ax1,'tickdir','out','ticklabelinterpreter','latex','xlim',-25+[0 300],'xticklabel',[])
 grid(f2ax0,'on')
 %

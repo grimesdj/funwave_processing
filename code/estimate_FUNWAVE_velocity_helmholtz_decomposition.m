@@ -256,7 +256,7 @@ fig0 = figure;
 p0   = plot(x,Uex,'-k',x,Uex_avg,'-b',x,Uex-Uex_avg,'-r','linewidth',2);
 xlabel('crosshore [m]','interpreter','latex')
 ylabel('$U_\mathrm{\scriptscriptstyle{EX}}$ [m/s]','interpreter','latex')
-title(info.runName,'interpreter','latex')
+title(info.runName)
 set(gca,'xlim',[75 525],'ticklabelinterpreter','latex','tickdir','out')
 f0l1 = legend([p0(1),p0(2),p0(3)]','$U_\mathrm{\scriptscriptstyle EX}$','$\left<u\right>_\mathrm{\scriptscriptstyle EX}$','$u''_\mathrm{\scriptscriptstyle EX}$');
 set(f0l1,'location','northeast','interpreter','latex')
@@ -274,7 +274,8 @@ a1 = subplot(1,2,1);
 imagesc(x,y,Urot_avg,clims),colormap(cm),caxis(clims)
 xlabel(a1,'crosshore [m]','interpreter','latex')
 ylabel(a1,'alongshore [m]','interpreter','latex')
-title({info.runName;'$\left<U_\mathrm{rot}\right>$'},'interpreter','latex')
+str = splitstr(info.runName,'_');
+title({str{2};'$\left<U_\mathrm{rot}\right>$'},'interpreter','latex')
 set(a1,'xlim',[75 500],'ticklabelinterpreter','latex','tickdir','out','ydir','normal')
 a2 = subplot(1,2,2);
 imagesc(x,y,Vrot_avg,clims),colormap(cm),caxis(clims)
@@ -298,7 +299,7 @@ a1 = subplot(1,2,1);
 imagesc(x,y,U_avg,clims),colormap(cm),caxis(clims)
 xlabel(a1,'crosshore [m]','interpreter','latex')
 ylabel(a1,'alongshore [m]','interpreter','latex')
-title({info.runName;'$\left<U\right>$'},'interpreter','latex')
+title({str{2};'$\left<U\right>$'},'interpreter','latex')
 set(a1,'xlim',[75 500],'ticklabelinterpreter','latex','tickdir','out','ydir','normal')
 a2 = subplot(1,2,2);
 imagesc(x,y,V_avg,clims),colormap(cm),caxis(clims)
@@ -322,7 +323,7 @@ p0   = plot(x,sqrt(Et),'-k',x,sqrt(Em),'-b',x,sqrt(Ek),'linewidth',2);
 xlabel('crosshore [m]','interpreter','latex')
 ylabel('$\mathcal{E}^{1/2}$ [m/s]','interpreter','latex')
 f0l1 = legend([p0(1),p0(2),p0(3)]','$u$','$\left<u\right>$','$u''$');
-title(info.runName,'interpreter','latex')
+title(info.runName)
 set(f0l1,'location','northeast','interpreter','latex')
 set(gca,'xlim',[75 525],'ticklabelinterpreter','latex','tickdir','out')
 exportgraphics(fig2,[info.rootSim,filesep,'figures',filesep,info.rootName,'Erot_eddy_kinetic_energy.pdf'])
@@ -342,7 +343,7 @@ a1 = subplot(1,2,1);
 imagesc(t,y,HOVMOLLER_U,clims),colormap(cm),caxis(clims)
 xlabel(a1,'time [s]','interpreter','latex')
 ylabel(a1,'alongshore [m]','interpreter','latex')
-title({info.runName;'$U_\mathrm{rot}$'},'interpreter','latex')
+title({str{2};'$U_\mathrm{rot}$'},'interpreter','latex')
 set(a1,'xlim',[75 500],'ticklabelinterpreter','latex','tickdir','out','ydir','normal')
 a2 = subplot(1,2,2);
 imagesc(t,y,HOVMOLLER_V,clims),colormap(cm),caxis(clims)
