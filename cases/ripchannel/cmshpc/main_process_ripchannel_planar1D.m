@@ -20,10 +20,50 @@ load([matDIR,filesep,'runs_to_process.mat'])
 %
 % loop over run_dirs
 Ndirs  = length(run_dirs);
+%
+%
+% create hovmoller plot of nubrk
+xm = 2.5;
+ym = 2;
+pw = 8;
+ph = 4;
+ppos = [xm ym pw ph];
+cpos = [xm+pw+0.05 ym 0.1 ph/2];
+ps   = [2*xm+pw+0.25 1.5*ym+ph];
+%
+fig0   = figure('units','centimeters');
+fig0.Position(3:4) = ps;
+fig0.PaperSize = ps;
+fig0.PaperPosition = [0 0 ps];
+%
+cm=cmocean('thermal');
+%
 for jj = 1:Ndirs
     runNAME= run_dirs{jj};
     rawDIR = [runDIR,filesep,runNAME,filesep,'output'];
     [Hm0(jj,:), mask(jj,:)]   = get_funwave_Hm0_from_eta(runNAME,rawDIR);
+    [visc,~] = get_funwave_viscocity_breaking_1D(runNAME,rawDIR,dx,dy,Navg);
+    clf(fig0)
+    a1 = axes('units','centimeters','position',ppos);
+    % assume x = 1m resolution starting at x=0
+    x = 0:(size(Hm0,2)-1);
+    t = 0:(size(visc,1)-1);
+    imagesc(x,t,log10(visc'))
+    clim = [0 log10(max(visc(:)))];
+    clrs = [0:diff(clim)/255:clim(2)];
+    caxis(clim)
+    colormap(cm)
+    xlabel('$t$ [s]','interpreter','latex')
+    ylabel('$x$ [m]','interpreter','latex')
+    title(runNAME,'interpreter','latex')
+    set(a1,'tickdir','out','ydir','normal','ticklabelinterpreter','latex')
+    %
+    c1 = axes('units','centimeters','position',cpos);
+    imagesc(0,clrs,reshape(cm,1,256))
+    set(c1,'yaxislocation','right','xaxislocation','top','tickdir','out','ticklabelinterpreter','latex','xtick',[])
+    xlabel('$\mathrm{log}_{10}\nu_\mathrm{br}$','interpreter','latex')
+    figname = [runDIR,filesep,runBATHY,'_viscocity_breaking.pdf'];
+    exportgraphics(fig0,figname)
 end
 save([matDIR,filesep,runBATHY,'_Hm0.mat'],'Hm0','mask','run_dirs')
 %
@@ -46,8 +86,6 @@ colororder(fig,clrs);
 ax  = axes('units','centimeters','position',ppos);
 colororder(ax,clrs);
 %
-% assume x = 1m resolution starting at x=0
-x = 0:(size(Hm0,2)-1);
 plot(x,Hm0,'-','linewidth',1.5)
 xlabel('$x$ [m]','interpreter','latex')
 ylabel('$H_{m_0}$ [m]','interpreter','latex')
