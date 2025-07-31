@@ -7,7 +7,14 @@ function info = process_FUNWAVE_virtual_moorings(info)
 
 g       = 9.8;
 % get the station locations
-stationID = fopen(info.stationFile);
+if isfield(info,'stationFile')
+    stationID = fopen(info.stationFile);
+elseif isfield(info,'gaugeFile')
+    stationID = fopen(info.gaugeFile);
+else
+    fprintf('\n\t!!!!! No Gauge/Station File: %s !!!!!\n',info.runName)
+    return
+end
 stationXY = textscan(stationID,'%f %f','delimiter','\t');
 iX        = stationXY{1};
 iY        = stationXY{2};
