@@ -274,7 +274,7 @@ a1 = subplot(1,2,1);
 imagesc(x,y,Urot_avg,clims),colormap(cm),caxis(clims)
 xlabel(a1,'crosshore [m]','interpreter','latex')
 ylabel(a1,'alongshore [m]','interpreter','latex')
-str = splitstr(info.runName,'_');
+str = strsplit(info.runName,'_');
 title({str{2};'$\left<U_\mathrm{rot}\right>$'},'interpreter','latex')
 set(a1,'xlim',[75 500],'ticklabelinterpreter','latex','tickdir','out','ydir','normal')
 a2 = subplot(1,2,2);

@@ -34,6 +34,8 @@ Nf           = length(stationFiles);
 if Nf~=Ns
     disp('different number of stations (x,y) and station files')
     return
+elseif
+    fprintf('\tlooping over station files: %s \n',info.runName)
 end
 %
 stations = struct([]);

@@ -81,6 +81,7 @@ Vrot_spec     = nan(Nk,Nx,Nt);
 VORT_spec     = nan(Nk,Nx,Nt);
 KEflux        = nan(Nx,Nt);
 %
+fprintf('\tlooping over time to estimage spectra\n')
 for jj = 1:Nt
     % 4b) plot y-avg[], y-rms[], and y-spectra[] of Prot_avg
     % first, map to shoreline coordinates if std(xsl)>3m (FRF shorelines can be crazy)
@@ -125,6 +126,7 @@ VORT_spec_binned = [];
 Urot_avg_spec_binned = [];
 Vrot_avg_spec_binned = [];
 VORT_avg_spec_binned = [];
+fprintf('\taveraging spectra into cross-shore bins\n')
 for ii = 1:Nb
     inbin  =  find( xp>=(xbins(ii)-db/2) & xp<(xbins(ii)+db/2));
     Urot_spec_binned(:,ii) = mean(Urot_spec(:,inbin),2,'omitnan');

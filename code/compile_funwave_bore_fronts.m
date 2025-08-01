@@ -23,28 +23,16 @@ h  = 0.25*(h(1:end-1,1:end-1) + h(2:end,1:end-1) + ...
            h(2:end,1:end-1) + h(2:end,2:end));
 x  = 0.5*(x(1:end-1) + x(2:end));
 y  = 0.5*(y(1:end-1) + y(2:end));
+% make (x,y) column vectors
+x  = x(:);
+y  = y(:);
 nx = length(x);
 ny = length(y);
 %
-% $$$ nx0= length(x);
-% $$$ ny0= length(y);
-% $$$ dy = median(diff(y));
-% $$$ %
-% $$$ % get nearest power of 2 in alongshore 
-% $$$ N2 = log2(y(end)-y(1));
-% $$$ i2 = (2^floor(N2)/dy);
-% $$$ iY = [1:i2]';
-% $$$ y  = y(iY);
-% $$$ %
-% $$$ x_range = [-250 10];
-% $$$ iX = find(x>=x_range(1) & x<=x_range(2));
-% $$$ x  = x(iX);
 %
 [yy,xx]   = meshgrid(y',x');
 %
 dx = x(2)-x(1);
-nx = length(x);
-ny = length(y);
 %
 % load data
 files0 = dir([rootMat,rootName,'mask*.mat']);
@@ -99,7 +87,7 @@ for kk = 1:length(t);
             end
             cf = rc(:,2);
 	    rf = rc(:,1);
-            xf = x(rf)';
+            xf = x(rf);
             yf = y(cf);
             % make sure points are oriented continuously south to north
             [Y,srt]=sort(yf);
@@ -113,7 +101,7 @@ for kk = 1:length(t);
             nl(iter) = length(X);
             tl(iter) = t(kk);
             iter = iter+1;
-            xylog{ww,kk} = [X yf(srt)];
+            xylog{ww,kk} = [X Y];
 % $$$     [xylog,bblog,fnlog] = bore_front_search_v5(Q0,nx,ny,r0,Qmin,Qstd,Nstd,plotter,ax);%        rclog= bore_front_search_v2(nu',ny,nx,r0,0,0.1);
 % $$$ % $$$         imagesc(x,y,nu)
 % $$$     if isempty(crlog)
