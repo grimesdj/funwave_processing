@@ -1,4 +1,4 @@
-function [visc,mask] = get_funwave_viscocity_breaking_1D(runNAME,rawDIR);
+function [visc,mask] = get_funwave_viscosity_breaking_1D(runNAME,rawDIR);
 %
 % USAGE: [visc,mask] = get_funwave_viscocity_breaking_1D(runNAME,rawDIR);
 %

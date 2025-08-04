@@ -34,7 +34,7 @@ Nf           = length(stationFiles);
 if Nf~=Ns
     disp('different number of stations (x,y) and station files')
     return
-elseif
+else
     fprintf('\tlooping over station files: %s \n',info.runName)
 end
 %

@@ -329,12 +329,12 @@ set(gca,'xlim',[75 525],'ticklabelinterpreter','latex','tickdir','out')
 exportgraphics(fig2,[info.rootSim,filesep,'figures',filesep,info.rootName,'Erot_eddy_kinetic_energy.pdf'])
 %
 % make a (U,V) hovmoller plot at xsl+100m...
-ix = find(x-xsl_avg>=125,1,'first');
+ix = find(x-avg_xsl>=125,1,'first');
 t           = ROT.t;
 HOVMOLLER_U = squeeze(ROT.Urot(1:ny,ix,:));
 HOVMOLLER_V = squeeze(ROT.Vrot(1:ny,ix,:));
 %
-vel_range = max(sqrt(Eddy(:)));
+vel_range = max(sqrt(Eeddy(:)));
 clims    = vel_range*[-1 1];
 clrs     = clims(1):diff(clims)/255:clims(2);
 cm       = cmocean('balance');
