@@ -9,7 +9,10 @@ nt = length(t0);
 % rin = rootOut; rout = [rootMat,rootName];t0=t;dt0=dt;
 %
 if ~exist('Nt','var')
-    Nt=inf;
+    timeFlag = 1;
+    Nt=inf
+else
+    timeFlag = 0;
 end
 %
 if ~exist('tlimits','var')
@@ -52,8 +55,8 @@ for jj = 1:nv
     %
     disp(['working on: ', var])
     % remove old files from archive
-    fprintf('removing old files:\n')
-    if nf==1
+    fprintf('\tremoving old files:\n')
+    if nf==1 | Nt==inf
         eval(['!rm ',rout,var,'*.nc'])
     else
         eval(['!rm ',rout,var,'_*.nc'])
@@ -67,6 +70,9 @@ for jj = 1:nv
         nt = nf;
         t0  = t0(1:nt);
         dt0 = dt0(1:nt);
+        if timeFlag;
+            Nt=nt;
+        end
     end
     %
 % $$$     % if files aren't organized... need index of time coordinate
@@ -77,10 +83,11 @@ for jj = 1:nv
     flag=0;
     Nk  =0;
     for kk = 1:nf
+        iter = Nk*Nt; iter(isnan(iter))=0;
         fin = [rin,files(kk).name];
         if ( (kk==1 | flag) & ~isBINARY )
             % read in first file to get domain dimensions
-            dum = load(fin);
+            dum = load(fin,'-ascii');
             [ny,nx] = size(dum);
             %
             x   = [0:nx-1]*dx;
@@ -89,10 +96,10 @@ for jj = 1:nv
             nx0 = floor(nx/spanx);
             ny0 = floor(ny/spany);
             % pre-allocate, unless this is a single file variable
-            if nf==1
+            if nf==1 
                 eval([var,'=(dum(1:spany:ny0*spany,1:spanx:nx0*spanx));']),
             else
-                eval([var,'=nan(ny0,nx0,min(nt-Nk*Nt,Nt));'])
+                eval([var,'=nan(ny0,nx0,min(nt,Nt));'])
                 % first element is southwest-side of domain
                 eval([var,'(:,:,1)=(dum(1:spany:ny0*spany,1:spanx:nx0*spanx));']),
             end
@@ -110,29 +117,36 @@ for jj = 1:nv
             dum = dum';% so I'm transposing so rows are y-coord and columns are x-coord
             fclose(fid);
         else
-            dum = load(fin);
+            dum = load(fin,'-ascii');
         end
         %
-        eval([var,'(:,:,kk-Nk*Nt)=(dum(1:spany:ny,1:spanx:nx));']),
-        if (kk-Nk*Nt)==Nt
+        eval([var,'(:,:,kk-iter)=(dum(1:spany:ny,1:spanx:nx));']),
+        %
+        if (kk-iter)==min(nt,Nt)
             flag=1;
             Nk  = Nk+1;
             Nj  = Nj+1;
             % get current time segment
-            t = t0((Nk-1)*Nt+1:Nk*Nt);
-            dt=dt0((Nk-1)*Nt+1:Nk*Nt);
+            iter0 = (Nk-1)*Nt; iter0(isnan(iter0))=0; 
+            t = t0(iter0+1:min(nt,Nk*Nt));
+            dt=dt0(iter0+1:min(nt,Nk*Nt));
             % partial save for large files
             fout = sprintf([rout,var,'_%02d.nc'],Nk);
             fprintf(' archiving: %s \n',fout)
-            nccreate(fout,var,'Format','netcdf4')
+            if length(size(eval(var)))==2
+                dim = {"y",length(y),"x",length(x)};
+            elseif length(size(eval(var)))==3
+                dim = {"y",length(y),"x",length(x),"t",length(t)};
+            end
+            nccreate(fout,var,'Dimensions',dim,'Format','netcdf4')
             eval(['ncwrite(fout,''',var,''',',var,');'])
-            nccreate(fout,'x','Format','netcdf4')
-            ncwrite (fout,'x',x);
-            nccreate(fout,'y','Format','netcdf4')
+            nccreate(fout,'x','Dimensions',{"x",length(x)},'Format','netcdf4')        
+            ncwrite (fout,'x',x);%      
+            nccreate(fout,'y','Dimensions',{"y",length(y)},'Format','netcdf4')
             ncwrite (fout,'y',y);
-            nccreate(fout,'t','Format','netcdf4')
+            nccreate(fout,'t','Dimensions',{"t",length(t)},'Format','netcdf4')
             ncwrite (fout,'t',t);
-            nccreate(fout,'dt','Format','netcdf4')
+            nccreate(fout,'dt','Dimensions',{"t",length(t)},'Format','netcdf4')
             ncwrite (fout,'dt',dt);
             % save('-v7.3',fout,var,'t','dt')
             eval(['clear ',var])            
@@ -140,12 +154,12 @@ for jj = 1:nv
         end
     end
     %
-    if  isinf(Nt) || Nk==0
+    if  Nk==0
         % get current time segment
         t = t0;
         dt=dt0;
         fout = ([rout,var,'.nc']);
-    elseif nt-(Nk*Nt)>0.25*Nt
+    elseif (nt-iter>0.25*Nt) 
         Nk = Nk+1;
         % get current time segment
         t = t0((Nk-1)*Nt+1:nt);
