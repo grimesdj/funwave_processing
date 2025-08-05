@@ -53,8 +53,11 @@ for jj = 1:nv
     disp(['working on: ', var])
     % remove old files from archive
     fprintf('removing old files:\n')
-    dir([rout,var,'_*.nc'])
-    eval(['!rm ',rout,var,'*.nc'])
+    if nf==1
+        eval(['!rm ',rout,var,'*.nc'])
+    else
+        eval(['!rm ',rout,var,'_*.nc'])
+    end
     %
     if (nf~=1) & (nf~=nt)
         disp(['time vector is off: nt=',num2str(nt),'and nf=',num2str(nf)])
@@ -100,7 +103,7 @@ for jj = 1:nv
             flag=0;
             continue
         end
-        %
+        % need to incorporate this into above if statement
         if isBINARY
             fid = fopen(fin);
             dum = fread(fid,[Mglob Nglob],'*double');% this looks like it's transposed relative to ASCII convension
@@ -109,6 +112,7 @@ for jj = 1:nv
         else
             dum = load(fin);
         end
+        %
         eval([var,'(:,:,kk-Nk*Nt)=(dum(1:spany:ny,1:spanx:nx));']),
         if (kk-Nk*Nt)==Nt
             flag=1;
@@ -118,10 +122,10 @@ for jj = 1:nv
             t = t0((Nk-1)*Nt+1:Nk*Nt);
             dt=dt0((Nk-1)*Nt+1:Nk*Nt);
             % partial save for large files
-            fout = sprintf([rout,var,'_%02d.mat'],Nk);
+            fout = sprintf([rout,var,'_%02d.nc'],Nk);
             fprintf(' archiving: %s \n',fout)
             nccreate(fout,var,'Format','netcdf4')
-            eval(['ncwrite(fout,''',var,''',var);'])
+            eval(['ncwrite(fout,''',var,''',',var,');'])
             nccreate(fout,'x','Format','netcdf4')
             ncwrite (fout,'x',x);
             nccreate(fout,'y','Format','netcdf4')
@@ -140,28 +144,33 @@ for jj = 1:nv
         % get current time segment
         t = t0;
         dt=dt0;
-        fout = ([rout,var,'.mat']);
+        fout = ([rout,var,'.nc']);
     elseif nt-(Nk*Nt)>0.25*Nt
         Nk = Nk+1;
         % get current time segment
         t = t0((Nk-1)*Nt+1:nt);
         dt=dt0((Nk-1)*Nt+1:nt);
-        fout = sprintf([rout,var,'_%02d.mat'],Nk);
+        fout = sprintf([rout,var,'_%02d.nc'],Nk);
     else
         eval(['clear ',var])            
     end
     %
     if exist(var,'var')
         fprintf(' archiving: %s \n',fout)
-        nccreate(fout,var,'Format','netcdf4')
-        eval(['ncwrite(fout,''',var,''',var);'])
-        nccreate(fout,'x','Format','netcdf4')
-        ncwrite (fout,'x',x);
-        nccreate(fout,'y','Format','netcdf4')
+        if length(size(eval(var)))==2
+            dim = {"y",length(y),"x",length(x)};
+        elseif length(size(eval(var)))==3
+            dim = {"y",length(y),"x",length(x),"t",length(t)};
+        end
+        nccreate(fout,var,'Dimensions',dim,'Format','netcdf4')
+        eval(['ncwrite(fout,''',var,''',',var,');'])
+        nccreate(fout,'x','Dimensions',{"x",length(x)},'Format','netcdf4')        
+        ncwrite (fout,'x',x);%      
+        nccreate(fout,'y','Dimensions',{"y",length(y)},'Format','netcdf4')
         ncwrite (fout,'y',y);
-        nccreate(fout,'t','Format','netcdf4')
+        nccreate(fout,'t','Dimensions',{"t",length(t)},'Format','netcdf4')
         ncwrite (fout,'t',t);
-        nccreate(fout,'dt','Format','netcdf4')
+        nccreate(fout,'dt','Dimensions',{"t",length(t)},'Format','netcdf4')
         ncwrite (fout,'dt',dt);
 % $$$         save('-v7.3',fout,var,'t','dt')
         eval(['clear ',var])

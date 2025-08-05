@@ -41,6 +41,10 @@ for jj = 1:Ndirs
     end
     info  = load([infoFile(1).folder,filesep,infoFile(1).name]);
     %
+    % need local virtual mooring location file
+    gaugeFile = split(info.gaugeFile,'/');
+    info.stationFile = [info.rootInp,gaugeFile{end}];
+    %
     if reproc & jj>1
         % 3) load the output times and dts
         info.timeFile = [info.rootSim,'time_dt.out'];
