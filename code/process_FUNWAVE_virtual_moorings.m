@@ -92,7 +92,7 @@ for ii = 1:Nf
     om     = 2*pi*fq;
     lom=length(om);
     g      = 9.81;
-    k      = wavenumber(om,h);
+    k      = wavenumber_FunwaveTVD(om,h);
     cU2eta = (om./(g*k)).*cosh(k.*h)./cosh(k.*h.*(1-alpha));
     % kill frequencies above 1Hz?
     Beta   = 0.5*(1-tanh( (fq-0.5)/0.05 ));
