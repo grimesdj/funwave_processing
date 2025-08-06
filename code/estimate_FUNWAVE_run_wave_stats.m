@@ -56,7 +56,7 @@ fig1 = figure;
 p1 = plot(binned_stats.Xbins,binned_stats.Length,'-k',binned_stats.Xbins,exp( binned_stats.log_mean_length' + binned_stats.log_std_length'*[-1 1] ), '--r');
 xlabel('crosshore [m]','interpreter','latex')
 ylabel('$L$ [m]','interpreter','latex')
-set(gca,'xlim',[75 300],'ticklabelinterpreter','latex','tickdir','out')
+set(gca,'xlim',x0(subDomain([3:4])),'ticklabelinterpreter','latex','tickdir','out')
 f1l1 = legend([p1(1), p1(2)]','$\bar{L}(l)=\exp\left(\overline{\log(l)}\right)$','$\bar{L}\pm\mathrm{std}(L)$');
 set(f1l1,'location','northeast','interpreter','latex')
 title(info.runName)
@@ -69,7 +69,7 @@ fig2 = figure;
 p2 = plot(binned_stats.Xbins,binned_stats.N,'-k','linewidth',2);
 xlabel('crosshore [m]','interpreter','latex')
 ylabel('$N$ [crests/frame]','interpreter','latex')
-set(gca,'xlim',[75 300],'ticklabelinterpreter','latex','tickdir','out')
+set(gca,'xlim',x0(subDomain([3:4])),'ticklabelinterpreter','latex','tickdir','out')
 title(info.runName)
 exportgraphics(fig2,[info.rootSim,filesep,'figures',filesep,info.rootName,'crests_per_frame_vs_x.pdf'])
 %

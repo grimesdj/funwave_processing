@@ -3,7 +3,7 @@ function info = estimate_FUNWAVE_rotational_velocity_alongshore_spectra(info);
 % get the input (x,y,h) grid file
 load(info.bathyFile)
 % switch from h=-z_bottom to h=depth
-h = -h;
+% h = -h;
 % preserve the original grid
 x0=x;
 y0=y;
@@ -288,7 +288,7 @@ xlabel(f0ax2,' $k_y$~[1/m]','interpreter','latex')
 ylabel(f0ax2,'$S_{\omega\omega}$~[(1/s)$^2$/$\Delta k$]','interpreter','latex','fontsize',12)
 % f0l2  = legend('$S_{\omega,\omega}$');
 % set(f0l2,'interpreter','latex','fontsize',12)
-set(f0ax2,'tickdir','out','ticklabelinterpreter','latex',,'xlim',[1e-3 1],'xminortick','on','box','on')
+set(f0ax2,'tickdir','out','ticklabelinterpreter','latex','xlim',[1e-3 1],'xminortick','on','box','on')
 grid(f0ax2,'on')
 set(f0ax2,'tickdir','out','ticklabelinterpreter','latex','box','on')
 %
@@ -304,13 +304,13 @@ exportgraphics(fig1,[info.rootSim,filesep,'figures',filesep,info.rootName,'rotat
 stationsFile = [info.rootMat,info.rootName,'gauges.mat'];
 if exist(stationsFile,'file')
     load(stationsFile)
-    advX = cell2mat({adv.x}');
-    advY = cell2mat({adv.y}');
-    advUrot = cell2mat({adv.Urot}');
+    stationsX = cell2mat({stations.x}');
+    stationsY = cell2mat({stations.y}');
+    stationsUrot = cell2mat({stations.Urot}');
 else
-    advX = [];
-    advY = [];
-    advUrot = [];
+    stationsX = [];
+    stationsY = [];
+    stationsUrot = [];
 end
 %
 %
@@ -321,18 +321,18 @@ set(fig2,'position',pos,'papersize',ps,'paperposition',[0 0 ps])
 % y-avg & y-rms fields
 f2ax0  = axes('units','centimeters','position',ppos3);
 dk = ky(2)-ky(1);
-p0 = plot(f2ax0,xp,sqrt(sum(Urot_avg_spec,1)*dk),'-r',xp,sqrt(sum(Vrot_avg_spec,1)*dk),'-b',advX,advUrot,'sk','linewidth',2);
+p0 = plot(f2ax0,xp,sqrt(sum(Urot_avg_spec,1)*dk),'-r',xp,sqrt(sum(Vrot_avg_spec,1)*dk),'-b',stationsX,stationsUrot,'sk','linewidth',2);
 %
 ylabel(f2ax0,'$\sigma$~[m/s]','interpreter','latex','fontsize',12)
 f2l1  = legend(p0,'$\langle u\rangle$','$\langle v\rangle$');
 set(f2l1,'interpreter','latex','fontsize',12)
 title(info.runName)
-set(f2ax1,'tickdir','out','ticklabelinterpreter','latex','xlim',-25+[0 300],'xticklabel',[])
+set(f2ax0,'tickdir','out','ticklabelinterpreter','latex','xlim',-25+[0 300],'xticklabel',[])
 grid(f2ax0,'on')
 %
 % y-avg & y-rms fields
 f2ax1  = axes('units','centimeters','position',ppos2);
-p1 = plot(f2ax1,xp,sqrt(sum(Urot_spec,1)*dk),'-r',xp,sqrt(sum(Vrot_spec,1)*dk),'-b',advX,advUrot,'sk','linewidth',2);
+p1 = plot(f2ax1,xp,sqrt(sum(Urot_spec,1)*dk),'-r',xp,sqrt(sum(Vrot_spec,1)*dk),'-b',stationsX,stationsUrot,'sk','linewidth',2);
 ylabel(f2ax1,'$\sigma$~[m/s]','interpreter','latex','fontsize',12)
 f2l1  = legend(p0,'$u''$','$v''$');
 set(f2l1,'interpreter','latex','fontsize',12)

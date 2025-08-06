@@ -18,7 +18,7 @@ function info = estimate_FUNWAVE_spectral_energy_flux(info);
 % load grid(h,x,y) and subDomain used to make u_rot
 load(info.waveStatsFile,'h','x','y','subDomain')
 % switch from h=-z_bottom to h=depth
-h = -h;
+% h = -h;
 % preserve the original grid
 x0=x;
 y0=y;

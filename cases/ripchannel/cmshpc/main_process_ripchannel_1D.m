@@ -57,7 +57,7 @@ for jj = 1:Ndirs
     t = 0:(size(visc,1)-1);
     imagesc(t,x,log10(visc'))
     clim = [-6 max(-5,log10(max(visc(:))))];
-    clrs = [0:diff(clim)/255:clim(2)];
+    clrs = [clim(1):diff(clim)/255:clim(2)];
     caxis(clim)
     colormap(cm)
     xlabel('$t$ [s]','interpreter','latex')
@@ -123,7 +123,10 @@ colororder(fig, clrs);
 ax  = axes('units','centimeters','position',ppos);
 colororder(ax,clrs);
 %
-plot(x,Ebr,'-','linewidth',1.5)
+Nflt= round(5/dx(ii)); if ~mod(Nflt,2), Nflt=Nflt+1; end
+flt = hamming(Nflt); flt = flt./sum(flt);
+Ebr_lp = conv2(Ebr',flt,'same');
+plot(x,Ebr_lp,'-','linewidth',1.5)
 xlabel('$x$ [m]','interpreter','latex')
 ylabel('$\epsilon_\mathrm{br}$ [m$^2$/s$^{3}$]','interpreter','latex')
 set(ax,'tickdir','out','ticklabelinterpreter','latex','fontsize',15,'xlim',[0 500])

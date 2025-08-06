@@ -1,0 +1,235 @@
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2024 The MathWorks, Inc.
+             R2024a Update 3 (24.1.0.2603908) 64-bit (glnxa64)
+                                May 2, 2024
+
+ 
+To get started, type doc.
+For product information, visit www.mathworks.com.
+ 
+>> >> >> >> >> >> >> >> >> 
+ii =
+
+     1
+
+>> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> 
+jj =
+
+    15
+
+>> >> >> 
+ processing: planar2D planar2D_h10t10s10d00 
+>> >> >> >>>>>>>> >> >> >> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>working on: dep
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_dep*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_dep.nc 
+working on: eta
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_eta_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_eta_01.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_eta_02.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_eta_03.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_eta_04.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_eta_05.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_eta_06.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_eta_07.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_eta_08.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_eta_09.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_eta_10.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_eta_11.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_eta_12.nc 
+working on: u
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_u_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_u_01.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_u_02.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_u_03.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_u_04.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_u_05.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_u_06.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_u_07.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_u_08.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_u_09.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_u_10.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_u_11.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_u_12.nc 
+working on: v
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_v_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_v_01.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_v_02.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_v_03.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_v_04.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_v_05.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_v_06.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_v_07.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_v_08.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_v_09.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_v_10.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_v_11.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_v_12.nc 
+working on: mask
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_mask_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_mask_01.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_mask_02.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_mask_03.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_mask_04.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_mask_05.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_mask_06.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_mask_07.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_mask_08.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_mask_09.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_mask_10.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_mask_11.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_mask_12.nc 
+working on: nubrk
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_nubrk_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_nubrk_01.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_nubrk_02.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_nubrk_03.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_nubrk_04.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_nubrk_05.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_nubrk_06.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_nubrk_07.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_nubrk_08.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_nubrk_09.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_nubrk_10.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_nubrk_11.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_nubrk_12.nc 
+working on: p
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_p_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_p_01.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_p_02.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_p_03.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_p_04.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_p_05.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_p_06.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_p_07.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_p_08.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_p_09.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_p_10.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_p_11.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_p_12.nc 
+working on: q
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_q_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_q_01.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_q_02.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_q_03.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_q_04.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_q_05.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_q_06.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_q_07.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_q_08.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_q_09.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_q_10.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_q_11.nc 
+ archiving: /scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_q_12.nc 
+
+fLog =
+
+  92x1 cell array
+
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_dep.nc'     }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_eta_01.nc'  }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_eta_02.nc'  }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_eta_03.nc'  }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_eta_04.nc'  }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_eta_05.nc'  }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_eta_06.nc'  }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_eta_07.nc'  }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_eta_08.nc'  }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_eta_09.nc'  }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_eta_10.nc'  }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_eta_11.nc'  }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_eta_12.nc'  }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_eta_13.nc'  }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_u_01.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_u_02.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_u_03.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_u_04.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_u_05.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_u_06.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_u_07.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_u_08.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_u_09.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_u_10.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_u_11.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_u_12.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_u_13.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_v_01.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_v_02.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_v_03.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_v_04.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_v_05.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_v_06.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_v_07.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_v_08.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_v_09.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_v_10.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_v_11.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_v_12.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_v_13.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_mask_01.nc' }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_mask_02.nc' }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_mask_03.nc' }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_mask_04.nc' }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_mask_05.nc' }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_mask_06.nc' }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_mask_07.nc' }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_mask_08.nc' }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_mask_09.nc' }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_mask_10.nc' }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_mask_11.nc' }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_mask_12.nc' }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_mask_13.nc' }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_nubrk_01.nc'}
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_nubrk_02.nc'}
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_nubrk_03.nc'}
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_nubrk_04.nc'}
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_nubrk_05.nc'}
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_nubrk_06.nc'}
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_nubrk_07.nc'}
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_nubrk_08.nc'}
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_nubrk_09.nc'}
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_nubrk_10.nc'}
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_nubrk_11.nc'}
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_nubrk_12.nc'}
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_nubrk_13.nc'}
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_p_01.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_p_02.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_p_03.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_p_04.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_p_05.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_p_06.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_p_07.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_p_08.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_p_09.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_p_10.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_p_11.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_p_12.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_p_13.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_q_01.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_q_02.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_q_03.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_q_04.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_q_05.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_q_06.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_q_07.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_q_08.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_q_09.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_q_10.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_q_11.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_q_12.nc'    }
+    {'/scratch/grimesdj/ripchannel/planar2D/mat_data/funwave_planar2D_h10t10s10d00_q_13.nc'    }
+
+>> >> >> {Error: File:
+/storage/cms/grimesdj_lab/grimesdj/git/funwave/code/estimate_FUNWAVE_run_statistics.m
+Line: 1 Column: 17
+Local function name must be different from the script name.
+} 
+>> >> >> 

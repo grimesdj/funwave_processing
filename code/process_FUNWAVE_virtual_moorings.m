@@ -26,7 +26,7 @@ load(info.bathyFile,'x','y','h')
 Xs = x(iX);
 Ys = y(iY);
 inds = sub2ind(size(h),iY,iX);
-dep  =-h(inds);
+dep  = h(inds);
 
 % download the station files
 stationFiles = dir([info.rootSim,filesep,'output',filesep,'sta_*']);
@@ -152,7 +152,7 @@ for ii = 1:Nf
     stations(ii).Nt = Nt;
     stations(ii).eta= eta;
     stations(ii).u  = u;
-    stations(ii).v  = v
+    stations(ii).v  = v;
     stations(ii).x  = x;
     stations(ii).y  = y;
     stations(ii).h  = h;

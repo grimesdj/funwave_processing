@@ -70,9 +70,9 @@ for jj = 1:nv
         nt = nf;
         t0  = t0(1:nt);
         dt0 = dt0(1:nt);
-        if timeFlag;
-            Nt=nt;
-        end
+% $$$         if timeFlag;
+% $$$             Nt=nt;
+% $$$         end
     end
     %
 % $$$     % if files aren't organized... need index of time coordinate
@@ -99,7 +99,7 @@ for jj = 1:nv
             if nf==1 
                 eval([var,'=(dum(1:spany:ny0*spany,1:spanx:nx0*spanx));']),
             else
-                eval([var,'=nan(ny0,nx0,min(nt,Nt));'])
+                eval([var,'=nan(ny0,nx0,min(nt-iter,Nt));'])
                 % first element is southwest-side of domain
                 eval([var,'(:,:,1)=(dum(1:spany:ny0*spany,1:spanx:nx0*spanx));']),
             end

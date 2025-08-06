@@ -11,9 +11,9 @@ function [Hs_xy,eta_bar,mask0,x,y,h,freqs,Snn_xy,xsl] = calculate_funwave_wave_h
 % file_mat = [root,bath,'/',run,'/','dep.mat'];
 % h = dep;
 
-% load grid and bottom 
-    load(bathyFile);
-    h = -h;
+% load grid and bottom: convention needs to be positive h underwater!
+load(bathyFile);
+%    h = -h;
 %
 if exist('subDomain','var')
     x = x(subDomain(3):subDomain(4));

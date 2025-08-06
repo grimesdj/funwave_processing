@@ -10,7 +10,7 @@ function info = estimate_FUNWAVE_run_wave_forcing(info);
 % get the input (x,y,h) grid file
 load(info.bathyFile)
 % switch from h=z_bottom to h=depth
-h =-h;
+% h =-h;
 % save the original grid
 x0=x;
 y0=y;

@@ -2,7 +2,7 @@
 addpath(genpath('/storage/cms/grimesdj_lab/grimesdj/git/funwave/'))
 % code to be launched on cms-hpc "cuttlefish"
 % 0) requires the input bathymetry name as top-dir
-runBATHYlist = {'barred1D'};
+runBATHYlist = {'planar2D'};
 reproc  = 1;% 1=reprocess ascii to mat
 rmfiles = 0;% 1=remove original ascii files when finished
 % $$$ for ii=1:length(runBATHYlist)
@@ -32,7 +32,7 @@ vars = {'dep','eta','u','v','mask','nubrk','p','q'};
 % loop over run_dirs
 Ndirs  = length(run_dirs);
 % $$$ for jj = 1:Ndirs
-jj=2
+jj=15
 % 1) get current run subdirectory to process:
 runID    = run_dirs{jj};
 fprintf('\n processing: %s %s \n', runBATHY,runID)    
@@ -52,7 +52,7 @@ if reproc
     t0   = Tdt(:,1);
     dt0  = gradient(t0);
     dT0  = Tdt(:,2); clear Tdt
-    info.dt = mean(dt);
+    info.dt = mean(dt0);
     info.bathyFile = [info.rootMat,filesep,runBATHY,'_depth.mat'];
     save(info.fileName,'-struct','info')
     %
@@ -60,7 +60,7 @@ if reproc
     spany = 1;
     % 4) convert the funwave output ascii files to .mat
     rootOut = split(info.rootOut,':');
-    fLog = convert_funwave_output_to_NetCDF(rootOut{end},[info.rootMat,info.rootName],vars,t0,dT0,info.dx,spanx,info.dy,spany,rmfiles,1e3)
+    fLog = convert_funwave_output_to_NetCDF(rootOut{end},[info.rootMat,info.rootName],vars,t0,dT0,info.dx,spanx,info.dy,spany,rmfiles,300)
 end
 %
 %
