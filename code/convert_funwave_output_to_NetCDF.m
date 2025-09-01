@@ -1,4 +1,4 @@
-function flog = convert_funwave_output_to_NetCDF(rin,rout,vars,t0,dt0,dx,spanx,dy,spany,rmfiles,Nt,tlimits,isBINARY,Mglob,Nglob)
+function flog = convert_funwave_output_to_NetCDF(rin,rout,vars,t0,dt0,dx,spanx,rngx,dy,spany,rngy,rmfiles,Nt,tlimits,isBINARY,Mglob,Nglob)
 %
 % USAGE: fout = convert_funwave_output_to_NetCDF(root_dir,vars,t,dt,rmfiles)
 % need to include t, dt, spanx=span in columns, spany=span in rows; Nt is number of time-steps to break record into.
@@ -17,6 +17,15 @@ end
 %
 if ~exist('tlimits','var')
     tlimits = [-inf inf];
+end
+%
+rngxFlag=0;
+rngyFlag=0;
+if any(isinf(rngx))
+    rngxFlag=1;
+end
+if any(isinf(rngy))
+    rngyFlag=1;
 end
 %
 if ~exist('isBINARY','var')
@@ -85,23 +94,33 @@ for jj = 1:nv
     for kk = 1:nf
         iter = Nk*Nt; iter(isnan(iter))=0;
         fin = [rin,files(kk).name];
-        if ( (kk==1 | flag) & ~isBINARY )
+        if ( (kk==1 | flag) )
+            if ~isBINARY
             % read in first file to get domain dimensions
-            dum = load(fin,'-ascii');
+                dum = load(fin,'-ascii');
+            else
+                fid = fopen(fin);
+                dum = fread(fid,[Mglob Nglob],'*double');% this looks like it's transposed relative to ASCII convension
+                dum = dum';% so I'm transposing so rows are y-coord and columns are x-coord
+                fclose(fid);
+            end
             [ny,nx] = size(dum);
-            %
+            % construct (x,y) coordinates
             x   = [0:nx-1]*dx;
             y   = [0:ny-1]'*dy;
+            %  define limits on (x,y)
+            if rngxFlag, rngx = [1 nx]; rngxFlag=0; end
+            if rngyFlag, rngy = [1 ny]; rngyFlag=0; end
             % if only partially saving variables...
-            nx0 = floor(nx/spanx);
-            ny0 = floor(ny/spany);
+            nx0 = floor(diff(rngx)/spanx);
+            ny0 = floor(diff(rngy)/spany);
             % pre-allocate, unless this is a single file variable
             if nf==1 
-                eval([var,'=(dum(1:spany:ny0*spany,1:spanx:nx0*spanx));']),
+                eval([var,'=(dum(rngy(1):spany:ny0*spany,rngx(1):spanx:nx0*spanx));']),
             else
                 eval([var,'=nan(ny0,nx0,min(nt-iter,Nt));'])
                 % first element is southwest-side of domain
-                eval([var,'(:,:,1)=(dum(1:spany:ny0*spany,1:spanx:nx0*spanx));']),
+                eval([var,'(:,:,1)=(dum(rngy(1):spany:ny0*spany,rngx(1):spanx:nx0*spanx));']),
             end
             x = x(1:spanx:nx0*spanx);
             y = y(1:spany:ny0*spany);
@@ -120,7 +139,7 @@ for jj = 1:nv
             dum = load(fin,'-ascii');
         end
         %
-        eval([var,'(:,:,kk-iter)=(dum(1:spany:ny,1:spanx:nx));']),
+        eval([var,'(:,:,kk-iter)=(dum(rngy(1):spany:ny0*spany,rngx(1):spanx:nx0*spanx));']),
         %
         if (kk-iter)==min(nt,Nt)
             flag=1;

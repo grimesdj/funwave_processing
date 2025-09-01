@@ -11,8 +11,8 @@ end
 ky = [0:stop-1]'/(dy*Ny);
 out = detrend(in);
 out = fft(out);
-out = out(1:stop,:)/(dy*Ny);
-out = real(out.*conj(out));
+out = out(1:stop,:);
+out = real(out.*conj(out))/(dy*Ny);
 out(2:end-inyq,:) = 2*out(2:end-inyq,:);
 
 % average over 5-ky bins

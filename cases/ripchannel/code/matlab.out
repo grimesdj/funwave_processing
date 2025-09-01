@@ -1,0 +1,44 @@
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2024 The MathWorks, Inc.
+             R2024a Update 3 (24.1.0.2603908) 64-bit (glnxa64)
+                                May 2, 2024
+
+ 
+To get started, type doc.
+For product information, visit www.mathworks.com.
+ 
+>> >> >> >> >> >> >> >> >> 
+ii =
+
+     1
+
+>> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> 
+jj =
+
+    15
+
+>> >> >> 
+ processing: planar2D planar2D_h10t10s10d00 
+>> >> >> >>>>>>>> >> >> >> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> >> >> loading eta from: funwave_planar2D_h10t10s10d00_eta_01.nc 
+loading eta from: funwave_planar2D_h10t10s10d00_eta_02.nc 
+loading eta from: funwave_planar2D_h10t10s10d00_eta_03.nc 
+loading eta from: funwave_planar2D_h10t10s10d00_eta_04.nc 
+loading eta from: funwave_planar2D_h10t10s10d00_eta_05.nc 
+loading eta from: funwave_planar2D_h10t10s10d00_eta_06.nc 
+loading eta from: funwave_planar2D_h10t10s10d00_eta_07.nc 
+loading eta from: funwave_planar2D_h10t10s10d00_eta_08.nc 
+loading eta from: funwave_planar2D_h10t10s10d00_eta_09.nc 
+loading eta from: funwave_planar2D_h10t10s10d00_eta_10.nc 
+loading eta from: funwave_planar2D_h10t10s10d00_eta_11.nc 
+loading eta from: funwave_planar2D_h10t10s10d00_eta_12.nc 
+{Error using internal.matlab.imagesci.nc/write (line 797)
+Variable 'x' does not exist in file. Use NCCREATE to create a variable.
+
+Error in ncwrite (line 95)
+ncObj.write(varName, varData, start, stride);
+
+Error in estimate_FUNWAVE_run_statistics (line 338)
+ncwrite   (info.waveForceFile,'x',x);
+} 
+>> >> >> 

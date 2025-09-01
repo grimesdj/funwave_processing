@@ -27,22 +27,17 @@ mask0     = info.mask;
 % full alongshore domain
 if ~isfield(info,'subDomain')
     iX = find(x0>=0  & x0<=400);
-    nx = length(iX);
-    ny = length(y0);
-    subDomain = [1 ny iX(1) iX(end)];
+    subDomain = [1 length(y) iX(1) iX(end)];
 else
     subDomain = info.subDomain;
 end
-% $$$ iX = find(x0>=25  & x0<=525);
-% $$$ nx = length(iX);
-% $$$ ny = length(y0);
-% $$$ subDomain = [1 ny iX(1) iX(end)];
 %
-% [u,v,x,y,h,t,mask] = load_funwave_u_v(info.rootMat,info.rootName,info.bathyFile,subDomain);
 % map bottom points to eta points
 x = x(subDomain(3):subDomain(4));
 y = y(subDomain(1):subDomain(2));
 h = h(subDomain(1):subDomain(2),subDomain(3):subDomain(4));
+%
+% map bottom points to eta points
 h  = 0.25*(h(1:end-1,1:end-1) + h(2:end,1:end-1) + ...
              h(2:end,1:end-1) + h(2:end,2:end));
 x  = 0.5*(x(1:end-1) + x(2:end));
@@ -79,7 +74,7 @@ Erot    = 0;
 %
 %
 % make a video of [vid1 = vorticity, vid2 = PSI]
-alims = [75 400 0 1500];
+alims = [x0(subDomain(3:4)) y0(subDomain(1:2))];
 clims0 = [-0.2 0.2];
 clrs0  = clims0(1):diff(clims0)/255:clims0(2);
 % $$$ clims1 = [-0.2 0.2];
@@ -257,7 +252,7 @@ p0   = plot(x,Uex,'-k',x,Uex_avg,'-b',x,Uex-Uex_avg,'-r','linewidth',2);
 xlabel('crosshore [m]','interpreter','latex')
 ylabel('$U_\mathrm{\scriptscriptstyle{EX}}$ [m/s]','interpreter','latex')
 title(info.runName)
-set(gca,'xlim',[75 525],'ticklabelinterpreter','latex','tickdir','out')
+set(gca,'xlim',x0(subDomain(3:4)),'ticklabelinterpreter','latex','tickdir','out')
 f0l1 = legend([p0(1),p0(2),p0(3)]','$U_\mathrm{\scriptscriptstyle EX}$','$\left<u\right>_\mathrm{\scriptscriptstyle EX}$','$u''_\mathrm{\scriptscriptstyle EX}$');
 set(f0l1,'location','northeast','interpreter','latex')
 if ~exist([info.rootSim,filesep,'figures'],'dir')
@@ -276,13 +271,13 @@ xlabel(a1,'crosshore [m]','interpreter','latex')
 ylabel(a1,'alongshore [m]','interpreter','latex')
 str = strsplit(info.runName,'_');
 title({str{2};'$\left<U_\mathrm{rot}\right>$'},'interpreter','latex')
-set(a1,'xlim',[75 500],'ticklabelinterpreter','latex','tickdir','out','ydir','normal')
+set(a1,'xlim',x0(subDomain(3:4)),'ticklabelinterpreter','latex','tickdir','out','ydir','normal')
 a2 = subplot(1,2,2);
 imagesc(x,y,Vrot_avg,clims),colormap(cm),caxis(clims)
 xlabel(a2,'crosshore [m]','interpreter','latex')
 ylabel(a2,'alongshore [m]','interpreter','latex')
 title(a2,'$\left<V_\mathrm{rot}\right>$','interpreter','latex')
-set(a2,'xlim',[75 500],'ticklabelinterpreter','latex','tickdir','out','ydir','normal')
+set(a2,'xlim',x0(subDomain(3:4)),'ticklabelinterpreter','latex','tickdir','out','ydir','normal')
 a3 = axes('position',[0.85 0.15 0.025 0.2]);
 imagesc(0,clrs,reshape(cm,256,1,3))
 ylabel(a3,'[m/s]~~','rotation',0,'interpreter','latex','horizontalalignment','right')
@@ -300,13 +295,13 @@ imagesc(x,y,U_avg,clims),colormap(cm),caxis(clims)
 xlabel(a1,'crosshore [m]','interpreter','latex')
 ylabel(a1,'alongshore [m]','interpreter','latex')
 title({str{2};'$\left<U\right>$'},'interpreter','latex')
-set(a1,'xlim',[75 500],'ticklabelinterpreter','latex','tickdir','out','ydir','normal')
+set(a1,'xlim',x0(subDomain(3:4)),'ticklabelinterpreter','latex','tickdir','out','ydir','normal')
 a2 = subplot(1,2,2);
 imagesc(x,y,V_avg,clims),colormap(cm),caxis(clims)
 xlabel(a2,'crosshore [m]','interpreter','latex')
 ylabel(a2,'alongshore [m]','interpreter','latex')
 title(a2,'$\left<V\right>$','interpreter','latex')
-set(a2,'xlim',[75 500],'ticklabelinterpreter','latex','tickdir','out','ydir','normal')
+set(a2,'xlim',x0(subDomain(3:4)),'ticklabelinterpreter','latex','tickdir','out','ydir','normal')
 a3 = axes('position',[0.85 0.15 0.025 0.2]);
 imagesc(0,clrs,reshape(cm,256,1,3))
 ylabel(a3,'[m/s]~~','rotation',0,'interpreter','latex','horizontalalignment','right')
@@ -325,7 +320,7 @@ ylabel('$\mathcal{E}^{1/2}$ [m/s]','interpreter','latex')
 f0l1 = legend([p0(1),p0(2),p0(3)]','$u$','$\left<u\right>$','$u''$');
 title(info.runName)
 set(f0l1,'location','northeast','interpreter','latex')
-set(gca,'xlim',[75 525],'ticklabelinterpreter','latex','tickdir','out')
+set(gca,'xlim',x0(subDomain(3:4)),'ticklabelinterpreter','latex','tickdir','out')
 exportgraphics(fig2,[info.rootSim,filesep,'figures',filesep,info.rootName,'Erot_eddy_kinetic_energy.pdf'])
 %
 % make a (U,V) hovmoller plot at xsl+100m...
@@ -344,18 +339,18 @@ imagesc(t,y,HOVMOLLER_U,clims),colormap(cm),caxis(clims)
 xlabel(a1,'time [s]','interpreter','latex')
 ylabel(a1,'alongshore [m]','interpreter','latex')
 title({str{2};'$U_\mathrm{rot}$'},'interpreter','latex')
-set(a1,'xlim',[75 500],'ticklabelinterpreter','latex','tickdir','out','ydir','normal')
+set(a1,'xlim',x0(subDomain(3:4)),'ticklabelinterpreter','latex','tickdir','out','ydir','normal')
 a2 = subplot(1,2,2);
 imagesc(t,y,HOVMOLLER_V,clims),colormap(cm),caxis(clims)
 xlabel(a2,'time [s]','interpreter','latex')
 ylabel(a2,'alongshore [m]','interpreter','latex')
 title(a2,'$V_\mathrm{rot}$','interpreter','latex')
-set(a2,'xlim',[75 500],'ticklabelinterpreter','latex','tickdir','out','ydir','normal')
+set(a2,'xlim',x0(subDomain(3:4)),'ticklabelinterpreter','latex','tickdir','out','ydir','normal')
 a3 = axes('position',[0.85 0.15 0.025 0.2]);
 imagesc(0,clrs,reshape(cm,256,1,3))
 ylabel(a3,'[m/s]~~','rotation',0,'interpreter','latex','horizontalalignment','right')
 set(a3,'ticklabelinterpreter','latex','fontsize',10,'tickdir','out','xtick',[])
-exportgraphics(fig1v2,[info.rootSim,filesep,'figures',filesep,info.rootName,'HOVMOLLER_U_V.pdf'])
+exportgraphics(fig2v2,[info.rootSim,filesep,'figures',filesep,info.rootName,'HOVMOLLER_U_V.pdf'])
 %
 close all
 %

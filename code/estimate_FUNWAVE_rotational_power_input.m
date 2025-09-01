@@ -331,227 +331,228 @@ return
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%% OLD %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% Now, what statistics to analyze?
-[Ny,Nx,Nt] = size(Prot);
-[nx,ny]    = meshgrid(1:Nx,1:Ny);
-%
-% map forcing to distance along-crest [0:0.01:1]?
-l          = [0:0.01:1];
-Eout       = nan(Ny,Nx,Nt);
-for jj=1:Nt
-    E  = Prot(:,:,jj);
-    BW = bwboundaries(abs(E)>0.001);
-    Nb = length(BW);
-    for nb = 1:Nb
-        points = BW{nb};
-        yb     = points(:,1);
-        xb     = points(:,2);
-        % get grid that's inside current front
-        in     = inpolygon(nx,ny,xb,yb);        
-        % points inside polygon
-        Ii     = find(in);
-        xi     = nx(in);
-        yi     = ny(in);
-        ei     = E(in);
-        % get the x-average magnitude and direction
-        % first, get unique set of y-coords
-        yu     = unique(yi);
-        Nu     = length(yu);
-        for nu = 1:Nu
-            iu = find(yi==yu(nu));
-            e_tot    = nanmean(ei(iu));
-            ei(iu)   = e_tot;
-            % ei(iu)   = real(e_tot)+imag(e_tot);
-        end
-        E(in) = ei;
-% $$$         % get the length of the front
-% $$$         lb(nb) = range(yu);
-% $$$         mag(nb,:) = interp(0:1/(Nu-1):1,mag_uFbr,l);
-% $$$         uFbr(nb,:) = interp(0:1/(Nu-1):1,mag_uFbr,l);
-    end
-    Eout(:,:,jj)=real(E);
-end
-%
-
-%
-% generate video object? only if we can make several 60s averages
-Navg   = round(60/dt);
-Nplt   = round(Navg/4);
-Nframes= floor(Nplt*Nt/Navg);
-if Nframes>10
-%
-alims = [75 400 0 1500];
-clims = [-1 1]*1e-2;
-clrs  = clims(1):diff(clims)/255:clims(2);
-cm    = cmocean('balance');
-[fig0,ax0,ax00,cx01,ps,ppos,pos] = get_1panel_video_figure_info(alims);
-ps  = ps + [0 0.25];
-pos = pos+[0 0 0 0.25];
-set(fig0,'position',pos,'papersize',ps,'paperposition',[0 0 ps])
-pos0 = get(ax0,'position');
-set(ax0,'position',pos0+[0 -0.75 0 0])
-pos00 = get(ax00,'position');
-set(ax00,'position',pos00+[0 -0.25 3 1.5])
-pos01 = get(cx01,'position');
-set(cx01,'position',pos01+[0 -0.75 0 0])
-%
-%
-vidName= sprintf([info.rootSim,filesep,'figures',filesep,info.rootName,'rotational_power_input_avg%ds'],round(Navg*dt));
-vid = VideoWriter(vidName,'Motion JPEG AVI');
-vid.Quality  = 100;
-vid.FrameRate= 5;
-open(vid)
-%
-% E    = Eout(:,:,1);
-Enz  = (Prot~=0);
-% Etot = squeeze(nansum(nansum(Eout,1),2)./sum(sum(Enz,1),2));clear Enz
-Etot = squeeze(nansum(nansum(Prot,1),2)./sum(sum(Enz,1),2));clear Enz
-% smooth Etot using 20-second running mean
-Etot_avg = conv(Etot,hamming(Navg)/sum(hamming(Navg)),'same');
-for jj=1:Navg/Nplt:Nframes
-    ii = Navg/Nplt*(jj-1) + [1:Navg];
-    E  = nanmean(Prot(:,:,ii),3);%nanmean(Eout(:,:,ii),3);
-    % plot avg
-    imagesc(ax0,y,x,E'), 
-    caxis(ax0,clims)
-    colormap(ax0,cm)
-    ylabel(ax0,'$y$ [m]','interpreter','latex')
-    xlabel(ax0,'$x$ [m]','interpreter','latex')
-    set(ax0,'tickdir','out','ticklabelinterpreter','latex','fontsize',25,'ydir','normal','color',0.8*[1 1 1],'xdir','reverse','ylim',alims(1:2),'xlim',alims(3:4)+y(1))
-    %
-    % make colorbar
-    imagesc(cx01,clrs,0,reshape(cm,1,256,3))
-    xlabel(cx01,{'$\epsilon=\left<u_\mathrm{rot}\cdot F_\mathrm{br}\right>$ [m$^2$/s$^{3}$]'},'interpreter','latex','rotation',0)%,'horizontalalignment','right')
-    set(cx01,'ytick',[],'xaxislocation','top','tickdir','out','ticklabelinterpreter','latex','fontsize',15)
-    %
-    % plot the time evolution of
-    yline(ax00,0,'--k')
-    plot(ax00,t/60,Etot,'k.',t/60,Etot_avg,'-b',t(jj+Navg/2)/60,Etot_avg(jj+Navg/2),'ro','markersize',10);
-    set(ax00,'xlim',(t(jj+Navg/2)+1*Navg*[-1 1])/60,'tickdir','out','ylim',[min(Etot_avg) max(Etot_avg)])
-    xlabel(ax00,'$t$ [min]','interpreter','latex')
-    ylabel(ax00,'$\overline{\epsilon}$ [m$^2$/s$^3$]','interpreter','latex')
-    %
-    % get+write frame
-    set(fig0,'position',pos);
-    frame = getframe(fig0);
-    if vid.FrameCount==0
-        fsize = size(frame.cdata,1,2);
-    elseif any(size(frame.cdata,1,2)~=fsize)
-        frame.cdata = imresize(frame.cdata,fsize);
-    end
-    writeVideo(vid,frame)
-end
-end
-%
-% now plot the time-averaged domain rotational power input
-Eavg  = nanmean(Prot,3);
-Eavg_smooth= conv2(Eavg,FILT','same');
-%
-alims = [75 400 0 1500];
-clims = [-1 1]*1e-2;
-clrs  = clims(1):diff(clims)/255:clims(2);
-cm    = cmocean('balance');
-xm = 2; ym = 2; pw = 10; ph = 3; ag=0.25; ps = [1.5*xm+pw, 2*ym+ag+ph];
-ppos = [xm ym             pw ph];
-cbpos = [xm ym+ph+ag 0.25*pw ag/1.5];
-fig0  = figure('units','centimeters');
-pos   = get(fig0,'position');
-pos(3:4) = ps;
-set(fig0,'position',pos,'papersize',ps,'paperposition',[0 0 ps])
-%
-ax0  = axes('units','centimeters','position',ppos);
-imagesc(ax0,y,x-mean(info.x_shoreline),Eavg_smooth'),
-hold(ax0,'on'),plot(ax0,y,info.x_shoreline-mean(info.x_shoreline),'--k','linewidth',1.5)
-caxis(ax0,clims)
-colormap(ax0,cm)
-ylabel(ax0,'$x$ [m]','interpreter','latex')
-xlabel(ax0,'$y$ [m]','interpreter','latex')
-set(ax0,'tickdir','out','ticklabelinterpreter','latex','ylim',-25+[0 200],'ydir','normal','xdir','reverse','xtick',[0 500 1000])
-%
-% make colorbar
-cx01 = axes('units','centimeters','position',cbpos);
-imagesc(cx01,clrs,0,reshape(cm,1,256,3))
-% ylabel(cx01,{sprintf('$~~\\left<\\vec{u}_\\mathrm{rot}\\cdot \\vec{F}_\\mathrm{br}\\right>_\\mathrm{%d~s}$ [m$^2$/s$^{3}$]',round(range(t)))},'interpreter','latex','rotation',0,'fontsize',12,'verticalalignment','bottom','horizontalalignment','left')
-ylabel(cx01,{'$~~\left<\vec{u}_\mathrm{rot}\cdot \vec{F}_\mathrm{br}\right>$ [m$^2$/s$^{3}$]'},'interpreter','latex','rotation',0,'fontsize',12,'verticalalignment','bottom','horizontalalignment','left')
-set(cx01,'ytick',[],'xaxislocation','top','tickdir','out','ticklabelinterpreter','latex','yaxislocation','right')
-exportgraphics(fig0,[info.rootSim,filesep,'figures',filesep,info.rootName,'rotational_power_input_time_averaged.pdf'])
-%
-% now map the time averaged power input to the local shoreline coordinates:
-xsl        = info.x_shoreline';
-x_map      = x-xsl;
-[xx,yy]    = meshgrid(x-mean(xsl),y);
-if std(xsl)>=3
-    fprintf('\tmapping to shoreline coordinates\n')
-    Eavg_map   = griddata(x_map,yy,Eavg,xx,yy);
-else
-    Eavg_map   = Eavg;
-end
-%
-alims = [-25 325 0 1500];
-clims = [-1 1]*1e-2;
-clrs  = clims(1):diff(clims)/255:clims(2);
-cm    = cmocean('balance');
-xm = 2; ym = 2; pw = 10; ph = 3; ag=0.25; ps = [1.5*xm+pw, 2*ym+3*ag+2*ph];
-ppos = [xm ym             pw ph];
-cbpos = [xm ym+ph+ag 0.25*pw ag/1.5];
-fig0  = figure('units','centimeters');
-pos   = get(fig0,'position');
-pos(3:4) = ps;
-set(fig0,'position',pos,'papersize',ps,'paperposition',[0 0 ps])
-pos0 = get(ax0,'position');
-set(ax0,'position',pos0+[0 -0.75 0 0])
-%
-ax0  = axes('units','centimeters','position',ppos);
-imagesc(ax0,y,x-mean(xsl),Eavg_map'),
-% imagesc(ax0,y,x-mean(xsl),Eavg'), 
-caxis(ax0,clims)
-colormap(ax0,cm)
-ylabel(ax0,'$y$ [m]','interpreter','latex')
-xlabel(ax0,'$x$ [m]','interpreter','latex')
-set(ax0,'tickdir','out','ticklabelinterpreter','latex','ylim',-25+[0 200],'ydir','normal','xdir','reverse','xticklabel',[])
-%
-% make colorbar
-cx01 = axes('units','centimeters','position',cbpos);
-imagesc(cx01,clrs,0,reshape(cm,1,256,3))
-ylabel(cx01,{sprintf('$\left<u_\mathrm{rot}\cdot F_\mathrm{br}\right>_$ [m$^2$/s$^{3}$]'},'interpreter','latex','rotation',0)%,'horizontalalignment','right')
-set(cx01,'ytick',[],'xaxislocation','top','tickdir','out','ticklabelinterpreter','latex','fontsize',12,'yaxislocation','right')
-exportgraphics(fig0,[info.rootSim,filesep,'figures',filesep,info.rootName,'rotational_power_input_time_averaged_vs_shoreline_coords.pdf'])
-%
-% compute k_y spectra on the time-averaged and shoreline mapped power input
-dy = info.dy;
-if ~mod(Ny,2)
-    inyq = 1;% don't double the nyquist frequency
-    stop = Ny/2+1;
-else
-    inyq = 0;%
-    stop = (Ny+1)/2;
-end
-ky = [0:stop-1]'/(dy*Ny);
-Eavg_map_spec = detrend(Eavg_map);
-Eavg_map_spec = fft(Eavg_map_spec);
-Eavg_map_spec = Eavg_map_spec(1:stop,:);
-Eavg_map_spec = real(Eavg_map_spec.*conj(Eavg_map_spec));
-Eavg_map_spec(2:end-inyq,:) = 2*Eavg_map_spec(2:end-inyq,:);
-%
-% average over 5-ky bins
-Nf = 5;
-ff = hamming(Nf)./hamming(Nf);
-Eavg_map_spec= conv2(Eavg_map_spec,ff,'same');
-% now cross-shore average into 10m bins (dof~2*20, less the cross-shore correlation)
-db    = 25;
-xbins = 0:db:150;
-Nb    = length(xbins);
-Eavg_map_spec_bin = nan(stop,Nb);
-figure,
-cm2 = cmocean('thermal',Nb);
-for ii = 1:Nb
-    inbin  =  find( (x-mean(xsl))>=(xbins(ii)-db/2) & (x-mean(xsl))<(xbins(ii)+db/2));
-    Eavg_map_spec_bin(:,ii) = nanmean(Eavg_map_spec(:,inbin),2);
-    loglog(ky,Eavg_map_spec_bin(:,ii),'color',cm2(ii,:)), hold on
-end
-% $$$ % what is the domain average of Prot vs. time?
-% $$$ t              = rot_vel.t;
-% $$$ Prot_SZavg = squeeze(nanmean(nanmean(Prot,1),2));
-% $$$ % wave-average?
-% $$$ % estimate ky-spectra of Prot?
+% $$$ %
+% $$$ % Now, what statistics to analyze?
+% $$$ [Ny,Nx,Nt] = size(Prot);
+% $$$ [nx,ny]    = meshgrid(1:Nx,1:Ny);
+% $$$ %
+% $$$ % map forcing to distance along-crest [0:0.01:1]?
+% $$$ l          = [0:0.01:1];
+% $$$ Eout       = nan(Ny,Nx,Nt);
+% $$$ for jj=1:Nt
+% $$$     E  = Prot(:,:,jj);
+% $$$     BW = bwboundaries(abs(E)>0.001);
+% $$$     Nb = length(BW);
+% $$$     for nb = 1:Nb
+% $$$         points = BW{nb};
+% $$$         yb     = points(:,1);
+% $$$         xb     = points(:,2);
+% $$$         % get grid that's inside current front
+% $$$         in     = inpolygon(nx,ny,xb,yb);        
+% $$$         % points inside polygon
+% $$$         Ii     = find(in);
+% $$$         xi     = nx(in);
+% $$$         yi     = ny(in);
+% $$$         ei     = E(in);
+% $$$         % get the x-average magnitude and direction
+% $$$         % first, get unique set of y-coords
+% $$$         yu     = unique(yi);
+% $$$         Nu     = length(yu);
+% $$$         for nu = 1:Nu
+% $$$             iu = find(yi==yu(nu));
+% $$$             e_tot    = nanmean(ei(iu));
+% $$$             ei(iu)   = e_tot;
+% $$$             % ei(iu)   = real(e_tot)+imag(e_tot);
+% $$$         end
+% $$$         E(in) = ei;
+% $$$ % $$$         % get the length of the front
+% $$$ % $$$         lb(nb) = range(yu);
+% $$$ % $$$         mag(nb,:) = interp(0:1/(Nu-1):1,mag_uFbr,l);
+% $$$ % $$$         uFbr(nb,:) = interp(0:1/(Nu-1):1,mag_uFbr,l);
+% $$$     end
+% $$$     Eout(:,:,jj)=real(E);
+% $$$ end
+% $$$ %
+% $$$ 
+% $$$ %
+% $$$ % generate video object? only if we can make several 60s averages
+% $$$ Navg   = round(60/dt);
+% $$$ Nplt   = round(Navg/4);
+% $$$ Nframes= floor(Nplt*Nt/Navg);
+% $$$ if Nframes>10
+% $$$ %
+% $$$ alims = [75 400 0 1500];
+% $$$ clims = [-1 1]*1e-2;
+% $$$ clrs  = clims(1):diff(clims)/255:clims(2);
+% $$$ cm    = cmocean('balance');
+% $$$ [fig0,ax0,ax00,cx01,ps,ppos,pos] = get_1panel_video_figure_info(alims);
+% $$$ ps  = ps + [0 0.25];
+% $$$ pos = pos+[0 0 0 0.25];
+% $$$ set(fig0,'position',pos,'papersize',ps,'paperposition',[0 0 ps])
+% $$$ pos0 = get(ax0,'position');
+% $$$ set(ax0,'position',pos0+[0 -0.75 0 0])
+% $$$ pos00 = get(ax00,'position');
+% $$$ set(ax00,'position',pos00+[0 -0.25 3 1.5])
+% $$$ pos01 = get(cx01,'position');
+% $$$ set(cx01,'position',pos01+[0 -0.75 0 0])
+% $$$ %
+% $$$ %
+% $$$ vidName= sprintf([info.rootSim,filesep,'figures',filesep,info.rootName,'rotational_power_input_avg%ds'],round(Navg*dt));
+% $$$ vid = VideoWriter(vidName,'Motion JPEG AVI');
+% $$$ vid.Quality  = 100;
+% $$$ vid.FrameRate= 5;
+% $$$ open(vid)
+% $$$ %
+% $$$ % E    = Eout(:,:,1);
+% $$$ Enz  = (Prot~=0);
+% $$$ % Etot = squeeze(nansum(nansum(Eout,1),2)./sum(sum(Enz,1),2));clear Enz
+% $$$ Etot = squeeze(nansum(nansum(Prot,1),2)./sum(sum(Enz,1),2));clear Enz
+% $$$ % smooth Etot using 20-second running mean
+% $$$ Etot_avg = conv(Etot,hamming(Navg)/sum(hamming(Navg)),'same');
+% $$$ for jj=1:Navg/Nplt:Nframes
+% $$$     ii = Navg/Nplt*(jj-1) + [1:Navg];
+% $$$     E  = nanmean(Prot(:,:,ii),3);%nanmean(Eout(:,:,ii),3);
+% $$$     % plot avg
+% $$$     imagesc(ax0,y,x,E'), 
+% $$$     caxis(ax0,clims)
+% $$$     colormap(ax0,cm)
+% $$$     ylabel(ax0,'$y$ [m]','interpreter','latex')
+% $$$     xlabel(ax0,'$x$ [m]','interpreter','latex')
+% $$$     set(ax0,'tickdir','out','ticklabelinterpreter','latex','fontsize',25,'ydir','normal','color',0.8*[1 1 1],'xdir','reverse','ylim',alims(1:2),'xlim',alims(3:4)+y(1))
+% $$$     %
+% $$$     % make colorbar
+% $$$     imagesc(cx01,clrs,0,reshape(cm,1,256,3))
+% $$$     xlabel(cx01,{'$\epsilon=\left<u_\mathrm{rot}\cdot F_\mathrm{br}\right>$ [m$^2$/s$^{3}$]'},'interpreter','latex','rotation',0)%,'horizontalalignment','right')
+% $$$     set(cx01,'ytick',[],'xaxislocation','top','tickdir','out','ticklabelinterpreter','latex','fontsize',15)
+% $$$     %
+% $$$     % plot the time evolution of
+% $$$     yline(ax00,0,'--k')
+% $$$     plot(ax00,t/60,Etot,'k.',t/60,Etot_avg,'-b',t(jj+Navg/2)/60,Etot_avg(jj+Navg/2),'ro','markersize',10);
+% $$$     set(ax00,'xlim',(t(jj+Navg/2)+1*Navg*[-1 1])/60,'tickdir','out','ylim',[min(Etot_avg) max(Etot_avg)])
+% $$$     xlabel(ax00,'$t$ [min]','interpreter','latex')
+% $$$     ylabel(ax00,'$\overline{\epsilon}$ [m$^2$/s$^3$]','interpreter','latex')
+% $$$     %
+% $$$     % get+write frame
+% $$$     set(fig0,'position',pos);
+% $$$     frame = getframe(fig0);
+% $$$     if vid.FrameCount==0
+% $$$         fsize = size(frame.cdata,1,2);
+% $$$     elseif any(size(frame.cdata,1,2)~=fsize)
+% $$$         frame.cdata = imresize(frame.cdata,fsize);
+% $$$     end
+% $$$     writeVideo(vid,frame)
+% $$$ end
+% $$$ end
+% $$$ %
+% $$$ % now plot the time-averaged domain rotational power input
+% $$$ Eavg  = nanmean(Prot,3);
+% $$$ Eavg_smooth= conv2(Eavg,FILT','same');
+% $$$ %
+% $$$ alims = [75 400 0 1500];
+% $$$ clims = [-1 1]*1e-2;
+% $$$ clrs  = clims(1):diff(clims)/255:clims(2);
+% $$$ cm    = cmocean('balance');
+% $$$ xm = 2; ym = 2; pw = 10; ph = 3; ag=0.25; ps = [1.5*xm+pw, 2*ym+ag+ph];
+% $$$ ppos = [xm ym             pw ph];
+% $$$ cbpos = [xm ym+ph+ag 0.25*pw ag/1.5];
+% $$$ fig0  = figure('units','centimeters');
+% $$$ pos   = get(fig0,'position');
+% $$$ pos(3:4) = ps;
+% $$$ set(fig0,'position',pos,'papersize',ps,'paperposition',[0 0 ps])
+% $$$ %
+% $$$ ax0  = axes('units','centimeters','position',ppos);
+% $$$ imagesc(ax0,y,x-mean(info.x_shoreline),Eavg_smooth'),
+% $$$ hold(ax0,'on'),plot(ax0,y,info.x_shoreline-mean(info.x_shoreline),'--k','linewidth',1.5)
+% $$$ caxis(ax0,clims)
+% $$$ colormap(ax0,cm)
+% $$$ ylabel(ax0,'$x$ [m]','interpreter','latex')
+% $$$ xlabel(ax0,'$y$ [m]','interpreter','latex')
+% $$$ set(ax0,'tickdir','out','ticklabelinterpreter','latex','ylim',-25+[0 200],'ydir','normal','xdir','reverse','xtick',[0 500 1000])
+% $$$ %
+% $$$ % make colorbar
+% $$$ cx01 = axes('units','centimeters','position',cbpos);
+% $$$ imagesc(cx01,clrs,0,reshape(cm,1,256,3))
+% $$$ % ylabel(cx01,{sprintf('$~~\\left<\\vec{u}_\\mathrm{rot}\\cdot \\vec{F}_\\mathrm{br}\\right>_\\mathrm{%d~s}$ [m$^2$/s$^{3}$]',round(range(t)))},'interpreter','latex','rotation',0,'fontsize',12,'verticalalignment','bottom','horizontalalignment','left')
+% $$$ ylabel(cx01,{'$~~\left<\vec{u}_\mathrm{rot}\cdot \vec{F}_\mathrm{br}\right>$ [m$^2$/s$^{3}$]'},'interpreter','latex','rotation',0,'fontsize',12,'verticalalignment','bottom','horizontalalignment','left')
+% $$$ set(cx01,'ytick',[],'xaxislocation','top','tickdir','out','ticklabelinterpreter','latex','yaxislocation','right')
+% $$$ exportgraphics(fig0,[info.rootSim,filesep,'figures',filesep,info.rootName,'rotational_power_input_time_averaged.pdf'])
+% $$$ %
+% $$$ % now map the time averaged power input to the local shoreline coordinates:
+% $$$ xsl        = info.x_shoreline';
+% $$$ x_map      = x-xsl;
+% $$$ [xx,yy]    = meshgrid(x-mean(xsl),y);
+% $$$ if std(xsl)>=3
+% $$$     fprintf('\tmapping to shoreline coordinates\n')
+% $$$     Eavg_map   = griddata(x_map,yy,Eavg,xx,yy);
+% $$$ else
+% $$$     Eavg_map   = Eavg;
+% $$$ end
+% $$$ %
+% $$$ alims = [-25 325 0 1500];
+% $$$ clims = [-1 1]*1e-2;
+% $$$ clrs  = clims(1):diff(clims)/255:clims(2);
+% $$$ cm    = cmocean('balance');
+% $$$ xm = 2; ym = 2; pw = 10; ph = 3; ag=0.25; ps = [1.5*xm+pw, 2*ym+3*ag+2*ph];
+% $$$ ppos = [xm ym             pw ph];
+% $$$ cbpos = [xm ym+ph+ag 0.25*pw ag/1.5];
+% $$$ fig0  = figure('units','centimeters');
+% $$$ pos   = get(fig0,'position');
+% $$$ pos(3:4) = ps;
+% $$$ set(fig0,'position',pos,'papersize',ps,'paperposition',[0 0 ps])
+% $$$ pos0 = get(ax0,'position');
+% $$$ set(ax0,'position',pos0+[0 -0.75 0 0])
+% $$$ %
+% $$$ ax0  = axes('units','centimeters','position',ppos);
+% $$$ imagesc(ax0,y,x-mean(xsl),Eavg_map'),
+% $$$ % imagesc(ax0,y,x-mean(xsl),Eavg'), 
+% $$$ caxis(ax0,clims)
+% $$$ colormap(ax0,cm)
+% $$$ ylabel(ax0,'$y$ [m]','interpreter','latex')
+% $$$ xlabel(ax0,'$x$ [m]','interpreter','latex')
+% $$$ set(ax0,'tickdir','out','ticklabelinterpreter','latex','ylim',-25+[0 200],'ydir','normal','xdir','reverse','xticklabel',[])
+% $$$ %
+% $$$ % make colorbar
+% $$$ cx01 = axes('units','centimeters','position',cbpos);
+% $$$ imagesc(cx01,clrs,0,reshape(cm,1,256,3))
+% $$$ ylabel(cx01,{'$\left<u_\mathrm{rot}\cdot F_\mathrm{br}\right>_$ [m$^2$/s$^{3}$]'},'interpreter','latex','rotation',0)%,'horizontalalignment','right')
+% $$$ set(cx01,'ytick',[],'xaxislocation','top','tickdir','out','ticklabelinterpreter','latex','fontsize',12,'yaxislocation','right')
+% $$$ exportgraphics(fig0,[info.rootSim,filesep,'figures',filesep,info.rootName,'rotational_power_input_time_averaged_vs_shoreline_coords.pdf'])
+% $$$ %
+% $$$ % compute k_y spectra on the time-averaged and shoreline mapped power input
+% $$$ dy = info.dy;
+% $$$ if ~mod(Ny,2)
+% $$$     inyq = 1;% don't double the nyquist frequency
+% $$$     stop = Ny/2+1;
+% $$$ else
+% $$$     inyq = 0;%
+% $$$     stop = (Ny+1)/2;
+% $$$ end
+% $$$ ky = [0:stop-1]'/(dy*Ny);
+% $$$ Eavg_map_spec = detrend(Eavg_map);
+% $$$ Eavg_map_spec = fft(Eavg_map_spec);
+% $$$ Eavg_map_spec = Eavg_map_spec(1:stop,:);
+% $$$ Eavg_map_spec = real(Eavg_map_spec.*conj(Eavg_map_spec));
+% $$$ Eavg_map_spec(2:end-inyq,:) = 2*Eavg_map_spec(2:end-inyq,:);
+% $$$ %
+% $$$ % average over 5-ky bins
+% $$$ Nf = 5;
+% $$$ ff = hamming(Nf)./hamming(Nf);
+% $$$ Eavg_map_spec= conv2(Eavg_map_spec,ff,'same');
+% $$$ % now cross-shore average into 10m bins (dof~2*20, less the cross-shore correlation)
+% $$$ db    = 25;
+% $$$ xbins = 0:db:150;
+% $$$ Nb    = length(xbins);
+% $$$ Eavg_map_spec_bin = nan(stop,Nb);
+% $$$ figure,
+% $$$ cm2 = cmocean('thermal',Nb);
+% $$$ for ii = 1:Nb
+% $$$     inbin  =  find( (x-mean(xsl))>=(xbins(ii)-db/2) & (x-mean(xsl))<(xbins(ii)+db/2));
+% $$$     Eavg_map_spec_bin(:,ii) = nanmean(Eavg_map_spec(:,inbin),2);
+% $$$     loglog(ky,Eavg_map_spec_bin(:,ii),'color',cm2(ii,:)), hold on
+% $$$ end
+% $$$ % $$$ % what is the domain average of Prot vs. time?
+% $$$ % $$$ t              = rot_vel.t;
+% $$$ % $$$ Prot_SZavg = squeeze(nanmean(nanmean(Prot,1),2));
+% $$$ % $$$ % wave-average?
+% $$$ % $$$ % estimate ky-spectra of Prot?
+% $$$ exportgraphics(fig0,[info.rootSim,filesep,'figures',filesep,info.rootName,'rotational_power_input_time_averaged_vs_shoreline_coords.pdf'])

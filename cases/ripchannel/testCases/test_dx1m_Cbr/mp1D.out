@@ -1,0 +1,66 @@
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2024 The MathWorks, Inc.
+             R2024a Update 3 (24.1.0.2603908) 64-bit (glnxa64)
+                                May 2, 2024
+
+ 
+To get started, type doc.
+For product information, visit www.mathworks.com.
+ 
+>> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+runNAME =
+
+    'barred1D_Cbr050'
+
+working on Hm0 for: barred1D_Cbr050 
+working on nubrk for : barred1D_Cbr050 
+working on Fbr for: barred1D_Cbr050 
+working on BrkDis for: barred1D_Cbr050 
+!!!! Not loading BrkSrcY !!!!!!!
+working on Ebr for run: barred1D_Cbr050 
+
+runNAME =
+
+    'barred1D_Cbr075'
+
+working on Hm0 for: barred1D_Cbr075 
+working on nubrk for : barred1D_Cbr075 
+working on Fbr for: barred1D_Cbr075 
+working on BrkDis for: barred1D_Cbr075 
+!!!! Not loading BrkSrcY !!!!!!!
+working on Ebr for run: barred1D_Cbr075 
+
+runNAME =
+
+    'barred1D_Cbr100'
+
+working on Hm0 for: barred1D_Cbr100 
+working on nubrk for : barred1D_Cbr100 
+working on Fbr for: barred1D_Cbr100 
+working on BrkDis for: barred1D_Cbr100 
+!!!! Not loading BrkSrcY !!!!!!!
+working on Ebr for run: barred1D_Cbr100 
+
+runNAME =
+
+    'barred1D_Cbr125'
+
+working on Hm0 for: barred1D_Cbr125 
+working on nubrk for : barred1D_Cbr125 
+working on Fbr for: barred1D_Cbr125 
+working on BrkDis for: barred1D_Cbr125 
+!!!! Not loading BrkSrcY !!!!!!!
+working on Ebr for run: barred1D_Cbr125 
+
+runNAME =
+
+    'barred1D_Cbr150'
+
+working on Hm0 for: barred1D_Cbr150 
+working on nubrk for : barred1D_Cbr150 
+working on Fbr for: barred1D_Cbr150 
+working on BrkDis for: barred1D_Cbr150 
+!!!! Not loading BrkSrcY !!!!!!!
+working on Ebr for run: barred1D_Cbr150 
+>> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >>>>>>>>>>>> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >>>>>>>>>>>> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >>>>>>>>>>>> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >>>>>>>>>>>> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >>>>>>>>>>>> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >>>>>>>>>>>> >> >> >> >> >> >> >> >> >> >> >> >> >> >> 

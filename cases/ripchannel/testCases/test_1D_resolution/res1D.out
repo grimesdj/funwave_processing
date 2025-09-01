@@ -1,0 +1,273 @@
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2024 The MathWorks, Inc.
+             R2024a Update 3 (24.1.0.2603908) 64-bit (glnxa64)
+                                May 2, 2024
+
+ 
+To get started, type doc.
+For product information, visit www.mathworks.com.
+ 
+>> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+working on: terraced1Ddx025_h10t10s00d00
+working on: dep
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1Ddx025_h10t10s00d00_dep.nc 
+working on: eta
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1Ddx025_h10t10s00d00_eta_01.nc 
+working on: u
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1Ddx025_h10t10s00d00_u_01.nc 
+working on: v
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1Ddx025_h10t10s00d00_v_01.nc 
+working on: p
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1Ddx025_h10t10s00d00_p_01.nc 
+working on: q
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1Ddx025_h10t10s00d00_q_01.nc 
+working on: mask
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1Ddx025_h10t10s00d00_mask_01.nc 
+working on: BrkSrcX
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1Ddx025_h10t10s00d00_BrkSrcX_01.nc 
+working on: BrkDissX
+	removing old files:
+ archiving (kk-iter)=min(nt,Nt): /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1Ddx025_h10t10s00d00_MomentumTerms_01.nc 
+working on: DxSxx
+ archiving (kk-iter)=min(nt,Nt): /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1Ddx025_h10t10s00d00_MomentumTerms_01.nc 
+working on: DxUUH
+ archiving (kk-iter)=min(nt,Nt): /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1Ddx025_h10t10s00d00_MomentumTerms_01.nc 
+working on: FRCX
+ archiving (kk-iter)=min(nt,Nt): /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1Ddx025_h10t10s00d00_MomentumTerms_01.nc 
+working on: PgrdX
+ archiving (kk-iter)=min(nt,Nt): /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1Ddx025_h10t10s00d00_MomentumTerms_01.nc 
+working on: Sxx
+ archiving (kk-iter)=min(nt,Nt): /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1Ddx025_h10t10s00d00_MomentumTerms_01.nc 
+
+working on: terraced1Ddx050_h10t10s00d00
+working on: dep
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1Ddx050_h10t10s00d00_dep.nc 
+working on: eta
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1Ddx050_h10t10s00d00_eta_01.nc 
+working on: u
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1Ddx050_h10t10s00d00_u_01.nc 
+working on: v
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1Ddx050_h10t10s00d00_v_01.nc 
+working on: p
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1Ddx050_h10t10s00d00_p_01.nc 
+working on: q
+	removing old files:
+Launching updater executable
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1Ddx050_h10t10s00d00_q_01.nc 
+working on: mask
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1Ddx050_h10t10s00d00_mask_01.nc 
+working on: BrkSrcX
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1Ddx050_h10t10s00d00_BrkSrcX_01.nc 
+working on: BrkDissX
+	removing old files:
+ archiving (kk-iter)=min(nt,Nt): /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1Ddx050_h10t10s00d00_MomentumTerms_01.nc 
+working on: DxSxx
+ archiving (kk-iter)=min(nt,Nt): /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1Ddx050_h10t10s00d00_MomentumTerms_01.nc 
+working on: DxUUH
+ archiving (kk-iter)=min(nt,Nt): /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1Ddx050_h10t10s00d00_MomentumTerms_01.nc 
+working on: FRCX
+ archiving (kk-iter)=min(nt,Nt): /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1Ddx050_h10t10s00d00_MomentumTerms_01.nc 
+working on: PgrdX
+ archiving (kk-iter)=min(nt,Nt): /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1Ddx050_h10t10s00d00_MomentumTerms_01.nc 
+working on: Sxx
+ archiving (kk-iter)=min(nt,Nt): /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1Ddx050_h10t10s00d00_MomentumTerms_01.nc 
+
+working on: terraced1D_h10t10s00d00
+working on: dep
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1D_h10t10s00d00_dep.nc 
+working on: eta
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1D_h10t10s00d00_eta_01.nc 
+working on: u
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1D_h10t10s00d00_u_01.nc 
+working on: v
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1D_h10t10s00d00_v_01.nc 
+working on: p
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1D_h10t10s00d00_p_01.nc 
+working on: q
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1D_h10t10s00d00_q_01.nc 
+working on: mask
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1D_h10t10s00d00_mask_01.nc 
+working on: BrkSrcX
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1D_h10t10s00d00_BrkSrcX_01.nc 
+working on: BrkDissX
+	removing old files:
+ archiving (kk-iter)=min(nt,Nt): /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1D_h10t10s00d00_MomentumTerms_01.nc 
+working on: DxSxx
+ archiving (kk-iter)=min(nt,Nt): /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1D_h10t10s00d00_MomentumTerms_01.nc 
+working on: DxUUH
+ archiving (kk-iter)=min(nt,Nt): /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1D_h10t10s00d00_MomentumTerms_01.nc 
+working on: FRCX
+ archiving (kk-iter)=min(nt,Nt): /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1D_h10t10s00d00_MomentumTerms_01.nc 
+working on: PgrdX
+ archiving (kk-iter)=min(nt,Nt): /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1D_h10t10s00d00_MomentumTerms_01.nc 
+working on: Sxx
+ archiving (kk-iter)=min(nt,Nt): /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_terraced1D_h10t10s00d00_MomentumTerms_01.nc 
+
+working on: planar1Ddx025_h10t10s00d00
+working on: dep
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx025_h10t10s00d00_dep*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx025_h10t10s00d00_dep.nc 
+working on: eta
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx025_h10t10s00d00_eta_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx025_h10t10s00d00_eta_01.nc 
+working on: u
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx025_h10t10s00d00_u_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx025_h10t10s00d00_u_01.nc 
+working on: v
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx025_h10t10s00d00_v_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx025_h10t10s00d00_v_01.nc 
+working on: p
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx025_h10t10s00d00_p_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx025_h10t10s00d00_p_01.nc 
+working on: q
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx025_h10t10s00d00_q_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx025_h10t10s00d00_q_01.nc 
+working on: mask
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx025_h10t10s00d00_mask_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx025_h10t10s00d00_mask_01.nc 
+working on: BrkSrcX
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx025_h10t10s00d00_BrkSrcX_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx025_h10t10s00d00_BrkSrcX_01.nc 
+working on: BrkDissX
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx025_h10t10s00d00_MomentumTerms*.nc': No such file or directory
+ archiving (kk-iter)=min(nt,Nt): /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx025_h10t10s00d00_MomentumTerms_01.nc 
+working on: DxSxx
+ archiving (kk-iter)=min(nt,Nt): /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx025_h10t10s00d00_MomentumTerms_01.nc 
+working on: DxUUH
+ archiving (kk-iter)=min(nt,Nt): /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx025_h10t10s00d00_MomentumTerms_01.nc 
+working on: FRCX
+ archiving (kk-iter)=min(nt,Nt): /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx025_h10t10s00d00_MomentumTerms_01.nc 
+working on: PgrdX
+ archiving (kk-iter)=min(nt,Nt): /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx025_h10t10s00d00_MomentumTerms_01.nc 
+working on: Sxx
+ archiving (kk-iter)=min(nt,Nt): /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx025_h10t10s00d00_MomentumTerms_01.nc 
+
+working on: planar1Ddx050_h10t10s00d00
+working on: dep
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx050_h10t10s00d00_dep*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx050_h10t10s00d00_dep.nc 
+working on: eta
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx050_h10t10s00d00_eta_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx050_h10t10s00d00_eta_01.nc 
+working on: u
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx050_h10t10s00d00_u_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx050_h10t10s00d00_u_01.nc 
+working on: v
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx050_h10t10s00d00_v_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx050_h10t10s00d00_v_01.nc 
+working on: p
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx050_h10t10s00d00_p_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx050_h10t10s00d00_p_01.nc 
+working on: q
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx050_h10t10s00d00_q_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx050_h10t10s00d00_q_01.nc 
+working on: mask
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx050_h10t10s00d00_mask_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx050_h10t10s00d00_mask_01.nc 
+working on: BrkSrcX
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx050_h10t10s00d00_BrkSrcX_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx050_h10t10s00d00_BrkSrcX_01.nc 
+working on: BrkDissX
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx050_h10t10s00d00_MomentumTerms*.nc': No such file or directory
+ archiving (kk-iter)=min(nt,Nt): /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx050_h10t10s00d00_MomentumTerms_01.nc 
+working on: DxSxx
+ archiving (kk-iter)=min(nt,Nt): /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx050_h10t10s00d00_MomentumTerms_01.nc 
+working on: DxUUH
+ archiving (kk-iter)=min(nt,Nt): /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx050_h10t10s00d00_MomentumTerms_01.nc 
+working on: FRCX
+ archiving (kk-iter)=min(nt,Nt): /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx050_h10t10s00d00_MomentumTerms_01.nc 
+working on: PgrdX
+ archiving (kk-iter)=min(nt,Nt): /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx050_h10t10s00d00_MomentumTerms_01.nc 
+working on: Sxx
+ archiving (kk-iter)=min(nt,Nt): /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1Ddx050_h10t10s00d00_MomentumTerms_01.nc 
+
+working on: planar1D_h10t10s00d00
+working on: dep
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1D_h10t10s00d00_dep*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1D_h10t10s00d00_dep.nc 
+working on: eta
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1D_h10t10s00d00_eta_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1D_h10t10s00d00_eta_01.nc 
+working on: u
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1D_h10t10s00d00_u_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1D_h10t10s00d00_u_01.nc 
+working on: v
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1D_h10t10s00d00_v_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1D_h10t10s00d00_v_01.nc 
+working on: p
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1D_h10t10s00d00_p_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1D_h10t10s00d00_p_01.nc 
+working on: q
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1D_h10t10s00d00_q_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1D_h10t10s00d00_q_01.nc 
+working on: mask
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1D_h10t10s00d00_mask_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1D_h10t10s00d00_mask_01.nc 
+working on: BrkSrcX
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1D_h10t10s00d00_BrkSrcX_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1D_h10t10s00d00_BrkSrcX_01.nc 
+working on: BrkDissX
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1D_h10t10s00d00_MomentumTerms*.nc': No such file or directory
+ archiving (kk-iter)=min(nt,Nt): /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1D_h10t10s00d00_MomentumTerms_01.nc 
+working on: DxSxx
+ archiving (kk-iter)=min(nt,Nt): /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1D_h10t10s00d00_MomentumTerms_01.nc 
+working on: DxUUH
+ archiving (kk-iter)=min(nt,Nt): /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1D_h10t10s00d00_MomentumTerms_01.nc 
+working on: FRCX
+ archiving (kk-iter)=min(nt,Nt): /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1D_h10t10s00d00_MomentumTerms_01.nc 
+working on: PgrdX
+ archiving (kk-iter)=min(nt,Nt): /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1D_h10t10s00d00_MomentumTerms_01.nc 
+working on: Sxx
+ archiving (kk-iter)=min(nt,Nt): /scratch/grimesdj/ripchannel/resolution1D/mat_data/funwave_planar1D_h10t10s00d00_MomentumTerms_01.nc 
+>> >> >> >> >> 

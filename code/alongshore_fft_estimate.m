@@ -2,10 +2,11 @@ function [out,ky] = alongshore_fft_estimate(info,in);
 %
 % USAGE: [out,ky] = alongshore_fft_estimate(info,in);
 %
-% fft of "in" [NxM] is over N-rows, M-columns are not altered
+% fft of "in" [NxMxP] is over N-rows, M-columns and P-layers are not altered
 dy = info.dy;
 Ny = info.Ny-1;
-if iseven(Ny)
+%
+if ~mod(Ny,2)
     inyq = 1;% don't double the nyquist frequency
     stop = Ny/2+1;
 else

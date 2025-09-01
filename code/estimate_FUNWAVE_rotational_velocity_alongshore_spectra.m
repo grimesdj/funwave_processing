@@ -324,7 +324,7 @@ dk = ky(2)-ky(1);
 p0 = plot(f2ax0,xp,sqrt(sum(Urot_avg_spec,1)*dk),'-r',xp,sqrt(sum(Vrot_avg_spec,1)*dk),'-b',stationsX,stationsUrot,'sk','linewidth',2);
 %
 ylabel(f2ax0,'$\sigma$~[m/s]','interpreter','latex','fontsize',12)
-f2l1  = legend(p0,'$\langle u\rangle$','$\langle v\rangle$');
+f2l1  = legend(p0(1:2),'$\langle u\rangle$','$\langle v\rangle$');
 set(f2l1,'interpreter','latex','fontsize',12)
 title(info.runName)
 set(f2ax0,'tickdir','out','ticklabelinterpreter','latex','xlim',-25+[0 300],'xticklabel',[])
@@ -334,7 +334,7 @@ grid(f2ax0,'on')
 f2ax1  = axes('units','centimeters','position',ppos2);
 p1 = plot(f2ax1,xp,sqrt(sum(Urot_spec,1)*dk),'-r',xp,sqrt(sum(Vrot_spec,1)*dk),'-b',stationsX,stationsUrot,'sk','linewidth',2);
 ylabel(f2ax1,'$\sigma$~[m/s]','interpreter','latex','fontsize',12)
-f2l1  = legend(p0,'$u''$','$v''$');
+f2l1  = legend(p0(1:2),'$u''$','$v''$');
 set(f2l1,'interpreter','latex','fontsize',12)
 set(f2ax1,'tickdir','out','ticklabelinterpreter','latex','xlim',-25+[0 300],'xticklabel',[])
 grid(f2ax1,'on')
@@ -347,8 +347,6 @@ ylabel(f2ax2,'$\sigma_{\omega}$~[(1/s)]','interpreter','latex','fontsize',12)
 % f2l2  = legend('$S_{\omega,\omega}$');
 % set(f2l2,'interpreter','latex','fontsize',12)
 set(f2ax2,'tickdir','out','ticklabelinterpreter','latex','xlim',-25+[0 300])
-f2ax2.XAxis.Scale='log';
-f2ax2.YAxis.Scale='log';
 grid(f2ax2,'on')
 set(f2ax2,'tickdir','out','ticklabelinterpreter','latex','box','on')
 %

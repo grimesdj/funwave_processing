@@ -35,7 +35,7 @@ Hs_x = nanmean(Hs_xy,1);
 p0 = plot(x,Hs_xy,'.k',x,Hs_x,'-r','markersize',1,'linewidth',1.5);
 xlabel('crosshore [m]','interpreter','latex')
 ylabel('$H_s$ [m]','interpreter','latex')
-set(gca,'xlim',[75 600],'ylim',[0 1.1*nanmax(Hs_xy(:))],'ticklabelinterpreter','latex','tickdir','out')
+set(gca,'xlim',x0(subDomain([3:4])),'ylim',[0 1.1*nanmax(Hs_xy(:))],'ticklabelinterpreter','latex','tickdir','out')
 f0l1 = legend([p0(1),p0(end)]','$H_\mathrm{s}(x,y)$','$\bar{H}_\mathrm{s}(x)$');
 set(f0l1,'location','southeast','interpreter','latex')
 title(info.runName)

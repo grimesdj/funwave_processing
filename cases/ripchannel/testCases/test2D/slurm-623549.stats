@@ -1,0 +1,11 @@
+Job ID: 623549
+Cluster: cuttlefish
+User/Group: grimesdj/grimesdj
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 2
+CPU Utilized: 00:01:17
+CPU Efficiency: 50.66% of 00:02:32 core-walltime
+Job Wall-clock time: 00:01:16
+Memory Utilized: 2.31 GB
+Memory Efficiency: 0.77% of 300.00 GB

@@ -20,9 +20,14 @@ h0=h;
 threshold = 0.01;
 %
 % full alongshore domain
-iX = find(x0>=75  & x0<=525);
-subDomain = [1 length(y) iX(1) iX(end)];
+if ~isfield(info,'subDomain')
+    iX = find(x0>=0  & x0<=400);
+    subDomain = [1 length(y) iX(1) iX(end)];
+else
+    subDomain=info.subDomain;
+end
 %
+% map bottom points to eta points%
 x = x(subDomain(3):subDomain(4));
 y = y(subDomain(1):subDomain(2));
 h = h(subDomain(1):subDomain(2),subDomain(3):subDomain(4));
@@ -62,6 +67,7 @@ DECOMP.y = y;
 cFbr = [];
 Havg = 0;
 Hmin = inf;
+mask0= 0;
 for ii=1:Nf
     fprintf('loading nubrk from: %s \n', files1(ii).name);
     if exist('subDomain','var')
@@ -149,6 +155,7 @@ for ii=1:Nf
     Rx_irr(~mask)=nan;
     Ry_irr(~mask)=nan;
     err   (~mask)=nan;
+    mask0 = mask0+mean(mask,3);
     DECOMP.t  (inds,1)         = t;
     DECOMP.H  (1:ny,1:nx,inds) = H;
     DECOMP.PSI(1:ny,1:nx,inds) = PSI;
@@ -162,7 +169,9 @@ for ii=1:Nf
 end
 %
 Havg     = Havg/Nf;
-mask     = info.mask;
+mask     = mask0/Nf;
+%
+whos mask cFbr cFbr_tavg
 % time average and rms
 cFbr_tavg= nanmean(cFbr,3).*mask;
 rms_cFbr_t = sqrt(nanmean((cFbr-cFbr_tavg).^2,3)).*mask;
@@ -191,7 +200,7 @@ xlabel('cross-shore [m]','interpreter','latex')
 ylabel('$\nabla\times\vec{F}_\mathrm{br}$','interpreter','latex')
 f0l0 = legend(p0,'$|\overline{(\cdot)}|$','rms($\cdot$)');
 set(f0l0,'interpreter','latex')
-set(gca,'xlim',[75 300],'ticklabelinterpreter','latex')
+set(gca,'xlim',x0(subDomain(3:4)),'ticklabelinterpreter','latex')
 exportgraphics(fig0,[info.rootSim,filesep,'figures',filesep,info.rootName,'rotational_forcing_vs_x.pdf'])
 %
 cFbr_range = range(cFbr_tavg(:));
@@ -202,7 +211,7 @@ fig1 = figure;
 imagesc(x,y,cFbr_tavg,clims),colormap(cm),caxis(clims)
 xlabel('cross-shore [m]','interpreter','latex')
 ylabel('alongshore [m]','interpreter','latex')
-set(gca,'xlim',[75 500],'ticklabelinterpreter','latex')
+set(gca,'xlim',x0(subDomain(3:4)),'ticklabelinterpreter','latex')
 %
 a3 = axes('position',[0.85 0.7 0.05 0.25]);
 imagesc(0,clrs,reshape(cm,256,1,3))
