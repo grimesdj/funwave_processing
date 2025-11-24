@@ -1,0 +1,31 @@
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2024 The MathWorks, Inc.
+             R2024a Update 3 (24.1.0.2603908) 64-bit (glnxa64)
+                                May 2, 2024
+
+ 
+To get started, type doc.
+For product information, visit www.mathworks.com.
+ 
+>> >> >> >> >> 
+runBATHY =
+
+    'testRip'
+
+>> >> >> >> >> >> >> >> >> >> >> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ processing: testRip barRip0_h10t10s10d00 
+
+ processing: testRip barRip1_h10t10s10d00 
+
+ processing: testRip terRip1_h10t10s10d00 
+>> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> 
+p1 = 
+
+  3x1 Line array:
+
+  Line
+  Line
+  Line
+
+>> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> 

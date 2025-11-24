@@ -1,0 +1,7 @@
+first load the info from a previous run...
+
+then change name and directory below and run in matlab
+
+info.runName='plnr2Ddt020_h10t10s10d00';info.rootMOD = '/scratch/grimesdj/ripchannel/test2Davg/';info.rootSim=[info.rootMOD,info.runName,filesep]; info.rootDAT=info.rootMOD; info.rootOut=[info.rootSim,'output',filesep]; info.rootMat=[info.rootMOD,'mat_data',filesep];info.rootInp=[info.rootMOD,'inputs',filesep]; info.fileName = [info.rootMat,'ripchannel_run_info_',info.runName,'.mat']; info.rootName=['funwave_',info.runName,'_'];
+
+save(info.fileName,'-struct','info')

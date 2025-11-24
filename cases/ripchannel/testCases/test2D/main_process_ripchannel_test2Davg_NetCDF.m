@@ -2,13 +2,13 @@
 addpath(genpath('/storage/cms/grimesdj_lab/grimesdj/git/funwave/'))
 % code to be launched on cms-hpc "cuttlefish"
 % 0) requires the input bathymetry name as top-dir
-runBATHYlist = {'test2D'};
+runBATHYlist = {'test2Davg'};
 reproc  = 0;% 1=reprocess ascii to mat
 rmfiles = 0;% 1=remove original ascii files when finished
-recalc  = 1;% 1=recalculate run statistics 
+recalc  = 1;% 1=recalculate run statistics
 %
-% need info from input file
-T_INTV_mean = 200;
+% $$$ % need info from input file
+% $$$ T_INTV_mean = 200;
 %
 %
 % $$$ for ii=1:length(runBATHYlist)
@@ -64,6 +64,11 @@ if reproc
     info.bathyFile = [info.rootMat,grid{1},'_depth.mat'];
     info.gaugeFile = [info.rootMat,grid{1},'_gauge.txt'];
     %
+    %% extract T_INTV_MEAN from run's name
+    T_INTV_mean      = regexp(runID,'(?<=dt)(.*?)(?=_)','match');
+    T_INTV_mean      = str2num(cell2mat(T_INTV_mean));
+    info.T_INTV_mean = T_INTV_mean;
+    %%
     % define subDomain for analysis
     info.subDomain = [1 info.Ny-1 1 round(400/info.dx)-1];
     %

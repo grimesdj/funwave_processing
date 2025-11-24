@@ -1,0 +1,32 @@
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2024 The MathWorks, Inc.
+             R2024a Update 3 (24.1.0.2603908) 64-bit (glnxa64)
+                                May 2, 2024
+
+ 
+To get started, type doc.
+For product information, visit www.mathworks.com.
+ 
+>> >> >> >> >> 
+runBATHY =
+
+    'test2Davg'
+
+>> >> >> >> >> >> >> >> >> >> >> >> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ processing: test2Davg plnr2D_h10t10s10d00 
+
+ processing: test2Davg plnr2Ddt1500_h10t10s10d00 
+
+ processing: test2Davg plnr2Ddt100_h10t10s10d00 
+
+ processing: test2Davg plnr2Ddt050_h10t10s10d00 
+
+ processing: test2Davg plnr2Ddt030_h10t10s10d00 
+
+ processing: test2Davg plnr2Ddt020_h10t10s10d00 
+>> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> {Unrecognized function or variable 'rmsFbr_visc0'.
+} 
+>> >> >> >> {Unrecognized function or variable 'p2'.
+} 
+>> >> >> >> >> >> >> >> >>>> >> >> >> >> 

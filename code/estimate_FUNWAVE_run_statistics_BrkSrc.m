@@ -36,7 +36,7 @@ dy = y0(2)-y0(1);
 Ns  = round(30/dt); if mod(Ns,2), Ns=Ns+1; end
 % filter width
 nf  = 2*Ns+1;
-flt = hamming(nf); flt=flt/sum(flt);
+flt = hanning(nf); flt=flt/sum(flt);
 %
 % full alongshore domain
 if ~isfield(info,'subDomain')
@@ -69,8 +69,8 @@ t0     = [];
 % preallocate pads:
 p_pad = []; q_pad = []; Fx_pad=[]; Fy_pad=[]; u_pad = []; v_pad = [];
 % preallocate archive vars:
-Eb0=[];Ebavg=[];Ib0=[];VORT=[];Urot=[];Vrot=[];PSI=[];ERR=[];
-t1 =[];Ibavg=[];
+Eb0=[];Ebavg=[];Icoh=[];VORT=[];Urot=[];Vrot=[];PSI=[];ERR=[];
+t1 =[];Icoh_avg=[];Icoh=[];EP0=[];EPavg=[];
 iter = 1;
 for ii=1:Nf
     fprintf('loading eta from: %s \n', files(ii).name);
@@ -152,17 +152,27 @@ for ii=1:Nf
     omega = vx-uy;
     clear uy vx
     %
-    % integrated change in vorticity of Ns timesteps
-    [~,~,dO] = gradientDG(omega);
-    dOavg = reshape(dO(:,:,1:Ns*(N-1)),ny,nx,Ns,N-1);
-    dOavg = cumsum( dOavg,4);
-    dOavg = squeeze(dOavg(:,:,end,:));
-    %
     % estimate curl of Fbr
     [Fbx_y,  ~  ] = gradientDG(Fbx./dy);
     [~    ,Fby_x] = gradientDG(Fby./dx);        
     cFbr  = Fby_x - Fbx_y;
     clear Fbx_y Fby_x
+    %
+    % estimate enstrophy production by Fbr
+    omega_avg    = time_average_field(omega, flt);
+    cFbr_avg     = time_average_field(cFbr, flt);    
+    EP           = cFbr .* (omega-omega_avg);
+    EP           = time_average_field(EP, flt);
+    EP0          = cat(3,EP0   ,EP   (:,:,(Ns:Ns:Ns*(N-1))));    
+    tmp          = cFbr_avg .* omega_avg;
+    EPavg        = cat(3,EPavg   ,tmp(:,:,(Ns:Ns:Ns*(N-1))));
+    clear tmp omega_avg cFbr_avg
+    %
+    % integrated change in vorticity of Ns timesteps
+    [~,~,dO] = gradientDG(omega);
+    dOavg = reshape(dO(:,:,1:Ns*(N-1)),ny,nx,Ns,N-1);
+    dOavg = cumsum( dOavg,4,'omitnan');
+    dOavg = squeeze(dOavg(:,:,end,:));
     %
     % rotational impulse over Ns timesteps
     cI    = cFbr;% cumsum(cFbr*dt,3);
@@ -176,10 +186,13 @@ for ii=1:Nf
     clear dO cI
     %
     % wave average spectra
-    coh = (dO_cI_cospec)./sqrt( dO_spec.*cI_spec );
+    tmp1 = time_average_field(dO_cI_cospec, flt);
+    tmp2 = time_average_field(dO_spec, flt);
+    tmp3 = time_average_field(cI_spec, flt);    
+    coh = tmp1./sqrt(tmp2.*tmp3); 
     coh = abs(coh).^2;
-    coh = time_average_field(coh, flt);
-    Ib0 = cat(3,Ib0   ,coh       (:,:,(Ns:Ns:Ns*(N-1))));
+    clear tmp1 tmp2 tmp3
+    Icoh = cat(3,Icoh   ,coh       (:,:,(Ns:Ns:Ns*(N-1))));
     clear coh dO_spec cI_spec dO_cI_cospec
     %
     [~,ky,dOavg_spec,cIavg_spec,dO_cI_avg_cospec] = alongshore_coherence_estimate(tmp,dOavg,cIavg);
@@ -188,7 +201,7 @@ for ii=1:Nf
     % wave average spectra
     coh_avg = (dO_cI_avg_cospec)./sqrt( dOavg_spec.*cIavg_spec );
     coh_avg = abs(coh_avg).^2;
-    Ibavg = cat(3,Ibavg ,coh_avg);    
+    Icoh_avg = cat(3,Icoh_avg ,coh_avg);    
     clear coh_avg dO_spec cI_spec dO_cI_cospec
     %
     %
@@ -288,7 +301,7 @@ nframes = length(t);
 N       = size(xylog,1)/nframes;
 mL      = exp(mean(log(l)));
 sL      = exp(mean(log(l))+std(log(l)));
-Lbins   = [0:10:range(y)];
+Lbins   = [0:10:range(y/2)];
 % histogram of lengths
 pL      = hist(l,Lbins);
 % $$$ mean_stats = struct('N',N,'Length',mL,'Length_plus_std',sL,'Lbins',Lbins,'Length_histogram',pL);
@@ -324,8 +337,8 @@ save(info.fileName,'-struct','info')
 % 1.1) variables:
 %      Eb0   = high-pass dissipation(?)  ( u' \dot Fbr )
 %      Ebavg =  low-pass generation(?)   (\avg{u} \dot Fbr)
-%      Ib0   =  coherence between diff(vort) and int(Fbr*dt)
-%      Ibavg =  coherence between wave averaged diff(vort) and int(Fbr*dt)
+%      Icoh   =  coherence between diff(vort) and int(Fbr*dt)
+%      Icoh_avg =  coherence between wave averaged diff(vort) and int(Fbr*dt)
 %      Xbins =  cross-shore bins for crest-length statistics
 %      Nc    =  number of crests per bin (Nx)
 %      Lc    =  mean crest lengt per bin (mLx)
@@ -349,17 +362,28 @@ nccreate  (info.waveForceFile,'t','Dimensions',{"t",length(t1)},'Format','netcdf
 ncwrite   (info.waveForceFile,'t',t1);
 %
 nccreate  (info.waveForceFile,'Ebr_lp','Dimensions',dim_yxt,'Format','netcdf4')
-ncwrite   (info.waveForceFile,'Ebr_lp',Eb0);
+ncwrite   (info.waveForceFile,'Ebr_lp',Ebavg);
 ncwriteatt(info.waveForceFile,'Ebr_lp','Description','low-pass (30s) dissipation rate \bar{(\bar{u} \dot Fbr)}');
 %
-dim_kyxt = {"ky",length(y),"x",length(x),"t",length(t1)};
-nccreate  (info.waveForceFile,'Ibr','Dimensions',dim_kyxt,'Format','netcdf4')
-ncwrite   (info.waveForceFile,'Ibr',Ib0);
-ncwriteatt(info.waveForceFile,'Ibr','Description','coherence between 1-s change in vorticity and rotational impulse \coh(\Delta{\omega}, Fbr*dt)');
+nccreate  (info.waveForceFile,'VProd','Dimensions',dim_yxt,'Format','netcdf4')
+ncwrite   (info.waveForceFile,'VProd',EP0);
+ncwriteatt(info.waveForceFile,'VProd','Description','high-pass enstrophy production rate \bar{(\omega'' \dot Fbr)}');
 %
-nccreate  (info.waveForceFile,'Ibr_lp','Dimensions',dim_kyxt,'Format','netcdf4')
-ncwrite   (info.waveForceFile,'Ibr_lp',Ibavg);
-ncwriteatt(info.waveForceFile,'Ibr_lp','Description','coherence between 30-s change in vorticity and rotational impulse \coh(\sum{\Delta{\omega}}, \sum{Fbr*dt})');
+nccreate  (info.waveForceFile,'VProd_lp','Dimensions',dim_yxt,'Format','netcdf4')
+ncwrite   (info.waveForceFile,'VProd_lp',EPavg);
+ncwriteatt(info.waveForceFile,'VProd_lp','Description','low-pass (30s) enstrophy production rate \bar{(\bar{\omega} \dot Fbr)}');
+%
+dim_kyxt = {"ky",length(ky),"x",length(x),"t",length(t1)};
+nccreate  (info.waveForceFile,'Icoh','Dimensions',dim_kyxt,'Format','netcdf4')
+ncwrite   (info.waveForceFile,'Icoh',Icoh);
+ncwriteatt(info.waveForceFile,'Icoh','Description','coherence between 1-s change in vorticity and rotational impulse \coh(\Delta{\omega}, Fbr*dt)');
+%
+nccreate  (info.waveForceFile,'ky','Dimensions',{"ky",length(ky)},'Format','netcdf4')
+ncwrite   (info.waveForceFile,'ky',ky);
+%
+nccreate  (info.waveForceFile,'Icoh_lp','Dimensions',dim_kyxt,'Format','netcdf4')
+ncwrite   (info.waveForceFile,'Icoh_lp',Icoh_avg);
+ncwriteatt(info.waveForceFile,'Icoh_lp','Description','coherence between 30-s change in vorticity and rotational impulse \coh(\sum{\Delta{\omega}}, \sum{Fbr*dt})');
 %
 dim_lbxb = {"Lb",length(Lbins),"Xb",length(Xbins)};
 nccreate  (info.waveForceFile,'Lc_pdf','Dimensions',dim_lbxb,'Format','netcdf4')

@@ -9,7 +9,7 @@ pw = 24;
 ph = pw*ar;
 
 ppos0 = [xm ym pw ph];
-cpos0 = [xm+1*pw/8 ym+ph+ag/2 pw/5 1.25*ag]
+cpos0 = [xm+1*pw/8 ym+ph+ag/2 pw/5 1.25*ag];
 cpos1 = [xm+3*pw/4 ym+ph+ag/2 pw/5 1.25*ag];
 
 ps = [1.5*xm+pw, 1.3*ym+ph+3*ag];
