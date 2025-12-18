@@ -14,11 +14,11 @@ x   = ncread(momFile,'x');
 y   = ncread(momFile,'y');
 t   = ncread(momFile,'t');
 %% time average and plot 2D fields:
-vars = {'PgrdX','PgrdY','BrkDissX','BrkDissY','DxSxx','DxSxy','DySxy','DySyy','DxUUH','DxUVH','DyUVH','DyVVH'};
+vars = {'PgrdX','PgrdY','BrkDissX','BrkDissY','DxSxx','DxSxy','DySxy','DySyy','DxUUH','DxUVH','DyUVH','DyVVH','FRCX','FRCY'};
 lbls = {'$gH\partial_x \bar\eta$','$gH\partial_y \bar\eta$','$-\bar{F}_\mathrm{br,x}$','$-\bar{F}_\mathrm{br,y}$',...
         '$\partial_x S_{xx}$','$\partial_x S_{xy}$','$\partial_y S_{xy}$','$\partial_y S_{yy}$',...
-        '$\partial_x (U^2 H)$','$\partial_x (UVH)$','$\partial_y (UVH)$','$\partial_y (V^2 H)$'};
-sgn  = {1, 1, -1, -1, 1 1 1 1 1 1 1 1};
+        '$\partial_x (U^2 H)$','$\partial_x (UVH)$','$\partial_y (UVH)$','$\partial_y (V^2 H)$','-\tau_x','-\tau_y'};
+sgn  = {1, 1, -1, -1, 1, 1, 1, 1, 1, 1, 1, 1, 1 1};
 %
 % figure parameters
 xm = 2.5;
@@ -36,16 +36,24 @@ fig.Position(3:4) = ps;
 fig.PaperSize     = ps;
 fig.PaperPosition = [0 0 ps];
 % colormap
-clim1  = [-0.1 0.1];
-clim2  = [0 0.1];
 cm1   = cmocean('balance');
 cm2   = cmocean('amp');
-clrs1 = clim1(1):diff(clim1)/255:clim1(2);
-clrs2 = clim2(1):diff(clim2)/255:clim2(2);
 %
 % loop over variables
 for jj=1:length(vars)
     var = ncread(momFile,vars{jj});
+    if range(var(:))<0.1
+        rng    = ceil(log10(range(var(:))));
+        clim1  = [-10^rng 10^rng];
+        clim2  = [0 10^rng];
+        clrs1 = clim1(1):diff(clim1)/255:clim1(2);
+        clrs2 = clim2(1):diff(clim2)/255:clim2(2);
+    else
+        clim1  = [-0.1 0.1];
+        clim2  = [0 0.1];
+        clrs1 = clim1(1):diff(clim1)/255:clim1(2);
+        clrs2 = clim2(1):diff(clim2)/255:clim2(2);
+    end
     clf(fig)
     a1 = axes('units','centimeters','position',ppos1);
     imagesc(y,x,sgn{jj}*mean(var,3,'omitnan')')

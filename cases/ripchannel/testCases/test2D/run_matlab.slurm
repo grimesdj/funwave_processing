@@ -1,6 +1,6 @@
 #!/bin/bash
 # Array of run directories to submit
-dirs=("test2Davg")
+dirs=("matlab")
 # job_name="$dir"
 # output_file="$dir.out"
 #        --partition=highmem \
@@ -14,8 +14,8 @@ sbatch --time=14400 \
        --job-name="$job_name" \
        --output="$output_file" \
        --mem=300G \
-       --partition=highmem\
+       --partition=general\
        --mail-user=coastesthydro@gmail.com \
        --mail-type=BEGIN,END,FAIL       \
-        /storage/cms/grimesdj_lab/grimesdj/matlab_bg.sh main_process_ripchannel_test2Davg_NetCDF.m test2Davg.out &
+        /storage/cms/grimesdj_lab/grimesdj/matlab_bg.sh plot_all_test2Davg_rms_Fbr.m matlab.out &
 done

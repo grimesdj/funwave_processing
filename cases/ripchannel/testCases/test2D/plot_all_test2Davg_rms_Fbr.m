@@ -10,7 +10,9 @@ figDIR   = [runDIR,filesep,'figures/'];
 %
 % the list of run directories are saved in:
 load([matDIR,filesep,'runs_to_process.mat'])
-run_dirs = cat(1,{'plnr2D_h10t10s10d00'},run_dirs);
+% include the 1500 second averaged run:
+run_dirs(3:6) = run_dirs(2:5);
+run_dirs{2}   = 'plnr2D_h10t10s10d00';
 %
 % loop over run_dirs
 Ndirs  = length(run_dirs);
@@ -35,25 +37,26 @@ t   = ncread(momFile,'t');
 if jj==1;
     rmsFbr_visc = nan(length(x),Ndirs);
     rmsFbr_rad  = nan(length(x),Ndirs);
-% $$$ elseif jj==Ndirs
-% $$$     % breaking force files
-% $$$     FbrXFiles  = dir([info.rootMat,info.rootName,'BrkSrcX_*.nc']);
-% $$$     FbrYFiles  = dir([info.rootMat,info.rootName,'BrkSrcY_*.nc']);
-% $$$     rmsFbr_visc0 = zeros(1,length(x));
-% $$$     for kk=1:length(FbrXFiles)
-% $$$         % load breaking force terms
-% $$$         BrkDissX = ncread([FbrXFiles(kk).folder,filesep,FbrXFiles(kk).name],'BrkSrcX');
-% $$$         BrkDissY = ncread([FbrYFiles(kk).folder,filesep,FbrYFiles(kk).name],'BrkSrcY');
-% $$$         %
-% $$$         [dyFx,~   ] = gradientDG(BrkDissX/info.dy);
-% $$$         [~   ,dxFy] = gradientDG(BrkDissY/info.dx);
-% $$$         cFbr        = dxFy - dyFx;
-% $$$         rmsFbr_visc0 = rmsFbr_visc0 + rms(cFbr,[1 3],'omitnan').^2;
-% $$$     end
-% $$$     rmsFbr_visc0 = sqrt(rmsFbr_visc0/length(FbrXFiles));
+elseif jj==2
+    % breaking force files
+    FbrXFiles  = dir([info.rootMat,info.rootName,'BrkSrcX_*.nc']);
+    FbrYFiles  = dir([info.rootMat,info.rootName,'BrkSrcY_*.nc']);
+    rmsFbr_visc0 = zeros(1,length(x));
+    nFbrFiles  = length(FbrXFiles);
+    for kk=1:length(FbrXFiles)
+        % load breaking force terms
+        BrkDissX = ncread([FbrXFiles(kk).folder,filesep,FbrXFiles(kk).name],'BrkSrcX');
+        BrkDissY = ncread([FbrYFiles(kk).folder,filesep,FbrYFiles(kk).name],'BrkSrcY');
+        %
+        [dyFx,~   ] = gradientDG(BrkDissX/info.dy);
+        [~   ,dxFy] = gradientDG(BrkDissY/info.dx);
+        cFbr        = dxFy - dyFx;
+        rmsFbr_visc0 = rmsFbr_visc0 + rms(cFbr,[1 3],'omitnan').^2;
+    end
+    rmsFbr_visc0 = sqrt(rmsFbr_visc0/nFbrFiles);
 end
 %
-% load breaking force terms
+% load mean breaking force terms
 BrkDissX = ncread(momFile,'BrkDissX');
 BrkDissY = ncread(momFile,'BrkDissY');
 DxSxx    = ncread(momFile,'DxSxx');
@@ -97,13 +100,13 @@ colororder(clrs)
 a1 = axes('units','centimeters','position',ppos1);
 p1 = plot(x,rmsFbr_visc,'-',x,rmsFbr_rad,'--','linewidth',2);
 hold on,
-p2 = plot(x,rmsFbr_visc0,':r','linewidth',2)
+p2 = plot(x,rmsFbr_visc0/40,':r','linewidth',2)
 xline(50,'--r')
 xlabel('$x$ [m]','interpreter','latex')
 ylabel('rms() [m/s$^{2}$]','interpreter','latex')
-legend([p1([1 Ndirs+1]); p2],{'curl$(\bar{F}_\mathrm{br})$','curl$(\nabla S)$','curl$({F}_\mathrm{br})$'},'interpreter','latex','fontsize',10)
+legend([p1([1 Ndirs+1]); p2],{'curl$(\bar{F}_\mathrm{br})$','curl$(\nabla S)$','curl$({F}_\mathrm{br})/40$'},'interpreter','latex','fontsize',10)
 % legend([p1([1 Ndirs+1])],{'curl$(\bar{F}_\mathrm{br})$','curl$(\nabla S)$'},'interpreter','latex','fontsize',10)
-% a1.YAxis.YScale = 'log';
+a1.YAxis.YScale = 'log';
 set(a1,'tickdir','out','ticklabelinterpreter','latex')
 %
 cb = axes('units','centimeters','position',cbpos);

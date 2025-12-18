@@ -17,5 +17,5 @@ sbatch --time=14400 \
        --partition=highmem\
        --mail-user=coastesthydro@gmail.com \
        --mail-type=BEGIN,END,FAIL       \
-       /storage/cms/grimesdj_lab/grimesdj/matlab_bg.sh plot_all_test2Davg_Hovmoller_and_Uex.m RIP1.out &
+       /storage/cms/grimesdj_lab/grimesdj/matlab_bg.sh main_process_ripchannel_testRip_NetCDF.m RIP.out &
 done

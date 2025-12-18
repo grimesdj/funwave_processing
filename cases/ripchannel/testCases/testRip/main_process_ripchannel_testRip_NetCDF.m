@@ -5,7 +5,7 @@ addpath(genpath('/storage/cms/grimesdj_lab/grimesdj/git/funwave/'))
 runBATHYlist = {'testRip'};
 reproc  = 0;% 1=reprocess ascii to mat
 rmfiles = 0;% 1=remove original ascii files when finished
-recalc  = 1;% 1=recalculate run statistics 
+recalc  = 0;% 1=recalculate run statistics 
 %
 % need info from input file
 T_INTV_mean = 200;

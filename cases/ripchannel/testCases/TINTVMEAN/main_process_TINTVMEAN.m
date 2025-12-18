@@ -163,7 +163,7 @@ for jj=1:Ndirs
     PgrdX_avg(dry)    = nan;
     FRCX_avg(dry)     = nan;
     %
-    Rx  = (PgrdX_avg + DxSxx_avg + FRCX_avg + DxUUH_avg-BrkDissX_avg);
+    Rx  = (PgrdX_avg + DxSxx_avg + FRCX_avg + DxUUH_avg - BrkDissX_avg);
     ax1 = axes('units','centimeters','position',ppos2);
     plot(x,PgrdX_avg,'-k',x,DxSxx_avg,'-r',x,FRCX_avg,'-b',x,DxUUH_avg,'-g',x,-BrkDissX_avg,'-m',x,Rx,'--c','linewidth',1)
     grid on
