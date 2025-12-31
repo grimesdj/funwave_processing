@@ -62,6 +62,16 @@ for jj = 1:nv
     files = dir([rin,var,'*']);
     nf    = length(files);
     %
+    % if there are multiple files, make sure the prefix is followed by "_"
+    if nf>1
+        % get struct-array w/ filenames
+        files = dir([rin,var,'_*']);
+        nf    = length(files);
+    elseif nf == 0
+        fprintf('\nThere are no output files for variable: %s\n',var)
+        continue
+    end
+    %
     disp(['working on: ', var])
     % remove old files from archive
     fprintf('\tremoving old files:\n')

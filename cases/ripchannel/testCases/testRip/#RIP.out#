@@ -1,0 +1,144 @@
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2024 The MathWorks, Inc.
+             R2024a Update 3 (24.1.0.2603908) 64-bit (glnxa64)
+                                May 2, 2024
+
+ 
+To get started, type doc.
+For product information, visit www.mathworks.com.
+ 
+>> >> >> >> >> >> >> >> >> >> >> >> >> >> >> 
+ii =
+
+     1
+
+>> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ processing wave-averaged: testRip barRip0_h10t10s10d00 
+
+ans =
+
+     0
+
+
+Restricting cross-shore analysis to x<=400.000000
+working on: dep
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_.nc 
+working on: etawavg
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_.nc 
+working on: uwavg
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_.nc 
+working on: vwavg
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_.nc 
+{Undefined variable 'rootOut'.
+} 
+>> >> >> >> >> >> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ processing: testRip barRip0_h10t10s10d00 
+working on: dep
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_dep*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_dep.nc 
+working on: eta
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_eta_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_eta_01.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_eta_02.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_eta_03.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_eta_04.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_eta_05.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_eta_06.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_eta_07.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_eta_08.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_eta_09.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_eta_10.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_eta_11.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_eta_12.nc 
+working on: mask
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_mask_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_mask_01.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_mask_02.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_mask_03.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_mask_04.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_mask_05.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_mask_06.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_mask_07.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_mask_08.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_mask_09.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_mask_10.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_mask_11.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_mask_12.nc 
+working on: BrkSrcX
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcX_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcX_01.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcX_02.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcX_03.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcX_04.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcX_05.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcX_06.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcX_07.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcX_08.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcX_09.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcX_10.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcX_11.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcX_12.nc 
+working on: BrkSrcY
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcY_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcY_01.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcY_02.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcY_03.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcY_04.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcY_05.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcY_06.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcY_07.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcY_08.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcY_09.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcY_10.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcY_11.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcY_12.nc 
+loading eta from: funwave_barRip0_h10t10s10d00_eta_01.nc 
+loading eta from: funwave_barRip0_h10t10s10d00_eta_02.nc 
+loading eta from: funwave_barRip0_h10t10s10d00_eta_03.nc 
+loading eta from: funwave_barRip0_h10t10s10d00_eta_04.nc 
+loading eta from: funwave_barRip0_h10t10s10d00_eta_05.nc 
+loading eta from: funwave_barRip0_h10t10s10d00_eta_06.nc 
+loading eta from: funwave_barRip0_h10t10s10d00_eta_07.nc 
+loading eta from: funwave_barRip0_h10t10s10d00_eta_08.nc 
+loading eta from: funwave_barRip0_h10t10s10d00_eta_09.nc 
+loading eta from: funwave_barRip0_h10t10s10d00_eta_10.nc 
+loading eta from: funwave_barRip0_h10t10s10d00_eta_11.nc 
+loading eta from: funwave_barRip0_h10t10s10d00_eta_12.nc 
+
+fout_stats =
+
+  2x1 cell array
+
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip0_h10t10s10d00_crest_length.pdf'           }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip0_h10t10s10d00_wave_height_and_spectra.pdf'}
+
+
+ processing: testRip barRip1_h10t10s10d00 
+working on: dep
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_dep.nc 
+working on: eta
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_eta_01.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_eta_02.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_eta_03.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_eta_04.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_eta_05.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_eta_06.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_eta_07.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_eta_08.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_eta_09.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_eta_10.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_eta_11.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_eta_12.nc 
+working on: mask
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_mask_01.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_mask_02.nc 

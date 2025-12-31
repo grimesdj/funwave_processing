@@ -3,7 +3,7 @@ addpath(genpath('/storage/cms/grimesdj_lab/grimesdj/git/funwave/'))
 % code to be launched on cms-hpc "cuttlefish"
 % 0) requires the input bathymetry name as top-dir
 runBATHYlist = {'test2Davg'};
-reproc  = 0;% 1=reprocess ascii to mat
+reproc  = 1;% 1=reprocess ascii to mat
 rmfiles = 0;% 1=remove original ascii files when finished
 recalc  = 1;% 1=recalculate run statistics
 %

@@ -8,45 +8,49 @@
 To get started, type doc.
 For product information, visit www.mathworks.com.
  
->> >> >> >> >> 
-runBATHY =
+>> >> >> >> >> >> >> >> >> >> >> >> >> >> >> 
+ii =
 
-    'testRip'
+     1
 
->> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
- processing: testRip barRip0_h10t10s10d00 
+>> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ processing wave-averaged: testRip - barRip0_h10t10s10d00 
 
-Lsz =
+fout_stats =
 
-   230
+  1x1 cell array
 
-
-Lrip =
-
-  204.5414
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip0_h10t10s10d00_velocity_and_vorticity_stats.pdf'}
 
 
- processing: testRip barRip1_h10t10s10d00 
+fout_momentum =
 
-Lsz =
+  21x1 cell array
 
-   230   230
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip0_h10t10s10d00_xshore_momentum_term_PgrdX_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip0_h10t10s10d00_xshore_momentum_term_PgrdY_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip0_h10t10s10d00_xshore_momentum_term_BrkDissX_time_averaged.pdf'       }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip0_h10t10s10d00_xshore_momentum_term_BrkDissY_time_averaged.pdf'       }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip0_h10t10s10d00_xshore_momentum_term_DxSxx_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip0_h10t10s10d00_xshore_momentum_term_DxSxy_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip0_h10t10s10d00_xshore_momentum_term_DySxy_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip0_h10t10s10d00_xshore_momentum_term_DySyy_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip0_h10t10s10d00_xshore_momentum_term_DxUUH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip0_h10t10s10d00_xshore_momentum_term_DxUVH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip0_h10t10s10d00_xshore_momentum_term_DyUVH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip0_h10t10s10d00_xshore_momentum_term_DyVVH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip0_h10t10s10d00_xshore_momentum_term_FRCX_time_averaged.pdf'           }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip0_h10t10s10d00_xshore_momentum_term_FRCY_time_averaged.pdf'           }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip0_h10t10s10d00_time_averaged_velocity.pdf'                            }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip0_h10t10s10d00_time_averaged_waterlevel.pdf'                          }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip0_h10t10s10d00_time_averaged_vorticity.pdf'                           }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip0_h10t10s10d00_xshore_momentum_terms_time_and_alongshore_averaged.pdf'}
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip0_h10t10s10d00dominant_momentum_terms_InnerSurfzone.pdf'              }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip0_h10t10s10d00dominant_momentum_terms_MiddleSurfzone.pdf'             }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip0_h10t10s10d00dominant_momentum_terms_OuterSurfzone.pdf'              }
 
-
-Lrip =
-
-  200.7876
-
-
- processing: testRip terRip1_h10t10s10d00 
-
-Lsz =
-
-   230   230   226
-
-
-Lrip =
-
-  188.8030
-
->> >> 
+>> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ processing fast-time: testRip - barRip0_h10t10s10d00 
+{Unrecognized function or variable 'spanx'.
+} 
+>> 

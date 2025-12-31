@@ -1,6 +1,5 @@
 %% make a detailed plot of each term in Fbr.
-% I'm looking to understand why Fbr switches sign
-% mid-surfzone.
+% I'm looking to understand why Fbr switches sign within the wave face
 addpath(genpath('/storage/cms/grimesdj_lab/grimesdj/git/funwave/'))
 
 % 1) determine which run to process

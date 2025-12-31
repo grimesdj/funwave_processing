@@ -95,28 +95,28 @@ xline(50,'--r')
 xlabel('$x$ [m]','interpreter','latex')
 ylabel('$R_x$ (m/s)$^{2}$','interpreter','latex')
 a1.YAxis.Exponent = 1;
-set(a1,'tickdir','out','ticklabelinterpreter','latex')
+set(a1,'tickdir','out','ticklabelinterpreter','latex','xlim',[50 400])
 %
 a2 = axes('units','centimeters','position',ppos2);
 p2 = plot(x, -Fbreak ,'-','linewidth',2);
 xline(50,'--r')
-ylabel('$F_{\mathrm{br},x}$','interpreter','latex')
+ylabel('$-F_{\mathrm{br},x}$','interpreter','latex')
 a2.YAxis.Exponent = 1;
-set(a2,'tickdir','out','ticklabelinterpreter','latex','xticklabel',[])
+set(a2,'tickdir','out','ticklabelinterpreter','latex','xticklabel',[],'xlim',[50 400])
 %
 a3 = axes('units','centimeters','position',ppos3);
 p3 = plot(x, RadStr ,'-','linewidth',2);
 xline(50,'--r')
 ylabel('$\partial_x S_{x,x}$','interpreter','latex')
 a3.YAxis.Exponent = 1;
-set(a3,'tickdir','out','ticklabelinterpreter','latex','xticklabel',[])
+set(a3,'tickdir','out','ticklabelinterpreter','latex','xticklabel',[],'xlim',[50 400])
 %
 a4 = axes('units','centimeters','position',ppos4);
 p4 = plot(x, PgradX ,'-','linewidth',2);
 xline(50,'--r')
 ylabel('$gH\partial_x \eta$','interpreter','latex')
 a4.YAxis.Exponent = 1;
-set(a4,'tickdir','out','ticklabelinterpreter','latex','xticklabel',[])
+set(a4,'tickdir','out','ticklabelinterpreter','latex','xticklabel',[],'xlim',[50 400])
 %
 cb = axes('units','centimeters','position',cbpos);
 imagesc(0,[1:Ndirs],reshape(clrs,Ndirs,1,3))
