@@ -52,3 +52,418 @@ fout_momentum =
 
  processing wave-averaged: testRip - barRip1_h10t10s10d00 
 loading from: funwave_barRip1_h10t10s10d00_uwavg_01.nc 
+
+fout_stats =
+
+  1x1 cell array
+
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip1_h10t10s10d00_velocity_and_vorticity_stats.pdf'}
+
+
+fout_momentum =
+
+  21x1 cell array
+
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip1_h10t10s10d00_xshore_momentum_term_PgrdX_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip1_h10t10s10d00_xshore_momentum_term_PgrdY_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip1_h10t10s10d00_xshore_momentum_term_BrkDissX_time_averaged.pdf'       }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip1_h10t10s10d00_xshore_momentum_term_BrkDissY_time_averaged.pdf'       }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip1_h10t10s10d00_xshore_momentum_term_DxSxx_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip1_h10t10s10d00_xshore_momentum_term_DxSxy_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip1_h10t10s10d00_xshore_momentum_term_DySxy_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip1_h10t10s10d00_xshore_momentum_term_DySyy_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip1_h10t10s10d00_xshore_momentum_term_DxUUH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip1_h10t10s10d00_xshore_momentum_term_DxUVH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip1_h10t10s10d00_xshore_momentum_term_DyUVH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip1_h10t10s10d00_xshore_momentum_term_DyVVH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip1_h10t10s10d00_xshore_momentum_term_FRCX_time_averaged.pdf'           }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip1_h10t10s10d00_xshore_momentum_term_FRCY_time_averaged.pdf'           }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip1_h10t10s10d00_time_averaged_velocity.pdf'                            }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip1_h10t10s10d00_time_averaged_waterlevel.pdf'                          }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip1_h10t10s10d00_time_averaged_vorticity.pdf'                           }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip1_h10t10s10d00_xshore_momentum_terms_time_and_alongshore_averaged.pdf'}
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip1_h10t10s10d00dominant_momentum_terms_InnerSurfzone.pdf'              }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip1_h10t10s10d00dominant_momentum_terms_MiddleSurfzone.pdf'             }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip1_h10t10s10d00dominant_momentum_terms_OuterSurfzone.pdf'              }
+
+
+ processing wave-averaged: testRip - terRip1_h10t10s10d00 
+
+ans =
+
+     0
+
+
+Restricting cross-shore analysis to x<=400.000000
+working on: dep
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_dep.nc 
+working on: etawavg
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_etawavg_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_etawavg_01.nc 
+working on: uwavg
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_uwavg_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_uwavg_01.nc 
+working on: vwavg
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_vwavg_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_vwavg_01.nc 
+working on: dep
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_MomentumTerms.nc 
+working on: BrkDissX
+time vector is off: nt=4and nf=18
+shortenning records to match
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_MomentumTerms.nc 
+working on: BrkDissY
+time vector is off: nt=4and nf=18
+shortenning records to match
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_MomentumTerms.nc 
+working on: DxSxx
+time vector is off: nt=4and nf=18
+shortenning records to match
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_MomentumTerms.nc 
+working on: DxSxy
+time vector is off: nt=4and nf=18
+shortenning records to match
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_MomentumTerms.nc 
+working on: DxUUH
+time vector is off: nt=4and nf=18
+shortenning records to match
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_MomentumTerms.nc 
+working on: DxUVH
+time vector is off: nt=4and nf=18
+shortenning records to match
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_MomentumTerms.nc 
+working on: DySxy
+time vector is off: nt=4and nf=18
+shortenning records to match
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_MomentumTerms.nc 
+working on: DySyy
+time vector is off: nt=4and nf=18
+shortenning records to match
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_MomentumTerms.nc 
+working on: DyUVH
+time vector is off: nt=4and nf=18
+shortenning records to match
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_MomentumTerms.nc 
+working on: DyVVH
+time vector is off: nt=4and nf=18
+shortenning records to match
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_MomentumTerms.nc 
+working on: FRCX
+time vector is off: nt=4and nf=18
+shortenning records to match
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_MomentumTerms.nc 
+working on: FRCY
+time vector is off: nt=4and nf=18
+shortenning records to match
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_MomentumTerms.nc 
+working on: PgrdX
+time vector is off: nt=4and nf=18
+shortenning records to match
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_MomentumTerms.nc 
+working on: PgrdY
+time vector is off: nt=4and nf=18
+shortenning records to match
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_MomentumTerms.nc 
+working on: Sxx
+time vector is off: nt=4and nf=18
+shortenning records to match
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_MomentumTerms.nc 
+working on: Syy
+time vector is off: nt=4and nf=18
+shortenning records to match
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_MomentumTerms.nc 
+working on: Sxy
+time vector is off: nt=4and nf=18
+shortenning records to match
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_MomentumTerms.nc 
+working on: umean
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_MomentumTerms.nc 
+working on: vmean
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_MomentumTerms.nc 
+working on: etamean
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_MomentumTerms.nc 
+loading from: funwave_terRip1_h10t10s10d00_uwavg_01.nc 
+
+fout_stats =
+
+  1x1 cell array
+
+    {'/scratch/grimesdj/ripchannel/testRip//figures/terRip1_h10t10s10d00_velocity_and_vorticity_stats.pdf'}
+
+
+fout_momentum =
+
+  21x1 cell array
+
+    {'/scratch/grimesdj/ripchannel/testRip//figures/terRip1_h10t10s10d00_xshore_momentum_term_PgrdX_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/terRip1_h10t10s10d00_xshore_momentum_term_PgrdY_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/terRip1_h10t10s10d00_xshore_momentum_term_BrkDissX_time_averaged.pdf'       }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/terRip1_h10t10s10d00_xshore_momentum_term_BrkDissY_time_averaged.pdf'       }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/terRip1_h10t10s10d00_xshore_momentum_term_DxSxx_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/terRip1_h10t10s10d00_xshore_momentum_term_DxSxy_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/terRip1_h10t10s10d00_xshore_momentum_term_DySxy_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/terRip1_h10t10s10d00_xshore_momentum_term_DySyy_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/terRip1_h10t10s10d00_xshore_momentum_term_DxUUH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/terRip1_h10t10s10d00_xshore_momentum_term_DxUVH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/terRip1_h10t10s10d00_xshore_momentum_term_DyUVH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/terRip1_h10t10s10d00_xshore_momentum_term_DyVVH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/terRip1_h10t10s10d00_xshore_momentum_term_FRCX_time_averaged.pdf'           }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/terRip1_h10t10s10d00_xshore_momentum_term_FRCY_time_averaged.pdf'           }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/terRip1_h10t10s10d00_time_averaged_velocity.pdf'                            }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/terRip1_h10t10s10d00_time_averaged_waterlevel.pdf'                          }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/terRip1_h10t10s10d00_time_averaged_vorticity.pdf'                           }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/terRip1_h10t10s10d00_xshore_momentum_terms_time_and_alongshore_averaged.pdf'}
+    {'/scratch/grimesdj/ripchannel/testRip//figures/terRip1_h10t10s10d00dominant_momentum_terms_InnerSurfzone.pdf'              }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/terRip1_h10t10s10d00dominant_momentum_terms_MiddleSurfzone.pdf'             }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/terRip1_h10t10s10d00dominant_momentum_terms_OuterSurfzone.pdf'              }
+
+>> >> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> >> >> >> >> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ processing fast-time: testRip - barRip0_h10t10s10d00 
+working on: dep
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_dep.nc 
+working on: eta
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_eta_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_eta_01.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_eta_02.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_eta_03.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_eta_04.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_eta_05.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_eta_06.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_eta_07.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_eta_08.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_eta_09.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_eta_10.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_eta_11.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_eta_12.nc 
+working on: mask
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_mask_01.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_mask_02.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_mask_03.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_mask_04.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_mask_05.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_mask_06.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_mask_07.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_mask_08.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_mask_09.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_mask_10.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_mask_11.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_mask_12.nc 
+working on: BrkSrcX
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcX_01.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcX_02.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcX_03.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcX_04.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcX_05.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcX_06.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcX_07.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcX_08.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcX_09.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcX_10.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcX_11.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcX_12.nc 
+working on: BrkSrcY
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcY_01.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcY_02.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcY_03.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcY_04.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcY_05.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcY_06.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcY_07.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcY_08.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcY_09.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcY_10.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcY_11.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip0_h10t10s10d00_BrkSrcY_12.nc 
+loading eta from: funwave_barRip0_h10t10s10d00_eta_01.nc 
+loading eta from: funwave_barRip0_h10t10s10d00_eta_02.nc 
+loading eta from: funwave_barRip0_h10t10s10d00_eta_03.nc 
+loading eta from: funwave_barRip0_h10t10s10d00_eta_04.nc 
+loading eta from: funwave_barRip0_h10t10s10d00_eta_05.nc 
+loading eta from: funwave_barRip0_h10t10s10d00_eta_06.nc 
+loading eta from: funwave_barRip0_h10t10s10d00_eta_07.nc 
+loading eta from: funwave_barRip0_h10t10s10d00_eta_08.nc 
+loading eta from: funwave_barRip0_h10t10s10d00_eta_09.nc 
+loading eta from: funwave_barRip0_h10t10s10d00_eta_10.nc 
+loading eta from: funwave_barRip0_h10t10s10d00_eta_11.nc 
+loading eta from: funwave_barRip0_h10t10s10d00_eta_12.nc 
+
+fout_stats =
+
+  2x1 cell array
+
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip0_h10t10s10d00_crest_length.pdf'           }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip0_h10t10s10d00_wave_height_and_spectra.pdf'}
+
+
+ processing fast-time: testRip - barRip1_h10t10s10d00 
+working on: dep
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_dep.nc 
+working on: eta
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_eta_01.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_eta_02.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_eta_03.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_eta_04.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_eta_05.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_eta_06.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_eta_07.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_eta_08.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_eta_09.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_eta_10.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_eta_11.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_eta_12.nc 
+working on: mask
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_mask_01.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_mask_02.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_mask_03.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_mask_04.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_mask_05.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_mask_06.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_mask_07.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_mask_08.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_mask_09.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_mask_10.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_mask_11.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_mask_12.nc 
+working on: BrkSrcX
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_BrkSrcX_01.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_BrkSrcX_02.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_BrkSrcX_03.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_BrkSrcX_04.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_BrkSrcX_05.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_BrkSrcX_06.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_BrkSrcX_07.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_BrkSrcX_08.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_BrkSrcX_09.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_BrkSrcX_10.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_BrkSrcX_11.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_BrkSrcX_12.nc 
+working on: BrkSrcY
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_BrkSrcY_01.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_BrkSrcY_02.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_BrkSrcY_03.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_BrkSrcY_04.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_BrkSrcY_05.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_BrkSrcY_06.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_BrkSrcY_07.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_BrkSrcY_08.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_BrkSrcY_09.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_BrkSrcY_10.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_BrkSrcY_11.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_barRip1_h10t10s10d00_BrkSrcY_12.nc 
+loading eta from: funwave_barRip1_h10t10s10d00_eta_01.nc 
+loading eta from: funwave_barRip1_h10t10s10d00_eta_02.nc 
+loading eta from: funwave_barRip1_h10t10s10d00_eta_03.nc 
+loading eta from: funwave_barRip1_h10t10s10d00_eta_04.nc 
+loading eta from: funwave_barRip1_h10t10s10d00_eta_05.nc 
+loading eta from: funwave_barRip1_h10t10s10d00_eta_06.nc 
+loading eta from: funwave_barRip1_h10t10s10d00_eta_07.nc 
+loading eta from: funwave_barRip1_h10t10s10d00_eta_08.nc 
+loading eta from: funwave_barRip1_h10t10s10d00_eta_09.nc 
+loading eta from: funwave_barRip1_h10t10s10d00_eta_10.nc 
+loading eta from: funwave_barRip1_h10t10s10d00_eta_11.nc 
+loading eta from: funwave_barRip1_h10t10s10d00_eta_12.nc 
+
+fout_stats =
+
+  2x1 cell array
+
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip1_h10t10s10d00_crest_length.pdf'           }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/barRip1_h10t10s10d00_wave_height_and_spectra.pdf'}
+
+
+ processing fast-time: testRip - terRip1_h10t10s10d00 
+working on: dep
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_dep.nc 
+working on: eta
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_eta_01.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_eta_02.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_eta_03.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_eta_04.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_eta_05.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_eta_06.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_eta_07.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_eta_08.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_eta_09.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_eta_10.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_eta_11.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_eta_12.nc 
+working on: mask
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_mask_01.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_mask_02.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_mask_03.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_mask_04.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_mask_05.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_mask_06.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_mask_07.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_mask_08.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_mask_09.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_mask_10.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_mask_11.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_mask_12.nc 
+working on: BrkSrcX
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_BrkSrcX_01.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_BrkSrcX_02.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_BrkSrcX_03.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_BrkSrcX_04.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_BrkSrcX_05.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_BrkSrcX_06.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_BrkSrcX_07.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_BrkSrcX_08.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_BrkSrcX_09.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_BrkSrcX_10.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_BrkSrcX_11.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_BrkSrcX_12.nc 
+working on: BrkSrcY
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_BrkSrcY_01.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_BrkSrcY_02.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_BrkSrcY_03.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_BrkSrcY_04.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_BrkSrcY_05.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_BrkSrcY_06.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_BrkSrcY_07.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_BrkSrcY_08.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_BrkSrcY_09.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_BrkSrcY_10.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_BrkSrcY_11.nc 
+ archiving: /scratch/grimesdj/ripchannel/testRip/mat_data/funwave_terRip1_h10t10s10d00_BrkSrcY_12.nc 
+loading eta from: funwave_terRip1_h10t10s10d00_eta_01.nc 
+loading eta from: funwave_terRip1_h10t10s10d00_eta_02.nc 
+loading eta from: funwave_terRip1_h10t10s10d00_eta_03.nc 
+loading eta from: funwave_terRip1_h10t10s10d00_eta_04.nc 
+loading eta from: funwave_terRip1_h10t10s10d00_eta_05.nc 
+loading eta from: funwave_terRip1_h10t10s10d00_eta_06.nc 
+loading eta from: funwave_terRip1_h10t10s10d00_eta_07.nc 
+loading eta from: funwave_terRip1_h10t10s10d00_eta_08.nc 
+loading eta from: funwave_terRip1_h10t10s10d00_eta_09.nc 
+loading eta from: funwave_terRip1_h10t10s10d00_eta_10.nc 
+loading eta from: funwave_terRip1_h10t10s10d00_eta_11.nc 
+loading eta from: funwave_terRip1_h10t10s10d00_eta_12.nc 
+
+fout_stats =
+
+  2x1 cell array
+
+    {'/scratch/grimesdj/ripchannel/testRip//figures/terRip1_h10t10s10d00_crest_length.pdf'           }
+    {'/scratch/grimesdj/ripchannel/testRip//figures/terRip1_h10t10s10d00_wave_height_and_spectra.pdf'}
+
+>> 

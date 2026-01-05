@@ -11,6 +11,8 @@ if ~exist(figDIR,'dir')
 end
 fout = {};
 %
+fin = [info.rootMat,info.rootName,'dep.nc'];
+h = ncread(fin,'dep');
 %
 %% 2) plot velocity and vorticity statistics
 x        = ncread(info.rotVelFile,'x');
@@ -19,12 +21,35 @@ t        = ncread(info.rotVelFile,'t');
 Urot     = ncread(info.rotVelFile,'Urot');
 Vrot     = ncread(info.rotVelFile,'Vrot');
 VORT     = ncread(info.rotVelFile,'VORT');
+ETA      = ncread(info.rotVelFile,'eta');
+H    = max(h+ETA,0.1);
 %
 % estimate energy/exchange statistics
 tmp      = sqrt( Urot.^2 + Vrot.^2 );
-EKE      = mean( tmp , [1 3],'omitnan');
+EKE      = sum( tmp.*H , [1 3],'omitnan')./sum( H, [1 3],'omitnan');
 tmp      = Urot; tmp(Urot<0)=nan;
-Uex      = mean( tmp , [1 3],'omitnan');clear tmp
+tmp1     = H;    tmp1(Urot<0)=nan;
+Uex      = sum( tmp.*tmp1 , [1 3],'omitnan')./sum( tmp1, [1 3], 'omitnan');clear tmp
+%
+% estimate the energy/exchange for the mean fields:
+momFile = [info.rootMat,info.rootName,'MomentumTerms.nc'];
+Umean   = ncread(momFile,'umean');
+Vmean   = ncread(momFile,'vmean');
+ETAmean = ncread(momFile,'etamean');
+Umean   = mean(Umean,3,'omitnan');
+Vmean   = mean(Vmean,3,'omitnan');
+ETAmean = mean(ETAmean,3,'omitnan');
+Hmean   = max(h+ETAmean,0.1);
+%
+MKE     = sum(sqrt( Umean.^2 + Vmean.^2).*Hmean, 1,'omitnan')./sum(Hmean, 1,'omitnan');
+%
+tmp = Umean; tmp(Umean<0)=nan;
+tmp1 = Hmean; tmp1(Umean<0)=nan;
+Uex_avg = sum(tmp.*tmp1, 1, 'omitnan')./sum(tmp1, 1, 'omitnan');
+%
+[~,dUdy] = gradient(Umean./info.dy);
+[dVdx,~] = gradient(Vmean./info.dx);
+VORTavg  = dVdx-dUdy;
 %
 % figure properties
 xm = 2.5;
@@ -42,13 +67,14 @@ fig.PaperSize=ps;
 fig.PaperPosition=[0 0 ps];
 %
 a1 = axes('units','centimeters','position',ppos1);
-plot(x, rms(VORT,[1 3],'omitnan'), 'linewidth',2)
+plot(x, rms(VORT,[1 3],'omitnan'),'-k',x, rms(VORTavg,1,'omitnan'),'--k', 'linewidth',2)
+legend({'$\bar{\omega}$','$\langle\omega\rangle$'},'interpreter','latex')
 xlabel('$x$ [m]','interpreter','latex')
 ylabel('$\mathrm{rms}\langle \omega \rangle$ (s$^{-1}$)','interpreter','latex')
 set(a1,'tickdir','out','ticklabelinterpreter','latex')
 a2 = axes('units','centimeters','position',ppos2);
-plot(x, Uex,'-k',x,EKE,'-r', 'linewidth',2)
-legend({'$U_\mathrm{ex}$','$U_\mathrm{eke}$'},'interpreter','latex')
+plot(x, Uex,'-k',x,Uex_avg,'--k',x,EKE,'-r',x,MKE,'-b', 'linewidth',2)
+legend({'$U_\mathrm{ex}$','$\langle U\rangle_\mathrm{ex}$','$U_\mathrm{eke}$','$U_\mathrm{mke}$'},'interpreter','latex')
 ylabel('(m/s)','interpreter','latex')
 set(a2,'tickdir','out','ticklabelinterpreter','latex','xticklabel',[])
 figname = [figDIR,info.runName,'_velocity_and_vorticity_stats.pdf'];
@@ -85,7 +111,7 @@ for jj = 1:Nt;
     colormap(ax0,cm)
     ylabel(ax0,'$y$ [m]','interpreter','latex')
     xlabel(ax0,'$x$ [m]','interpreter','latex')
-    title_str = sprintf('$t$ = %1.1f min, $\\langle \\omega \\rangle$ ',(mean(t(jj))-t(1))/60);
+    title_str = sprintf('$t$ = %1.1f min, $\\bar \\omega$ ',(mean(t(jj))-t(1))/60);
     set(ax0,'tickdir','out','ticklabelinterpreter','latex','fontsize',25,'ydir','normal','color',0.8*[1 1 1],'xdir','reverse','ylim',alims(1:2),'xlim',alims(3:4)+y(1))
     title(ax0,title_str,'interpreter','latex','fontsize',15,'horizontalalignment','left','units','normalized','position',[0.01 1.1 0]) 
     %

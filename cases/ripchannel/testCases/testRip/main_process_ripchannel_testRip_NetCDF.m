@@ -1,11 +1,9 @@
-%% grimes edited to skip reprocessing the first run... %%
- 
 % code to be launched on cms-hpc "cuttlefish"
 addpath(genpath('/storage/cms/grimesdj_lab/grimesdj/git/funwave/'))
 % code to be launched on cms-hpc "cuttlefish"
 % 0) requires the input bathymetry name as top-dir
 runBATHYlist = {'testRip'};
-reproc  = 1;% 1=reprocess ascii to mat
+reproc  = 0;% 1=reprocess ascii to mat
 rmfiles = 0;% 1=remove original ascii files when finished
 recalc  = 1;% 1=recalculate run statistics
 plot_all_momentum=0;
@@ -51,7 +49,7 @@ end
 info  = load([infoFile(1).folder,filesep,infoFile(1).name]);
 %
 %
-if reproc & jj>2
+if reproc 
     info = prep_info_structure(info);
     %
     % run specific output grid info:
@@ -179,7 +177,6 @@ end
 %
 %
 %% fast time wave files
-Ndirs  = length(run_dirs);
 for jj = 1:Ndirs
 % 1) get current run subdirectory to process:
 runID    = run_dirs{jj};

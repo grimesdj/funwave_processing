@@ -27,9 +27,6 @@ t   = ncread(momFile,'t');
 %
 %% 0) need to check for a land-mask
 if ~isfield(info,'mask')
-    % load the depth and ancillary fields
-    depFile = [info.rootMat,info.rootName,'dep.nc'];
-    h0 = ncread(depFile,'dep');
     % full domain or sub-domain?
     if ~isfield(info,'subDomain')
         iX = find(x0>=0  & x0<=400);
@@ -39,9 +36,11 @@ if ~isfield(info,'mask')
     else
         subDomain = info.subDomain;
     end
-    h = ncread(momFile,'dep',[subDomain([1 3])] , [subDomain([2 4])]);
-    x = ncread(momFile, 'x' , subDomain([3])    ,  subDomain([4]))';
-    y = ncread(momFile, 'y' , subDomain([1])    ,  subDomain([2]));
+    % load the depth and ancillary fields
+    depFile = [info.rootMat,info.rootName,'dep.nc'];
+    h = ncread(depFile,'dep',[subDomain([1 3])] , [subDomain([2 4])]);
+    x = ncread(depFile, 'x' , subDomain([3])    ,  subDomain([4]))';
+    y = ncread(depFile, 'y' , subDomain([1])    ,  subDomain([2]));
     eta = ncread(momFile,'etamean',[subDomain([1 3]) 1] , [subDomain([2 4]) inf]);
     info.mask = (mean(eta,3,'omitnan')+h)>=0.1;
     % if no shorline location... use the depth-mask
@@ -317,7 +316,7 @@ clear tmp1
 %             advection, 
 tmp1 = ncread(momFile,'DyVVH');
 tmp2 = ncread(momFile,'DxUVH');
-ADY  = mean(tmp1,3,'omitnan'); clear tmp1 tmp2
+ADY  = mean(tmp1,3,'omitnan') + mean(tmp2,3,'omitnan'); clear tmp1 tmp2
 %             pressure grad,
 PGY  = ncread(momFile,'PgrdY');
 PGY  = mean(PGY,3,'omitnan');
@@ -361,8 +360,8 @@ for ii = [iINN iMID iBP]
 % $$$         icon(2*(kk+1)).XData=[0.05 0.2];
 % $$$     end
     title(a1,[NAMES{iter},' Surfzone'],'interpreter','latex')
-    set(a1,'tickdir','out','ticklabelinterpreter','latex','xlim',ylims,'ytick',[-1 0 1])
-    a1.YAxis.Exponent = -2;
+    set(a1,'tickdir','out','ticklabelinterpreter','latex','xlim',ylims,'ytick',1e-3*[-1 0 1])
+    a1.YAxis.Exponent = -3;
     % 
     a2 = axes('units','centimeters','position',ppos2);
     p2 = plot(y,PGX(:,ii),'k',y,ADX(:,ii),'b',y,RSX(:,ii),'r','linewidth',2);
@@ -370,8 +369,8 @@ for ii = [iINN iMID iBP]
                'string','Cross-shore','fitboxtotext','on','linestyle','none','interpreter','latex',...
                'fontsize',8,'backgroundcolor','none')    
     ylabel('[m/s]$^2\times 10^{-2}$','interpreter','latex','fontsize',9)
-    set(a2,'tickdir','out','ticklabelinterpreter','latex','xticklabel',[],'xlim',ylims,'ytick',[-1 0 1])
-    a2.YAxis.Exponent = -2;    
+    set(a2,'tickdir','out','ticklabelinterpreter','latex','xticklabel',[],'xlim',ylims,'ytick',1e-3*[-1 0 1])
+    a2.YAxis.Exponent = -3;    
     figname = [figDIR,info.runName,'dominant_momentum_terms_',NAMES{iter},'Surfzone.pdf'];
     drawnow
     exportgraphics(fig,figname)
