@@ -1,7 +1,7 @@
 clear all
-close all
+% close all
 % extract the wavemaker E(f,d) info from log file:
-fin = '~/Grants/NSF_SED/ripchannel/test2Davg/LOG.txt';
+fin = '/Users/derekgrimes/Library/CloudStorage/OneDrive-UNC-Wilmington/SED/ripchannel/spreadRip/barRip0_h10t10s00d00/LOG.txt';
 fid = fopen(fin);
 iter = 0;
 
@@ -48,3 +48,6 @@ elseif ismember('Input Dire',tmp2)
 end
 
 end
+
+figure,
+scatter(freq,dire,20,amp,'filled')

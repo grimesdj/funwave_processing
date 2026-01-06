@@ -2858,8 +2858,13 @@ SUBROUTINE WK_NEW_EQUAL_DFREQ_IRREGULAR_WAVE &
     N_spec=20.0_SP/sigma_theta
 
     IF(mtheta==1) THEN ! 1D case
-        theta(1) = theta_input*pi/180.0_SP
-        AG(1) = 1.0_SP
+        ! theta(1) = theta_input*pi/180.0_SP
+        ! AG(1) = 1.0_SP
+        ! Grimes added this to use TMA spectrum for 1D waves (sigma_theta=0) in a 2D run:
+           DO kf=1,mfreq
+              theta(kf) = theta_input*pi/180.0_SP
+              AG(kf) = 1.0_SP
+           ENDDO
     ELSE
         displace_theta = minloc(abs(Freq-fm))
         idx_theta = MOD(displace_theta(1),mtheta)

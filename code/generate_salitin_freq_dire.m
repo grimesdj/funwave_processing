@@ -6,7 +6,7 @@ h_gen=9;
 delta=2;
 fm = 0.1;
 theta_input=0;
-sigma_theta_input=10;
+sigma_theta_input=2;
 gamma_spec=3;
 DY = 1;
 Nglob=2999;
@@ -26,8 +26,8 @@ df = (fmax-fmin)/(mfreq-1.0);
     N_spec=20.0/sigma_theta;
 
     if mtheta==1 % 1D case
-        theta(1) = theta_input*pi/180.0;
-        AG(1) = 1.0;
+        theta(1:mfreq) = theta_input*pi/180.0;
+        AG(1:mfreq) = 1.0;
     else
         [~,displace_theta] = min(abs(Freq-fm));
         idx_theta = mod(displace_theta(1),mtheta);
@@ -44,14 +44,16 @@ df = (fmax-fmin)/(mfreq-1.0);
                 0.5))/(real(mtheta)-1.0));   %Grimes narrowed +/- bounds
 
             theta(kf) = theta(kf) + theta_input*pi/180.0;   %new method
-            if theta(kf)>0.5*pi
-                theta(kf) = 0.5*pi;
+            if theta(kf)>2*pi/3
+                theta(kf) = 2*pi/3;
             end
-            if theta(kf)<-0.5*pi
-                theta(kf) = -0.5*pi;
+            if theta(kf)<-2*pi/3
+                theta(kf) = -2*pi/3;
             end
             AG(kf) = 1.0/( 2.0*pi );
-            
+% $$$             if abs(theta(kf))<pi/180 & abs(kf-displace_theta)<2
+% $$$                 return
+% $$$             end
             for k_n=1:N_spec
                 AG(kf) = AG(kf)+ ...
                     (1.0/pi)*exp(-0.5*(real(k_n)*sigma_theta).^2) ...
@@ -61,7 +63,7 @@ df = (fmax-fmin)/(mfreq-1.0);
         AG(:) = abs(AG(:));
     end
 
-theta0 = theta;
+    theta0 = theta;
 
     % next correct the directions for periodic domain...
     alpha=-0.39;
@@ -133,3 +135,38 @@ theta0 = theta;
         end
         theta(kf)=tmp3;
     end
+
+    %% Wave heigh spectrum estimation:
+    Hmo = 1.0;
+    
+        for kf=1:mfreq
+        omiga_spec=2.0*pi*Freq(kf)*sqrt(h_gen/grav);
+        phi=1.0-0.5*(2.0-omiga_spec).^2;
+        if omiga_spec<=1.0, phi=0.5*omiga_spec.^2; end
+        if omiga_spec>=2.0, phi=1.0; end
+        sigma_spec=0.07;
+        if Freq(kf)>fm, sigma_spec=0.09; end
+        Etma(kf)=grav.^2*Freq(kf).^(-5)*(2.0*pi).^(-4)*phi...
+            *exp(-5.0/4.0*(Freq(kf)/fm).^(-4))...
+            *gamma_spec.^(exp(-(Freq(kf)/fm-1.0).^2/(2.0*sigma_spec.^2)));
+        EnergyBin(kf) = Etma(kf)*df;
+        Ef = Ef + EnergyBin(kf);
+        end
+        alpha_spec=Hmo.^2/16.0/Ef;
+        correction_coeff = Ef/dot(AG,EnergyBin);
+        for kf=1:mfreq
+            AG(kf) = AG(kf) * correction_coeff;
+            Hmo_each(1,kf)=4.0 *sqrt((alpha_spec*EnergyBin(kf)*AG(kf)));
+        end
+
+
+        figure, scatter(Freq,theta0*180/pi,20,Hmo_each,'filled')
+
+        figure, scatter(Freq,theta*180/pi,20,log(Hmo_each),'filled')
+
+
+        if mod(mfreq,mtheta)==0
+            Hmo_array = reshape(Hmo_each,mtheta,mfreq/mtheta);
+            theta_array = reshape(theta0,mtheta,mfreq/mtheta);
+            freq_array = reshape(Freq,mtheta,mfreq/mtheta);
+        end
