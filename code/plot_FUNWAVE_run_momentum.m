@@ -78,17 +78,17 @@ fig.PaperPosition = [0 0 ps];
 % colormap
 cm1   = cmocean('balance');
 cm2   = cmocean('amp');
-%
+% limits/grading
+clim1  = [-1 1];
+clim2  = [0 1];
+clrs1 = clim1(1):diff(clim1)/255:clim1(2);
+clrs2 = clim2(1):diff(clim2)/255:clim2(2);
 % loop over variables
 for jj=1:length(vars)
     var = ncread(momFile,vars{jj});% here is where you'd depth average...
     tmp = mean(var,3,'omitnan')';
     rng    = ceil(log10(range(tmp(:))));
     scale  = 10^rng;
-    clim1  = scale*[-1 1];
-    clim2  = [0 scale];
-    clrs1 = clim1(1):diff(clim1)/255:clim1(2);
-    clrs2 = clim2(1):diff(clim2)/255:clim2(2);
     %
     clf(fig)
     a1 = axes('units','centimeters','position',ppos1);
@@ -106,11 +106,11 @@ for jj=1:length(vars)
     set(a2,'tickdir','out','ticklabelinterpreter','latex','ydir','normal','xticklabel',[])
     c1 = axes('units','centimeters','position',cpos1);
     imagesc(0,clrs1,reshape(cm1,256,1,3))
-    xlabel(c1,{['avg(',lbls{jj},')'];sprintf('[m/s]$^2$\\times 10^{-%d}]',log10(scale))},'interpreter','latex','fontsize',6,'horizontalalignment','left')
+    xlabel(c1,{['avg(',lbls{jj},')'];sprintf('[m/s]$^2\\times 10^{%d}$]',log10(scale))},'interpreter','latex','fontsize',6,'horizontalalignment','left')
     set(c1,'xaxislocation','top','xtick',[],'yaxislocation','right','fontsize',6,'tickdir','out','ydir','normal')
     c2 = axes('units','centimeters','position',cpos2);
     imagesc(0,clrs2,reshape(cm2,256,1,3))
-    xlabel(c2,{['rms(',lbls{jj},')'];sprintf('[m/s]$^2$\\times 10^{-%d}]',log10(scale))},'interpreter','latex','fontsize',6,'horizontalalignment','left')
+    xlabel(c2,{['rms(',lbls{jj},')'];sprintf('[m/s]$^2\\times 10^{%d}$]',log10(scale))},'interpreter','latex','fontsize',6,'horizontalalignment','left')
     set(c2,'xaxislocation','top','xtick',[],'yaxislocation','right','fontsize',6,'tickdir','out','ydir','normal')
     figname = [figDIR,info.runName,'_xshore_momentum_term_',vars{jj},'_time_averaged.pdf'];
     exportgraphics(fig,figname)

@@ -165,3 +165,5 @@ time vector is off: nt=3600and nf=3601
 shortenning records to match
  archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_mask_01.nc 
  archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_mask_02.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_mask_03.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_mask_04.nc 
