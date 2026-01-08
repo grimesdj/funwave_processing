@@ -2875,8 +2875,8 @@ SUBROUTINE WK_NEW_EQUAL_DFREQ_IRREGULAR_WAVE &
                 2.0_SP/3.0_SP*pi*(floor(real(ktheta_temp)/2.0_SP - &
                 0.5_SP))/(real(mtheta)-1.0_SP))   !Grimes reduced theta range to -pi/3 to pi/3
             theta(kf) = theta(kf) + theta_input*pi/180.0_SP   !new method
-            IF(theta(kf).gt.0.5_SP*pi) theta(kf) = 0.5_SP*pi
-            IF(theta(kf).lt.-0.5_SP*pi) theta(kf) = -0.5_SP*pi
+            IF(theta(kf).gt.0.5_SP*pi) theta(kf) = pi/3.0_SP ! reducing range to +/- pi/3
+            IF(theta(kf).lt.-0.5_SP*pi) theta(kf) = -pi/3.0_SP
             AG(kf) = 1.0_SP/( 2.0_SP*pi )
             do k_n=1,N_spec
                 AG(kf) = AG(kf)+ &

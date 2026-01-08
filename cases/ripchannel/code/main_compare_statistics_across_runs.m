@@ -73,7 +73,6 @@ switch compare
     end
 end
 
-
 %% 3) now loop over each group of runs... 
 % plot:
 % i)  Velocity/Vorticity: (Uex, Uex_avg, EKE, MKE) and (rms(VORT), rms(VORT_avg))
@@ -273,6 +272,16 @@ for ii=1:N
         RSY  = mean(tmp1,3,'omitnan') + mean(tmp2,3,'omitnan') - mean(tmp3,3,'omitnan');
         clear tmp1 tmp2 tmp3
         %
+        % mometnum terms need to be alongshore smoothed over ~25m (half-width of channel)
+        Nflt = 25/info.dy;
+        flt  = hamming(Nflt); flt = flt/sum(flt);
+        ADX  = conv2(ADX,flt,'same');
+        RSX  = conv2(RSX,flt,'same');
+        PGX  = conv2(PGX,flt,'same');        
+        %
+        ADY  = conv2(ADY,flt,'same');
+        RSY  = conv2(RSY,flt,'same');
+        PGY  = conv2(PGY,flt,'same');        
         %
         %% Cross-shore Momentum terms:
         figure(fig1), 
@@ -349,7 +358,7 @@ for ii=1:N
     imagesc(0,clrs,reshape(cm,M,1,3))
     set(f1cb,'ydir','normal','yaxislocation','right','xaxislocation','top','fontsize',6,'ytick',1:M,'yticklabel',run_names{ii},'ticklabelinterpreter','latex','xtick',[])
     xlabel(f1a32,'$y$ [m]','interpreter','latex')
-    ylabel(f1a21,'[m/s]$^2 \times 10^{-3}$','interpreter','latex')
+    ylabel(f1a21,'[m/s]$^2 \times 10^{-2}$','interpreter','latex')
     title(f1a11,'Inner Surfzone','interpreter','latex','fontsize',8)
     title(f1a12,'Middle Surfzone','interpreter','latex','fontsize',8)
     title(f1a13,'Outer Surfzone','interpreter','latex','fontsize',8)
@@ -363,11 +372,14 @@ for ii=1:N
     set([f1a13 f1a23 f1a33],'yaxislocation','right')
     for kk=1:3
         for ll=1:3
-            eval(['f1a',num2str(kk),num2str(ll),'.YAxis.Exponent=-3;'])
-            eval(['f1a',num2str(kk),num2str(ll),'.YAxis.Limits=[-1.5 1.5]*1e-3;'])
-            eval(['f1a',num2str(kk),num2str(ll),'.YAxis.TickValues=[-1 0 1]*1e-3;'])                                    
+            eval(['f1a',num2str(kk),num2str(ll),'.YAxis.Exponent=-2;'])
+            eval(['f1a',num2str(kk),num2str(ll),'.YAxis.Limits=[-1.5 1.5]*1e-2;'])
+            eval(['f1a',num2str(kk),num2str(ll),'.YAxis.TickValues=[-1 0 1]*1e-2;'])                                    
             eval(['f1a',num2str(kk),num2str(ll),'.XAxis.Limits=[',num2str(ylims),'];'])
-            eval(['f2a',num2str(kk),num2str(ll),'.FontSize=''8'';'])                                    
+            eval(['f1a',num2str(kk),num2str(ll),'.XAxis.TickValues=[',num2str(yticks),'];'])            
+            eval(['f1a',num2str(kk),num2str(ll),'.FontSize=8;'])
+            eval(['f1a',num2str(kk),num2str(ll),'.Box=''on'';'])
+            eval(['grid(f1a',num2str(kk),num2str(ll),',''on'');'])                                                                                    
         end
     end
     if ~isempty(varComp)
@@ -383,7 +395,7 @@ for ii=1:N
     imagesc(0,clrs,reshape(cm,M,1,3))
     set(f2cb,'ydir','normal','yaxislocation','right','xaxislocation','top','fontsize',6,'ytick',1:M,'yticklabel',run_names{ii},'ticklabelinterpreter','latex','xtick',[])
     xlabel(f2a32,'$y$ [m]','interpreter','latex')
-    ylabel(f2a21,'[m/s]$^2 \times 10^{-3}$','interpreter','latex')
+    ylabel(f2a21,'[m/s]$^2 \times 10^{-2}$','interpreter','latex')
     title(f2a11,'Inner Surfzone','interpreter','latex','fontsize',8)
     title(f2a12,'Middle Surfzone','interpreter','latex','fontsize',8)
     title(f2a13,'Outer Surfzone','interpreter','latex','fontsize',8)
@@ -397,11 +409,14 @@ for ii=1:N
     set([f2a13 f2a23 f2a33],'yaxislocation','right')
     for kk=1:3
         for ll=1:3
-            eval(['f2a',num2str(kk),num2str(ll),'.YAxis.Exponent=-3;'])
-            eval(['f2a',num2str(kk),num2str(ll),'.YAxis.Limits=[-1.5 1.5]*1e-3;'])
-            eval(['f2a',num2str(kk),num2str(ll),'.YAxis.TickValues=[-1 0 1]*1e-3;'])                                    
+            eval(['f2a',num2str(kk),num2str(ll),'.YAxis.Exponent=-2;'])
+            eval(['f2a',num2str(kk),num2str(ll),'.YAxis.Limits=[-1.5 1.5]*1e-2;'])
+            eval(['f2a',num2str(kk),num2str(ll),'.YAxis.TickValues=[-1 0 1]*1e-2;'])                                    
             eval(['f2a',num2str(kk),num2str(ll),'.XAxis.Limits=[',num2str(ylims),'];'])
-            eval(['f2a',num2str(kk),num2str(ll),'.FontSize=''8'';'])                        
+            eval(['f2a',num2str(kk),num2str(ll),'.XAxis.TickValues=[',num2str(yticks),'];'])                        
+            eval(['f2a',num2str(kk),num2str(ll),'.FontSize=8;'])
+            eval(['f2a',num2str(kk),num2str(ll),'.Box=''on'';'])
+            eval(['grid(f2a',num2str(kk),num2str(ll),',''on'');'])                                                                        
         end
     end
     if ~isempty(varComp)

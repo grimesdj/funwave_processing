@@ -8,14 +8,12 @@
 To get started, type doc.
 For product information, visit www.mathworks.com.
  
->> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >>>>>>>>>>>>>>>>>>>> >> >> >> >> >> >> >> >> >> >> >>>>>> >> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
- plotting runs: 
-		 barRip0_h10t10s00d00 
-		 barRip0_h10t10s02d00 
-		 barRip0_h10t10s04d00 
-		 barRip0_h10t10s10d00 
-		 barRip0_h10t10s20d00 
-{Error setting property 'FontSize' of class 'Axes':
-Value not a numeric scalar
-} 
->> 
+>> >> >> >> >> >> >> >> >> >> >> >> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> >> >> >> >> >> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ processing fast-time: spreadRip - barRip1_h10t10s00d00 
+working on: eta
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_barRip1_h10t10s00d00_eta_01.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_barRip1_h10t10s00d00_eta_02.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_barRip1_h10t10s00d00_eta_03.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_barRip1_h10t10s00d00_eta_04.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_barRip1_h10t10s00d00_eta_05.nc 

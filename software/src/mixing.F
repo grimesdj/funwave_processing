@@ -324,7 +324,7 @@ END SUBROUTINE MIXING_STUFF
         Vwavg=Vsum_wavg/T_sum_wavg
         ETAwavg=ETAsum/T_sum_wavg
 
-        T_sum_wavg=T_sum_wavg-T_INTV_wavg ! T_sum=ZERO? (ykchoi)
+        T_sum_wavg=T_sum_wavg-T_INTV_wavg 
 	Usum_wavg=ZERO
 	Vsum_wavg=ZERO
 	ETAsum_wavg=ZERO

@@ -56,11 +56,9 @@ if reproc
     info.bathyFile = [info.rootMat,filesep,runBATHY,'_depth.mat'];
     save(info.fileName,'-struct','info')
     %
-    spanx = 1;
-    spany = 1;
     % 4) convert the funwave output ascii files to .mat
     rootOut = split(info.rootOut,':');
-    fLog = convert_funwave_output_to_NetCDF(rootOut{end},[info.rootMat,info.rootName],vars,t0,dT0,info.dx,spanx,info.dy,spany,rmfiles,1e3)
+    fLog = convert_funwave_output_to_NetCDF(rootOut{end},[info.rootMat,info.rootName],vars,t0,dT0,info.dx,info.spanx,info.dy,info.spany,rmfiles,1e3)
 end
 %
 %

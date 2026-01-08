@@ -23,25 +23,24 @@ x   = ncread(momFile,'x');
 y   = ncread(momFile,'y');
 t   = ncread(momFile,'t');
 %
+% load the depth for 2D plots
+depFile = [info.rootMat,info.rootName,'dep.nc'];
+h = ncread(depFile,'dep');
 %
 %
 %% 0) need to check for a land-mask
 if ~isfield(info,'mask')
-    % full domain or sub-domain?
-    if ~isfield(info,'subDomain')
-        iX = find(x0>=0  & x0<=400);
-        sdx = length(iX);
-        sdy = length(y0);
-        subDomain = [1 sdy iX(1) iX(end)];
-    else
-        subDomain = info.subDomain;
-    end
-    % load the depth and ancillary fields
-    depFile = [info.rootMat,info.rootName,'dep.nc'];
-    h = ncread(depFile,'dep',[subDomain([1 3])] , [subDomain([2 4])]);
-    x = ncread(depFile, 'x' , subDomain([3])    ,  subDomain([4]))';
-    y = ncread(depFile, 'y' , subDomain([1])    ,  subDomain([2]));
-    eta = ncread(momFile,'etamean',[subDomain([1 3]) 1] , [subDomain([2 4]) inf]);
+% $$$     % full domain or sub-domain?
+% $$$     if ~isfield(info,'subDomain')
+% $$$         iX = find(x0>=0  & x0<=400);
+% $$$         sdx = length(iX);
+% $$$         sdy = length(y0);
+% $$$         subDomain = [1 sdy iX(1) iX(end)];
+% $$$     else
+% $$$         subDomain = info.subDomain;
+% $$$     end
+% $$$     eta = ncread(momFile,'etamean',[subDomain([1 3]) 1] , [subDomain([2 4]) inf]);
+    eta = ncread(momFile,'etamean');
     info.mask = (mean(eta,3,'omitnan')+h)>=0.1;
     % if no shorline location... use the depth-mask
     if ~isfield(info,'x_shoreline')
@@ -83,38 +82,36 @@ cm2   = cmocean('amp');
 % loop over variables
 for jj=1:length(vars)
     var = ncread(momFile,vars{jj});% here is where you'd depth average...
-    if range(var(:))<0.1
-        rng    = ceil(log10(range(var(:))));
-        clim1  = [-10^rng 10^rng];
-        clim2  = [0 10^rng];
-        clrs1 = clim1(1):diff(clim1)/255:clim1(2);
-        clrs2 = clim2(1):diff(clim2)/255:clim2(2);
-    else
-        clim1  = [-0.1 0.1];
-        clim2  = [0 0.1];
-        clrs1 = clim1(1):diff(clim1)/255:clim1(2);
-        clrs2 = clim2(1):diff(clim2)/255:clim2(2);
-    end
+    tmp = mean(var,3,'omitnan')';
+    rng    = ceil(log10(range(tmp(:))));
+    scale  = 10^rng;
+    clim1  = scale*[-1 1];
+    clim2  = [0 scale];
+    clrs1 = clim1(1):diff(clim1)/255:clim1(2);
+    clrs2 = clim2(1):diff(clim2)/255:clim2(2);
+    %
     clf(fig)
     a1 = axes('units','centimeters','position',ppos1);
-    imagesc(y,x,sgn{jj}*mean(var,3,'omitnan')')
+    imagesc(y,x,sgn{jj}*tmp/scale)
+    hold on, contour(y,x,h',[0:1:6],'-k','linewidth',1)
     colormap(a1,cm1),caxis(a1,clim1)
     xlabel('$y$ [m]','interpreter','latex')
     ylabel('$x$ [m]','interpreter','latex')
     set(a1,'tickdir','out','ticklabelinterpreter','latex','ydir','normal')
     a2 = axes('units','centimeters','position',ppos2);
-    imagesc(y,x,rms(var,3,'omitnan')')
+    imagesc(y,x,rms(var,3,'omitnan')'/scale)
+    hold on, contour(y,x,h',[0:1:6],'-k','linewidth',1)    
     colormap(a2,cm2),caxis(a2,clim2)    
     ylabel('$x$ [m]','interpreter','latex')
     set(a2,'tickdir','out','ticklabelinterpreter','latex','ydir','normal','xticklabel',[])
     c1 = axes('units','centimeters','position',cpos1);
     imagesc(0,clrs1,reshape(cm1,256,1,3))
-    xlabel(c1,['avg(',lbls{jj},')'],'interpreter','latex','fontsize',8)
-    set(c1,'xaxislocation','top','xtick',[],'yaxislocation','right','fontsize',8,'tickdir','out','ydir','normal')
+    xlabel(c1,{['avg(',lbls{jj},')'];sprintf('[m/s]$^2$\\times 10^{-%d}]',log10(scale))},'interpreter','latex','fontsize',6,'horizontalalignment','left')
+    set(c1,'xaxislocation','top','xtick',[],'yaxislocation','right','fontsize',6,'tickdir','out','ydir','normal')
     c2 = axes('units','centimeters','position',cpos2);
     imagesc(0,clrs2,reshape(cm2,256,1,3))
-    xlabel(c2,['rms(',lbls{jj},')'],'interpreter','latex','fontsize',8)
-    set(c2,'xaxislocation','top','xtick',[],'yaxislocation','right','fontsize',8,'tickdir','out','ydir','normal')
+    xlabel(c2,{['rms(',lbls{jj},')'];sprintf('[m/s]$^2$\\times 10^{-%d}]',log10(scale))},'interpreter','latex','fontsize',6,'horizontalalignment','left')
+    set(c2,'xaxislocation','top','xtick',[],'yaxislocation','right','fontsize',6,'tickdir','out','ydir','normal')
     figname = [figDIR,info.runName,'_xshore_momentum_term_',vars{jj},'_time_averaged.pdf'];
     exportgraphics(fig,figname)
     fout = cat(1,fout,figname);
@@ -147,22 +144,24 @@ clim1 = [-0.5 0.5];
 clrs1 = clim1(1):diff(clim1)/255:clim1(2);
 a1 = axes('units','centimeters','position',ppos1);
 imagesc(y,x,mean(Umean,3,'omitnan')')
+hold on, contour(y,x,h',[0:1:6],'-k','linewidth',1)
 colormap(a1,cm1),caxis(a1,clim1)
 xlabel('$y$ [m]','interpreter','latex')
 ylabel('$x$ [m]','interpreter','latex')
 set(a1,'tickdir','out','ticklabelinterpreter','latex','ydir','normal')
 a2 = axes('units','centimeters','position',ppos2);
 imagesc(y,x,mean(Vmean,3,'omitnan')')
+hold on, contour(y,x,h',[0:1:6],'-k','linewidth',1)
 colormap(a2,cm1),caxis(a2,clim1)    
 ylabel('$x$ [m]','interpreter','latex')
 set(a2,'tickdir','out','ticklabelinterpreter','latex','ydir','normal','xticklabel',[])
 c1 = axes('units','centimeters','position',cpos1);
 imagesc(0,clrs1,reshape(cm1,256,1,3))
-xlabel(c1,'$\bar{U}$ [m/s]','interpreter','latex','fontsize',8)
+xlabel(c1,'$\langle{U}\rangle$ [m/s]','interpreter','latex','fontsize',8,'horizontalalignment','left')
 set(c1,'xaxislocation','top','xtick',[],'yaxislocation','right','fontsize',8,'tickdir','out','ydir','normal')
 c2 = axes('units','centimeters','position',cpos2);
 imagesc(0,clrs1,reshape(cm1,256,1,3))
-xlabel(c2,'$\bar{V}$ [m/s]','interpreter','latex','fontsize',8)
+xlabel(c2,'$\langle{V}\rangle$ [m/s]','interpreter','latex','fontsize',8,'horizontalalignment','left')
 set(c2,'xaxislocation','top','xtick',[],'yaxislocation','right','fontsize',8,'tickdir','out','ydir','normal')
 figname = [figDIR,info.runName,'_time_averaged_velocity.pdf'];
 exportgraphics(fig,figname)
@@ -176,17 +175,18 @@ fig.PaperSize     = ps;
 fig.PaperPosition = [0 0 ps];
 % colormap
 cm1   = cmocean('balance');
-clim1 = [-0.5 0.5];
+clim1 = [-0.1 0.1];
 clrs1 = clim1(1):diff(clim1)/255:clim1(2);
 a1 = axes('units','centimeters','position',ppos1);
 imagesc(y,x,mean(ETAmean,3,'omitnan')')
+hold on, contour(y,x,h',[0:1:6],'-k','linewidth',1)
 colormap(a1,cm1),caxis(a1,clim1)
 xlabel('$y$ [m]','interpreter','latex')
 ylabel('$x$ [m]','interpreter','latex')
 set(a1,'tickdir','out','ticklabelinterpreter','latex','ydir','normal')
 c1 = axes('units','centimeters','position',cpos1);
 imagesc(0,clrs1,reshape(cm1,256,1,3))
-xlabel(c1,'$\bar{\eta}$ [m]','interpreter','latex','fontsize',8)
+xlabel(c1,'$\langle{\eta}\rangle$ [m]','interpreter','latex','fontsize',8,'horizontalalignment','left')
 set(c1,'xaxislocation','top','xtick',[],'yaxislocation','right','fontsize',8,'tickdir','out','ydir','normal')
 figname = [figDIR,info.runName,'_time_averaged_waterlevel.pdf'];
 exportgraphics(fig,figname)
@@ -216,6 +216,7 @@ clim1 = [-0.1 0.1];
 clrs1 = clim1(1):diff(clim1)/255:clim1(2);
 a1 = axes('units','centimeters','position',ppos1);
 imagesc(y,x,vort')
+hold on, contour(y,x,h',[0:1:6],'-k','linewidth',1)
 colormap(a1,cm1),caxis(a1,clim1)
 xlabel('$y$ [m]','interpreter','latex')
 ylabel('$x$ [m]','interpreter','latex')
@@ -260,13 +261,13 @@ ylabel('mean() [m/s]$^2$','interpreter','latex')
 legend(p1(1:3),{'$gH\partial_x\, \bar{\eta}$','$\partial_x\, S_{xx}$','$-\bar{F}_{\mathrm{br},x}$'},'interpreter','latex')
 set(a1,'tickdir','out','ticklabelinterpreter','latex')
 clear avg0 avg1 avg2 avg3
-rms0 = rms(tmp0,[1 3],'omitnan');
-rms1 = rms(tmp1,[1 3],'omitnan');
-rms2 = rms(tmp2,[1 3],'omitnan');
+rms0 = std(tmp0,[],[1 3],'omitnan');
+rms1 = std(tmp1,[],[1 3],'omitnan');
+rms2 = std(tmp2,[],[1 3],'omitnan');
 clear tmp0 tmp1 tmp2 tmp3
 a2 = axes('units','centimeters','position',ppos2);
 plot(x, rms0,'k',x, rms1,'b',x, rms2,'r', 'linewidth',2)
-ylabel('rms() [m/s]$^2$','interpreter','latex')
+ylabel('std() [m/s]$^2$','interpreter','latex')
 set(a2,'tickdir','out','ticklabelinterpreter','latex','xticklabel',[])
 figname = [figDIR,info.runName,'_xshore_momentum_terms_time_and_alongshore_averaged.pdf'];
 exportgraphics(fig,figname)
@@ -302,12 +303,15 @@ iMID    = find(x>=xSL+Wsz*2/3,1,'first');
 %             advection, 
 tmp1 = ncread(momFile,'DxUUH');
 tmp2 = ncread(momFile,'DyUVH');
-ADX  = mean(tmp1,3,'omitnan') + mean(tmp2,3,'omitnan'); clear tmp1 tmp2
+ADX  = mean(tmp1,3,'omitnan') + mean(tmp2,3,'omitnan'); 
+ADXstd= std(tmp1,[],3,'omitnan') + std(tmp2,[],3,'omitnan'); clear tmp1 tmp2
 %             pressure grad,
-PGX  = mean(PgrdX,3,'omitnan');
+PGX   = mean(PgrdX,3,'omitnan');
+PGXstd= std (PgrdX,[],3,'omitnan');
 %             radiation stress+BrkDissX,
 tmp1 = ncread(momFile,'DySxy');
 RSX  = mean(tmp1,3,'omitnan') + mean(DxSxx,3,'omitnan') - mean(BrkDissX,3,'omitnan');
+RSXstd = std(tmp1,[],3,'omitnan') + std(DxSxx,[],3,'omitnan') - std(BrkDissX,[],3,'omitnan');
 clear tmp1
 % $$$ %             friction.
 % $$$ FRCX = ncread(momFile,'FRCX');
@@ -316,15 +320,18 @@ clear tmp1
 %             advection, 
 tmp1 = ncread(momFile,'DyVVH');
 tmp2 = ncread(momFile,'DxUVH');
-ADY  = mean(tmp1,3,'omitnan') + mean(tmp2,3,'omitnan'); clear tmp1 tmp2
+ADY  = mean(tmp1,3,'omitnan') + mean(tmp2,3,'omitnan'); 
+ADYstd= std(tmp1,[],3,'omitnan') + std(tmp2,[],3,'omitnan'); clear tmp1 tmp2
 %             pressure grad,
-PGY  = ncread(momFile,'PgrdY');
-PGY  = mean(PGY,3,'omitnan');
+PgrdY = ncread(momFile,'PgrdY');
+PGY   = mean(PgrdY,3,'omitnan');
+PGYstd= std (PgrdY,[],3,'omitnan');
 %             radiation,
 tmp1 = ncread(momFile,'DySyy');
 tmp2 = ncread(momFile,'DxSxy');
 BrkDissY = ncread(momFile,'BrkDissY');
-RSY  = mean(tmp1,3,'omitnan') + mean(tmp2,3,'omitnan') - mean(BrkDissY,3,'omitnan');
+RSY     = mean(tmp1,3,'omitnan') + mean(tmp2,3,'omitnan') - mean(BrkDissY,3,'omitnan');
+RSYstd  = std(tmp1,[],3,'omitnan') + std(tmp2,[],3,'omitnan') - std(BrkDissY,[],3,'omitnan');
 clear tmp1 tmp2
 % $$$ %             friction
 % $$$ FRCY = ncread(momFile,'FRCX');
@@ -345,9 +352,10 @@ for ii = [iINN iMID iBP]
     % 4.2.3) plot 1D transects
     clf(fig)
     a1 = axes('units','centimeters','position',ppos1);
-    p1 = plot(y,PGY(:,ii),'k',y,ADY(:,ii),'b',y,RSY(:,ii),'r','linewidth',2);
+    scale = 1e-3;
+    p1 = plot(y,PGY(:,ii)*scale,'k',y,ADY(:,ii)*scale,'b',y,RSY(:,ii)*scale,'r','linewidth',2);
     xlabel('$y$ [m]','interpreter','latex')
-    ylabel('[m/s]$^2\times 10^{-2}$','interpreter','latex','fontsize',9)
+    ylabel('[m/s]$^2\times 10^{-3}$','interpreter','latex','fontsize',9)
     annotation('textbox','units','centimeters','position',[ppos1(1:2)+[0 0.8].*ppos1(3:4), 0.3, 0.3],...
                'string','Alongshore','fitboxtotext','on','linestyle','none','interpreter','latex',...
                'fontsize',8,'backgroundcolor','none')
@@ -360,17 +368,15 @@ for ii = [iINN iMID iBP]
 % $$$         icon(2*(kk+1)).XData=[0.05 0.2];
 % $$$     end
     title(a1,[NAMES{iter},' Surfzone'],'interpreter','latex')
-    set(a1,'tickdir','out','ticklabelinterpreter','latex','xlim',ylims,'ytick',1e-3*[-1 0 1])
-    a1.YAxis.Exponent = -3;
+    set(a1,'tickdir','out','ticklabelinterpreter','latex','xlim',ylims)
     % 
     a2 = axes('units','centimeters','position',ppos2);
-    p2 = plot(y,PGX(:,ii),'k',y,ADX(:,ii),'b',y,RSX(:,ii),'r','linewidth',2);
+    p2 = plot(y,PGX(:,ii)*scale,'k',y,ADX(:,ii)*scale,'b',y,RSX(:,ii)*scale,'r','linewidth',2);
     annotation('textbox','units','centimeters','position',[ppos2(1:2)+[0 0.8].*ppos2(3:4), 0.3, 0.3],...
                'string','Cross-shore','fitboxtotext','on','linestyle','none','interpreter','latex',...
                'fontsize',8,'backgroundcolor','none')    
-    ylabel('[m/s]$^2\times 10^{-2}$','interpreter','latex','fontsize',9)
-    set(a2,'tickdir','out','ticklabelinterpreter','latex','xticklabel',[],'xlim',ylims,'ytick',1e-3*[-1 0 1])
-    a2.YAxis.Exponent = -3;    
+    ylabel('[m/s]$^2\times 10^{-3}$','interpreter','latex','fontsize',9)
+    set(a2,'tickdir','out','ticklabelinterpreter','latex','xticklabel',[],'xlim',ylims)
     figname = [figDIR,info.runName,'dominant_momentum_terms_',NAMES{iter},'Surfzone.pdf'];
     drawnow
     exportgraphics(fig,figname)
@@ -378,7 +384,176 @@ for ii = [iINN iMID iBP]
 end
 close(fig)
 %    
-return
+%
+% figure parameters have same margins/gaps/etc as (3) above:
+fig = figure('units','centimeters');
+fig.Position(3:4)=ps;
+fig.PaperSize=ps;
+fig.PaperPosition=[0 0 ps];
+%
+ylims   = info.Ly/2 + [-500 500];
+NAMES   = {'Inner', 'Middle', 'Outer'};
+iter    = 0;
+for ii = [iINN iMID iBP]
+    iter = iter+1;
+    % 4.2.3) plot 1D transects
+    clf(fig)
+    scale = 1e-2;    
+    a1 = axes('units','centimeters','position',ppos1);
+    p1 = plot(y,PGYstd(:,ii)*scale,'k',y,ADYstd(:,ii)*scale,'b',y,RSYstd(:,ii)*scale,'r','linewidth',2);
+    xlabel('$y$ [m]','interpreter','latex')
+    ylabel('[m/s]$^2\times 10^{-2}$','interpreter','latex','fontsize',9)
+    annotation('textbox','units','centimeters','position',[ppos1(1:2)+[0 0.8].*ppos1(3:4), 0.3, 0.3],...
+               'string','Alongshore: std()','fitboxtotext','on','linestyle','none','interpreter','latex',...
+               'fontsize',8,'backgroundcolor','none')
+    hl = legend(p1,{'Pres.','Adv.','Wave'},'interpreter','latex','fontsize',8,'location','northeast');
+    hl.AutoUpdate='off';
+    hl.ItemTokenSize=[10 10];
+% $$$     for kk=1:3
+% $$$         p2 = icon(kk).Position;
+% $$$         icon(kk).Position = [0.3 p2(2) 0];
+% $$$         icon(2*(kk+1)).XData=[0.05 0.2];
+% $$$     end
+    title(a1,[NAMES{iter},' Surfzone'],'interpreter','latex')
+    set(a1,'tickdir','out','ticklabelinterpreter','latex','xlim',ylims)
+    % 
+    a2 = axes('units','centimeters','position',ppos2);
+    p2 = plot(y,PGXstd(:,ii)*scale,'k',y,ADXstd(:,ii)*scale,'b',y,RSXstd(:,ii)*scale,'r','linewidth',2);
+    annotation('textbox','units','centimeters','position',[ppos2(1:2)+[0 0.8].*ppos2(3:4), 0.3, 0.3],...
+               'string','Cross-shore: std()','fitboxtotext','on','linestyle','none','interpreter','latex',...
+               'fontsize',8,'backgroundcolor','none')    
+    ylabel('[m/s]$^2\times 10^{-2}$','interpreter','latex','fontsize',9)
+    set(a2,'tickdir','out','ticklabelinterpreter','latex','xticklabel',[],'xlim',ylims)
+    figname = [figDIR,info.runName,'dominant_momentum_terms_std_',NAMES{iter},'Surfzone.pdf'];
+    drawnow
+    exportgraphics(fig,figname)
+    fout = cat(1,fout,figname);
+end
+close(fig)
+%
+%% 2.2) Decompose advection terms into mean and eddy:
+Uavg  = mean(Umean,3,'omitnan');
+Vavg  = mean(Vmean,3,'omitnan');
+Eavg  = mean(ETAmean,3,'omitnan');
+Havg  = h+Eavg;
+%
+tmp = Uavg.*Uavg.*Havg;
+DxUUHavg = 0*H;
+DxUUHavg(:,2:end-1) = 0.5*(tmp(:,3:end)-tmp(:,1:end-2))/info.dx;
+DxUUHavg(:,[1 end]) = (tmp(:,[2 end])-tmp(:,[1 end-1]))/info.dx;
+%
+tmp = Uavg.*Vavg.*Havg;
+DyUVHavg = 0*H;
+DyUVHavg(2:end-1,:) = 0.5*(tmp(3:end,:)-tmp(1:end-2,:))/info.dy;
+DyUVHavg([1 end],:) = (tmp([2 end],:)-tmp([1 end-1],:))/info.dy;
+%
+tmp = Uavg.*Vavg.*Havg;
+DyVVHavg = 0*H;
+DyVVHavg(2:end-1,:) = 0.5*(tmp(3:end,:)-tmp(1:end-2,:))/info.dy;
+DyVVHavg([1 end],:) = (tmp([2 end],:)-tmp([1 end-1],:))/info.dy;
+%
+tmp = Uavg.*Vavg.*Havg;
+DxUVHavg = 0*H;
+DxUVHavg(:,2:end-1) = 0.5*(tmp(:,3:end)-tmp(:,1:end-2))/info.dy;
+DxUVHavg(:,[1 end]) = (tmp(:,[2 end])-tmp(:,[1 end-1]))/info.dy;
+%
+ADXavg  = (DxUUHavg+DyUVHavg);
+ADXeddy = ADX-ADXavg;
+ADYavg  = (DyVVHavg+DxUVHavg);
+ADYeddy = ADY-ADYavg;
+% figure parameters
+xm = 2.5;
+ym = 2.5;
+pw = 9;
+ph = 2.5;
+ag = 0.1;
+ppos1 = [xm       ym         pw ph];
+ppos2 = [xm       ym+ph+ag   pw ph];
+cpos1 = [xm+pw+ag ym       5*ag ph/2];
+cpos2 = [xm+pw+ag ym+ph+ag 5*ag ph/2];
+ps    = [2*xm+pw+6*ag  2*ym+ag+2*ph];
+fig   = figure('units','centimeters');
+fig.Position(3:4) = ps;
+fig.PaperSize     = ps;
+fig.PaperPosition = [0 0 ps];
+% colormap
+cm1   = cmocean('balance');
+clim1 = [-0.1 0.1];
+clrs1 = clim1(1):diff(clim1)/255:clim1(2);
+a1 = axes('units','centimeters','position',ppos1);
+imagesc(y,x,ADXeddy'*1e3)
+hold on, contour(y,x,h',[0:1:6],'-k','linewidth',1)
+colormap(a1,cm1),caxis(a1,clim1)
+xlabel('$y$ [m]','interpreter','latex')
+ylabel('$x$ [m]','interpreter','latex')
+    annotation('textbox','units','centimeters','position',[ppos1(1:2)+[0 0.8].*ppos1(3:4), 0.3, 0.3],...
+               'string','Eddy Advection $(x)$','fitboxtotext','on','linestyle','none','interpreter','latex',...
+               'fontsize',8,'backgroundcolor','none')    
+set(a1,'tickdir','out','ticklabelinterpreter','latex','ydir','normal')
+a2 = axes('units','centimeters','position',ppos2);
+imagesc(y,x,ADXavg'*1e3)
+hold on, contour(y,x,h',[0:1:6],'-k','linewidth',1)
+colormap(a2,cm1),caxis(a2,clim1)    
+ylabel('$x$ [m]','interpreter','latex')
+set(a2,'tickdir','out','ticklabelinterpreter','latex','ydir','normal','xticklabel',[])
+    annotation('textbox','units','centimeters','position',[ppos2(1:2)+[0 0.8].*ppos2(3:4), 0.3, 0.3],...
+               'string','Mean Advection $(x)$','fitboxtotext','on','linestyle','none','interpreter','latex',...
+               'fontsize',8,'backgroundcolor','none')    
+c1 = axes('units','centimeters','position',cpos1);
+imagesc(0,clrs1,reshape(cm1,256,1,3))
+xlabel(c1,'[m/s]$^2\times 10^{-3}','interpreter','latex','fontsize',8)
+set(c1,'xaxislocation','top','xtick',[],'yaxislocation','right','fontsize',8,'tickdir','out','ydir','normal')
+% $$$ c2 = axes('units','centimeters','position',cpos2);
+% $$$ imagesc(0,clrs1,reshape(cm1,256,1,3))
+% $$$ xlabel(c2,'$\bar{V}$ [m/s]','interpreter','latex','fontsize',8)
+% $$$ set(c2,'xaxislocation','top','xtick',[],'yaxislocation','right','fontsize',8,'tickdir','out','ydir','normal')
+figname = [figDIR,info.runName,'_time_averaged_vs_eddy_x_advection.pdf'];
+exportgraphics(fig,figname)
+fout = cat(1,fout,figname);
+close(fig)
+%
+%
+fig   = figure('units','centimeters');
+fig.Position(3:4) = ps;
+fig.PaperSize     = ps;
+fig.PaperPosition = [0 0 ps];
+% colormap
+cm1   = cmocean('balance');
+clim1 = [-0.1 0.1];
+clrs1 = clim1(1):diff(clim1)/255:clim1(2);
+a1 = axes('units','centimeters','position',ppos1);
+imagesc(y,x,ADYeddy'*1e3)
+hold on, contour(y,x,h',[0:1:6],'-k','linewidth',1)
+colormap(a1,cm1),caxis(a1,clim1)
+xlabel('$y$ [m]','interpreter','latex')
+ylabel('$x$ [m]','interpreter','latex')
+    annotation('textbox','units','centimeters','position',[ppos1(1:2)+[0 0.8].*ppos1(3:4), 0.3, 0.3],...
+               'string','Eddy Advection $(y)$','fitboxtotext','on','linestyle','none','interpreter','latex',...
+               'fontsize',8,'backgroundcolor','none')    
+set(a1,'tickdir','out','ticklabelinterpreter','latex','ydir','normal')
+a2 = axes('units','centimeters','position',ppos2);
+imagesc(y,x,ADYavg'*1e3)
+hold on, contour(y,x,h',[0:1:6],'-k','linewidth',1)
+colormap(a2,cm1),caxis(a2,clim1)    
+ylabel('$x$ [m]','interpreter','latex')
+set(a2,'tickdir','out','ticklabelinterpreter','latex','ydir','normal','xticklabel',[])
+    annotation('textbox','units','centimeters','position',[ppos2(1:2)+[0 0.8].*ppos2(3:4), 0.3, 0.3],...
+               'string','Mean Advection $(y)$','fitboxtotext','on','linestyle','none','interpreter','latex',...
+               'fontsize',8,'backgroundcolor','none')    
+c1 = axes('units','centimeters','position',cpos1);
+imagesc(0,clrs1,reshape(cm1,256,1,3))
+xlabel(c1,'[m/s]$^2\times 10^{-3}','interpreter','latex','fontsize',8)
+set(c1,'xaxislocation','top','xtick',[],'yaxislocation','right','fontsize',8,'tickdir','out','ydir','normal')
+% $$$ c2 = axes('units','centimeters','position',cpos2);
+% $$$ imagesc(0,clrs1,reshape(cm1,256,1,3))
+% $$$ xlabel(c2,'$\bar{V}$ [m/s]','interpreter','latex','fontsize',8)
+% $$$ set(c2,'xaxislocation','top','xtick',[],'yaxislocation','right','fontsize',8,'tickdir','out','ydir','normal')
+figname = [figDIR,info.runName,'_time_averaged_vs_eddy_y_advection.pdf'];
+exportgraphics(fig,figname)
+fout = cat(1,fout,figname);
+close(fig)
+%
+%
 %% 1.2) make a video of curl(BrkDiss) and curl(DxSxx...)
 BrkDissY = ncread(momFile,'BrkDissY');
 DySyy    = ncread(momFile,'DySyy');
@@ -420,12 +595,13 @@ clr_map='balance';
 label1 = '$\\mathrm{curl}(\\nabla S)$ ';
 label2 = {'(s$^{-2}$)'};
 vidName= [figDIR,info.runName,'_curl_of_radiation_stress_gradient'];
-make_1panel_video(vidName,x,y,t,cS,alims,clims,clr_map,label1,label2)
+make_1panel_video_with_bathy(vidName,x,y,t,h,cS,alims,clims,clr_map,label1,label2)
 fout = cat(1,fout,vidName);
 %
 label1 = '$\\mathrm{curl}(F_\\mathrm{br})$ ';
 label2 = {'(s$^{-2}$)'};
 vidName= [figDIR,info.runName,'_curl_of_breaking_force'];
-make_1panel_video(vidName,x,y,t,cFbr,alims,clims,clr_map,label1,label2)
+make_1panel_video_with_bathy(vidName,x,y,t,h,cFbr,alims,clims,clr_map,label1,label2)
 fout = cat(1,fout,vidName);
 %
+return

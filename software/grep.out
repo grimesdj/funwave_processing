@@ -1,10 +1,3 @@
-./io.F:     ICOUNT_MEAN=ICOUNT_MEAN+1
-./io.F:        WRITE(3,102)'PRINTING MEAN FILE', icount_mean
-./io.F:        WRITE(*,102)'PRINTING MEAN FILE', icount_mean
-./io.F:        WRITE(*,102)'PRINTING MEAN FILE', icount_mean
-./io.F:	   itmp1=mod(icount_mean/10000,10)
-./io.F:	   itmp2=mod(icount_mean/1000,10)
-./io.F:	   itmp3=mod(icount_mean/100,10)
-./io.F:	   itmp4=mod(icount_mean/10,10)
-./io.F:	   itmp5=mod(icount_mean,10)
-./mod_global.F:       INTEGER :: icount_mean=0  ! for output mean file number
+./mod_parallel_field_io.F:SUBROUTINE PutFileBinary(FILE_NAME,PHI)
+./mod_parallel_field_io.F:END SUBROUTINE PutfileBinary
+./io.F:         Call PutFileBinary(FILE_NAME,PHI)

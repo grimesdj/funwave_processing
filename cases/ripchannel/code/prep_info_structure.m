@@ -38,6 +38,8 @@ function info = prep_info_structure(info);
     fprintf('\nRestricting cross-shore analysis to x<=%f\n',Lx)
     info.Lx = Lx;
     info.subDomain = [1 info.Ny-1 1 round(Lx/info.dx)-1];
+    info.spanx = 1;
+    info.spany = 1;
     %
     % remove the remote hostname from output directory
     rootOut = split(info.rootOut,':');

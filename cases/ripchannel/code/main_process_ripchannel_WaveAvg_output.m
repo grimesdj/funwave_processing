@@ -4,9 +4,9 @@ rootDIR = '/scratch/grimesdj/ripchannel/';
 % code to be launched on cms-hpc "cuttlefish"
 % 0) requires the input bathymetry name as top-dir
 runBATHYlist = {'spreadRip'};
-reproc  = 1;% 1=reprocess ascii to mat
-rmfiles = 1;% 1=remove original ascii files when finished
-recalc  = 1;% 1=recalculate run statistics 
+reproc  = 0;% 1=reprocess ascii to mat
+rmfiles = 0;% 1=remove original ascii files when finished
+recalc  = 0;% 1=recalculate run statistics 
 %
 %
 for ii=1:length(runBATHYlist)
@@ -52,7 +52,6 @@ if reproc
     rngx  = [1 info.subDomain(4)+1];% rngx  = [1 info.Lx/info.dx];
     rngy  = [1 info.subDomain(2)+1];% rngy  = [1 info.Ly/info.dy];
     % construct time vector for wave-averaged variables
-    if jj~=1
     vars = {'dep','etawavg','uwavg','vwavg'};
     NwaveAvg = floor((info.TOTAL_TIME-info.STEADY_TIME)/info.T_INTV_wavg);
     dt_lp = info.T_INTV_wavg*ones(NwaveAvg,1);
@@ -64,7 +63,6 @@ if reproc
     dt_lp = info.T_INTV_mean*ones(Nbrk,1);
     t_lp = [1:Nbrk]*dt_lp(1);
     fLog = convert_funwave_output_to_single_NetCDF(info.rootOut,[info.rootMat,info.rootName,'MomentumTerms'],vars,t_lp,dt_lp,info.dx,spanx,rngx,info.dy,spany,rngy,rmfiles,300);
-    end
 end
 %
 %
@@ -78,6 +76,8 @@ fout_stats    = plot_FUNWAVE_run_WaveAvgVelocity_statistics(info)
 fout_momentum = plot_FUNWAVE_run_momentum(info)
 end
 end
+
+exit
 
 % check for instantaneous files and proceed if they exist...
 %% fast time wave files
@@ -95,6 +95,10 @@ info  = load([infoFile(1).folder,filesep,infoFile(1).name]);
 %
 %
 if reproc
+    spanx = 1;
+    spany = 1;
+    rngx  = [1 info.subDomain(4)+1];% rngx  = [1 info.Lx/info.dx];
+    rngy  = [1 info.subDomain(2)+1];% rngy  = [1 info.Ly/info.dy];
     % 3) load the output times and dts
     info.timeFile = [info.rootSim,'time_dt.out'];
     if ~exist(info.timeFile,'file')

@@ -106,7 +106,8 @@ open(vid)
 Nt = length(t);
 for jj = 1:Nt;
     % plot avg
-    imagesc(ax0,y,x,squeeze(VORT(:,:,jj)')), 
+    imagesc(ax0,y,x,squeeze(VORT(:,:,jj)')),
+    hold on, contour(ax0,y,x,h',[0:1:6],'-k')
     caxis(ax0,clims)
     colormap(ax0,cm)
     ylabel(ax0,'$y$ [m]','interpreter','latex')
