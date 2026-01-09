@@ -1,6 +1,6 @@
 #!/bin/bash
 # Array of run directories to submit
-dirs=("barRip0_s00")
+dirs=("matlab3")
 # job_name="$dir"
 # output_file="$dir.out"
 
@@ -16,5 +16,5 @@ for dir in "${dirs[@]}"; do
        --partition=highmem\
        --mail-user=coastesthydro@gmail.com \
        --mail-type=BEGIN,END,FAIL          \
-        matlab_bg.sh main_process_ripchannel_WaveAvg_output.m barRip0_s00.out
+        matlab_bg.sh main_compare_statistics_across_runs_NEW.m matlab3.out
 done

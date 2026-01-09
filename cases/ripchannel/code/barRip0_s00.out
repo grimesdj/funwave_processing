@@ -25,3 +25,62 @@ working on: etawavg
  archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_barRip0_h10t10s00d00_etawavg_01.nc 
 working on: uwavg
 	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_barRip0_h10t10s00d00_uwavg_01.nc 
+working on: vwavg
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_barRip0_h10t10s00d00_vwavg_01.nc 
+working on: BrkDissX
+	removing old files:
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_barRip0_h10t10s00d00_MomentumTerms.nc 
+working on: BrkDissY
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_barRip0_h10t10s00d00_MomentumTerms.nc 
+working on: DxSxx
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_barRip0_h10t10s00d00_MomentumTerms.nc 
+working on: DxSxy
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_barRip0_h10t10s00d00_MomentumTerms.nc 
+working on: DxUUH
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_barRip0_h10t10s00d00_MomentumTerms.nc 
+working on: DxUVH
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_barRip0_h10t10s00d00_MomentumTerms.nc 
+working on: DySxy
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_barRip0_h10t10s00d00_MomentumTerms.nc 
+working on: DySyy
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_barRip0_h10t10s00d00_MomentumTerms.nc 
+working on: DyUVH
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_barRip0_h10t10s00d00_MomentumTerms.nc 
+working on: DyVVH
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_barRip0_h10t10s00d00_MomentumTerms.nc 
+working on: FRCX
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_barRip0_h10t10s00d00_MomentumTerms.nc 
+working on: FRCY
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_barRip0_h10t10s00d00_MomentumTerms.nc 
+working on: PgrdX
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_barRip0_h10t10s00d00_MomentumTerms.nc 
+working on: PgrdY
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_barRip0_h10t10s00d00_MomentumTerms.nc 
+working on: Sxx
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_barRip0_h10t10s00d00_MomentumTerms.nc 
+working on: Syy
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_barRip0_h10t10s00d00_MomentumTerms.nc 
+working on: Sxy
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_barRip0_h10t10s00d00_MomentumTerms.nc 
+working on: umean
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_barRip0_h10t10s00d00_MomentumTerms.nc 
+working on: vmean
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_barRip0_h10t10s00d00_MomentumTerms.nc 
+working on: etamean
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_barRip0_h10t10s00d00_MomentumTerms.nc 
+loading from: funwave_barRip0_h10t10s00d00_uwavg_01.nc 
+
+fout_stats =
+
+  1x1 cell array
+
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip0_h10t10s00d00_velocity_and_vorticity_stats.pdf'}
+
+{Unrecognized function or variable 'H'.
+
+Error in plot_FUNWAVE_run_momentum (line 441)
+DxUUHavg = 0*H;
+} 
+>> >> 

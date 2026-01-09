@@ -169,3 +169,183 @@ shortenning records to match
  archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_mask_04.nc 
  archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_mask_05.nc 
  archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_mask_06.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_mask_07.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_mask_08.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_mask_09.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_mask_10.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_mask_11.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_mask_12.nc 
+working on: BrkSrcX
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_BrkSrcX_*.nc': No such file or directory
+time vector is off: nt=3600and nf=3601
+shortenning records to match
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_BrkSrcX_01.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_BrkSrcX_02.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_BrkSrcX_03.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_BrkSrcX_04.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_BrkSrcX_05.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_BrkSrcX_06.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_BrkSrcX_07.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_BrkSrcX_08.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_BrkSrcX_09.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_BrkSrcX_10.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_BrkSrcX_11.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_BrkSrcX_12.nc 
+working on: BrkSrcY
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_BrkSrcY_*.nc': No such file or directory
+time vector is off: nt=3600and nf=3601
+shortenning records to match
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_BrkSrcY_01.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_BrkSrcY_02.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_BrkSrcY_03.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_BrkSrcY_04.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_BrkSrcY_05.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_BrkSrcY_06.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_BrkSrcY_07.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_BrkSrcY_08.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_BrkSrcY_09.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_BrkSrcY_10.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_BrkSrcY_11.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s00d00_BrkSrcY_12.nc 
+loading eta from: funwave_terRip1_h10t10s00d00_eta_01.nc 
+loading eta from: funwave_terRip1_h10t10s00d00_eta_02.nc 
+loading eta from: funwave_terRip1_h10t10s00d00_eta_03.nc 
+loading eta from: funwave_terRip1_h10t10s00d00_eta_04.nc 
+loading eta from: funwave_terRip1_h10t10s00d00_eta_05.nc 
+loading eta from: funwave_terRip1_h10t10s00d00_eta_06.nc 
+loading eta from: funwave_terRip1_h10t10s00d00_eta_07.nc 
+loading eta from: funwave_terRip1_h10t10s00d00_eta_08.nc 
+loading eta from: funwave_terRip1_h10t10s00d00_eta_09.nc 
+loading eta from: funwave_terRip1_h10t10s00d00_eta_10.nc 
+loading eta from: funwave_terRip1_h10t10s00d00_eta_11.nc 
+loading eta from: funwave_terRip1_h10t10s00d00_eta_12.nc 
+
+fout_stats =
+
+  2x1 cell array
+
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s00d00_crest_length.pdf'           }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s00d00_wave_height_and_spectra.pdf'}
+
+
+ processing fast-time: spreadRip - terRip1_h10t10s02d00 
+working on: eta
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_eta_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_eta_01.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_eta_02.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_eta_03.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_eta_04.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_eta_05.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_eta_06.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_eta_07.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_eta_08.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_eta_09.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_eta_10.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_eta_11.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_eta_12.nc 
+working on: mask
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_mask_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_mask_01.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_mask_02.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_mask_03.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_mask_04.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_mask_05.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_mask_06.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_mask_07.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_mask_08.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_mask_09.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_mask_10.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_mask_11.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_mask_12.nc 
+working on: BrkSrcX
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_BrkSrcX_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_BrkSrcX_01.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_BrkSrcX_02.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_BrkSrcX_03.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_BrkSrcX_04.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_BrkSrcX_05.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_BrkSrcX_06.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_BrkSrcX_07.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_BrkSrcX_08.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_BrkSrcX_09.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_BrkSrcX_10.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_BrkSrcX_11.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_BrkSrcX_12.nc 
+working on: BrkSrcY
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_BrkSrcY_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_BrkSrcY_01.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_BrkSrcY_02.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_BrkSrcY_03.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_BrkSrcY_04.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_BrkSrcY_05.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_BrkSrcY_06.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_BrkSrcY_07.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_BrkSrcY_08.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_BrkSrcY_09.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_BrkSrcY_10.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_BrkSrcY_11.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s02d00_BrkSrcY_12.nc 
+loading eta from: funwave_terRip1_h10t10s02d00_eta_01.nc 
+loading eta from: funwave_terRip1_h10t10s02d00_eta_02.nc 
+loading eta from: funwave_terRip1_h10t10s02d00_eta_03.nc 
+loading eta from: funwave_terRip1_h10t10s02d00_eta_04.nc 
+loading eta from: funwave_terRip1_h10t10s02d00_eta_05.nc 
+loading eta from: funwave_terRip1_h10t10s02d00_eta_06.nc 
+loading eta from: funwave_terRip1_h10t10s02d00_eta_07.nc 
+loading eta from: funwave_terRip1_h10t10s02d00_eta_08.nc 
+loading eta from: funwave_terRip1_h10t10s02d00_eta_09.nc 
+loading eta from: funwave_terRip1_h10t10s02d00_eta_10.nc 
+loading eta from: funwave_terRip1_h10t10s02d00_eta_11.nc 
+loading eta from: funwave_terRip1_h10t10s02d00_eta_12.nc 
+
+fout_stats =
+
+  2x1 cell array
+
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s02d00_crest_length.pdf'           }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s02d00_wave_height_and_spectra.pdf'}
+
+
+ processing fast-time: spreadRip - terRip1_h10t10s04d00 
+working on: eta
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s04d00_eta_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s04d00_eta_01.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s04d00_eta_02.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s04d00_eta_03.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s04d00_eta_04.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s04d00_eta_05.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s04d00_eta_06.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s04d00_eta_07.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s04d00_eta_08.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s04d00_eta_09.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s04d00_eta_10.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s04d00_eta_11.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s04d00_eta_12.nc 
+working on: mask
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s04d00_mask_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s04d00_mask_01.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s04d00_mask_02.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s04d00_mask_03.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s04d00_mask_04.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s04d00_mask_05.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s04d00_mask_06.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s04d00_mask_07.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s04d00_mask_08.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s04d00_mask_09.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s04d00_mask_10.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s04d00_mask_11.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s04d00_mask_12.nc 
+working on: BrkSrcX
+	removing old files:
+rm: cannot remove '/scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s04d00_BrkSrcX_*.nc': No such file or directory
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s04d00_BrkSrcX_01.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s04d00_BrkSrcX_02.nc 
+ archiving: /scratch/grimesdj/ripchannel/spreadRip/mat_data/funwave_terRip1_h10t10s04d00_BrkSrcX_03.nc 
