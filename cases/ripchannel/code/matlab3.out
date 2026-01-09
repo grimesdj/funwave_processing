@@ -8,186 +8,25 @@
 To get started, type doc.
 For product information, visit www.mathworks.com.
  
->> >> >> >> >> >> >> >> >> >> >> >> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
- processing: spreadRip barRip0_h10t10s00d00 
+>> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >>>>>>>>>>>>>>>>>>>> >> >> >> >> >> >> >> >> >> >> >>>>>> >> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ plotting runs: 
+		 barRip0_h10t10s00d00 
+		 barRip0_h10t10s02d00 
+		 barRip0_h10t10s04d00 
+		 barRip0_h10t10s10d00 
+		 barRip0_h10t10s20d00 
 
-fout_stats =
+ plotting runs: 
+		 barRip1_h10t10s00d00 
+		 barRip1_h10t10s02d00 
+		 barRip1_h10t10s04d00 
+		 barRip1_h10t10s10d00 
+		 barRip1_h10t10s20d00 
 
-  1x1 cell array
-
-    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip0_h10t10s00d00_velocity_and_vorticity_stats.pdf'}
-
-[Warning: Error updating Text.
-
- String scalar or character vector must have valid interpreter syntax:
-avg($gH\partial_x \bar\eta$)
-[m/s]$^2$\times 10^{--1}]
-] 
-[Warning: Error updating Text.
-
- String scalar or character vector must have valid interpreter syntax:
-rms($gH\partial_x \bar\eta$)
-[m/s]$^2$\times 10^{--1}]
-] 
-[Warning: Error updating Text.
-
- String scalar or character vector must have valid interpreter syntax:
-avg($gH\partial_y \bar\eta$)
-[m/s]$^2$\times 10^{--2}]
-] 
-[Warning: Error updating Text.
-
- String scalar or character vector must have valid interpreter syntax:
-rms($gH\partial_y \bar\eta$)
-[m/s]$^2$\times 10^{--2}]
-] 
-[Warning: Error updating Text.
-
- String scalar or character vector must have valid interpreter syntax:
-avg($-H\bar{F}_\mathrm{br,x}$)
-[m/s]$^2$\times 10^{--1}]
-] 
-[Warning: Error updating Text.
-
- String scalar or character vector must have valid interpreter syntax:
-rms($-H\bar{F}_\mathrm{br,x}$)
-[m/s]$^2$\times 10^{--1}]
-] 
-[Warning: Error updating Text.
-
- String scalar or character vector must have valid interpreter syntax:
-avg($-H\bar{F}_\mathrm{br,y}$)
-[m/s]$^2$\times 10^{--2}]
-] 
-[Warning: Error updating Text.
-
- String scalar or character vector must have valid interpreter syntax:
-rms($-H\bar{F}_\mathrm{br,y}$)
-[m/s]$^2$\times 10^{--2}]
-] 
-[Warning: Error updating Text.
-
- String scalar or character vector must have valid interpreter syntax:
-avg($\partial_x S_{xx}$)
-[m/s]$^2$\times 10^{-0}]
-] 
-[Warning: Error updating Text.
-
- String scalar or character vector must have valid interpreter syntax:
-rms($\partial_x S_{xx}$)
-[m/s]$^2$\times 10^{-0}]
-] 
-[Warning: Error updating Text.
-
- String scalar or character vector must have valid interpreter syntax:
-avg($\partial_x S_{xy}$)
-[m/s]$^2$\times 10^{--1}]
-] 
-[Warning: Error updating Text.
-
- String scalar or character vector must have valid interpreter syntax:
-rms($\partial_x S_{xy}$)
-[m/s]$^2$\times 10^{--1}]
-] 
-[Warning: Error updating Text.
-
- String scalar or character vector must have valid interpreter syntax:
-avg($\partial_y S_{xy}$)
-[m/s]$^2$\times 10^{--1}]
-] 
-[Warning: Error updating Text.
-
- String scalar or character vector must have valid interpreter syntax:
-rms($\partial_y S_{xy}$)
-[m/s]$^2$\times 10^{--1}]
-] 
-[Warning: Error updating Text.
-
- String scalar or character vector must have valid interpreter syntax:
-avg($\partial_y S_{yy}$)
-[m/s]$^2$\times 10^{--1}]
-] 
-[Warning: Error updating Text.
-
- String scalar or character vector must have valid interpreter syntax:
-rms($\partial_y S_{yy}$)
-[m/s]$^2$\times 10^{--1}]
-] 
-[Warning: Error updating Text.
-
- String scalar or character vector must have valid interpreter syntax:
-avg($\partial_x (U^2 H)$)
-[m/s]$^2$\times 10^{--2}]
-] 
-[Warning: Error updating Text.
-
- String scalar or character vector must have valid interpreter syntax:
-rms($\partial_x (U^2 H)$)
-[m/s]$^2$\times 10^{--2}]
-] 
-[Warning: Error updating Text.
-
- String scalar or character vector must have valid interpreter syntax:
-avg($\partial_x (UVH)$)
-[m/s]$^2$\times 10^{--2}]
-] 
-[Warning: Error updating Text.
-
- String scalar or character vector must have valid interpreter syntax:
-rms($\partial_x (UVH)$)
-[m/s]$^2$\times 10^{--2}]
-] 
-[Warning: Error updating Text.
-
- String scalar or character vector must have valid interpreter syntax:
-avg($\partial_y (UVH)$)
-[m/s]$^2$\times 10^{--2}]
-] 
-[Warning: Error updating Text.
-
- String scalar or character vector must have valid interpreter syntax:
-rms($\partial_y (UVH)$)
-[m/s]$^2$\times 10^{--2}]
-] 
-[Warning: Error updating Text.
-
- String scalar or character vector must have valid interpreter syntax:
-avg($\partial_y (V^2 H)$)
-[m/s]$^2$\times 10^{--2}]
-] 
-[Warning: Error updating Text.
-
- String scalar or character vector must have valid interpreter syntax:
-rms($\partial_y (V^2 H)$)
-[m/s]$^2$\times 10^{--2}]
-] 
-[Warning: Error updating Text.
-
- String scalar or character vector must have valid interpreter syntax:
-avg(-$\tau_x$)
-[m/s]$^2$\times 10^{--2}]
-] 
-[Warning: Error updating Text.
-
- String scalar or character vector must have valid interpreter syntax:
-rms(-$\tau_x$)
-[m/s]$^2$\times 10^{--2}]
-] 
-[Warning: Error updating Text.
-
- String scalar or character vector must have valid interpreter syntax:
-avg(-$\tau_y$)
-[m/s]$^2$\times 10^{--2}]
-] 
-[Warning: Error updating Text.
-
- String scalar or character vector must have valid interpreter syntax:
-rms(-$\tau_y$)
-[m/s]$^2$\times 10^{--2}]
-] 
-{Unrecognized function or variable 'H'.
-
-Error in plot_FUNWAVE_run_momentum (line 441)
-DxUUHavg = 0*H;
-} 
->> >> 
+ plotting runs: 
+		 terRip1_h10t10s00d00 
+		 terRip1_h10t10s02d00 
+		 terRip1_h10t10s04d00 
+		 terRip1_h10t10s10d00 
+		 terRip1_h10t10s20d00 
+>> 

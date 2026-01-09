@@ -90,7 +90,17 @@ if ~isfield(info,'x_shoreline');
 else
     alims = [mean(info.x_shoreline) x(info.subDomain(end)) y(info.subDomain(1:2))'];
 end
-clims = [-1 1]*1e-1;
+%
+%
+scale = 1e-1;
+if range(VORT(:))<scale
+    rng = ceil(log10(range(VORT(:))));
+    scale = 10^range;
+    clims = [-0.5 0.5]*scale;    
+else
+    clims = [-1 1]*1e-1;
+end
+
 clrs  = clims(1):diff(clims)/255:clims(2);
 cm    = cmocean('balance');
 [fig,ax0,ax00,cx01,ps,ppos,pos] = get_1panel_video_figure_info(alims);

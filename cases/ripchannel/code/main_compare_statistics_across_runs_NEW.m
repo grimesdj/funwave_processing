@@ -276,14 +276,17 @@ for ii=1:N
         %% Momentum Stats:
         momFile = [info.rootMat,info.rootName,'MomentumTerms.nc'];
         % surfzone width and transect locations
-        xSL = mean(info.x_shoreline);
-        xBP = info.x_breakpoint;        
-        iBP = find(info.x>=xBP,1,'first');
-        Wsz = xBP-xSL;
-        iINN= find(info.x>(xSL + Wsz/3),1,'first');
-        iMID= find(info.x>(xSL + Wsz*2/3),1,'first');
-        iOUT= find(info.x>(xSL + Wsz),1,'first');
+% $$$         xSL = mean(info.x_shoreline);
+% $$$         xBP = info.x_breakpoint;        
+% $$$         iBP = find(info.x>=xBP,1,'first');
+% $$$         Wsz = xBP-xSL;
+% $$$         iINN= find(info.x>(xSL + Wsz/3),1,'first');
+% $$$         iMID= find(info.x>(xSL + Wsz*2/3),1,'first');
+% $$$         iOUT= find(info.x>(xSL + Wsz),1,'first');
         y0      = info.Ly/2;
+        iOUT = find(info.x>=info.xc,1,'first');
+        iINN = find(info.x>=50+(info.xc-50)/3,1,'first');
+        iMID = find(info.x>=50+(info.xc-50)*2/3,1,'first');
         ylims   = [-500 500];
         yticks  = [-300 0 300];                
         %

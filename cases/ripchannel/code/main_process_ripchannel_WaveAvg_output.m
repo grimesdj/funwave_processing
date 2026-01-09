@@ -4,9 +4,9 @@ rootDIR = '/scratch/grimesdj/ripchannel/';
 % code to be launched on cms-hpc "cuttlefish"
 % 0) requires the input bathymetry name as top-dir
 runBATHYlist = {'spreadRip'};
-reproc  = 1;% 1=reprocess ascii to mat
-rmfiles = 1;% 1=remove original ascii files when finished
-recalc  = 1;% 1=recalculate run statistics 
+reproc  = 0;% 1=reprocess ascii to mat
+rmfiles = 0;% 1=remove original ascii files when finished
+recalc  = 0;% 1=recalculate run statistics 
 %
 %
 for ii=1:length(runBATHYlist)
@@ -30,7 +30,7 @@ load([matDIR,filesep,'runs_to_process.mat'])
 %
 % loop over run_dirs
 Ndirs  = length(run_dirs);
-for jj = 1%:Ndirs
+for jj = 1:Ndirs
 % 1) get current run subdirectory to process:
 runID    = run_dirs{jj};
 fprintf('\n processing: %s %s \n', runBATHY,runID)    
