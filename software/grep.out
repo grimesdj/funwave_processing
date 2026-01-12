@@ -1,3 +1,12 @@
-./mod_parallel_field_io.F:SUBROUTINE PutFileBinary(FILE_NAME,PHI)
-./mod_parallel_field_io.F:END SUBROUTINE PutfileBinary
-./io.F:         Call PutFileBinary(FILE_NAME,PHI)
+./bc.F:    CALL PHI_COLL(Mloc,Nloc,Ibeg,Iend,Jbeg,Jend,Nghost,P_center,VTYPE,PERIODIC)
+./bc.F:    CALL PHI_COLL(Mloc,Nloc,Ibeg,Iend,Jbeg,Jend,Nghost,P_center,VTYPE)
+./etauv_solver.F:       P_center(I,J)=0.5_SP*(P(I+1,J)+P(I,J))
+./etauv_solver.F:       U_davg(I,J) = P_center(I,J)/Max(H(I,J),MinDepthFrc)
+./mixing.F:!                  U_davg_mean,V_davg_mean,P_center,Q_center,P_sum,Q_sum, &
+./mixing.F:!                  U_davg_mean,V_davg_mean,P_center,Q_center,P_sum,Q_sum, &
+./mixing.F:!      REAL(SP),DIMENSION(M,N),INTENT(IN) :: U_davg,V_davg,P_center,Q_center
+./mixing.F:        P_sum=P_center*DT+P_sum
+./mixing.F:        P_sum=P_center*DT+P_sum
+./init.F:              P_center(Mloc,Nloc),Q_center(Mloc,Nloc), &
+./init.F:     P_center = ZERO
+./mod_global.F:                  P_center,Q_center,U_davg,V_davg,U_davg_sum,V_davg_sum, &

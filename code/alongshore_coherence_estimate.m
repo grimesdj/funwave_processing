@@ -30,7 +30,6 @@ out1(2:end-inyq,:) = 2*out1(2:end-inyq,:);
 out2(2:end-inyq,:) = 2*out2(2:end-inyq,:);
 out12(2:end-inyq,:) = 2*out12(2:end-inyq,:);
 %
-coh  = abs(out12)./sqrt(out1.*out2);
 %
 % average over 5-ky bins
 Nf  = 5;
@@ -38,6 +37,8 @@ ff  = hamming(Nf); ff = ff./sum(ff);
 out1 = conv2(out1,ff,'same');
 out2 = conv2(out2,ff,'same');
 out12= conv2(out12,ff,'same');
+%
+coh  = abs(out12)./sqrt(out1.*out2);
 %
 % account for decreased size of output
 sz(1)=stop;
