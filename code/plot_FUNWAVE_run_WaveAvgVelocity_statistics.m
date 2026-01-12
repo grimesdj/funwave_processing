@@ -93,10 +93,10 @@ end
 %
 %
 scale = 1e-1;
-if range(VORT(:))<scale
-    rng = ceil(log10(range(VORT(:))));
-    scale = 10^range;
-    clims = [-0.5 0.5]*scale;    
+if std(VORT(:))<scale
+    rng = ceil(log10(3*std(VORT(:))/2));
+    scale = 10^rng;
+    clims = [-1 1]*scale;    
 else
     clims = [-1 1]*1e-1;
 end

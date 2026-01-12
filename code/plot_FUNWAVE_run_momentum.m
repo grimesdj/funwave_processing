@@ -669,6 +669,11 @@ exportgraphics(fig,figname)
 fout = cat(1,fout,figname);
 close(fig)
 %
+rng_cFbr  = ceil(log10(3*std(cFbr(:))/2));
+rng_cS    = ceil(log10(3*std(cS(:))/2));
+clims_cFbr= [-1 1]*10^rng;
+clims_cS  = [-1 1]*10^rng;
+%
 %% 2) make a video of DxSxx and curl(DxSxx)
 alims = [mean(info.x_shoreline) x(info.subDomain(end)) y(info.subDomain(1:2))'];
 clims = [-1 1]*1e-2;
@@ -676,13 +681,13 @@ clr_map='balance';
 label1 = '$\\mathrm{curl}(\\nabla S)$ ';
 label2 = {'(s$^{-2}$)'};
 vidName= [figDIR,info.runName,'_curl_of_radiation_stress_gradient'];
-make_1panel_video_with_bathy(vidName,x,y,t,h,cS,alims,clims,clr_map,label1,label2)
+make_1panel_video_with_bathy(vidName,x,y,t,h,cS,alims,clims_cS,clr_map,label1,label2)
 fout = cat(1,fout,vidName);
 %
 label1 = '$\\mathrm{curl}(F_\\mathrm{br})$ ';
 label2 = {'(s$^{-2}$)'};
 vidName= [figDIR,info.runName,'_curl_of_breaking_force'];
-make_1panel_video_with_bathy(vidName,x,y,t,h,cFbr,alims,clims,clr_map,label1,label2)
+make_1panel_video_with_bathy(vidName,x,y,t,h,cFbr,alims,clims_cFbr,clr_map,label1,label2)
 fout = cat(1,fout,vidName);
 %
 return
