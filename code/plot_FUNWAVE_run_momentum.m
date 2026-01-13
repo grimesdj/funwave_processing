@@ -115,14 +115,14 @@ for jj=1:length(vars)
     clf(fig)
     a1 = axes('units','centimeters','position',ppos1);
     imagesc(y,x,sgn{jj}*tmp/scale)
-    hold on, contour(y,x,h',[0:1:6],'-k','linewidth',1)
+    hold(a1,'on'), contour(y,x,h',[0:1:6],'-k','linewidth',1)
     colormap(a1,cm1),caxis(a1,clim1)
     xlabel('$y$ [m]','interpreter','latex')
     ylabel('$x$ [m]','interpreter','latex')
     set(a1,'tickdir','out','ticklabelinterpreter','latex','ydir','normal')
     a2 = axes('units','centimeters','position',ppos2);
     imagesc(y,x,std(var,[],3,'omitnan')'/scale)
-    hold on, contour(y,x,h',[0:1:6],'-k','linewidth',1)    
+    hold(a2,'on'), contour(y,x,h',[0:1:6],'-k','linewidth',1)    
     colormap(a2,cm2),caxis(a2,clim2)    
     ylabel('$x$ [m]','interpreter','latex')
     set(a2,'tickdir','out','ticklabelinterpreter','latex','ydir','normal','xticklabel',[])
@@ -166,14 +166,14 @@ clim1 = [-0.5 0.5];
 clrs1 = clim1(1):diff(clim1)/255:clim1(2);
 a1 = axes('units','centimeters','position',ppos1);
 imagesc(y,x,mean(Umean,3,'omitnan')')
-hold on, contour(y,x,h',[0:1:6],'-k','linewidth',1)
+hold(a1,'on'), contour(y,x,h',[0:1:6],'-k','linewidth',1)
 colormap(a1,cm1),caxis(a1,clim1)
 xlabel('$y$ [m]','interpreter','latex')
 ylabel('$x$ [m]','interpreter','latex')
 set(a1,'tickdir','out','ticklabelinterpreter','latex','ydir','normal')
 a2 = axes('units','centimeters','position',ppos2);
 imagesc(y,x,mean(Vmean,3,'omitnan')')
-hold on, contour(y,x,h',[0:1:6],'-k','linewidth',1)
+hold(a2,'on'), contour(y,x,h',[0:1:6],'-k','linewidth',1)
 colormap(a2,cm1),caxis(a2,clim1)    
 ylabel('$x$ [m]','interpreter','latex')
 set(a2,'tickdir','out','ticklabelinterpreter','latex','ydir','normal','xticklabel',[])
@@ -201,7 +201,7 @@ clim1 = [-0.1 0.1];
 clrs1 = clim1(1):diff(clim1)/255:clim1(2);
 a1 = axes('units','centimeters','position',ppos1);
 imagesc(y,x,mean(ETAmean,3,'omitnan')')
-hold on, contour(y,x,h',[0:1:6],'-k','linewidth',1)
+hold(a1,'on'), contour(y,x,h',[0:1:6],'-k','linewidth',1)
 colormap(a1,cm1),caxis(a1,clim1)
 xlabel('$y$ [m]','interpreter','latex')
 ylabel('$x$ [m]','interpreter','latex')
@@ -238,7 +238,7 @@ clim1 = [-0.1 0.1];
 clrs1 = clim1(1):diff(clim1)/255:clim1(2);
 a1 = axes('units','centimeters','position',ppos1);
 imagesc(y,x,vort')
-hold on, contour(y,x,h',[0:1:6],'-k','linewidth',1)
+hold(a1,'on'), contour(y,x,h',[0:1:6],'-k','linewidth',1)
 colormap(a1,cm1),caxis(a1,clim1)
 xlabel('$y$ [m]','interpreter','latex')
 ylabel('$x$ [m]','interpreter','latex')
@@ -486,7 +486,7 @@ clrs1 = clim1(1):diff(clim1)/255:clim1(2);
 a1 = axes('units','centimeters','position',ppos1);
 scale = 1e-2;
 imagesc(y,x,ADXeddy'/scale)
-hold on, contour(y,x,h',[0:1:6],'-k','linewidth',1)
+hold(a1,'on'), contour(y,x,h',[0:1:6],'-k','linewidth',1)
 colormap(a1,cm1),caxis(a1,clim1)
 xlabel('$y$ [m]','interpreter','latex')
 ylabel('$x$ [m]','interpreter','latex')
@@ -496,7 +496,7 @@ ylabel('$x$ [m]','interpreter','latex')
 set(a1,'tickdir','out','ticklabelinterpreter','latex','ydir','normal')
 a2 = axes('units','centimeters','position',ppos2);
 imagesc(y,x,ADXavg'/scale)
-hold on, contour(y,x,h',[0:1:6],'-k','linewidth',1)
+hold(a2,'on'), contour(y,x,h',[0:1:6],'-k','linewidth',1)
 colormap(a2,cm1),caxis(a2,clim1)    
 ylabel('$x$ [m]','interpreter','latex')
 set(a2,'tickdir','out','ticklabelinterpreter','latex','ydir','normal','xticklabel',[])
@@ -528,7 +528,7 @@ clim1 = [-0.5 0.5];
 clrs1 = clim1(1):diff(clim1)/255:clim1(2);
 a1 = axes('units','centimeters','position',ppos1);
 imagesc(y,x,ADYeddy'/scale)
-hold on, contour(y,x,h',[0:1:6],'-k','linewidth',1)
+hold(a1,'on'), contour(y,x,h',[0:1:6],'-k','linewidth',1)
 colormap(a1,cm1),caxis(a1,clim1)
 xlabel('$y$ [m]','interpreter','latex')
 ylabel('$x$ [m]','interpreter','latex')
@@ -539,7 +539,7 @@ annotation('textbox','units','centimeters','position',[ppos1(1:2)+[0 0.9].*ppos1
 set(a1,'tickdir','out','ticklabelinterpreter','latex','ydir','normal')
 a2 = axes('units','centimeters','position',ppos2);
 imagesc(y,x,ADYavg'/scale)
-hold on, contour(y,x,h',[0:1:6],'-k','linewidth',1)
+hold(a2,'on'), contour(y,x,h',[0:1:6],'-k','linewidth',1)
 colormap(a2,cm1),caxis(a2,clim1)    
 ylabel('$x$ [m]','interpreter','latex')
 set(a2,'tickdir','out','ticklabelinterpreter','latex','ydir','normal','xticklabel',[])
@@ -595,7 +595,7 @@ clim1 = [-1 1];
 clrs1 = clim1(1):diff(clim1)/255:clim1(2);
 a1 = axes('units','centimeters','position',ppos1);
 imagesc(y,x,uvavg'/scale)
-hold on, contour(y,x,h',[0:1:6],'-k','linewidth',1)
+hold(a1,'on'), contour(y,x,h',[0:1:6],'-k','linewidth',1)
 colormap(a1,cm1),caxis(a1,clim1)
 xlabel('$y$ [m]','interpreter','latex')
 ylabel('$x$ [m]','interpreter','latex')
@@ -605,7 +605,7 @@ ylabel('$x$ [m]','interpreter','latex')
 set(a1,'tickdir','out','ticklabelinterpreter','latex','ydir','normal')
 a2 = axes('units','centimeters','position',ppos2);
 imagesc(y,x,UVavg'/scale)
-hold on, contour(y,x,h',[0:1:6],'-k','linewidth',1)
+hold(a2,'on'), contour(y,x,h',[0:1:6],'-k','linewidth',1)
 colormap(a2,cm1),caxis(a2,clim1)    
 ylabel('$x$ [m]','interpreter','latex')
 set(a2,'tickdir','out','ticklabelinterpreter','latex','ydir','normal','xticklabel',[])
@@ -614,7 +614,7 @@ set(a2,'tickdir','out','ticklabelinterpreter','latex','ydir','normal','xticklabe
                'fontsize',8,'backgroundcolor','none')    
 a3 = axes('units','centimeters','position',ppos3);
 imagesc(y,x,(mean(Umean,3,'omitnan').*mean(Vmean,3,'omitnan'))'/scale)
-hold on, contour(y,x,h',[0:1:6],'-k','linewidth',1)
+hold(a3,'on'), contour(y,x,h',[0:1:6],'-k','linewidth',1)
 colormap(a3,cm1),caxis(a3,clim1)    
 ylabel('$x$ [m]','interpreter','latex')
 set(a3,'tickdir','out','ticklabelinterpreter','latex','ydir','normal','xticklabel',[])
@@ -671,8 +671,8 @@ close(fig)
 %
 rng_cFbr  = ceil(log10(3*std(cFbr(:))/2));
 rng_cS    = ceil(log10(3*std(cS(:))/2));
-clims_cFbr= [-1 1]*10^rng;
-clims_cS  = [-1 1]*10^rng;
+clims_cFbr= [-0.5 0.5]*10^rng;
+clims_cS  = [-0.5 0.5]*10^rng;
 %
 %% 2) make a video of DxSxx and curl(DxSxx)
 alims = [mean(info.x_shoreline) x(info.subDomain(end)) y(info.subDomain(1:2))'];

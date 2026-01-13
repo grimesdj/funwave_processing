@@ -38,7 +38,7 @@ out1 = conv2(out1,ff,'same');
 out2 = conv2(out2,ff,'same');
 out12= conv2(out12,ff,'same');
 %
-coh  = abs(out12)./sqrt(out1.*out2);
+coh  = conj(out12).*out12./(out1.*out2);
 %
 % account for decreased size of output
 sz(1)=stop;

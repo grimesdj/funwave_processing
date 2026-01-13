@@ -17,7 +17,7 @@ Nt = length(t);
 for jj = 1:Nt;
     % plot avg
     imagesc(ax0,y,x,squeeze(data(:,:,jj)')),
-    hold on, contour(ax0,y,x,h',[0:1:6],'-k','linewidth',1)
+    hold(ax0,'on'), contour(ax0,y,x,h',[0:1:6],'-k','linewidth',1)
     caxis(ax0,clims)
     colormap(ax0,cm)
     xlabel(ax0,'$y$ [m]','interpreter','latex')

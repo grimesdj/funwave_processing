@@ -96,7 +96,7 @@ scale = 1e-1;
 if std(VORT(:))<scale
     rng = ceil(log10(3*std(VORT(:))/2));
     scale = 10^rng;
-    clims = [-1 1]*scale;    
+    clims = [-0.5 0.5]*scale;    
 else
     clims = [-1 1]*1e-1;
 end
@@ -117,7 +117,7 @@ Nt = length(t);
 for jj = 1:Nt;
     % plot avg
     imagesc(ax0,y,x,squeeze(VORT(:,:,jj)')),
-    hold on, contour(ax0,y,x,h',[0:1:6],'-k')
+    hold(ax0,'on'), contour(ax0,y,x,h',[0:1:6],'-k')
     caxis(ax0,clims)
     colormap(ax0,cm)
     ylabel(ax0,'$y$ [m]','interpreter','latex')
