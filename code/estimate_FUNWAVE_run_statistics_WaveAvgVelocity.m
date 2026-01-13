@@ -44,6 +44,7 @@ ETAmean = mean(ncread(momFile,'etamean'), 3, 'omitnan');
 Umean =   mean(ncread(momFile,'umean'  ), 3, 'omitnan');
 Vmean =   mean(ncread(momFile,'vmean'  ), 3, 'omitnan');
 %
+[PSI_mean,Urot_mean,Vrot_mean,~,~,~]=get_vel_decomposition_reGRID(Umean,Vmean,dx,dy);        
 %
 %
 %% Calculate rotational current decomposition
@@ -83,6 +84,9 @@ for ii=1:Nf
     clear uy vx
     %
     %
+% $$$     if ii==1 % estimate mean vort/etc.
+% $$$         [PSImean,Urot_mean,Vrot_mean,~,~,~]=get_vel_decomposition_reGRID(Umean,Vmean,dx,dy);        
+% $$$     end
     %
     % helmholtz decomposition
     II=0;
@@ -159,6 +163,17 @@ nccreate  (info.rotVelFile,'eta','Dimensions',dim_yxt,'Format','netcdf4')
 ncwrite   (info.rotVelFile,'eta',eta0);
 ncwriteatt(info.rotVelFile,'eta','Description','low-pass sea-surface elevation');
 %
+nccreate  (info.rotVelFile,'Urot_mean','Dimensions',dim_yx,'Format','netcdf4')
+ncwrite   (info.rotVelFile,'Urot_mean',Urot_mean);
+ncwriteatt(info.rotVelFile,'Urot_mean','Description','time-mean cross-shore rotational velocity');
+%
+nccreate  (info.rotVelFile,'Vrot_mean','Dimensions',dim_yx,'Format','netcdf4')
+ncwrite   (info.rotVelFile,'Vrot_mean',Vrot_mean);
+ncwriteatt(info.rotVelFile,'Vrot_mean','Description','time-mean along-shore rotational velocity');
+%
+nccreate  (info.rotVelFile,'PSI_mean','Dimensions',dim_yx,'Format','netcdf4')
+ncwrite   (info.rotVelFile,'PSI_mean',PSI_mean);
+ncwriteatt(info.rotVelFile,'PSI_mean','Description','time-mean cross-shore rotational velocity');
 %
 return
 % $$$ 
