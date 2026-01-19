@@ -322,7 +322,7 @@ END SUBROUTINE MIXING_STUFF
 
         Uwavg=Usum_wavg/T_sum_wavg
         Vwavg=Vsum_wavg/T_sum_wavg
-        ETAwavg=ETAsum/T_sum_wavg
+        ETAwavg=ETAsum_wavg/T_sum_wavg
 
         T_sum_wavg=T_sum_wavg-T_INTV_wavg 
 	Usum_wavg=ZERO
