@@ -245,13 +245,41 @@ ylabel('$x$ [m]','interpreter','latex')
 set(a1,'tickdir','out','ticklabelinterpreter','latex','ydir','normal')
 c1 = axes('units','centimeters','position',cpos1);
 imagesc(0,clrs1,reshape(cm1,256,1,3))
-xlabel(c1,'$\bar{\omega}$ [1/s]','interpreter','latex','fontsize',8)
+xlabel(c1,'$\bar{\omega}$ [1/s]','interpreter','latex','fontsize',8,'horizontalalignment','left')
 set(c1,'ticklabelinterpreter','latex','xaxislocation','top','xtick',[],'yaxislocation','right','fontsize',8,'tickdir','out','ydir','normal')
 figname = [figDIR,info.runName,'_time_averaged_vorticity.pdf'];
 exportgraphics(fig,figname)
 fout = cat(1,fout,figname);
 close(fig)
 %
+%% Plot a mean stream-function:
+H  = h + ETAmean;
+UH = mean( Umean.*H , 3, 'omitnan' );
+VH = mean( Vmean.*H , 3, 'omitnan' );
+[PSI,UHrot,VHrot,~,~,~]=get_vel_decomposition_reGRID(UH,VH,info.dx,info.dy);
+fig   = figure('units','centimeters');
+fig.Position(3:4) = ps;
+fig.PaperSize     = ps;
+fig.PaperPosition = [0 0 ps];
+% colormap
+cm1   = cmocean('balance');
+clim1 = [-25 25];
+clrs1 = clim1(1):diff(clim1)/255:clim1(2);
+a1 = axes('units','centimeters','position',ppos1);
+imagesc(y,x,PSI')
+hold(a1,'on'), contour(y,x,h',[0:1:6],'-k','linewidth',1)
+colormap(a1,cm1),caxis(a1,clim1)
+xlabel('$y$ [m]','interpreter','latex')
+ylabel('$x$ [m]','interpreter','latex')
+set(a1,'tickdir','out','ticklabelinterpreter','latex','ydir','normal')
+c1 = axes('units','centimeters','position',cpos1);
+imagesc(0,clrs1,reshape(cm1,256,1,3))
+xlabel(c1,'$\bar{\Psi}$ [m$^3$/s]','interpreter','latex','fontsize',8,'horizontalalignment','left')
+set(c1,'ticklabelinterpreter','latex','xaxislocation','top','xtick',[],'yaxislocation','right','fontsize',8,'tickdir','out','ydir','normal')
+figname = [figDIR,info.runName,'_time_averaged_streamfunction.pdf'];
+exportgraphics(fig,figname)
+fout = cat(1,fout,figname);
+close(fig)
 %
 %% 3) time and alongshore average dominant cross-shore terms
 BrkDissX = ncread(momFile,'BrkDissX');

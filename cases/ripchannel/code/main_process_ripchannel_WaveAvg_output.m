@@ -1,14 +1,12 @@
-%% Grimes edited to only process s00 runs --> lines 35 & 86: jj = [1, 6, 11]
-
 % code to be launched on cms-hpc "cuttlefish"
 addpath(genpath('/storage/cms/grimesdj_lab/grimesdj/git/funwave/'))
 rootDIR = '/scratch/grimesdj/ripchannel/';
 % code to be launched on cms-hpc "cuttlefish"
 % 0) requires the input bathymetry name as top-dir
 runBATHYlist = {'spreadRip'};
-reproc  = 1;% 1=reprocess ascii to mat
-rmfiles = 1;% 1=remove original ascii files when finished
-recalc  = 1;% 1=recalculate run statistics 
+reproc  = 0;% 1=reprocess ascii to mat
+rmfiles = 0;% 1=remove original ascii files when finished
+recalc  = 0;% 1=recalculate run statistics 
 %
 %
 for ii=1:length(runBATHYlist)
@@ -32,7 +30,7 @@ load([matDIR,filesep,'runs_to_process.mat'])
 %
 % loop over run_dirs
 Ndirs  = length(run_dirs);
-for jj = [1 6 11]%1:Ndirs
+for jj = 1:Ndirs
 % 1) get current run subdirectory to process:
 runID    = run_dirs{jj};
 fprintf('\n processing: %s %s \n', runBATHY,runID)    
@@ -79,11 +77,11 @@ fout_momentum = plot_FUNWAVE_run_momentum(info)
 end
 end
 
-% exit
+exit
 
 % check for instantaneous files and proceed if they exist...
 %% fast time wave files
-for jj = [1 6 11]%1:Ndirs
+for jj = 1:Ndirs
 % 1) get current run subdirectory to process:
 runID    = run_dirs{jj};
 fprintf('\n processing fast-time: %s - %s \n', runBATHY,runID)    

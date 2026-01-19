@@ -16,6 +16,7 @@ run_dirs{2}   = 'plnr2D_h10t10s10d00';
 %
 % loop over run_dirs
 Ndirs  = length(run_dirs);
+idx_plot = [];
 for jj = 1:Ndirs
 % 1) get current run subdirectory to process:
 runID    = run_dirs{jj};
@@ -106,7 +107,7 @@ xlabel('$x$ [m]','interpreter','latex')
 ylabel('rms() [m/s$^{2}$]','interpreter','latex')
 legend([p1([1 Ndirs+1]); p2],{'curl$(\bar{F}_\mathrm{br})$','curl$(\nabla S)$','curl$({F}_\mathrm{br})/40$'},'interpreter','latex','fontsize',10)
 % legend([p1([1 Ndirs+1])],{'curl$(\bar{F}_\mathrm{br})$','curl$(\nabla S)$'},'interpreter','latex','fontsize',10)
-a1.YAxis.YScale = 'log';
+% a1.YAxis.Scale = 'log';
 set(a1,'tickdir','out','ticklabelinterpreter','latex')
 %
 cb = axes('units','centimeters','position',cbpos);
