@@ -3,10 +3,11 @@ addpath(genpath('/storage/cms/grimesdj_lab/grimesdj/git/funwave/'))
 rootDIR = '/scratch/grimesdj/ripchannel/';
 % code to be launched on cms-hpc "cuttlefish"
 % 0) requires the input bathymetry name as top-dir
-runBATHYlist = {'spreadRipLong'};
-reproc  = 0;% 1=reprocess ascii to mat
-rmfiles = 0;% 1=remove original ascii files when finished
-recalc  = 0;% 1=recalculate run statistics 
+runBATHYlist = {'uniRip'};
+reproc  = 1;% 1=reprocess ascii to mat
+rmfiles = 1;% 1=remove original ascii files when finished
+recalc  = 1;% 1=recalculate run statistics
+plotter = 1;% 1=plot run statistics
 %
 %
 for ii=1:length(runBATHYlist)
@@ -74,8 +75,11 @@ end
 %
 %
 % plot the run statistics
+if plotter
 fout_stats    = plot_FUNWAVE_run_WaveAvgVelocity_statistics(info)
 fout_momentum = plot_FUNWAVE_run_momentum(info)
+fout_momentum_offline = plot_FUNWAVE_offline_momentum_budget(info)
+end
 end
 end
 

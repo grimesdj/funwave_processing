@@ -210,32 +210,19 @@ for ii=1:N
         h = ncread(fin,'dep',[info.subDomain([1 3])] , [info.subDomain([2 4])]);
         %
         %% Velocity/Vorticity Stats:
-        % read fields and calculate stats:
-        x        = ncread(info.rotVelFile,'x');
-        y        = ncread(info.rotVelFile,'y');
-        t        = ncread(info.rotVelFile,'t');
-        Urot     = ncread(info.rotVelFile,'Urot');
-        Vrot     = ncread(info.rotVelFile,'Vrot');
-        ETA      = ncread(info.rotVelFile,'eta');
-        VORT     = ncread(info.rotVelFile,'VORT');
-        H        = max(h+ETA,0.1);
-        %
-        % estimate energy/exchange statistics
-        tmp      = sqrt( Urot.^2 + Vrot.^2 );
-        EKE      = sum( tmp.*H , [1 3],'omitnan')./sum( H, [1 3],'omitnan');
-        tmp      = Urot; tmp(Urot<0)=nan;
-        tmp1     = H; tmp1(Urot<0)=nan;
-        Uex      = sum( tmp.*tmp1, [1 3],'omitnan')./sum(tmp1, [1 3],'omitnan'); clear tmp tmp1
-        %
         % estimate the energy/exchange for the mean fields:
         momFile = [info.rootMat,info.rootName,'MomentumTerms.nc'];
         Umean   = ncread(momFile,'umean');
         Vmean   = ncread(momFile,'vmean');
         ETAmean = ncread(momFile,'etamean');
-        Umean   = mean(Umean,3,'omitnan');
+        Hmean   = max(h+ETAmean,0.1);
+        %
+        Tmean   = mean(Umean.*Hmean,[1 3],'omitnan');
+        Us      = Tmean./mean(Hmean,[1 3],'omitnan');
+        Umean   = mean(Umean-Us,3,'omitnan');
         Vmean   = mean(Vmean,3,'omitnan');
         ETAmean = mean(ETAmean,3,'omitnan');
-        Hmean   = max(h+ETAmean,0.1);
+        Hmean   = max(h+ETAmean,0.1);        
         %
         MKE     = sum(sqrt( Umean.^2 + Vmean.^2).*Hmean, 1,'omitnan')./sum(Hmean, 1,'omitnan');
         %
@@ -246,6 +233,27 @@ for ii=1:N
         [~,dUdy] = gradient(Umean./info.dy);
         [dVdx,~] = gradient(Vmean./info.dx);
         VORTavg  = dVdx-dUdy;
+        %
+        % read fields and calculate stats:
+        x        = ncread(info.rotVelFile,'x');
+        y        = ncread(info.rotVelFile,'y');
+        t        = ncread(info.rotVelFile,'t');
+        Urot     = ncread(info.rotVelFile,'Urot');
+        Vrot     = ncread(info.rotVelFile,'Vrot');
+        ETA      = ncread(info.rotVelFile,'eta');
+        VORT     = ncread(info.rotVelFile,'VORT');
+        disp('setting waterlevel to time-mean... bug in source code')
+% $$$         H        = max(h+ETA,0.1);
+        H = repmat(Hmean,1,1,size(Urot,3));
+        %
+        %
+        % estimate energy/exchange statistics
+        tmp      = sqrt( Urot.^2 + Vrot.^2 );
+        EKE      = sum( tmp.*H , [1 3],'omitnan')./sum( H, [1 3],'omitnan');
+        tmp      = Urot; tmp(Urot<0)=nan;
+        tmp1     = H; tmp1(Urot<0)=nan;
+        Uex      = sum( tmp.*tmp1, [1 3],'omitnan')./sum(tmp1, [1 3],'omitnan'); clear tmp tmp1
+        %
         %
         figure(fig0), axes(f0a1), hold on,
         plot(x, rms(VORT,[1 3],'omitnan'),'-',x, rms(VORTavg,1,'omitnan'),':','color',cm(jj,:), 'linewidth',1)

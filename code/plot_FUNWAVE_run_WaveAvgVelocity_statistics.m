@@ -22,7 +22,7 @@ Urot     = ncread(info.rotVelFile,'Urot');
 Vrot     = ncread(info.rotVelFile,'Vrot');
 VORT     = ncread(info.rotVelFile,'VORT');
 ETA      = ncread(info.rotVelFile,'eta');
-H    = max(h+ETA,0.1);
+H        = max(h+ETA,0.1);
 %
 % estimate energy/exchange statistics
 tmp      = sqrt( Urot.^2 + Vrot.^2 );
@@ -36,11 +36,18 @@ momFile = [info.rootMat,info.rootName,'MomentumTerms.nc'];
 Umean   = ncread(momFile,'umean');
 Vmean   = ncread(momFile,'vmean');
 ETAmean = ncread(momFile,'etamean');
+%
+% remove stokes velocity from mean:
+H = h+ETAmean;
+T = mean(Umean.*H,1);
+Ustokes = T./mean(H,1);
+Umean   = Umean-Ustokes;
 Umean   = mean(Umean,3,'omitnan');
 Vmean   = mean(Vmean,3,'omitnan');
 ETAmean = mean(ETAmean,3,'omitnan');
-Hmean   = max(h+ETAmean,0.1);
+Hmean   = h+ETAmean;
 %
+% % estimate mean kinetic energy
 MKE     = sum(sqrt( Umean.^2 + Vmean.^2).*Hmean, 1,'omitnan')./sum(Hmean, 1,'omitnan');
 %
 tmp = Umean; tmp(Umean<0)=nan;

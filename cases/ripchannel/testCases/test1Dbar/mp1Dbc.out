@@ -1,0 +1,71 @@
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2024 The MathWorks, Inc.
+             R2024a Update 3 (24.1.0.2603908) 64-bit (glnxa64)
+                                May 2, 2024
+
+ 
+To get started, type doc.
+For product information, visit www.mathworks.com.
+ 
+>> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+working on: barred1D_h05t08s00d00
+
+The break-point location for run: barred1D-barred1D_h05t08s00d00, is x_{bp}=102.0 m
+And the surfzone width is W_{sz}=51.0 m
+
+working on: barred1D_h05t10s00d00
+
+The break-point location for run: barred1D-barred1D_h05t10s00d00, is x_{bp}=115.0 m
+And the surfzone width is W_{sz}=64.5 m
+
+working on: barred1D_h10t08s00d00
+
+The break-point location for run: barred1D-barred1D_h10t08s00d00, is x_{bp}=220.5 m
+And the surfzone width is W_{sz}=173.0 m
+
+working on: barred1D_h10t10s00d00
+
+The break-point location for run: barred1D-barred1D_h10t10s00d00, is x_{bp}=221.0 m
+And the surfzone width is W_{sz}=174.5 m
+
+working on: barred1D_h15t08s00d00
+
+The break-point location for run: barred1D-barred1D_h15t08s00d00, is x_{bp}=233.5 m
+And the surfzone width is W_{sz}=189.5 m
+
+working on: barred1D_h15t10s00d00
+
+The break-point location for run: barred1D-barred1D_h15t10s00d00, is x_{bp}=236.5 m
+And the surfzone width is W_{sz}=193.5 m
+
+working on: terraced1D_h05t08s00d00
+
+The break-point location for run: terraced1D-terraced1D_h05t08s00d00, is x_{bp}=105.5 m
+And the surfzone width is W_{sz}=54.5 m
+
+working on: terraced1D_h05t10s00d00
+
+The break-point location for run: terraced1D-terraced1D_h05t10s00d00, is x_{bp}=119.5 m
+And the surfzone width is W_{sz}=69.0 m
+
+working on: terraced1D_h10t08s00d00
+
+The break-point location for run: terraced1D-terraced1D_h10t08s00d00, is x_{bp}=212.0 m
+And the surfzone width is W_{sz}=164.5 m
+
+working on: terraced1D_h10t10s00d00
+
+The break-point location for run: terraced1D-terraced1D_h10t10s00d00, is x_{bp}=214.0 m
+And the surfzone width is W_{sz}=167.5 m
+
+working on: terraced1D_h15t08s00d00
+
+The break-point location for run: terraced1D-terraced1D_h15t08s00d00, is x_{bp}=229.5 m
+And the surfzone width is W_{sz}=185.5 m
+
+working on: terraced1D_h15t10s00d00
+
+The break-point location for run: terraced1D-terraced1D_h15t10s00d00, is x_{bp}=234.0 m
+And the surfzone width is W_{sz}=191.0 m
+>> 

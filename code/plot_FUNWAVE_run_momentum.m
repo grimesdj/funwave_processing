@@ -17,7 +17,7 @@ fout = {};
 % momentum file
 momFile = [info.rootMat,info.rootName,'MomentumTerms.nc'];
 %
-% $$$ %
+% 
 % load from the momentum file:
 x   = ncread(momFile,'x');
 y   = ncread(momFile,'y');
@@ -81,6 +81,7 @@ lbls = {'$gH\partial_x \bar\eta$','$gH\partial_y \bar\eta$','$-H\bar{F}_\mathrm{
         '$\partial_x S_{xx}$','$\partial_x S_{xy}$','$\partial_y S_{xy}$','$\partial_y S_{yy}$',...
         '$\partial_x (U^2 H)$','$\partial_x (UVH)$','$\partial_y (UVH)$','$\partial_y (V^2 H)$','-$\tau_x$','-$\tau_y$'};
 sgn  = {1, 1, -1, -1, 1, 1, 1, 1, 1, 1, 1, 1, 1 1};
+scales = {1e-2,1e-2,1e-2,1e-3,1e-2,1e-2,1e-2,1e-2,1e-2,1e-2,1e-2,1e-2,1e-3,1e-3};
 %
 % figure parameters
 xm = 2.5;
@@ -109,8 +110,9 @@ clrs2 = clim2(1):diff(clim2)/255:clim2(2);
 for jj=1:length(vars)
     var = ncread(momFile,vars{jj});% here is where you'd depth average...
     tmp = mean(var,3,'omitnan')';
-    rng    = ceil(log10(range(tmp(:))/2));
-    scale  = 10^rng;
+% $$$     rng    = ceil(log10(range(tmp(:))/2));
+% $$$     scale  = 10^rng;
+    scale = scales{jj};
     %
     clf(fig)
     a1 = axes('units','centimeters','position',ppos1);
@@ -119,13 +121,13 @@ for jj=1:length(vars)
     colormap(a1,cm1),caxis(a1,clim1)
     xlabel('$y$ [m]','interpreter','latex')
     ylabel('$x$ [m]','interpreter','latex')
-    set(a1,'tickdir','out','ticklabelinterpreter','latex','ydir','normal')
+    set(a1,'tickdir','out','ticklabelinterpreter','latex','ydir','normal','xdir','reverse')
     a2 = axes('units','centimeters','position',ppos2);
     imagesc(y,x,std(var,[],3,'omitnan')'/scale)
     hold(a2,'on'), contour(y,x,h',[0:1:6],'-k','linewidth',1)    
     colormap(a2,cm2),caxis(a2,clim2)    
     ylabel('$x$ [m]','interpreter','latex')
-    set(a2,'tickdir','out','ticklabelinterpreter','latex','ydir','normal','xticklabel',[])
+    set(a2,'tickdir','out','ticklabelinterpreter','latex','ydir','normal','xticklabel',[],'xdir','reverse')
     c1 = axes('units','centimeters','position',cpos1);
     imagesc(0,clrs1,reshape(cm1,256,1,3))
     xlabel(c1,{['avg(',lbls{jj},')'];sprintf('[m/s]$^2\\times 10^{%d}$~',log10(scale))},'interpreter','latex','fontsize',6,'horizontalalignment','left')
@@ -145,6 +147,19 @@ close(fig)
 Umean = ncread(momFile,'umean');
 Vmean = ncread(momFile,'vmean');
 ETAmean = ncread(momFile,'etamean');
+%
+%
+% remove stokes velocity from mean:
+H = h+ETAmean;
+T = mean(Umean.*H,1);
+Ustokes = T./mean(H,1);
+Umean   = Umean-Ustokes;
+Umean   = mean(Umean,3,'omitnan');
+Vmean   = mean(Vmean,3,'omitnan');
+ETAmean = mean(ETAmean,3,'omitnan');
+Hmean   = h+ETAmean;
+%
+%
 % figure parameters
 xm = 2.5;
 ym = 2.5;
@@ -165,18 +180,18 @@ cm1   = cmocean('balance');
 clim1 = [-0.5 0.5];
 clrs1 = clim1(1):diff(clim1)/255:clim1(2);
 a1 = axes('units','centimeters','position',ppos1);
-imagesc(y,x,mean(Umean,3,'omitnan')')
+imagesc(y,x,Umean')
 hold(a1,'on'), contour(y,x,h',[0:1:6],'-k','linewidth',1)
 colormap(a1,cm1),caxis(a1,clim1)
 xlabel('$y$ [m]','interpreter','latex')
 ylabel('$x$ [m]','interpreter','latex')
-set(a1,'tickdir','out','ticklabelinterpreter','latex','ydir','normal')
+set(a1,'tickdir','out','ticklabelinterpreter','latex','ydir','normal','xdir','reverse')
 a2 = axes('units','centimeters','position',ppos2);
-imagesc(y,x,mean(Vmean,3,'omitnan')')
+imagesc(y,x,Vmean')
 hold(a2,'on'), contour(y,x,h',[0:1:6],'-k','linewidth',1)
 colormap(a2,cm1),caxis(a2,clim1)    
 ylabel('$x$ [m]','interpreter','latex')
-set(a2,'tickdir','out','ticklabelinterpreter','latex','ydir','normal','xticklabel',[])
+set(a2,'tickdir','out','ticklabelinterpreter','latex','ydir','normal','xticklabel',[],'xdir','reverse')
 c1 = axes('units','centimeters','position',cpos1);
 imagesc(0,clrs1,reshape(cm1,256,1,3))
 xlabel(c1,'$\langle{U}\rangle$ [m/s]','interpreter','latex','fontsize',8,'horizontalalignment','left')
@@ -200,12 +215,12 @@ cm1   = cmocean('balance');
 clim1 = [-0.1 0.1];
 clrs1 = clim1(1):diff(clim1)/255:clim1(2);
 a1 = axes('units','centimeters','position',ppos1);
-imagesc(y,x,mean(ETAmean,3,'omitnan')')
+imagesc(y,x,ETAmean')
 hold(a1,'on'), contour(y,x,h',[0:1:6],'-k','linewidth',1)
 colormap(a1,cm1),caxis(a1,clim1)
 xlabel('$y$ [m]','interpreter','latex')
 ylabel('$x$ [m]','interpreter','latex')
-set(a1,'tickdir','out','ticklabelinterpreter','latex','ydir','normal')
+set(a1,'tickdir','out','ticklabelinterpreter','latex','ydir','normal','xdir','reverse')
 c1 = axes('units','centimeters','position',cpos1);
 imagesc(0,clrs1,reshape(cm1,256,1,3))
 xlabel(c1,'$\langle{\eta}\rangle$ [m]','interpreter','latex','fontsize',8,'horizontalalignment','left')
@@ -216,8 +231,8 @@ fout = cat(1,fout,figname);
 close(fig)
 %
 %% plot time averaged vorticity:
-[dUdy,~] = gradientDG(mean(Umean,3,'omitnan')./info.dy);
-[~,dVdx] = gradientDG(mean(Vmean,3,'omitnan')./info.dx);
+[dUdy,~] = gradientDG(Umean./info.dy);
+[~,dVdx] = gradientDG(Vmean./info.dx);
 vort = dVdx-dUdy;
 % figure parameters
 xm = 2.5;
@@ -242,7 +257,7 @@ hold(a1,'on'), contour(y,x,h',[0:1:6],'-k','linewidth',1)
 colormap(a1,cm1),caxis(a1,clim1)
 xlabel('$y$ [m]','interpreter','latex')
 ylabel('$x$ [m]','interpreter','latex')
-set(a1,'tickdir','out','ticklabelinterpreter','latex','ydir','normal')
+set(a1,'tickdir','out','ticklabelinterpreter','latex','ydir','normal','xdir','reverse')
 c1 = axes('units','centimeters','position',cpos1);
 imagesc(0,clrs1,reshape(cm1,256,1,3))
 xlabel(c1,'$\bar{\omega}$ [1/s]','interpreter','latex','fontsize',8,'horizontalalignment','left')
@@ -253,9 +268,8 @@ fout = cat(1,fout,figname);
 close(fig)
 %
 %% Plot a mean stream-function:
-H  = h + ETAmean;
-UH = mean( Umean.*H , 3, 'omitnan' );
-VH = mean( Vmean.*H , 3, 'omitnan' );
+UH = Umean.*Hmean;
+VH = Vmean.*Hmean;
 [PSI,UHrot,VHrot,~,~,~]=get_vel_decomposition_reGRID(UH,VH,info.dx,info.dy);
 fig   = figure('units','centimeters');
 fig.Position(3:4) = ps;
@@ -271,7 +285,7 @@ hold(a1,'on'), contour(y,x,h',[0:1:6],'-k','linewidth',1)
 colormap(a1,cm1),caxis(a1,clim1)
 xlabel('$y$ [m]','interpreter','latex')
 ylabel('$x$ [m]','interpreter','latex')
-set(a1,'tickdir','out','ticklabelinterpreter','latex','ydir','normal')
+set(a1,'tickdir','out','ticklabelinterpreter','latex','ydir','normal','xdir','reverse')
 c1 = axes('units','centimeters','position',cpos1);
 imagesc(0,clrs1,reshape(cm1,256,1,3))
 xlabel(c1,'$\bar{\Psi}$ [m$^3$/s]','interpreter','latex','fontsize',8,'horizontalalignment','left')
@@ -397,7 +411,7 @@ for ii = [iINN iMID iBP]
 % $$$         icon(kk).Position = [0.3 p2(2) 0];
 % $$$         icon(2*(kk+1)).XData=[0.05 0.2];
 % $$$     end
-    set(a1,'tickdir','out','ticklabelinterpreter','latex','xlim',ylims)
+    set(a1,'tickdir','out','ticklabelinterpreter','latex','xlim',ylims,'xdir','reverse')
     % 
     a2 = axes('units','centimeters','position',ppos2);
     p2 = plot(y,PGX(:,ii)/scale,'k',y,ADX(:,ii)/scale,'b',y,RSX(:,ii)/scale,'r','linewidth',2);
@@ -445,7 +459,7 @@ for ii = [iINN iMID iBP]
 % $$$         icon(kk).Position = [0.3 p2(2) 0];
 % $$$         icon(2*(kk+1)).XData=[0.05 0.2];
 % $$$     end
-    set(a1,'tickdir','out','ticklabelinterpreter','latex','xlim',ylims)
+    set(a1,'tickdir','out','ticklabelinterpreter','latex','xlim',ylims,'xdir','reverse')
     % 
     a2 = axes('units','centimeters','position',ppos2);
     p2 = plot(y,PGXstd(:,ii)/scale,'k',y,ADXstd(:,ii)/scale,'b',y,RSXstd(:,ii)/scale,'r','linewidth',2);
@@ -453,7 +467,7 @@ for ii = [iINN iMID iBP]
                'string','Cross-shore: std()','fitboxtotext','on','linestyle','none','interpreter','latex',...
                'fontsize',8,'backgroundcolor','none')    
     ylabel(sprintf('[m/s]$^2\\times 10^{%d}$',log10(scale)),'interpreter','latex','fontsize',9)
-    set(a2,'tickdir','out','ticklabelinterpreter','latex','xticklabel',[],'xlim',ylims)
+    set(a2,'tickdir','out','ticklabelinterpreter','latex','xticklabel',[],'xlim',ylims,'xdir','reverse')
     title(a2,sprintf('%s Surfzone: $x=%3.0f$ m',NAMES{iter},x(ii)),'interpreter','latex')
     figname = [figDIR,info.runName,'dominant_momentum_terms_std_',NAMES{iter},'Surfzone.pdf'];
     drawnow
@@ -521,13 +535,13 @@ ylabel('$x$ [m]','interpreter','latex')
     annotation('textbox','units','centimeters','position',[ppos1(1:2)+[0 0.9].*ppos1(3:4), 0.3, 0.3],...
                'string',{'Eddy Advection:'; '$\partial_x \langle \overline{u^2 H} \rangle + \partial_y \langle \overline{uv H} \rangle$'},'fitboxtotext','on','linestyle','none','interpreter','latex',...
                'fontsize',8,'backgroundcolor','none')    
-set(a1,'tickdir','out','ticklabelinterpreter','latex','ydir','normal')
+set(a1,'tickdir','out','ticklabelinterpreter','latex','ydir','normal','xdir','reverse')
 a2 = axes('units','centimeters','position',ppos2);
 imagesc(y,x,ADXavg'/scale)
 hold(a2,'on'), contour(y,x,h',[0:1:6],'-k','linewidth',1)
 colormap(a2,cm1),caxis(a2,clim1)    
 ylabel('$x$ [m]','interpreter','latex')
-set(a2,'tickdir','out','ticklabelinterpreter','latex','ydir','normal','xticklabel',[])
+set(a2,'tickdir','out','ticklabelinterpreter','latex','ydir','normal','xticklabel',[],'xdir','reverse')
     annotation('textbox','units','centimeters','position',[ppos2(1:2)+[0 0.9].*ppos2(3:4), 0.3, 0.3],...
                'string',{'Mean Advection:'; '$\partial_x \langle u \rangle^2\langle H\rangle + \partial_y \langle u\rangle\langle v \rangle\langle H\rangle$'},'fitboxtotext','on','linestyle','none','interpreter','latex',...
                'fontsize',8,'backgroundcolor','none')    
@@ -564,13 +578,13 @@ annotation('textbox','units','centimeters','position',[ppos1(1:2)+[0 0.9].*ppos1
            'string',{'Eddy Advection:'; '$\partial_y \langle \overline{v^2 H} \rangle + \partial_x \langle \overline{uv H} \rangle$'},...
            'fitboxtotext','on','linestyle','none','interpreter','latex',...
            'fontsize',8,'backgroundcolor','none')    
-set(a1,'tickdir','out','ticklabelinterpreter','latex','ydir','normal')
+set(a1,'tickdir','out','ticklabelinterpreter','latex','ydir','normal','xdir','reverse')
 a2 = axes('units','centimeters','position',ppos2);
 imagesc(y,x,ADYavg'/scale)
 hold(a2,'on'), contour(y,x,h',[0:1:6],'-k','linewidth',1)
 colormap(a2,cm1),caxis(a2,clim1)    
 ylabel('$x$ [m]','interpreter','latex')
-set(a2,'tickdir','out','ticklabelinterpreter','latex','ydir','normal','xticklabel',[])
+set(a2,'tickdir','out','ticklabelinterpreter','latex','ydir','normal','xticklabel',[],'xdir','reverse')
     annotation('textbox','units','centimeters','position',[ppos2(1:2)+[0 0.9].*ppos2(3:4), 0.3, 0.3],...
                'string',{'Mean Advection:'; '$\partial_y \langle v \rangle^2\langle H\rangle + \partial_x \langle u\rangle\langle v \rangle\langle H \rangle$'},...
                'fitboxtotext','on','linestyle','none','interpreter','latex',...
@@ -630,13 +644,13 @@ ylabel('$x$ [m]','interpreter','latex')
     annotation('textbox','units','centimeters','position',[ppos1(1:2)+[0 0.9].*ppos1(3:4), 0.3, 0.3],...
                'string',{'Reynolds Stress: $\langle u'' v'' \rangle$'},'fitboxtotext','on','linestyle','none','interpreter','latex',...
                'fontsize',8,'backgroundcolor','none')    
-set(a1,'tickdir','out','ticklabelinterpreter','latex','ydir','normal')
+set(a1,'tickdir','out','ticklabelinterpreter','latex','ydir','normal','xdir','reverse')
 a2 = axes('units','centimeters','position',ppos2);
 imagesc(y,x,UVavg'/scale)
 hold(a2,'on'), contour(y,x,h',[0:1:6],'-k','linewidth',1)
 colormap(a2,cm1),caxis(a2,clim1)    
 ylabel('$x$ [m]','interpreter','latex')
-set(a2,'tickdir','out','ticklabelinterpreter','latex','ydir','normal','xticklabel',[])
+set(a2,'tickdir','out','ticklabelinterpreter','latex','ydir','normal','xticklabel',[],'xdir','reverse')
     annotation('textbox','units','centimeters','position',[ppos2(1:2)+[0 0.9].*ppos2(3:4), 0.3, 0.3],...
                'string',{'Reynolds Stress: $\langle \bar{u} \bar{v}\rangle$'},'fitboxtotext','on','linestyle','none','interpreter','latex',...
                'fontsize',8,'backgroundcolor','none')    
@@ -645,7 +659,7 @@ imagesc(y,x,(mean(Umean,3,'omitnan').*mean(Vmean,3,'omitnan'))'/scale)
 hold(a3,'on'), contour(y,x,h',[0:1:6],'-k','linewidth',1)
 colormap(a3,cm1),caxis(a3,clim1)    
 ylabel('$x$ [m]','interpreter','latex')
-set(a3,'tickdir','out','ticklabelinterpreter','latex','ydir','normal','xticklabel',[])
+set(a3,'tickdir','out','ticklabelinterpreter','latex','ydir','normal','xticklabel',[],'xdir','reverse')
     annotation('textbox','units','centimeters','position',[ppos3(1:2)+[0 0.9].*ppos3(3:4), 0.3, 0.3],...
                'string',{'Reynolds Stress: $\langle u\rangle \langle v\rangle$'},'fitboxtotext','on','linestyle','none','interpreter','latex',...
                'fontsize',8,'backgroundcolor','none')    
@@ -699,8 +713,8 @@ close(fig)
 %
 rng_cFbr  = ceil(log10(3*std(cFbr(:))/2));
 rng_cS    = ceil(log10(3*std(cS(:))/2));
-clims_cFbr= [-0.5 0.5]*10^rng;
-clims_cS  = [-0.5 0.5]*10^rng;
+clims_cFbr= [-0.5 0.5]*10^rng_cFbr;
+clims_cS  = [-0.5 0.5]*10^rng_cS;
 %
 %% 2) make a video of DxSxx and curl(DxSxx)
 alims = [mean(info.x_shoreline) x(info.subDomain(end)) y(info.subDomain(1:2))'];

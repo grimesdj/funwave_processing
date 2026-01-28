@@ -44,6 +44,12 @@ ETAmean = mean(ncread(momFile,'etamean'), 3, 'omitnan');
 Umean =   mean(ncread(momFile,'umean'  ), 3, 'omitnan');
 Vmean =   mean(ncread(momFile,'vmean'  ), 3, 'omitnan');
 %
+% remove stokes velocity from mean:
+H = h+ETAmean;
+T = mean(Umean.*H,1);
+Ustokes = T./mean(H,1);
+Umean   = Umean-Ustokes;
+%
 [PSI_mean,Urot_mean,Vrot_mean,~,~,~]=get_vel_decomposition_reGRID(Umean,Vmean,dx,dy);        
 %
 %
@@ -73,8 +79,8 @@ for ii=1:Nf
     end
     %
     eta=etawavg-ETAmean;
-    u = uwavg-Umean;
-    v = vwavg-Vmean;
+    u = uwavg-(Umean+Ustokes);
+    v = vwavg-;
     clear etawavg uwavg vwavg
     %
     % estimate vorticity
