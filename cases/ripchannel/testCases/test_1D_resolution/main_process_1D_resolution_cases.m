@@ -1,7 +1,7 @@
 % code to be launched on cms-hpc "cuttlefish"
 addpath(genpath('/storage/cms/grimesdj_lab/grimesdj/git/funwave/'))
 % requires the input bathymetry name as top-dir
-runBATHY = 'resolution1D';%'planar1D'
+runBATHY = 'barred1D';%'resolution1D';%'planar1D'%
 figDIR = '/storage/cms/grimesdj_lab/grimesdj/git/funwave/cases/ripchannel/testCases/test_1D_resolution/figures/';
 %
 % reprocess raw output?
