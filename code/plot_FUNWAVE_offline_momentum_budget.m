@@ -50,8 +50,8 @@ U       = U-Ustokes;
 %
 g = 9.8;
 [PgrdY,PgrdX] = gradientDG(g*ETA);
-PgrdY = PgrdY./info.dy;
-PgrdX = PgrdX./info.dx;
+PgrdY = -PgrdY./info.dy;
+PgrdX = -PgrdX./info.dx;
 UU = U.*U;
 VV = V.*V;
 UV = U.*V;

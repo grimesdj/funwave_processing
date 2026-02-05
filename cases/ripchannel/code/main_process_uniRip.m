@@ -6,7 +6,7 @@ rootDIR = '/scratch/grimesdj/ripchannel/';
 runBATHYlist = {'uniRip'};
 reproc  = 0;% 1=reprocess ascii to mat
 rmfiles = 0;% 1=remove original ascii files when finished
-recalc  = 1;% 1=recalculate run statistics
+recalc  = 0;% 1=recalculate run statistics
 plotter = 1;% 1=plot run statistics
 %
 %

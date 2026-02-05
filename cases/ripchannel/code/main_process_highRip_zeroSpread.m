@@ -1,5 +1,5 @@
 %% error in input files (zero-spread are non-binary i/o) corrupted first run: barRip0_h05t10s00d00
-%% processing s~=0 here...
+%% processing s==0 here...
 
 
 % code to be launched on cms-hpc "cuttlefish"
@@ -8,9 +8,9 @@ rootDIR = '/scratch/grimesdj/ripchannel/';
 % code to be launched on cms-hpc "cuttlefish"
 % 0) requires the input bathymetry name as top-dir
 runBATHYlist = {'highRip'};
-reproc  = 0;% 1=reprocess ascii to mat
-rmfiles = 0;% 1=remove original ascii files when finished
-recalc  = 0;% 1=recalculate run statistics
+reproc  = 1;% 1=reprocess ascii to mat
+rmfiles = 1;% 1=remove original ascii files when finished
+recalc  = 1;% 1=recalculate run statistics
 plotter = 1;% 1=plot run statistics
 %
 %
@@ -36,7 +36,7 @@ load([matDIR,filesep,'runs_to_process.mat'])
 % loop over run_dirs
 Ndirs  = length(run_dirs);
 disp('ONLY PROCESSING NON-ZERO SPREAD CASES 2:2:12')
-for jj = [2:2:Ndirs]
+for jj = [1:2:Ndirs]
 % 1) get current run subdirectory to process:
 runID    = run_dirs{jj};
 fprintf('\n processing: %s %s \n', runBATHY,runID)    
@@ -63,10 +63,10 @@ if reproc
     dt_lp = info.T_INTV_wavg*ones(NwaveAvg,1);
     t_lp = [1:NwaveAvg]*dt_lp(1);
     % binary output files... faster archiving
-    isBINARY = 1;
+    isBINARY = 0;
     fLog = convert_funwave_output_to_NetCDF(info.rootOut,[info.rootMat,info.rootName],vars,t_lp,dt_lp,info.dx,spanx,rngx,info.dy,spany,rngy,rmfiles,300,[-inf inf],isBINARY,info.Nx-1,info.Ny-1);
     % construct time vector for Radiation Stress variables
-    vars = {'BrkDissX','BrkDissY','DxSxx','DxSxy','DxUUH','DxUVH','DySxy','DySyy','DyUVH','DyVVH','FRCX','FRCY','PgrdX','PgrdY','Sxx','Syy','Sxy','umean','vmean','etamean','Hsig'};
+    vars = {'BrkDissX','BrkDissY','DxSxx','DxSxy','DxUUH','DxUVH','DySxy','DySyy','DyUVH','DyVVH','FRCX','FRCY','PgrdX','PgrdY','Sxx','Syy','Sxy','umean','vmean','etamean'};
     Nbrk = floor((info.TOTAL_TIME-info.STEADY_TIME)/info.T_INTV_mean);
     dt_lp = info.T_INTV_mean*ones(Nbrk,1);
     t_lp = [1:Nbrk]*dt_lp(1);

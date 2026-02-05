@@ -280,7 +280,7 @@ cm1   = cmocean('balance');
 clim1 = [-25 25];
 clrs1 = clim1(1):diff(clim1)/255:clim1(2);
 a1 = axes('units','centimeters','position',ppos1);
-imagesc(y,x,PSI')
+imagesc(y,x,-PSI')
 hold(a1,'on'), contour(y,x,h',[0:1:6],'-k','linewidth',1)
 colormap(a1,cm1),caxis(a1,clim1)
 xlabel('$y$ [m]','interpreter','latex')
@@ -388,7 +388,7 @@ fig.Position(3:4)=ps;
 fig.PaperSize=ps;
 fig.PaperPosition=[0 0 ps];
 %
-ylims   = info.Ly/2 + [-500 500];
+ylims   = info.Ly/2 + [-1000 1000];
 NAMES   = {'Inner', 'Middle', 'Outer'};
 scale = 1e-3;
 iter    = 0;
@@ -435,7 +435,7 @@ fig.Position(3:4)=ps;
 fig.PaperSize=ps;
 fig.PaperPosition=[0 0 ps];
 %
-ylims   = info.Ly/2 + [-500 500];
+ylims   = info.Ly/2 + [-1000 1000];
 NAMES   = {'Inner', 'Middle', 'Outer'};
 scale   = 1e-3;
 iter    = 0;

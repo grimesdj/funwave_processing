@@ -409,3 +409,402 @@ fout_momentum_offline =
 
 
  processing: spreadRip barRip1_h10t10s04d00 
+
+fout_stats =
+
+  1x1 cell array
+
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s04d00_velocity_and_vorticity_stats.pdf'}
+
+
+fout_momentum =
+
+  31x1 cell array
+
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s04d00_xshore_momentum_term_PgrdX_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s04d00_xshore_momentum_term_PgrdY_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s04d00_xshore_momentum_term_BrkDissX_time_averaged.pdf'       }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s04d00_xshore_momentum_term_BrkDissY_time_averaged.pdf'       }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s04d00_xshore_momentum_term_DxSxx_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s04d00_xshore_momentum_term_DxSxy_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s04d00_xshore_momentum_term_DySxy_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s04d00_xshore_momentum_term_DySyy_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s04d00_xshore_momentum_term_DxUUH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s04d00_xshore_momentum_term_DxUVH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s04d00_xshore_momentum_term_DyUVH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s04d00_xshore_momentum_term_DyVVH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s04d00_xshore_momentum_term_FRCX_time_averaged.pdf'           }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s04d00_xshore_momentum_term_FRCY_time_averaged.pdf'           }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s04d00_time_averaged_velocity.pdf'                            }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s04d00_time_averaged_waterlevel.pdf'                          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s04d00_time_averaged_vorticity.pdf'                           }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s04d00_time_averaged_streamfunction.pdf'                      }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s04d00_xshore_momentum_terms_time_and_alongshore_averaged.pdf'}
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s04d00dominant_momentum_terms_InnerSurfzone.pdf'              }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s04d00dominant_momentum_terms_MiddleSurfzone.pdf'             }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s04d00dominant_momentum_terms_OuterSurfzone.pdf'              }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s04d00dominant_momentum_terms_std_InnerSurfzone.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s04d00dominant_momentum_terms_std_MiddleSurfzone.pdf'         }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s04d00dominant_momentum_terms_std_OuterSurfzone.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s04d00_time_averaged_vs_eddy_x_advection.pdf'                 }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s04d00_time_averaged_vs_eddy_y_advection.pdf'                 }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s04d00_reynolds_stress_estimate.pdf'                          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s04d00_std_curl_Fbr.pdf'                                      }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s04d00_curl_of_radiation_stress_gradient'                     }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s04d00_curl_of_breaking_force'                                }
+
+loading from: funwave_barRip1_h10t10s04d00_uwavg_01.nc 
+fixing eta to time-mean... bug in source code
+
+fout_momentum_offline =
+
+  3x1 cell array
+
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s04d00_time_averaged_vs_eddy_x_advection_offline_calculation.pdf'}
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s04d00_time_averaged_vs_eddy_y_advection_offline_calculation.pdf'}
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s04d00_time_averaged_pressure_gradient_offline_calculation.pdf'  }
+
+
+ processing: spreadRip barRip1_h10t10s10d00 
+
+fout_stats =
+
+  1x1 cell array
+
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s10d00_velocity_and_vorticity_stats.pdf'}
+
+
+fout_momentum =
+
+  31x1 cell array
+
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s10d00_xshore_momentum_term_PgrdX_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s10d00_xshore_momentum_term_PgrdY_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s10d00_xshore_momentum_term_BrkDissX_time_averaged.pdf'       }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s10d00_xshore_momentum_term_BrkDissY_time_averaged.pdf'       }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s10d00_xshore_momentum_term_DxSxx_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s10d00_xshore_momentum_term_DxSxy_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s10d00_xshore_momentum_term_DySxy_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s10d00_xshore_momentum_term_DySyy_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s10d00_xshore_momentum_term_DxUUH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s10d00_xshore_momentum_term_DxUVH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s10d00_xshore_momentum_term_DyUVH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s10d00_xshore_momentum_term_DyVVH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s10d00_xshore_momentum_term_FRCX_time_averaged.pdf'           }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s10d00_xshore_momentum_term_FRCY_time_averaged.pdf'           }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s10d00_time_averaged_velocity.pdf'                            }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s10d00_time_averaged_waterlevel.pdf'                          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s10d00_time_averaged_vorticity.pdf'                           }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s10d00_time_averaged_streamfunction.pdf'                      }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s10d00_xshore_momentum_terms_time_and_alongshore_averaged.pdf'}
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s10d00dominant_momentum_terms_InnerSurfzone.pdf'              }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s10d00dominant_momentum_terms_MiddleSurfzone.pdf'             }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s10d00dominant_momentum_terms_OuterSurfzone.pdf'              }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s10d00dominant_momentum_terms_std_InnerSurfzone.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s10d00dominant_momentum_terms_std_MiddleSurfzone.pdf'         }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s10d00dominant_momentum_terms_std_OuterSurfzone.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s10d00_time_averaged_vs_eddy_x_advection.pdf'                 }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s10d00_time_averaged_vs_eddy_y_advection.pdf'                 }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s10d00_reynolds_stress_estimate.pdf'                          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s10d00_std_curl_Fbr.pdf'                                      }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s10d00_curl_of_radiation_stress_gradient'                     }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s10d00_curl_of_breaking_force'                                }
+
+loading from: funwave_barRip1_h10t10s10d00_uwavg_01.nc 
+fixing eta to time-mean... bug in source code
+
+fout_momentum_offline =
+
+  3x1 cell array
+
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s10d00_time_averaged_vs_eddy_x_advection_offline_calculation.pdf'}
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s10d00_time_averaged_vs_eddy_y_advection_offline_calculation.pdf'}
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s10d00_time_averaged_pressure_gradient_offline_calculation.pdf'  }
+
+
+ processing: spreadRip barRip1_h10t10s20d00 
+
+fout_stats =
+
+  1x1 cell array
+
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s20d00_velocity_and_vorticity_stats.pdf'}
+
+
+fout_momentum =
+
+  31x1 cell array
+
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s20d00_xshore_momentum_term_PgrdX_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s20d00_xshore_momentum_term_PgrdY_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s20d00_xshore_momentum_term_BrkDissX_time_averaged.pdf'       }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s20d00_xshore_momentum_term_BrkDissY_time_averaged.pdf'       }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s20d00_xshore_momentum_term_DxSxx_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s20d00_xshore_momentum_term_DxSxy_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s20d00_xshore_momentum_term_DySxy_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s20d00_xshore_momentum_term_DySyy_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s20d00_xshore_momentum_term_DxUUH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s20d00_xshore_momentum_term_DxUVH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s20d00_xshore_momentum_term_DyUVH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s20d00_xshore_momentum_term_DyVVH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s20d00_xshore_momentum_term_FRCX_time_averaged.pdf'           }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s20d00_xshore_momentum_term_FRCY_time_averaged.pdf'           }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s20d00_time_averaged_velocity.pdf'                            }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s20d00_time_averaged_waterlevel.pdf'                          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s20d00_time_averaged_vorticity.pdf'                           }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s20d00_time_averaged_streamfunction.pdf'                      }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s20d00_xshore_momentum_terms_time_and_alongshore_averaged.pdf'}
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s20d00dominant_momentum_terms_InnerSurfzone.pdf'              }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s20d00dominant_momentum_terms_MiddleSurfzone.pdf'             }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s20d00dominant_momentum_terms_OuterSurfzone.pdf'              }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s20d00dominant_momentum_terms_std_InnerSurfzone.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s20d00dominant_momentum_terms_std_MiddleSurfzone.pdf'         }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s20d00dominant_momentum_terms_std_OuterSurfzone.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s20d00_time_averaged_vs_eddy_x_advection.pdf'                 }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s20d00_time_averaged_vs_eddy_y_advection.pdf'                 }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s20d00_reynolds_stress_estimate.pdf'                          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s20d00_std_curl_Fbr.pdf'                                      }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s20d00_curl_of_radiation_stress_gradient'                     }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s20d00_curl_of_breaking_force'                                }
+
+loading from: funwave_barRip1_h10t10s20d00_uwavg_01.nc 
+fixing eta to time-mean... bug in source code
+
+fout_momentum_offline =
+
+  3x1 cell array
+
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s20d00_time_averaged_vs_eddy_x_advection_offline_calculation.pdf'}
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s20d00_time_averaged_vs_eddy_y_advection_offline_calculation.pdf'}
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/barRip1_h10t10s20d00_time_averaged_pressure_gradient_offline_calculation.pdf'  }
+
+
+ processing: spreadRip terRip1_h10t10s00d00 
+
+fout_stats =
+
+  1x1 cell array
+
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s00d00_velocity_and_vorticity_stats.pdf'}
+
+
+fout_momentum =
+
+  31x1 cell array
+
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s00d00_xshore_momentum_term_PgrdX_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s00d00_xshore_momentum_term_PgrdY_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s00d00_xshore_momentum_term_BrkDissX_time_averaged.pdf'       }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s00d00_xshore_momentum_term_BrkDissY_time_averaged.pdf'       }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s00d00_xshore_momentum_term_DxSxx_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s00d00_xshore_momentum_term_DxSxy_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s00d00_xshore_momentum_term_DySxy_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s00d00_xshore_momentum_term_DySyy_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s00d00_xshore_momentum_term_DxUUH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s00d00_xshore_momentum_term_DxUVH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s00d00_xshore_momentum_term_DyUVH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s00d00_xshore_momentum_term_DyVVH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s00d00_xshore_momentum_term_FRCX_time_averaged.pdf'           }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s00d00_xshore_momentum_term_FRCY_time_averaged.pdf'           }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s00d00_time_averaged_velocity.pdf'                            }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s00d00_time_averaged_waterlevel.pdf'                          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s00d00_time_averaged_vorticity.pdf'                           }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s00d00_time_averaged_streamfunction.pdf'                      }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s00d00_xshore_momentum_terms_time_and_alongshore_averaged.pdf'}
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s00d00dominant_momentum_terms_InnerSurfzone.pdf'              }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s00d00dominant_momentum_terms_MiddleSurfzone.pdf'             }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s00d00dominant_momentum_terms_OuterSurfzone.pdf'              }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s00d00dominant_momentum_terms_std_InnerSurfzone.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s00d00dominant_momentum_terms_std_MiddleSurfzone.pdf'         }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s00d00dominant_momentum_terms_std_OuterSurfzone.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s00d00_time_averaged_vs_eddy_x_advection.pdf'                 }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s00d00_time_averaged_vs_eddy_y_advection.pdf'                 }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s00d00_reynolds_stress_estimate.pdf'                          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s00d00_std_curl_Fbr.pdf'                                      }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s00d00_curl_of_radiation_stress_gradient'                     }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s00d00_curl_of_breaking_force'                                }
+
+loading from: funwave_terRip1_h10t10s00d00_uwavg_01.nc 
+fixing eta to time-mean... bug in source code
+
+fout_momentum_offline =
+
+  3x1 cell array
+
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s00d00_time_averaged_vs_eddy_x_advection_offline_calculation.pdf'}
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s00d00_time_averaged_vs_eddy_y_advection_offline_calculation.pdf'}
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s00d00_time_averaged_pressure_gradient_offline_calculation.pdf'  }
+
+
+ processing: spreadRip terRip1_h10t10s02d00 
+
+fout_stats =
+
+  1x1 cell array
+
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s02d00_velocity_and_vorticity_stats.pdf'}
+
+
+fout_momentum =
+
+  31x1 cell array
+
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s02d00_xshore_momentum_term_PgrdX_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s02d00_xshore_momentum_term_PgrdY_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s02d00_xshore_momentum_term_BrkDissX_time_averaged.pdf'       }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s02d00_xshore_momentum_term_BrkDissY_time_averaged.pdf'       }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s02d00_xshore_momentum_term_DxSxx_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s02d00_xshore_momentum_term_DxSxy_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s02d00_xshore_momentum_term_DySxy_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s02d00_xshore_momentum_term_DySyy_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s02d00_xshore_momentum_term_DxUUH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s02d00_xshore_momentum_term_DxUVH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s02d00_xshore_momentum_term_DyUVH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s02d00_xshore_momentum_term_DyVVH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s02d00_xshore_momentum_term_FRCX_time_averaged.pdf'           }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s02d00_xshore_momentum_term_FRCY_time_averaged.pdf'           }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s02d00_time_averaged_velocity.pdf'                            }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s02d00_time_averaged_waterlevel.pdf'                          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s02d00_time_averaged_vorticity.pdf'                           }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s02d00_time_averaged_streamfunction.pdf'                      }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s02d00_xshore_momentum_terms_time_and_alongshore_averaged.pdf'}
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s02d00dominant_momentum_terms_InnerSurfzone.pdf'              }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s02d00dominant_momentum_terms_MiddleSurfzone.pdf'             }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s02d00dominant_momentum_terms_OuterSurfzone.pdf'              }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s02d00dominant_momentum_terms_std_InnerSurfzone.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s02d00dominant_momentum_terms_std_MiddleSurfzone.pdf'         }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s02d00dominant_momentum_terms_std_OuterSurfzone.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s02d00_time_averaged_vs_eddy_x_advection.pdf'                 }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s02d00_time_averaged_vs_eddy_y_advection.pdf'                 }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s02d00_reynolds_stress_estimate.pdf'                          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s02d00_std_curl_Fbr.pdf'                                      }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s02d00_curl_of_radiation_stress_gradient'                     }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s02d00_curl_of_breaking_force'                                }
+
+loading from: funwave_terRip1_h10t10s02d00_uwavg_01.nc 
+fixing eta to time-mean... bug in source code
+
+fout_momentum_offline =
+
+  3x1 cell array
+
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s02d00_time_averaged_vs_eddy_x_advection_offline_calculation.pdf'}
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s02d00_time_averaged_vs_eddy_y_advection_offline_calculation.pdf'}
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s02d00_time_averaged_pressure_gradient_offline_calculation.pdf'  }
+
+
+ processing: spreadRip terRip1_h10t10s04d00 
+
+fout_stats =
+
+  1x1 cell array
+
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s04d00_velocity_and_vorticity_stats.pdf'}
+
+
+fout_momentum =
+
+  31x1 cell array
+
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s04d00_xshore_momentum_term_PgrdX_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s04d00_xshore_momentum_term_PgrdY_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s04d00_xshore_momentum_term_BrkDissX_time_averaged.pdf'       }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s04d00_xshore_momentum_term_BrkDissY_time_averaged.pdf'       }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s04d00_xshore_momentum_term_DxSxx_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s04d00_xshore_momentum_term_DxSxy_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s04d00_xshore_momentum_term_DySxy_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s04d00_xshore_momentum_term_DySyy_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s04d00_xshore_momentum_term_DxUUH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s04d00_xshore_momentum_term_DxUVH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s04d00_xshore_momentum_term_DyUVH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s04d00_xshore_momentum_term_DyVVH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s04d00_xshore_momentum_term_FRCX_time_averaged.pdf'           }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s04d00_xshore_momentum_term_FRCY_time_averaged.pdf'           }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s04d00_time_averaged_velocity.pdf'                            }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s04d00_time_averaged_waterlevel.pdf'                          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s04d00_time_averaged_vorticity.pdf'                           }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s04d00_time_averaged_streamfunction.pdf'                      }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s04d00_xshore_momentum_terms_time_and_alongshore_averaged.pdf'}
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s04d00dominant_momentum_terms_InnerSurfzone.pdf'              }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s04d00dominant_momentum_terms_MiddleSurfzone.pdf'             }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s04d00dominant_momentum_terms_OuterSurfzone.pdf'              }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s04d00dominant_momentum_terms_std_InnerSurfzone.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s04d00dominant_momentum_terms_std_MiddleSurfzone.pdf'         }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s04d00dominant_momentum_terms_std_OuterSurfzone.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s04d00_time_averaged_vs_eddy_x_advection.pdf'                 }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s04d00_time_averaged_vs_eddy_y_advection.pdf'                 }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s04d00_reynolds_stress_estimate.pdf'                          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s04d00_std_curl_Fbr.pdf'                                      }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s04d00_curl_of_radiation_stress_gradient'                     }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s04d00_curl_of_breaking_force'                                }
+
+loading from: funwave_terRip1_h10t10s04d00_uwavg_01.nc 
+fixing eta to time-mean... bug in source code
+
+fout_momentum_offline =
+
+  3x1 cell array
+
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s04d00_time_averaged_vs_eddy_x_advection_offline_calculation.pdf'}
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s04d00_time_averaged_vs_eddy_y_advection_offline_calculation.pdf'}
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s04d00_time_averaged_pressure_gradient_offline_calculation.pdf'  }
+
+
+ processing: spreadRip terRip1_h10t10s10d00 
+
+fout_stats =
+
+  1x1 cell array
+
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s10d00_velocity_and_vorticity_stats.pdf'}
+
+
+fout_momentum =
+
+  31x1 cell array
+
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s10d00_xshore_momentum_term_PgrdX_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s10d00_xshore_momentum_term_PgrdY_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s10d00_xshore_momentum_term_BrkDissX_time_averaged.pdf'       }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s10d00_xshore_momentum_term_BrkDissY_time_averaged.pdf'       }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s10d00_xshore_momentum_term_DxSxx_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s10d00_xshore_momentum_term_DxSxy_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s10d00_xshore_momentum_term_DySxy_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s10d00_xshore_momentum_term_DySyy_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s10d00_xshore_momentum_term_DxUUH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s10d00_xshore_momentum_term_DxUVH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s10d00_xshore_momentum_term_DyUVH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s10d00_xshore_momentum_term_DyVVH_time_averaged.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s10d00_xshore_momentum_term_FRCX_time_averaged.pdf'           }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s10d00_xshore_momentum_term_FRCY_time_averaged.pdf'           }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s10d00_time_averaged_velocity.pdf'                            }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s10d00_time_averaged_waterlevel.pdf'                          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s10d00_time_averaged_vorticity.pdf'                           }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s10d00_time_averaged_streamfunction.pdf'                      }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s10d00_xshore_momentum_terms_time_and_alongshore_averaged.pdf'}
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s10d00dominant_momentum_terms_InnerSurfzone.pdf'              }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s10d00dominant_momentum_terms_MiddleSurfzone.pdf'             }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s10d00dominant_momentum_terms_OuterSurfzone.pdf'              }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s10d00dominant_momentum_terms_std_InnerSurfzone.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s10d00dominant_momentum_terms_std_MiddleSurfzone.pdf'         }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s10d00dominant_momentum_terms_std_OuterSurfzone.pdf'          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s10d00_time_averaged_vs_eddy_x_advection.pdf'                 }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s10d00_time_averaged_vs_eddy_y_advection.pdf'                 }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s10d00_reynolds_stress_estimate.pdf'                          }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s10d00_std_curl_Fbr.pdf'                                      }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s10d00_curl_of_radiation_stress_gradient'                     }
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s10d00_curl_of_breaking_force'                                }
+
+loading from: funwave_terRip1_h10t10s10d00_uwavg_01.nc 
+fixing eta to time-mean... bug in source code
+
+fout_momentum_offline =
+
+  3x1 cell array
+
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s10d00_time_averaged_vs_eddy_x_advection_offline_calculation.pdf'}
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s10d00_time_averaged_vs_eddy_y_advection_offline_calculation.pdf'}
+    {'/scratch/grimesdj/ripchannel/spreadRip//figures/terRip1_h10t10s10d00_time_averaged_pressure_gradient_offline_calculation.pdf'  }
+
+
+ processing: spreadRip terRip1_h10t10s20d00 

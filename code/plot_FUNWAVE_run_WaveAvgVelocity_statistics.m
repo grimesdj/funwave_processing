@@ -4,6 +4,13 @@ function fout = plot_FUNWAVE_run_WaveAvgVelocity_statistics(info);
 %
 % takes run "info" structure and creates plots of run
 % statistics, outputing a list of archived figures.
+%
+% also add stats to the velocity decomposition file:
+% Uex: (mean) and (eddy) (m/s)
+% Umke: mean kinetic energy (m/s)
+% Ueke: eddy kinetic energy (m/s)
+% ENSmean: mean enstrophy (1/s)^2
+% ENSeddy: eddy enstrophy (1/s)^2
 
 figDIR = [info.rootMOD,filesep,'figures/'];
 if ~exist(figDIR,'dir')
@@ -24,14 +31,14 @@ VORT     = ncread(info.rotVelFile,'VORT');
 ETA      = ncread(info.rotVelFile,'eta');
 H        = max(h+ETA,0.1);
 %
-% estimate energy/exchange statistics
+%% estimate eddy energy/exchange statistics
 tmp      = sqrt( Urot.^2 + Vrot.^2 );
-EKE      = sum( tmp.*H , [1 3],'omitnan')./sum( H, [1 3],'omitnan');
+Ueke      = sum( tmp.*H , [1 3],'omitnan')./sum( H, [1 3],'omitnan');
 tmp      = Urot; tmp(Urot<0)=nan;
-tmp1     = H;    tmp1(Urot<0)=nan;
-Uex      = sum( tmp.*tmp1 , [1 3],'omitnan')./sum( tmp1, [1 3], 'omitnan');clear tmp
+tmp1     = H;    tmp1(H<0.1)=nan;
+Uex_eddy      = sum( tmp.*tmp1 , [1 3],'omitnan')./sum( tmp1, [1 3], 'omitnan');clear tmp
 %
-% estimate the energy/exchange for the mean fields:
+%% estimate the energy/exchange for the mean fields:
 momFile = [info.rootMat,info.rootName,'MomentumTerms.nc'];
 Umean   = ncread(momFile,'umean');
 Vmean   = ncread(momFile,'vmean');
@@ -47,16 +54,20 @@ Vmean   = mean(Vmean,3,'omitnan');
 ETAmean = mean(ETAmean,3,'omitnan');
 Hmean   = h+ETAmean;
 %
-% % estimate mean kinetic energy
-MKE     = sum(sqrt( Umean.^2 + Vmean.^2).*Hmean, 1,'omitnan')./sum(Hmean, 1,'omitnan');
+%% estimate mean kinetic energy
+Umke     = sum(sqrt( Umean.^2 + Vmean.^2).*Hmean, 1,'omitnan')./sum(Hmean, 1,'omitnan');
 %
-tmp = Umean; tmp(Umean<0)=nan;
-tmp1 = Hmean; tmp1(Umean<0)=nan;
-Uex_avg = sum(tmp.*tmp1, 1, 'omitnan')./sum(tmp1, 1, 'omitnan');
+tmp  = Umean; tmp(Umean<0)=nan;
+tmp1 = Hmean; tmp1(Hmean<0.1)=nan;
+Uex_mean = sum(tmp.*tmp1, 1, 'omitnan')./sum(tmp1, 1, 'omitnan');
 %
+%% estimate the enstrophy stats
 [~,dUdy] = gradient(Umean./info.dy);
 [dVdx,~] = gradient(Vmean./info.dx);
 VORTavg  = dVdx-dUdy;
+%
+ENS_mean = sqrt( mean(VORTavg.^2, [1 3],'omitnan') );
+ENS_eddy = sqrt( mean(VORT   .^2, [1 3],'omitnan') );
 %
 % figure properties
 xm = 2.5;
@@ -74,13 +85,13 @@ fig.PaperSize=ps;
 fig.PaperPosition=[0 0 ps];
 %
 a1 = axes('units','centimeters','position',ppos1);
-plot(x, rms(VORT,[1 3],'omitnan'),'-k',x, rms(VORTavg,1,'omitnan'),'--k', 'linewidth',2)
+plot(x, sqrt(ENS_eddy),'-k',x, sqrt(ENS_mean),'--k', 'linewidth',2)
 legend({'$\bar{\omega}$','$\langle\omega\rangle$'},'interpreter','latex')
 xlabel('$x$ [m]','interpreter','latex')
 ylabel('$\mathrm{rms}\langle \omega \rangle$ (s$^{-1}$)','interpreter','latex')
 set(a1,'tickdir','out','ticklabelinterpreter','latex')
 a2 = axes('units','centimeters','position',ppos2);
-plot(x, Uex,'-k',x,Uex_avg,'--k',x,EKE,'-r',x,MKE,'-b', 'linewidth',2)
+plot(x, Uex_eddy,'-k',x,Uex_mean,'--k',x,Ueke,'-r',x,Umke,'-b', 'linewidth',2)
 legend({'$U_\mathrm{ex}$','$\langle U\rangle_\mathrm{ex}$','$U_\mathrm{eke}$','$U_\mathrm{mke}$'},'interpreter','latex')
 ylabel('(m/s)','interpreter','latex')
 set(a2,'tickdir','out','ticklabelinterpreter','latex','xticklabel',[])
@@ -153,6 +164,29 @@ end
 close(vid)
 close(fig)
 %
+%% archive:
+dim_x  = {"x",length(x)};
+nccreate  (info.rotVelFile,'Uex_eddy','Dimensions',dim_x,'Format','netcdf4')
+ncwrite   (info.rotVelFile,'Uex_eddy',Uex_eddy);
+ncwriteatt(info.rotVelFile,'Uex_eddy','Description','Exchange velocity from wave-averaged rotational velocity');
 %
-clear VORT Urot Vrot EKE Urot
+nccreate  (info.rotVelFile,'Uex_mean','Dimensions',dim_x,'Format','netcdf4')
+ncwrite   (info.rotVelFile,'Uex_mean',Uex_mean);
+ncwriteatt(info.rotVelFile,'Uex_mean','Description','Exchange velocity from time-mean velocity');
+%
+nccreate  (info.rotVelFile,'Ueke','Dimensions',dim_x,'Format','netcdf4')
+ncwrite   (info.rotVelFile,'Ueke',Ueke);
+ncwriteatt(info.rotVelFile,'Ueke','Description','Energy velocity scale from wave-averaged rotational velocity');
+%
+nccreate  (info.rotVelFile,'Umke','Dimensions',dim_x,'Format','netcdf4')
+ncwrite   (info.rotVelFile,'Umke',Umke);
+ncwriteatt(info.rotVelFile,'Umke','Description','Energy velocity scale from time-mean velocity');
+%
+nccreate  (info.rotVelFile,'ENS_eddy','Dimensions',dim_x,'Format','netcdf4')
+ncwrite   (info.rotVelFile,'ENS_eddy',ENS_eddy);
+ncwriteatt(info.rotVelFile,'ENS_eddy','Description','Enstrophy from wave-averaged rotational velocity');
+%
+nccreate  (info.rotVelFile,'ENS_mean','Dimensions',dim_x,'Format','netcdf4')
+ncwrite   (info.rotVelFile,'ENS_mean',ENS_mean);
+ncwriteatt(info.rotVelFile,'ENS_mean','Description','Enstrophy from time-mean velocity');
 %

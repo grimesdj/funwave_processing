@@ -80,7 +80,7 @@ for ii=1:Nf
     %
     eta=etawavg-ETAmean;
     u = uwavg-(Umean+Ustokes);
-    v = vwavg-;
+    v = vwavg;
     clear etawavg uwavg vwavg
     %
     % estimate vorticity
