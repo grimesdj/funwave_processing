@@ -1,0 +1,82 @@
+%% create compendium plot of exchange and enstrophy for a set of runs:
+clear all
+close all
+%% 0) where are we looking? archiving?
+rootDIR  = '/data2/ripchannel/'
+figDIR   = '/data2/ripchannel/figures/'
+outDIR   = '/data2/ripchannel/mat_data/'
+
+%% 1) need a list of run-directories to compare:
+NAMES    = {'highRip-barRip0-s00','highRip-barRip1-s00','highRip-terRip1-s00','highRip-terRip1-s10','highRip-barRip1-s10','highRip-barRip0-s10','spreadRip-barRip0','spreadRip-barRip1','spreadRip-terRip1'};
+%
+xm = 0.25;
+ym = 0.25;
+pw = 6;
+ph = 6;
+ag = 0.5;
+ppos  = [xm ym pw ph];
+cbpos = [xm+pw+ag, ag, ph/2];
+ps    = [2*xm+pw+6*ag, 2*ym+ph];
+fig   = figure('units','centimeters');
+fig.Position(3:4) = ps;
+set(fig,'papersize',ps,'paperposition',[0 0 ps])
+for nn = 1:length(NAMES)
+% $$$     clearvars -except rootDIR figDIR outDIR NAMES nn
+    NAME     = NAMES{nn};
+switch NAME
+  case 'highRip-barRip0-s00'
+    runIDs   = {'highRip','spreadRip','highRip'}    
+    run_dirs = {'barRip0_h05t10s00d00','barRip0_h10t10s00d00','barRip0_h15t10s00d00'};
+    height   = {'0.5','1','1.5'};
+    cbttl    = '$H_\mathrm{s}$ [m]';
+  case 'highRip-barRip1-s00'
+    runIDs   = {'highRip','spreadRip','highRip'}    
+    run_dirs = {'barRip1_h05t10s00d00','barRip1_h10t10s00d00','barRip1_h15t10s00d00'};
+    cblbl    = {'0.5','1','1.5'};
+    cbttl    = '$H_\mathrm{s}$ [m]';
+  case 'highRip-terRip1-s00'
+    runIDs   = {'highRip','spreadRip','highRip'}    
+    run_dirs = {'terRip1_h05t10s00d00','terRip1_h10t10s00d00','terRip1_h15t10s00d00'};
+    cblbl    = {'0.5','1','1.5'};
+    cbttl    = '$H_\mathrm{s}$ [m]';
+  case 'highRip-barRip0-s10'
+    runIDs   = {'highRip','spreadRip','highRip'}    
+    run_dirs = {'barRip0_h05t10s10d00','barRip0_h10t10s10d00','barRip0_h15t10s10d00'};
+    cblbl    = {'0.5','1','1.5'};
+    cbttl    = '$H_\mathrm{s}$ [m]';
+  case 'highRip-barRip1-s10'
+    runIDs   = {'highRip','spreadRip','highRip'}    
+    run_dirs = {'barRip1_h05t10s10d00','barRip1_h10t10s10d00','barRip1_h15t10s10d00'};
+    cblbl    = {'0.5','1','1.5'};
+    cbttl    = '$H_\mathrm{s}$ [m]';
+  case 'highRip-terRip1-s10'
+    runIDs   = {'highRip','spreadRip','highRip'}    
+    run_dirs = {'terRip1_h05t10s10d00','terRip1_h10t10s10d00','terRip1_h15t10s10d00'};
+    cblbl    = {'0.5','1','1.5'};
+    cbttl    = '$H_\mathrm{s}$ [m]';
+  case 'spreadRip-barRip0'
+    runIDs   = {'spreadRip','spreadRip','spreadRip','spreadRip','spreadRip'}
+    run_dirs = {'barRip0_h10t10s00d00','barRip0_h10t10s02d00','barRip0_h10t10s04d00','barRip0_h10t10s10d00','barRip0_h10t10s20d00'};
+    cblbl    = {'0','2','4','10','20'};
+    cbttl    = '$\sigma_\theta$ [$^\circ$]';
+  case 'spreadRip-barRip1'
+    runIDs   = {'spreadRip','spreadRip','spreadRip','spreadRip','spreadRip'}
+    run_dirs = {'barRip1_h10t10s00d00','barRip1_h10t10s02d00','barRip1_h10t10s04d00','barRip1_h10t10s10d00','barRip1_h10t10s20d00'};
+    cblbl    = {'0','2','4','10','20'};
+    cbttl    = '$\sigma_\theta$ [$^\circ$]';
+  case 'spreadRip-terRip1'
+    runIDs   = {'spreadRip','spreadRip','spreadRip','spreadRip','spreadRip'}
+    run_dirs = {'terRip1_h10t10s00d00','terRip1_h10t10s02d00','terRip1_h10t10s04d00','terRip1_h10t10s10d00','terRip1_h10t10s20d00'};
+    cblbl    = {'0','2','4','10','20'};
+    cbttl    = '$\sigma_\theta$ [$^\circ$]';
+end
+
+
+%% 2) loop over the list, loading and allocating Uex, ENS, etc.
+tmp = load([outDIR,'BulkVelocityStats_',NAME,'.mat'],'x','Uex','Uex_mean','Uex_eddy','ENS','ENS_mean','ENS_eddy','dETA','Uscale','Umax','Umax_mean','Umax_eddy','runIDs','run_dirs','cblbl','cbttl','Uex_channel','Uex_ambient','Uex_mean_channel','Uex_mean_ambient','Uex_eddy_channel','Uex_eddy_ambient','ENS_channel','ENS_ambient','ENS_mean_channel','ENS_mean_ambient','ENS_eddy_channel','ENS_eddy_ambient')
+
+Umax = cat(1,Umax,tmp.Umax);
+cblbl= cat(1,cblbl,tmp.cblbl);
+cbttl= cat(1,cbttl,tmp.cbttl);
+
+end
