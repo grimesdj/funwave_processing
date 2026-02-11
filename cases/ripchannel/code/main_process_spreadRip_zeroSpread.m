@@ -1,5 +1,5 @@
 %% error in input files (zero-spread are non-binary i/o) corrupted first run: barRip0_h05t10s00d00
-%% processing s~=0 here...
+%% processing s==0 here...
 
 
 % code to be launched on cms-hpc "cuttlefish"
@@ -35,8 +35,8 @@ load([matDIR,filesep,'runs_to_process.mat'])
 %
 % loop over run_dirs
 Ndirs  = length(run_dirs);
-disp('ONLY PROCESSING NON-ZERO SPREAD CASES [2:5,7:10,12:15]')
-for jj = [9:10,12:15]%[2:5,7:10,12:15]
+disp('ONLY PROCESSING NON-ZERO SPREAD CASES 2:2:12')
+for jj = [1:5:Ndirs]
 % 1) get current run subdirectory to process:
 runID    = run_dirs{jj};
 fprintf('\n processing: %s %s \n', runBATHY,runID)    
@@ -49,7 +49,7 @@ end
 info  = load([infoFile(1).folder,filesep,infoFile(1).name]);
 %
 %
-if reproc & jj>9
+if reproc 
     info = prep_info_structure(info);
     %
     % run specific output grid info:
@@ -63,10 +63,10 @@ if reproc & jj>9
     dt_lp = info.T_INTV_wavg*ones(NwaveAvg,1);
     t_lp = [1:NwaveAvg]*dt_lp(1);
     % binary output files... faster archiving
-    isBINARY = 1;
+    isBINARY = 0;
     fLog = convert_funwave_output_to_NetCDF(info.rootOut,[info.rootMat,info.rootName],vars,t_lp,dt_lp,info.dx,spanx,rngx,info.dy,spany,rngy,rmfiles,300,[-inf inf],isBINARY,info.Nx-1,info.Ny-1);
     % construct time vector for Radiation Stress variables
-    vars = {'BrkDissX','BrkDissY','DxSxx','DxSxy','DxUUH','DxUVH','DySxy','DySyy','DyUVH','DyVVH','FRCX','FRCY','PgrdX','PgrdY','Sxx','Syy','Sxy','umean','vmean','etamean','Hsig'};
+    vars = {'BrkDissX','BrkDissY','DxSxx','DxSxy','DxUUH','DxUVH','DySxy','DySyy','DyUVH','DyVVH','FRCX','FRCY','PgrdX','PgrdY','Sxx','Syy','Sxy','umean','vmean','etamean'};
     Nbrk = floor((info.TOTAL_TIME-info.STEADY_TIME)/info.T_INTV_mean);
     dt_lp = info.T_INTV_mean*ones(Nbrk,1);
     t_lp = [1:Nbrk]*dt_lp(1);
@@ -74,7 +74,7 @@ if reproc & jj>9
 end
 %
 %
-if recalc & jj>9
+if recalc 
     info = estimate_FUNWAVE_run_statistics_WaveAvgVelocity(info);
 end
 %
@@ -84,7 +84,6 @@ if plotter
 fout_stats    = plot_FUNWAVE_run_WaveAvgVelocity_statistics(info)
 fout_momentum = plot_FUNWAVE_run_momentum(info)
 fout_momentum_offline = plot_FUNWAVE_offline_momentum_budget(info)
-close all
 end
 end
 end

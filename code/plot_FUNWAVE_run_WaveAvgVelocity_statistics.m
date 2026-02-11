@@ -165,28 +165,33 @@ close(vid)
 close(fig)
 %
 %% archive:
+% check for existing vars: Uex_eddy, etc.
+finfo = ncinfo(info.rotVelFile);
+vars  = {finfo.Variables.Name}';
+if ~ismember('Uex_eddy',vars)
 dim_x  = {"x",length(x)};
 nccreate  (info.rotVelFile,'Uex_eddy','Dimensions',dim_x,'Format','netcdf4')
-ncwrite   (info.rotVelFile,'Uex_eddy',Uex_eddy);
 ncwriteatt(info.rotVelFile,'Uex_eddy','Description','Exchange velocity from wave-averaged rotational velocity');
 %
 nccreate  (info.rotVelFile,'Uex_mean','Dimensions',dim_x,'Format','netcdf4')
-ncwrite   (info.rotVelFile,'Uex_mean',Uex_mean);
 ncwriteatt(info.rotVelFile,'Uex_mean','Description','Exchange velocity from time-mean velocity');
 %
 nccreate  (info.rotVelFile,'Ueke','Dimensions',dim_x,'Format','netcdf4')
-ncwrite   (info.rotVelFile,'Ueke',Ueke);
 ncwriteatt(info.rotVelFile,'Ueke','Description','Energy velocity scale from wave-averaged rotational velocity');
 %
 nccreate  (info.rotVelFile,'Umke','Dimensions',dim_x,'Format','netcdf4')
-ncwrite   (info.rotVelFile,'Umke',Umke);
 ncwriteatt(info.rotVelFile,'Umke','Description','Energy velocity scale from time-mean velocity');
 %
 nccreate  (info.rotVelFile,'ENS_eddy','Dimensions',dim_x,'Format','netcdf4')
-ncwrite   (info.rotVelFile,'ENS_eddy',ENS_eddy);
 ncwriteatt(info.rotVelFile,'ENS_eddy','Description','Enstrophy from wave-averaged rotational velocity');
 %
 nccreate  (info.rotVelFile,'ENS_mean','Dimensions',dim_x,'Format','netcdf4')
-ncwrite   (info.rotVelFile,'ENS_mean',ENS_mean);
 ncwriteatt(info.rotVelFile,'ENS_mean','Description','Enstrophy from time-mean velocity');
 %
+end
+ncwrite   (info.rotVelFile,'Uex_eddy',Uex_eddy);
+ncwrite   (info.rotVelFile,'Uex_mean',Uex_mean);
+ncwrite   (info.rotVelFile,'Ueke',Ueke);
+ncwrite   (info.rotVelFile,'Umke',Umke);
+ncwrite   (info.rotVelFile,'ENS_eddy',ENS_eddy);
+ncwrite   (info.rotVelFile,'ENS_mean',ENS_mean);
