@@ -10,7 +10,7 @@ function [psi,u_psi,v_psi,phi,u_phi,v_phi]=get_vel_decomposition_reGRID(u,v,dx,d
 % dx  = cross-shore grid spacing (m)
 % dy  = alongshore grid spacing (m)
 % OUTPUT:
-% psi = Velocity stream function
+% psi = Velocity stream function (there's a minus sign issue here)
 % phi = Velocity potential
 %
 % This function has been written by Dr. Matthew Spydell, SIO, UCSD

@@ -359,7 +359,7 @@ clim1 = [-0.5 0.5];
 clrs1 = clim1(1):diff(clim1)/255:clim1(2);
 a1 = axes('units','centimeters','position',ppos1);
 scale = 1e-2;
-imagesc(y,x,-PgrdX'/scale)
+imagesc(y,x,PgrdX'/scale)
 hold(a1,'on'), contour(y,x,h',[0:1:6],'-k','linewidth',0.5)
 colormap(a1,cm1),caxis(a1,clim1)
 xlabel('$y$ [m]','interpreter','latex')
@@ -369,7 +369,7 @@ ylabel('$x$ [m]','interpreter','latex')
                'fontsize',8,'backgroundcolor','none')    
 set(a1,'tickdir','out','ticklabelinterpreter','latex','ydir','normal','xdir','reverse')
 a2 = axes('units','centimeters','position',ppos2);
-imagesc(y,x,-PgrdY'/scale)
+imagesc(y,x,PgrdY'/scale)
 hold(a2,'on'), contour(y,x,h',[0:1:6],'-k','linewidth',0.5)
 colormap(a2,cm1),caxis(a2,clim1)    
 ylabel('$x$ [m]','interpreter','latex')
