@@ -2838,19 +2838,14 @@ SUBROUTINE WK_NEW_EQUAL_DFREQ_IRREGULAR_WAVE &
     REAL(SP) :: Ef,fre,omiga_spec,phi,sigma_spec,Ef100,Ef_add,sigma_theta,&
                     theta_p,theta_m,theta_10,theta_11,theta_21,alpha_spec,ap,&
                     alpha,alpha1,tb,tc,wkn,C_phase,wave_length,rl_gen,rI,&
-                    theta_1,omgn_tmp,df,correction_coeff,ktheta_temp,Theta_temp&
-                    THETA_MAX_DEG,THETA_MAX
+                    theta_1,omgn_tmp,df,correction_coeff,ktheta_temp,Theta_temp
     INTEGER :: kf,kff,kb,N_spec,ktotal,k_n,ktheta,mcenter
     INTEGER, DIMENSION(mfreq) :: displace_theta
     INTEGER :: idx_theta
     ! inclusion of wave coherency
     REAL(SP),INTENT(INOUT) :: alpha_c   ! wave coherence percentage
 
-      
-    !Grimes added variable limits on theta for narrow directional spread cases
-    THETA_MAX_DEG = MIN(10_SP*sigma_theta_input,60_SP)
-    THETA_MAX = THETA_MAX_DEG*pi/180_SP
-    !Grimes (end)
+
     df = (fmax-fmin)/(mfreq-1.0_SP)
     Ef = ZERO
 
@@ -2876,12 +2871,12 @@ SUBROUTINE WK_NEW_EQUAL_DFREQ_IRREGULAR_WAVE &
         DO kf=1,mfreq !new method
             ktheta_temp = MOD(kf-idx_theta,mtheta)
             IF(ktheta_temp.le.ZERO) ktheta_temp = ktheta_temp + mtheta
-            theta(kf) = (-1_SP)**real(kf)*(-THETA_MAX + &
-                2.0_SP*THETA_MAX*(floor(real(ktheta_temp)/2.0_SP - &
-                0.5_SP))/(real(mtheta)-1.0_SP))   !Grimes reduced theta range to (-pi/3,pi/3) or 10xsigma_theta_input
+            theta(kf) = (-1_SP)**real(kf)*(-pi*1.0_SP/3.0_SP + &
+                2.0_SP/3.0_SP*pi*(floor(real(ktheta_temp)/2.0_SP - &
+                0.5_SP))/(real(mtheta)-1.0_SP))   !Grimes reduced theta range to -pi/3 to pi/3
             theta(kf) = theta(kf) + theta_input*pi/180.0_SP   !new method
-            IF(theta(kf).gt.THETA_MAX) theta(kf) = THETA_MAX ! reducing range here, too
-            IF(theta(kf).lt.-THETA_MAX) theta(kf) = -THETA_MAX
+            IF(theta(kf).gt.0.5_SP*pi) theta(kf) = pi/3.0_SP ! reducing range to +/- pi/3
+            IF(theta(kf).lt.-0.5_SP*pi) theta(kf) = -pi/3.0_SP
             AG(kf) = 1.0_SP/( 2.0_SP*pi )
             do k_n=1,N_spec
                 AG(kf) = AG(kf)+ &
