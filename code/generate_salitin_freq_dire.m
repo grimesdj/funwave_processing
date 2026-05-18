@@ -5,8 +5,8 @@ fmax= 0.25;
 h_gen=9;
 delta=2;
 fm = 0.1;
-theta_input=0;
-sigma_theta_input=02;
+theta_input=00;
+sigma_theta_input=10;
 gamma_spec=3;
 DY = 1;
 Nglob=2999;
@@ -14,7 +14,25 @@ alpha_c=0;
 PERIODIC=1;
 SMALL=eps('single');
 
-THETA_MAX_DEG = min(10*sigma_theta_input,60);
+%% NEW STUFF:
+alpha=-0.39;
+alpha1=alpha+1.0/3.0;
+grav=9.81;
+omgn=2.0*pi*fm;
+tb=omgn*omgn*h_gen/grav;
+tc=1.0+tb*alpha;
+wkn=sqrt((tc-sqrt(tc*tc-4.0*alpha1*tb))/(2.0*alpha1))/h_gen;
+
+DTHETA0 = asin(2*pi/DY/(Nglob-1)/wkn);
+THETA_MAX_DEG = (mtheta-1)/2 * DTHETA0*180/pi
+NSIGMA  = THETA_MAX_DEG / sigma_theta_input
+while NSIGMA<5 & THETA_MAX_DEG<60
+    disp('decreasing angular resolution')
+    THETA_MAX_DEG = min(2*THETA_MAX_DEG,60);
+    NSIGMA = THETA_MAX_DEG / sigma_theta_input
+end
+%%
+% $$$ THETA_MAX_DEG = min(10*sigma_theta_input,60);
 THETA_MAX = THETA_MAX_DEG*pi/180;
 
 df = (fmax-fmin)/(mfreq-1.0);
