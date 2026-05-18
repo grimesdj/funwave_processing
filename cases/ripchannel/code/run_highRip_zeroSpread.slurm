@@ -13,7 +13,7 @@ for dir in "${dirs[@]}"; do
        --job-name="$job_name" \
        --output="$output_file" \
        --mem=300G \
-       --partition=general\
+       --partition=highmem\
        --mail-user=coastesthydro@gmail.com \
        --mail-type=BEGIN,END,FAIL          \
         matlab_bg.sh main_process_highRip_zeroSpread.m highRip_zeroSpread.out
