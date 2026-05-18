@@ -1,28 +1,66 @@
-./bc.F:    CALL PHI_COLL(Mloc,Nloc,Ibeg,Iend,Jbeg,Jend,Nghost,U_davg,VTYPE,PERIODIC)
-./bc.F:    CALL PHI_COLL(Mloc,Nloc,Ibeg,Iend,Jbeg,Jend,Nghost,U_davg,VTYPE)
-./etauv_solver.F:       U_davg(I,J) = P_center(I,J)/Max(H(I,J),MinDepthFrc)
-./mixing.F:!                 Cd,Depth,U_davg,V_davg,U_davg_sum,V_davg_sum, &
-./mixing.F:!                  U_davg_mean,V_davg_mean,P_center,Q_center,P_sum,Q_sum, &
-./mixing.F:!                 Cd,Depth,U_davg,V_davg,U_davg_sum,V_davg_sum, &
-./mixing.F:!                  U_davg_mean,V_davg_mean,P_center,Q_center,P_sum,Q_sum, &
-./mixing.F:!      REAL(SP),DIMENSION(M,N),INTENT(OUT) :: U_davg_sum,V_davg_sum, &
-./mixing.F:!                                             U_davg_mean,V_davg_mean,&
-./mixing.F:!      REAL(SP),DIMENSION(M,N),INTENT(IN) :: U_davg,V_davg,P_center,Q_center
-./mixing.F:        U_davg_sum=U_davg*DT+U_davg_sum
-./mixing.F:        UUsum = (U_davg-U_davg_mean)*(U_davg-U_davg_mean)*(Eta-ETAmean+Depth)*DT + UUsum
-./mixing.F:        UVsum = (U_davg-U_davg_mean)*(V_davg-V_davg_mean)*(Eta-ETAmean+Depth)*DT + UVsum
-./mixing.F:        U_davg_mean = U_davg_sum/T_sum
-./mixing.F:        U_davg_sum = ZERO
-./mixing.F:        U_davg_sum=U_davg*DT+U_davg_sum
-./mixing.F:        UUsum = (U_davg-U_davg_mean)*(U_davg-U_davg_mean)*(Eta-ETAmean+Depth)*DT + UUsum
-./mixing.F:        UVsum = (U_davg-U_davg_mean)*(V_davg-V_davg_mean)*(Eta-ETAmean+Depth)*DT + UVsum
-./mixing.F:	Usum_wavg=U_davg*DT+Usum_wavg
-./mixing.F:        Usum_wavg=U_davg*DT+Usum_wavg
-./init.F:              U_davg(Mloc,Nloc),V_davg(Mloc,Nloc), &
-./init.F:              U_davg_sum(Mloc,Nloc),V_davg_sum(Mloc,Nloc), &
-./init.F:              U_davg_mean(Mloc,Nloc),V_davg_mean(Mloc,Nloc), &
-./init.F:     U_davg = ZERO
-./init.F:     U_davg_mean = ZERO
-./init.F:     U_davg_sum = ZERO
-./mod_global.F:                  P_center,Q_center,U_davg,V_davg,U_davg_sum,V_davg_sum, &
-./mod_global.F:                  U_davg_mean,V_davg_mean,P_sum,Q_sum, &
+.//fluxes_21v.F:     P=0.5_SP*(PR+PL)
+.//masks.F:     MASKtmp=MASK
+.//masks.F:!     ETAtmp=ETA
+.//masks.F:     ETAtmp=EtaScreen
+.//misc.F:    icp=0
+.//misc.F:      icp=icp+1
+.//misc.F:     DT_tmp=CFL*TMP3
+.//mod_tracer.F:        DO I_tmp=1,NumTracker
+.//mod_sediment.F:        Pickup=ZERO
+.//mod_param.F:       INTEGER, PARAMETER::SP=8
+.//mod_param.F:       INTEGER, PARAMETER::MPI_SP=MPI_DOUBLE_PRECISION
+.//mod_param.F:       INTEGER, PARAMETER::SP=SELECTED_REAL_KIND(6,30)
+.//mod_param.F:       INTEGER, PARAMETER::MPI_SP=MPI_REAL
+.//mod_global.F:       REAL(SP) :: FroudeCap=10.0_SP
+.//mod_global.F:       REAL(SP) :: SWE_ETA_DEP=0.7_SP
+.//mod_global.F:                  OUT_P=.FALSE., OUT_Q=.FALSE., &
+.//mod_global.F:                  OUT_TMP=.FALSE., OUT_AGE=.FALSE.,OUT_NU=.FALSE., &
+.//fluxes.F:     P=0.5_SP*(PR+PL)
+.//wavemaker.F:        omgn_tmp=2.0_SP*pi/PeakPeriod
+.//wavemaker.F:        ap=Hmo_each(ktheta)/SQRT(2.0_SP)/2.0_SP
+.//wavemaker.F:!        ap=Hmo_each(ktheta)/2.0_SP  ! Joes suggestion
+.//wavemaker.F:        ap=Hmo_each(ktheta,kf)/SQRT(2.0_SP)/2.0_SP
+.//wavemaker.F:!        ap=Hmo_each(ktheta)/2.0_SP  ! Joes suggestion
+.//wavemaker.F:         ap=Hmo_each(ktheta)/SQRT(2.0_SP)/2.0_SP
+.//wavemaker.F:!        ap=Hmo_each(ktheta)/2.0_SP  ! this is the one suggested by Geiman
+.//wavemaker.F:        omgn_tmp=2.0_SP*pi*fm
+.//wavemaker.F:         ap=Hmo_each(ktheta,kf)/SQRT(2.0_SP)/2.0_SP
+.//wavemaker.F:        omgn_tmp=2.0_SP*pi*fm
+.//wavemaker.F:        omgn_tmp=2.0_SP*pi/PeakPeriod
+.//wavemaker.F:            ELSEIF(Theta_temp==0.0_SP)THEN
+.//wavemaker.F:    omgn_tmp=2.0_SP*pi/PeakPeriod
+.//wavemaker.F:            ELSEIF (Theta_temp==0.0_SP)THEN
+.//wavemaker.F:    omgn_tmp=2.0_SP*pi*fm
+.//io.F:      if (myid.eq.0) WRITE(3,'(A5,F12.2)')'SLP=', SLP
+.//io.F:      if (myid.eq.0) WRITE(3,'(A6,F12.2)')'Xslp=', Xslp  
+.//io.F:      WRITE(3,'(A5,F12.2)')'SLP=', SLP
+.//io.F:      WRITE(3,'(A6,F12.2)')'Xslp=', Xslp  
+.//io.F:      if (myid.eq.0) WRITE(3,'(A11,F12.2)')'Time_ramp=', Time_ramp
+.//io.F:      WRITE(3,'(A11,F12.2)')'Time_ramp=', Time_ramp
+.//io.F:      if (myid.eq.0) WRITE(3,'(A11,F12.2)')'Time_ramp=', Time_ramp
+.//io.F:      WRITE(3,'(A11,F12.2)')'Time_ramp=', Time_ramp
+.//io.F:      if (myid.eq.0) WRITE(3,'(A12,F12.2)')'Time_ramp= ', Time_ramp
+.//io.F:      WRITE(3,'(A12,F12.2)')'Time_ramp= ', Time_ramp
+.//io.F:      if (myid.eq.0) WRITE(3,'(A12,F12.2)')'Time_ramp= ', Time_ramp
+.//io.F:      WRITE(3,'(A12,F12.2)')'Time_ramp= ', Time_ramp
+.//io.F:        if (myid.eq.0) WRITE(3,'(A22,F12.2)')'DIFFUSION_SPONGE Csp=', Csp
+.//io.F:        WRITE(3,'(A22,F12.2)')'DIFFUSION_SPONGE Csp=', Csp
+.//io.F:       if (myid.eq.0) WRITE(3,'(A13,F12.2)')'SWE_ETA_DEP=', SWE_ETA_DEP
+.//io.F:       WRITE(3,'(A13,F12.2)')'SWE_ETA_DEP=', SWE_ETA_DEP
+.//io.F:      if (myid.eq.0) WRITE(3,'(A12,F12.2)')'FroudeCap=', FroudeCap
+.//io.F:      WRITE(3,'(A12,F12.2)')'FroudeCap=', FroudeCap
+.//io.F:        if (myid.eq.0) WRITE(3,'(A12,F12.2)')'Time_ramp= ', Time_ramp
+.//io.F:        WRITE(3,'(A12,F12.2)')'Time_ramp= ', Time_ramp
+.//init.F:     P=0.0_SP
+.//init.F:     U1p=ZERO
+.//init.F:     V1p=ZERO
+.//init.F:     U1pp=ZERO
+.//init.F:     V1pp=ZERO
+.//samples.F:     IF(dep==ZERO)THEN
+.//fluxes_33v.F:     P=0.5_SP*(PR+PL)
+.//etauv_solver.F:     REAL(SP),PARAMETER::n_left=-1.0_SP,n_right=1.0_SP,n_bottom=-1.0_SP,n_top=1.0_SP
+.//etauv_solver.F:      F_top=Q(I,J+1)
+.//etauv_solver.F:      F_top=Fy(I,J+1)
+.//etauv_solver.F:      F_top=Gy(I,J+1)
+.//etauv_solver.F:       dep=Max(Depth(I,J),MinDepthFrc)
+.//etauv_solver.F:       dep=Max(Depth(I,J),MinDepthFrc)

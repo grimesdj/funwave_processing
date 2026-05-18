@@ -1,12 +1,12 @@
-mfreq=1025;
-mtheta=25;
+mfreq=1550;
+mtheta=31;
 fmin= 0.04;
 fmax= 0.25;
 h_gen=9;
 delta=2;
 fm = 0.1;
 theta_input=0;
-sigma_theta_input=2;
+sigma_theta_input=02;
 gamma_spec=3;
 DY = 1;
 Nglob=2999;
@@ -14,6 +14,8 @@ alpha_c=0;
 PERIODIC=1;
 SMALL=eps('single');
 
+THETA_MAX_DEG = min(10*sigma_theta_input,60);
+THETA_MAX = THETA_MAX_DEG*pi/180;
 
 df = (fmax-fmin)/(mfreq-1.0);
     Ef = 0;
@@ -39,16 +41,16 @@ df = (fmax-fmin)/(mfreq-1.0);
             theta(kf) = (-1).^real(kf)*(-pi*1.0/2.0 + ...
                 2.0/2.0*pi*(floor(real(ktheta_temp)/2.0 - ...
                 0.5))/(real(mtheta)-1.0));   %new method
-            theta(kf) = (-1).^real(kf)*(-pi*1.0/3.0 + ...
-                2.0/3.0*pi*(floor(real(ktheta_temp)/2.0 - ...
+            theta(kf) = (-1).^real(kf)*(-THETA_MAX + ...
+                2*THETA_MAX*(floor(real(ktheta_temp)/2.0 - ...
                 0.5))/(real(mtheta)-1.0));   %Grimes narrowed +/- bounds
 
             theta(kf) = theta(kf) + theta_input*pi/180.0;   %new method
-            if theta(kf)>2*pi/3
-                theta(kf) = 2*pi/3;
+            if theta(kf)>THETA_MAX
+                theta(kf) = THETA_MAX;
             end
-            if theta(kf)<-2*pi/3
-                theta(kf) = -2*pi/3;
+            if theta(kf)<-THETA_MAX
+                theta(kf) = -THETA_MAX;
             end
             AG(kf) = 1.0/( 2.0*pi );
 % $$$             if abs(theta(kf))<pi/180 & abs(kf-displace_theta)<2
@@ -160,13 +162,13 @@ df = (fmax-fmin)/(mfreq-1.0);
         end
 
 
-        figure, scatter(Freq,theta0*180/pi,20,Hmo_each,'filled')
+        figure, scatter(Freq,theta*180/pi,20,Hmo_each/2/sqrt(2),'filled')
 
-        figure, scatter(Freq,theta*180/pi,20,log(Hmo_each),'filled')
+% $$$         figure, scatter(Freq,theta*180/pi,20,log(Hmo_each),'filled')
 
 
         if mod(mfreq,mtheta)==0
-            Hmo_array = reshape(Hmo_each,mtheta,mfreq/mtheta);
+            Hmo_array   = reshape(Hmo_each,mtheta,mfreq/mtheta);
             theta_array = reshape(theta0,mtheta,mfreq/mtheta);
-            freq_array = reshape(Freq,mtheta,mfreq/mtheta);
+            freq_array  = reshape(Freq,mtheta,mfreq/mtheta);
         end
