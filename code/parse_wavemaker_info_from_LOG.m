@@ -1,8 +1,9 @@
-clear all
+% clear all
 % close all
 % extract the wavemaker E(f,d) info from log file:
-fin = '/Users/derekgrimes/Library/CloudStorage/OneDrive-UNC-Wilmington/SED/ripchannel/spreadRip/barRip0_h10t10s02d00/LOG.txt';
+% fin = '/Users/derekgrimes/Library/CloudStorage/OneDrive-UNC-Wilmington/SED/ripchannel/spreadRip/barRip0_h10t10s02d00/LOG.txt';
 % fin = '/Users/derekgrimes/Library/CloudStorage/OneDrive-UNC-Wilmington/SED/ripchannel/spreadRip/barRip0_h10t10s00d00/LOG.txt';
+function [freq, dire, amp] = parse_wavemaker_info_from_LOG(fin,plotter);
 fid = fopen(fin);
 iter = 0;
 
@@ -50,5 +51,10 @@ end
 
 end
 
-figure,
-scatter(freq,dire,20,amp,'filled')
+if plotter
+    figure,
+    scatter(freq,dire,20,amp,'filled')
+end
+
+end
+

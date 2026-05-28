@@ -2838,8 +2838,8 @@ SUBROUTINE WK_NEW_EQUAL_DFREQ_IRREGULAR_WAVE &
     REAL(SP) :: Ef,fre,omiga_spec,phi,sigma_spec,Ef100,Ef_add,sigma_theta,&
                     theta_p,theta_m,theta_10,theta_11,theta_21,alpha_spec,ap,&
                     alpha,alpha1,tb,tc,wkn,C_phase,wave_length,rl_gen,rI,&
-                    theta_1,omgn_tmp,df,correction_coeff,ktheta_temp,Theta_temp&
-                    THETA_MAX_DEG,THETA_MAX
+                    theta_1,omgn_tmp,df,correction_coeff,ktheta_temp,Theta_temp,&
+                    DTHETA0,NSIGMA,THETA_MAX_DEG,THETA_MAX
     INTEGER :: kf,kff,kb,N_spec,ktotal,k_n,ktheta,mcenter
     INTEGER, DIMENSION(mfreq) :: displace_theta
     INTEGER :: idx_theta
@@ -2848,7 +2848,27 @@ SUBROUTINE WK_NEW_EQUAL_DFREQ_IRREGULAR_WAVE &
 
       
     !Grimes added variable limits on theta for narrow directional spread cases
-    THETA_MAX_DEG = MIN(10_SP*sigma_theta_input,60_SP)
+    ! estimate angular resolution at peak frequency:
+    alpha=-0.39_SP
+    alpha1=alpha+1.0_SP/3.0_SP
+    omgn_tmp=2.0_SP*pi*fm
+    tb=omgn_tmp*omgn_tmp*h_gen/grav
+    tc=1.0_SP+tb*alpha
+    wkn=SQRT((tc-SQRT(tc*tc-4.0_SP*alpha1*tb))/(2.0_SP*alpha1))/h_gen
+
+    DTHETA0 = ASIN(2.0_SP*pi/DY/(Nglob-1)/wkn)
+    THETA_MAX_DEG = (mtheta-1.0_SP)/2.0_SP*DTHETA0*180.0_SP/pi
+    NSIGMA = THETA_MAX_DEG / sigma_theta_input
+    DO WHILE (NSIGMA.LT.5.0_SP.AND.THETA_MAX_DEG<60.0_SP)
+       THETA_MAX_DEG = MIN(2*THETA_MAX_DEG,60.0_SP)
+       NSIGMA = THETA_MAX_DEG / sigma_theta_input
+    ENDDO
+
+    if(myid==0)then
+    WRITE(3,'(A40)') 'WM Angular Range, Resolution, #STD'
+    WRITE(3,'(3F12.5)')  THETA_MAX_DEG,THETA_MAX_DEG*2.0_SP/(mtheta-1.0_SP),NSIGMA
+    endif
+
     THETA_MAX = THETA_MAX_DEG*pi/180_SP
     !Grimes (end)
     df = (fmax-fmin)/(mfreq-1.0_SP)
