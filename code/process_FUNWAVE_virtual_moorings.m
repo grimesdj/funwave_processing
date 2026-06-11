@@ -53,7 +53,7 @@ for ii = 1:Nf
     if ii==1
         dt   = 0.125;
         fprintf('\n\t!!!warning: assuming dt = %f s !!!!\n',dt)
-        time = [0:dt:t(end)-dt]';
+        time = [max(0,t(1)):dt:t(end)-dt]';
         Nt   = length(time);
         % stuff for computing spectra
         fs = 1./dt;
