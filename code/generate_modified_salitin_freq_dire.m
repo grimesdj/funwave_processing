@@ -1,7 +1,7 @@
-function [Freq,theta,Hmo_each]=generate_salitin_freq_dire(mfreq,mtheta,fmin,fmax,h_gen,delta,fm,theta_input,sigma_theta_input,gamma_spec,DY,Nglob,alpha_c,PERIODIC,SMALL);
+function [Freq,theta,Hmo_each,Freq_new,theta_new,Hmo_each_new]=generate_modified_salitin_freq_dire(mfreq,mtheta,fmin,fmax,h_gen,delta,fm,theta_input,sigma_theta_input,gamma_spec,DY,Nglob,alpha_c,PERIODIC,SMALL);
 % $$$ clear all
 % $$$ close all
-
+% $$$ 
 % $$$ mfreq=1550;
 % $$$ mtheta=31;
 % $$$ fmin= 0.04;
@@ -18,7 +18,26 @@ function [Freq,theta,Hmo_each]=generate_salitin_freq_dire(mfreq,mtheta,fmin,fmax
 % $$$ PERIODIC=1;
 % $$$ SMALL=eps('single');
 
-THETA_MAX = 60*pi/180;
+%% NEW STUFF:
+alpha=-0.39;
+alpha1=alpha+1.0/3.0;
+grav=9.81;
+omgn=2.0*pi*fm;
+tb=omgn*omgn*h_gen/grav;
+tc=1.0+tb*alpha;
+wkn=sqrt((tc-sqrt(tc*tc-4.0*alpha1*tb))/(2.0*alpha1))/h_gen;
+
+DTHETA0 = asin(2*pi/DY/(Nglob-1)/wkn);
+THETA_MAX_DEG = (mtheta-1)/2 * DTHETA0*180/pi
+NSIGMA  = THETA_MAX_DEG / sigma_theta_input
+while NSIGMA<5 & THETA_MAX_DEG<60
+    disp('decreasing angular resolution')
+    THETA_MAX_DEG = min(2*THETA_MAX_DEG,60);
+    NSIGMA = THETA_MAX_DEG / sigma_theta_input
+end
+%%
+% $$$ THETA_MAX_DEG = min(10*sigma_theta_input,60);
+THETA_MAX = THETA_MAX_DEG*pi/180;
 
 df = (fmax-fmin)/(mfreq-1.0);
     Ef = 0;
@@ -180,8 +199,61 @@ df = (fmax-fmin)/(mfreq-1.0);
 % $$$         figure, scatter(Freq,theta*180/pi,20,log(Hmo_each),'filled')
 
 
-        linkaxes([ax1 ax2])
-
+        %% remove neighboring frequencies on same mode with small df.
+        E0 = sum( Hmo_each.^2 )
+        maxAmp0 = max(Hmo_each/sqrt(2)/2)
         
-end
+        % loop over mode numbers
+        Hmo_each_new = Hmo_each;
+        modeMin = min(theta_mode);
+        modeMax = max(theta_mode);
+        mask    = 1+0*Freq;
+        for mode = modeMin:modeMax
+            % find all indices on current mode
+            loc  = find(theta_mode==mode);
+            loc(~mask(loc))=[];
+            % for each index, 
+            for idx0=1:length(loc)-1
+                % compare it's frequency with all others to find very near neighbors
+                loc0 = loc(idx0);
+                f0 = Freq(loc0);
+                % skip if we've already allocated this energy to another frequncy
+                if ~mask(loc0)
+                    continue
+                end
+                %
+                for idx1=idx0+1:length(loc)
+                    loc1 = loc(idx1);
+                    f1 = Freq(loc1);
+                    % skip if we've already allocated this energy to another frequncy
+                    if ~mask(loc1)
+                        continue
+                    end
+                    % threshold is 1/2 the expected resolution along a mode
+                    if f1-f0<df*mtheta/4
+                        % now keep the frequency/mode that has higher energy
+                        if Hmo_each_new(loc0)<Hmo_each_new(loc1)
+                            Hmo_each_new(loc1) = sqrt( Hmo_each_new(loc0).^2 + Hmo_each_new(loc1).^2 );
+                            mask(loc0)=0;
+                            % we no longer want to keep this frequency, so no need to continue
+                            break
+                        else
+                            Hmo_each_new(loc0) = sqrt( Hmo_each_new(loc0).^2 + Hmo_each_new(loc1).^2 );
+                            mask(loc1)=0;
+                        end
+                    end    
+                end
+            end
+        end
+        E1 = sum(Hmo_each_new.^2.*mask)
+        maxAmp1 = max(Hmo_each_new.*mask/sqrt(2)/2)
+        numFreq = sum(mask)
 
+        Freq_new = Freq(logical(mask));
+        theta_new = theta(logical(mask));
+        Hmo_each_new=Hmo_each_new(logical(mask));
+        
+        ax3 = subplot(1,3,3);
+        scatter(Freq_new,theta_new*180/pi,20,Hmo_each_new/2/sqrt(2),'filled'), caxis([0 0.11])
+        title('mode-filtered')
+        linkaxes([ax1 ax2 ax3])

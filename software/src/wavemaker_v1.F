@@ -3026,19 +3026,19 @@ SUBROUTINE WK_NEW_EQUAL_DFREQ_IRREGULAR_WAVE &
             phi1(kf,1)=rand(0)*2.0_SP*pi
 # endif
 
-!# if defined (PARALLEL)
-!            if(myid==0)then
-!                WRITE(3,'(A40)') 'Freq,Input Dire,PBC Dire,Amplitude,Phase'
-!                WRITE(3,'(3F12.5)')  Freq(kf),theta(kf)*180./pi,&
-!                    tmp3*180./pi,Hmo_each(1,kf)/SQRT(2.0_SP)/2.0_SP,&
-!                    phi1(kf,1)*180/pi
-!            endif
-!# else
-!            WRITE(3,'(A40)') 'Freq,Input Dire,PBC Dire,Amplitude,Phase'
-!            WRITE(3,'(3F12.5)')  Freq(kf),theta(kf)*180./pi,&
-!                tmp3*180./pi,Hmo_each(1,kf)/SQRT(2.0_SP)/2.0_SP,&
-!                phi1(kf,1)*180/pi
-!# endif
+# if defined (PARALLEL)
+            if(myid==0)then
+                WRITE(3,'(A40)') 'Freq,Input Dire,PBC Dire,Amplitude,Phase'
+                WRITE(3,'(3F12.5)')  Freq(kf),theta(kf)*180./pi,&
+                    tmp3*180./pi,Hmo_each(1,kf)/SQRT(2.0_SP)/2.0_SP,&
+                    phi1(kf,1)*180/pi
+            endif
+# else
+            WRITE(3,'(A40)') 'Freq,Input Dire,PBC Dire,Amplitude,Phase'
+            WRITE(3,'(3F12.5)')  Freq(kf),theta(kf)*180./pi,&
+                tmp3*180./pi,Hmo_each(1,kf)/SQRT(2.0_SP)/2.0_SP,&
+                phi1(kf,1)*180/pi
+# endif
 
             Theta(kf) = tmp3
         ENDIF ! IF(PERIODIC)THEN
@@ -3051,157 +3051,8 @@ SUBROUTINE WK_NEW_EQUAL_DFREQ_IRREGULAR_WAVE &
             /(omgn(kf)*wkn*rI*(1.0_SP-alpha*(wkn*h_gen)**2))
 
     ENDDO ! DO kf=1,mfreq
-      
-!     start: Grimes working to deal with thetas that were mapped to the same mode and have very long repeat time=1/(f1-f2).
-!     TO DO: Also need to re-allocate phases for the "new" variables.
-      
-integer :: modeMin, modeMax
-integer :: mode
-integer :: idx0, idx1
-integer :: loc0, loc1
-integer :: nloc
-integer, allocatable :: mask(:)
-integer, allocatable :: loc(:)
-      
-real :: f0, f1
-real :: thresh
 
-modeMin = minval(theta_mode)
-modeMax = maxval(theta_mode)
-
-allocate(mask(size(Freq)))
-mask = 1
-
-thresh = df*mtheta/4.0
-
-do mode = modeMin, modeMax
-
-    ! Count active points in this mode
-    nloc = count(theta_mode == mode .and. mask /= 0)
-    if (nloc < 2) cycle
-      allocate(loc(nloc))
-    ! Build index list
-    nloc = 0
-    do idx0 = 1, size(Freq)
-        if (theta_mode(idx0)==mode.and.mask(idx0)/=0) then
-            nloc = nloc + 1
-            loc(nloc) = idx0
-        end if
-    end do
-    
-    do idx0 = 1, nloc-1
-        loc0 = loc(idx0)
-        if (mask(loc0) == 0) cycle
-        f0 = Freq(loc0)
-        do idx1 = idx0+1, nloc
-            loc1 = loc(idx1)
-            if (mask(loc1) == 0) cycle
-                f1 = Freq(loc1)
-                if (f1 - f0 < thresh) then
-                    if (Hmo_each(loc0) < Hmo_each(loc1)) then
-                        Hmo_each(loc1) = sqrt( &
-                              Hmo_each(loc0)**2 + &
-                              Hmo_each(loc1)**2 )
-                       mask(loc0) = 0
-                       ! exit current loop and return to outer loop
-                       exit
-               else
-                      Hmo_each(loc0) = sqrt( &
-                              Hmo_each(loc0)**2 + &
-                              Hmo_each(loc1)**2 )
-                      mask(loc1) = 0
-               end if
-          end if
-       end do
-      end do
-    deallocate(loc)
-end do
-
-integer :: nkeep, k
-real, allocatable :: Freq_new(:), theta_new(:), Hmo_keep(:), D_gen_new(:),&
-                     omgn_new(:), beta_gen_new(:), rlamda_new(:), phi1_new(:)
-
-nkeep = count(mask /= 0)
-
-allocate(Freq_new(nkeep))
-allocate(theta_new(nkeep))
-allocate(Hmo_keep(nkeep))
-allocate(D_gen_new(nkeep))
-allocate(omgn_new(nkeep))
-allocate(beta_gen_new(nkeep))
-allocate(rlamda_new(nkeep))
-allocate(phi1_new(nkeep))
-      
-k = 0
-do idx0 = 1, size(mask)
-    if (mask(idx0) /= 0) then
-        k = k + 1
-        Freq_new(k)  = Freq(idx0)
-        theta_new(k) = theta(idx0)
-        Hmo_keep(k)  = Hmo_each(idx0)
-
-        ap = Hmo_keep(1,k)/SQRT(2.0_SP)/2.0_SP
-        omgn_new(k)=2.0_SP*pi*Freq_new(k)
-        tb=omgn_new(k)*omgn_new(k)*h_gen/grav
-        tc=1.0_SP+tb*alpha
-        wkn=SQRT((tc-SQRT(tc*tc-4.0_SP*alpha1*tb))/(2.0_SP*alpha1))/h_gen
-
-        IF(wkn.eq.0.0)THEN
-            wkn=SMALL
-            C_phase=sqrt(grav*h_gen)
-            wave_length=C_phase/fm
-        ELSE
-            C_phase=1.0_SP/wkn*fm*2.0_SP*pi
-            wave_length=C_phase/fm
-        ENDIF
-
-        # if defined (INTEL)
-            phi1_new(k,1)=rand()*2.0_SP*pi
-        # elif defined (CRAY)
-            phi1_new(k,1)=rand()*2.0_SP*pi
-        # else
-            phi1_new(k,1)=rand(0)*2.0_SP*pi
-        # endif
-
-        # if defined (PARALLEL)
-            if(myid==0)then
-                WRITE(3,'(A40)') 'Freq,PBC Dire,Amplitude,Phase'
-                WRITE(3,'(3F12.5)')  Freq_new(k),theta_new(k)*180./pi,&
-                    Hmo_keep(1,kf)/SQRT(2.0_SP)/2.0_SP,&
-                    phi1_new(kf,1)*180/pi
-            endif
-         # else
-            WRITE(3,'(A40)') 'Freq,PBC Dire,Amplitude,Phase'
-            WRITE(3,'(3F12.5)')  Freq_new(k),theta_new(k)*180./pi,&
-                Hmo_keep(1,k)/SQRT(2.0_SP)/2.0_SP,&
-                phi1_new(k,1)*180/pi
-        # endif
-
-        
-        rlamda_new(k,1)=wkn*sin(theta_new(k))
-        beta_gen_new(k)=80.0_SP/delta**2/wave_length**2
-        rl_gen=wkn*cos(theta_new(k))
-        rI=SQRT(pi/beta_gen_new(k))*exp(-rl_gen**2/4.0_SP/beta_gen_new(k))
-        D_gen_new(k,1)=2.0_SP*ap*cos(theta_new(k))  &
-            *(omgn_new(k)**2-alpha1*grav*wkn**4*h_gen**3)  &
-            /(omgn_new(k)*wkn*rI*(1.0_SP-alpha*(wkn*h_gen)**2))
-      end if
-      end do
-
-Nfreq = nkeep
-
-! Replace old arrays with compacted versions
-call move_alloc(Freq_new, Freq)
-call move_alloc(theta_new, theta)
-call move_alloc(Hmo_keep, Hmo_each)      
-call move_alloc(D_gen_new,D_gen)
-call move_alloc(rlamda_new,rlamda)
-call move_alloc(beta_gen_new,beta_gen)      
-call move_alloc(omgn_new,omgn)
-call move_alloc(phi1_new,phi1)
-
-!     end: Grimes working to deal with long repeat times.
-! WAVEMAKER WIDTH
+    ! WAVEMAKER WIDTH
     omgn_tmp=2.0_SP*pi*fm
     tb=omgn_tmp*omgn_tmp*h_gen/grav
     tc=1.0_SP+tb*alpha
