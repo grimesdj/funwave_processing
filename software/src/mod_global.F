@@ -266,7 +266,7 @@ MODULE GLOBAL
        REAL(SP),DIMENSION(:),ALLOCATABLE :: Beta_genS,D_genS
        REAL(SP),DIMENSION(:,:),ALLOCATABLE :: Beta_gen2D,D_gen2D,rlamda2D, &
                                               Phase2D
-       REAL(SP),DIMENSION(:),ALLOCATABLE :: Freq,Dire
+       REAL(SP),DIMENSION(:),ALLOCATABLE :: Freq,Dire 
        REAL(SP) :: PeakPeriod
        INTEGER :: NumWaveComp,NumFreq,NumDir
        CHARACTER(LEN=80) WaveCompFile

@@ -577,7 +577,6 @@ SUBROUTINE WAVEMAKER_INITIALIZATION
 
     IF(WaveMaker(1:10)=='WK_NEW_IRR') THEN
 
-! This shouldn't be necessary as these have INTENT(OUT) in subroutine
 !        ALLOCATE(D_gen_ir(Nfreq,1),rlamda_ir(Nfreq,1), &
  !           phase_ir(Nfreq,1),Beta_gen_ir(Nfreq),omgn_ir(Nfreq), &
   !          Cm(Mloc,Nloc,Nfreq),Sm(Mloc,Nloc,Nfreq),Freq(Nfreq))
@@ -593,6 +592,7 @@ SUBROUTINE WAVEMAKER_INITIALIZATION
             Hmo,ThetaPeak,sigma_theta,rlamda_ir,beta_gen_ir,D_gen_ir,Phase_ir,&
             Width_WK,omgn_ir,Periodic,DY,Nglob,Freq,alpha_c)
 
+        Nfreq = SIZE(omgn_ir)
         CALL CALCULATE_NEW_Cm_Sm(Mloc,Nloc,DX,DY,Xc_WK,Ibeg,Jbeg,Nfreq,&
             Ntheta,D_gen_ir,Phase_ir,Width_WK,rlamda_ir,beta_gen_ir,Cm,Sm)
 # else

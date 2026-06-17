@@ -577,16 +577,13 @@ SUBROUTINE WAVEMAKER_INITIALIZATION
 
     IF(WaveMaker(1:10)=='WK_NEW_IRR') THEN
 
-! This shouldn't be necessary as these have INTENT(OUT) in subroutine
-!        ALLOCATE(D_gen_ir(Nfreq,1),rlamda_ir(Nfreq,1), &
- !           phase_ir(Nfreq,1),Beta_gen_ir(Nfreq),omgn_ir(Nfreq), &
-  !          Cm(Mloc,Nloc,Nfreq),Sm(Mloc,Nloc,Nfreq),Freq(Nfreq))
+     IF(myid==0)THEN
+       WRITE(*) 'We are currently in WK_NEW_IRR:' 
+      endif
+        ALLOCATE(D_gen_ir(Nfreq,1),rlamda_ir(Nfreq,1), &
+            phase_ir(Nfreq,1),Beta_gen_ir(Nfreq),omgn_ir(Nfreq), &
+            Cm(Mloc,Nloc,Nfreq),Sm(Mloc,Nloc,Nfreq),Freq(Nfreq))
         ! call the wavemaker
-
-     IF(myid.eq.0)THEN
-       WRITE(3,'(A40)') 'We are currently in WK_NEW_IRR:'
-       WRITE(*,'(A40)') 'We are currently in WK_NEW_IRR:'
-     ENDIF
 # if defined (CARTESIAN)
         CALL WK_NEW_EQUAL_DFREQ_IRREGULAR_WAVE &
             (Nfreq,Ntheta,delta_WK,DEP_WK,FreqPeak,FreqMax,FreqMin,GammaTMA,&
@@ -2854,8 +2851,9 @@ SUBROUTINE WK_NEW_EQUAL_DFREQ_IRREGULAR_WAVE &
     ! inclusion of wave coherency
     REAL(SP),INTENT(INOUT) :: alpha_c   ! wave coherence percentage
 
+      
 !     declarations for Grimes modification for combining neighboring frequencies
-      INTEGER, INTENT(IN) :: mfreq
+      INTEGER, INTENT(INOUT) :: mfreq
       REAL(SP),allocatable,INTENT(OUT) :: Freq(:)
       REAL(SP),allocatable,INTENT(OUT) :: D_gen(:,:),phi1(:,:),rlamda(:,:)
       REAL(SP),allocatable,INTENT(OUT) :: beta_gen(:),omgn(:)
@@ -2874,11 +2872,6 @@ SUBROUTINE WK_NEW_EQUAL_DFREQ_IRREGULAR_WAVE &
       real(SP), allocatable :: Freq_new(:), theta_new(:), Hmo_keep(:,:), D_gen_new(:,:),&
                      omgn_new(:), beta_gen_new(:), rlamda_new(:,:), phi1_new(:,:)
 
-      IF(myid==0)THEN
-         WRITE(3,'(A40)') 'Grimes variable declarations done'
-         WRITE(*,'(A40)') 'Grimes variable declarations done'         
-      endif
-                     
       allocate(Freq(mfreq))
       allocate(D_gen(mfreq,1))
       allocate(phi1(mfreq,1))
@@ -2886,8 +2879,6 @@ SUBROUTINE WK_NEW_EQUAL_DFREQ_IRREGULAR_WAVE &
       allocate(beta_gen(mfreq))
       allocate(omgn(mfreq))
       allocate(theta(mfreq))
-      
-      
       
     !Grimes added variable limits on theta for narrow directional spread cases
     ! estimate angular resolution at peak frequency:
@@ -2908,7 +2899,7 @@ SUBROUTINE WK_NEW_EQUAL_DFREQ_IRREGULAR_WAVE &
 
     if(myid==0)then
     WRITE(3,'(A40)') 'WM Angular Range, Resolution, #STD'
-    WRITE(3,'(3F4.2)')  THETA_MAX_DEG,THETA_MAX_DEG*2.0_SP/(mtheta-1.0_SP),NSIGMA
+    WRITE(3,'(3F12.5)')  THETA_MAX_DEG,THETA_MAX_DEG*2.0_SP/(mtheta-1.0_SP),NSIGMA
     endif
 
     THETA_MAX = THETA_MAX_DEG*pi/180_SP
@@ -3100,10 +3091,6 @@ SUBROUTINE WK_NEW_EQUAL_DFREQ_IRREGULAR_WAVE &
 !     start: Grimes working to deal with thetas that were mapped to the same mode and have very long repeat time=1/(f1-f2).
 !     TO DO: Also need to re-allocate phases for the "new" variables.
       
-      IF(myid==0)THEN
-         WRITE(3,'(A40)') 'Beginning to cycle through modes'
-         WRITE(*,'(A40)') 'Beginning to cycle through modes'
-      endif
 
 modeMin = minval(theta_mode)
 modeMax = maxval(theta_mode)
@@ -3158,13 +3145,8 @@ end do
 
 nkeep = count(mask0 /= 0)
 
-!mfreq = nkeep
-
-      IF(myid.eq.0)THEN
-         WRITE(3,'(A40)') 'Extracting modes to save'
-         WRITE(*,'(A40)') 'Extracting modes to save'
-      ENDIF
-
+mfreq = nkeep
+      
 allocate(Freq_new(nkeep))
 allocate(theta_new(nkeep))
 allocate(Hmo_keep(1,nkeep))
@@ -3208,13 +3190,13 @@ do idx0 = 1, size(mask0)
         # if defined (PARALLEL)
             if(myid==0)then
                 WRITE(3,'(A40)') 'Freq,PBC Dire,Amplitude,Phase'
-                WRITE(3,'(4F5.2)')  Freq_new(kidx),theta_new(kidx)*180./pi,&
+                WRITE(3,'(3F12.5)')  Freq_new(kidx),theta_new(kidx)*180./pi,&
                     Hmo_keep(1,kidx)/SQRT(2.0_SP)/2.0_SP,&
                     phi1_new(kidx,1)*180/pi
             endif
          # else
             WRITE(3,'(A40)') 'Freq,PBC Dire,Amplitude,Phase'
-            WRITE(3,'(4F12.5)')  Freq_new(kidx),theta_new(kidx)*180./pi,&
+            WRITE(3,'(3F12.5)')  Freq_new(kidx),theta_new(kidx)*180./pi,&
                 Hmo_keep(1,kidx)/SQRT(2.0_SP)/2.0_SP,&
                 phi1_new(kidx,1)*180/pi
         # endif
@@ -3229,10 +3211,6 @@ do idx0 = 1, size(mask0)
             /(omgn_new(kidx)*wkn*rI*(1.0_SP-alpha*(wkn*h_gen)**2))
       end if
       end do
-
-      IF(myid==0)THEN
-       WRITE(3,'(A40)') 'Re allocating saved modes and number of modes' 
-      ENDIF
 
 !     Replace old arrays with compacted versions
       deallocate(Freq)      

@@ -498,15 +498,21 @@ SUBROUTINE WAVEMAKER_INITIALIZATION
 
     IF(WaveMaker(1:10)=='WK_NEW_IRR') THEN
 
-        ALLOCATE(D_gen_ir(Nfreq,1),rlamda_ir(Nfreq,1), &
-            phase_ir(Nfreq,1),Beta_gen_ir(Nfreq),omgn_ir(Nfreq), &
-            Cm(Mloc,Nloc,Nfreq),Sm(Mloc,Nloc,Nfreq),Freq(Nfreq))
+!        ALLOCATE(D_gen_ir(Nfreq,1),rlamda_ir(Nfreq,1), &
+ !           phase_ir(Nfreq,1),Beta_gen_ir(Nfreq),omgn_ir(Nfreq), &
+  !          Cm(Mloc,Nloc,Nfreq),Sm(Mloc,Nloc,Nfreq),Freq(Nfreq))
         ! call the wavemaker
+
+     IF(myid.eq.0)THEN
+       WRITE(3,'(A40)') 'We are currently in WK_NEW_IRR:'
+       WRITE(*,'(A40)') 'We are currently in WK_NEW_IRR:'
+     ENDIF
         CALL WK_NEW_EQUAL_DFREQ_IRREGULAR_WAVE &
             (Nfreq,Ntheta,delta_WK,DEP_WK,FreqPeak,FreqMax,FreqMin,GammaTMA,&
             Hmo,ThetaPeak,sigma_theta,rlamda_ir,beta_gen_ir,D_gen_ir,Phase_ir,&
             Width_WK,omgn_ir,Periodic,DY,Nglob,Freq,alpha_c)
 
+        Nfreq = SIZE(omgn_ir)
         CALL CALCULATE_NEW_Cm_Sm(Mloc,Nloc,DX,DY,Xc_WK,Ibeg,Jbeg,Nfreq,&
             Ntheta,D_gen_ir,Phase_ir,Width_WK,rlamda_ir,beta_gen_ir,Cm,Sm)
         ! deallocate some variables
@@ -2492,17 +2498,20 @@ SUBROUTINE WK_NEW_EQUAL_DFREQ_IRREGULAR_WAVE &
     USE GLOBAL, only : myid, ier
     USE IFPORT
     IMPLICIT NONE
-    INTEGER,INTENT(IN) :: mfreq,mtheta,Nglob
+!     INTEGER,INTENT(IN) :: mfreq,mtheta,Nglob
+      INTEGER,INTENT(IN) :: mtheta,Nglob
     REAL(SP),INTENT(IN) :: delta,h_gen,fm,fmax,fmin,gamma_spec,Hmo,&
                                theta_input,sigma_theta_input,DY
     LOGICAL,INTENT(IN) :: Periodic
     REAL(SP), INTENT(OUT) :: width
-    REAL(SP),DIMENSION(mfreq):: EnergyBin,theta,Etma
-    REAL(SP),DIMENSION(mfreq),INTENT(OUT):: Freq
+    REAL(SP),DIMENSION(mfreq):: EnergyBin,Etma
+      
+!    REAL(SP),DIMENSION(mfreq):: EnergyBin,theta,Etma
+!    REAL(SP),DIMENSION(mfreq),INTENT(OUT):: Freq
     REAL(SP), DIMENSION(mfreq) :: AG
     REAL(SP), DIMENSION(1,mfreq) :: Hmo_each
-    REAL(SP),DIMENSION(mfreq,1),INTENT(OUT) :: D_gen,phi1,rlamda
-    REAL(SP),DIMENSION(mfreq),INTENT(OUT) :: beta_gen,omgn
+!    REAL(SP),DIMENSION(mfreq,1),INTENT(OUT) :: D_gen,phi1,rlamda
+!    REAL(SP),DIMENSION(mfreq),INTENT(OUT) :: beta_gen,omgn
     REAL(SP) :: Ef,fre,omiga_spec,phi,sigma_spec,Ef100,Ef_add,sigma_theta,&
                     theta_p,theta_m,theta_10,theta_11,theta_21,alpha_spec,ap,&
                     alpha,alpha1,tb,tc,wkn,C_phase,wave_length,rl_gen,rI,&
@@ -2514,6 +2523,40 @@ SUBROUTINE WK_NEW_EQUAL_DFREQ_IRREGULAR_WAVE &
     ! inclusion of wave coherency
     REAL(SP),INTENT(INOUT) :: alpha_c   ! wave coherence percentage
 
+!     declarations for Grimes modification for combining neighboring frequencies
+      INTEGER, INTENT(IN) :: mfreq
+      REAL(SP),allocatable,INTENT(OUT) :: Freq(:)
+      REAL(SP),allocatable,INTENT(OUT) :: D_gen(:,:),phi1(:,:),rlamda(:,:)
+      REAL(SP),allocatable,INTENT(OUT) :: beta_gen(:),omgn(:)
+      REAL(SP),allocatable :: theta(:)
+      integer :: modeMin, modeMax
+      integer :: mode
+      integer :: idx0, idx1
+      integer :: loc0, loc1
+      integer :: nloc
+      integer, allocatable :: loc(:)
+      integer, dimension(mfreq) :: mask0, theta_mode
+      
+      real(SP) :: f0, f1
+      real(SP) :: thresh
+      integer :: nkeep, kidx
+      real(SP), allocatable :: Freq_new(:), theta_new(:), Hmo_keep(:,:), D_gen_new(:,:),&
+                     omgn_new(:), beta_gen_new(:), rlamda_new(:,:), phi1_new(:,:)
+
+      IF(myid==0)THEN
+         WRITE(3,'(A40)') 'Grimes variable declarations done'
+         WRITE(*,'(A40)') 'Grimes variable declarations done'         
+      endif
+                     
+      allocate(Freq(mfreq))
+      allocate(D_gen(mfreq,1))
+      allocate(phi1(mfreq,1))
+      allocate(rlamda(mfreq,1))
+      allocate(beta_gen(mfreq))
+      allocate(omgn(mfreq))
+      allocate(theta(mfreq))
+      
+      
       
     !Grimes added variable limits on theta for narrow directional spread cases
     ! estimate angular resolution at peak frequency:
@@ -2534,7 +2577,7 @@ SUBROUTINE WK_NEW_EQUAL_DFREQ_IRREGULAR_WAVE &
 
     if(myid==0)then
     WRITE(3,'(A40)') 'WM Angular Range, Resolution, #STD'
-    WRITE(3,'(3F12.5)')  THETA_MAX_DEG,THETA_MAX_DEG*2.0_SP/(mtheta-1.0_SP),NSIGMA
+    WRITE(3,'(3F4.2)')  THETA_MAX_DEG,THETA_MAX_DEG*2.0_SP/(mtheta-1.0_SP),NSIGMA
     endif
 
     THETA_MAX = THETA_MAX_DEG*pi/180_SP
@@ -2648,6 +2691,7 @@ SUBROUTINE WK_NEW_EQUAL_DFREQ_IRREGULAR_WAVE &
                     IF(tmp2.GE.tmp1)THEN
                         Theta_temp = Theta_temp - 0.001_SP
                         IF(Theta_temp.LE.ZERO)THEN
+                            I = 0
                             Theta_temp = 0.0_SP
                             goto 1002
                         ENDIF
@@ -2669,6 +2713,7 @@ SUBROUTINE WK_NEW_EQUAL_DFREQ_IRREGULAR_WAVE &
                     IF(tmp2.GE.tmp1)THEN
                         Theta_temp = Theta_temp + 0.001_SP
                         IF(Theta_temp.GE.ZERO)THEN
+                            I = 0
                             Theta_temp = 0.0_SP
                             goto 1002
                         ENDIF
@@ -2689,14 +2734,22 @@ SUBROUTINE WK_NEW_EQUAL_DFREQ_IRREGULAR_WAVE &
 
             phi1(kf,1)=rand()*2.0_SP*pi
 
-            if(myid==0)then
-                WRITE(3,'(A40)') 'Freq,Input Dire,PBC Dire,Amplitude,Phase'
-                WRITE(3,'(3F12.5)')  Freq(kf),theta(kf)*180./pi,&
-                    tmp3*180./pi,Hmo_each(1,kf)/SQRT(2.0_SP)/2.0_SP,&
-                    phi1(kf,1)*180/pi
-            endif
+!# if defined (1)
+!            if(myid==0)then
+!                WRITE(3,'(A40)') 'Freq,Input Dire,PBC Dire,Amplitude,Phase'
+!                WRITE(3,'(3F12.5)')  Freq(kf),theta(kf)*180./pi,&
+!                    tmp3*180./pi,Hmo_each(1,kf)/SQRT(2.0_SP)/2.0_SP,&
+!                    phi1(kf,1)*180/pi
+!            endif
+!# else
+!            WRITE(3,'(A40)') 'Freq,Input Dire,PBC Dire,Amplitude,Phase'
+!            WRITE(3,'(3F12.5)')  Freq(kf),theta(kf)*180./pi,&
+!                tmp3*180./pi,Hmo_each(1,kf)/SQRT(2.0_SP)/2.0_SP,&
+!                phi1(kf,1)*180/pi
+!# endif
 
-            Theta(kf) = tmp3
+      Theta(kf) = tmp3
+      theta_mode(kf) = SIGN(I,int(tmp3))
         ENDIF ! IF(PERIODIC)THEN
         rlamda(kf,1)=wkn*sin(theta(kf))
         beta_gen(kf)=80.0_SP/delta**2/wave_length**2
@@ -2707,8 +2760,171 @@ SUBROUTINE WK_NEW_EQUAL_DFREQ_IRREGULAR_WAVE &
             /(omgn(kf)*wkn*rI*(1.0_SP-alpha*(wkn*h_gen)**2))
 
     ENDDO ! DO kf=1,mfreq
+      
+!     start: Grimes working to deal with thetas that were mapped to the same mode and have very long repeat time=1/(f1-f2).
+!     TO DO: Also need to re-allocate phases for the "new" variables.
+      
+      IF(myid==0)THEN
+         WRITE(3,'(A40)') 'Beginning to cycle through modes'
+         WRITE(*,'(A40)') 'Beginning to cycle through modes'
+      endif
 
-    ! WAVEMAKER WIDTH
+modeMin = minval(theta_mode)
+modeMax = maxval(theta_mode)
+
+mask0 = 1
+
+thresh = df*mtheta/4.0
+
+do mode = modeMin, modeMax
+
+    ! Count active points in this mode
+    nloc = count(theta_mode == mode .and. mask0 /= 0)
+    if (nloc < 2) cycle
+      allocate(loc(nloc))
+    ! Build index list
+    nloc = 0
+    do idx0 = 1, size(Freq)
+        if (theta_mode(idx0)==mode.and.mask0(idx0)/=0) then
+            nloc = nloc + 1
+            loc(nloc) = idx0
+        end if
+    end do
+    
+    do idx0 = 1, nloc-1
+        loc0 = loc(idx0)
+        if (mask0(loc0) == 0) cycle
+        f0 = Freq(loc0)
+        do idx1 = idx0+1, nloc
+            loc1 = loc(idx1)
+            if (mask0(loc1) == 0) cycle
+                f1 = Freq(loc1)
+                if (f1 - f0 < thresh) then
+                    if (Hmo_each(1,loc0) < Hmo_each(1,loc1)) then
+                        Hmo_each(1,loc1) = sqrt( &
+                              Hmo_each(1,loc0)**2 + &
+                              Hmo_each(1,loc1)**2 )
+                       mask0(loc0) = 0
+                       ! exit current loop and return to outer loop
+                       exit
+               else
+                      Hmo_each(1,loc0) = sqrt( &
+                              Hmo_each(1,loc0)**2 + &
+                              Hmo_each(1,loc1)**2 )
+                      mask0(loc1) = 0
+               end if
+          end if
+       end do
+      end do
+    deallocate(loc)
+end do
+
+
+nkeep = count(mask0 /= 0)
+
+!mfreq = nkeep
+
+      IF(myid.eq.0)THEN
+         WRITE(3,'(A40)') 'Extracting modes to save'
+         WRITE(*,'(A40)') 'Extracting modes to save'
+      ENDIF
+
+allocate(Freq_new(nkeep))
+allocate(theta_new(nkeep))
+allocate(Hmo_keep(1,nkeep))
+allocate(D_gen_new(nkeep,1))
+allocate(omgn_new(nkeep))
+allocate(beta_gen_new(nkeep))
+allocate(rlamda_new(nkeep,1))
+allocate(phi1_new(nkeep,1))
+      
+kidx = 0
+do idx0 = 1, size(mask0)
+    if (mask0(idx0) /= 0) then
+        kidx = kidx + 1
+        Freq_new(kidx)  = Freq(idx0)
+        theta_new(kidx) = theta(idx0)
+        Hmo_keep(1,kidx)  = Hmo_each(1,idx0)
+
+        ap = Hmo_keep(1,kidx)/SQRT(2.0_SP)/2.0_SP
+        omgn_new(kidx)=2.0_SP*pi*Freq_new(kidx)
+        tb=omgn_new(kidx)*omgn_new(kidx)*h_gen/grav
+        tc=1.0_SP+tb*alpha
+        wkn=SQRT((tc-SQRT(tc*tc-4.0_SP*alpha1*tb))/(2.0_SP*alpha1))/h_gen
+
+        IF(wkn.eq.0.0)THEN
+            wkn=SMALL
+            C_phase=sqrt(grav*h_gen)
+            wave_length=C_phase/fm
+        ELSE
+            C_phase=1.0_SP/wkn*fm*2.0_SP*pi
+            wave_length=C_phase/fm
+        ENDIF
+
+        # if defined (1)
+            phi1_new(kidx,1)=rand()*2.0_SP*pi
+        # elif defined (CRAY)
+            phi1_new(kidx,1)=rand()*2.0_SP*pi
+        # else
+            phi1_new(kidx,1)=rand(0)*2.0_SP*pi
+        # endif
+
+        # if defined (1)
+            if(myid==0)then
+                WRITE(3,'(A40)') 'Freq,PBC Dire,Amplitude,Phase'
+                WRITE(3,'(4F5.2)')  Freq_new(kidx),theta_new(kidx)*180./pi,&
+                    Hmo_keep(1,kidx)/SQRT(2.0_SP)/2.0_SP,&
+                    phi1_new(kidx,1)*180/pi
+            endif
+         # else
+            WRITE(3,'(A40)') 'Freq,PBC Dire,Amplitude,Phase'
+            WRITE(3,'(4F12.5)')  Freq_new(kidx),theta_new(kidx)*180./pi,&
+                Hmo_keep(1,kidx)/SQRT(2.0_SP)/2.0_SP,&
+                phi1_new(kidx,1)*180/pi
+        # endif
+
+        
+        rlamda_new(kidx,1)=wkn*sin(theta_new(kidx))
+        beta_gen_new(kidx)=80.0_SP/delta**2/wave_length**2
+        rl_gen=wkn*cos(theta_new(kidx))
+        rI=SQRT(pi/beta_gen_new(kidx))*exp(-rl_gen**2/4.0_SP/beta_gen_new(kidx))
+        D_gen_new(kidx,1)=2.0_SP*ap*cos(theta_new(kidx))  &
+            *(omgn_new(kidx)**2-alpha1*grav*wkn**4*h_gen**3)  &
+            /(omgn_new(kidx)*wkn*rI*(1.0_SP-alpha*(wkn*h_gen)**2))
+      end if
+      end do
+
+      IF(myid==0)THEN
+       WRITE(3,'(A40)') 'Re allocating saved modes and number of modes' 
+      ENDIF
+
+!     Replace old arrays with compacted versions
+      deallocate(Freq)      
+      deallocate(omgn)
+      deallocate(beta_gen)
+      deallocate(D_gen)
+      deallocate(phi1)
+      deallocate(rlamda)
+      deallocate(theta)
+      
+      allocate(Freq(nkeep))
+      allocate(omgn(nkeep))
+      allocate(beta_gen(nkeep))
+      allocate(D_gen(nkeep,1))
+      allocate(phi1(nkeep,1))
+      allocate(rlamda(nkeep,1))
+      allocate(theta(nkeep))
+      
+      Freq = Freq_new
+      omgn = 2*pi*Freq
+      beta_gen = beta_gen_new
+      D_gen= D_gen_new
+      phi1 = phi1_new
+      rlamda= rlamda_new
+      theta = theta_new
+
+!     end: Grimes working to deal with long repeat times.
+! WAVEMAKER WIDTH
     omgn_tmp=2.0_SP*pi*fm
     tb=omgn_tmp*omgn_tmp*h_gen/grav
     tc=1.0_SP+tb*alpha
