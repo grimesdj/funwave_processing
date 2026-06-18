@@ -1,0 +1,78 @@
+    INTEGER,INTENT(IN) :: mtheta,Nglob
+    REAL(SP),INTENT(IN) :: delta,h_gen,fm,fmax,fmin,gamma_spec,Hmo,&
+                               theta_input,sigma_theta_input,DY
+    LOGICAL,INTENT(IN) :: Periodic
+    REAL(SP), INTENT(OUT) :: width
+    REAL(SP),DIMENSION(mfreq):: EnergyBin,Etma      
+!    REAL(SP),DIMENSION(mfreq):: EnergyBin,theta,Etma
+!    REAL(SP),DIMENSION(mfreq),INTENT(OUT):: Freq
+    REAL(SP), DIMENSION(mfreq) :: AG
+    REAL(SP), DIMENSION(1,mfreq) :: Hmo_each
+!    REAL(SP),DIMENSION(mfreq,1),INTENT(OUT) :: D_gen,phi1,rlamda
+!    REAL(SP),DIMENSION(mfreq),INTENT(OUT) :: beta_gen,omgn
+    REAL(SP) :: Ef,fre,omiga_spec,phi,sigma_spec,Ef100,Ef_add,sigma_theta,&
+                    theta_p,theta_m,theta_10,theta_11,theta_21,alpha_spec,ap,&
+                    alpha,alpha1,tb,tc,wkn,C_phase,wave_length,rl_gen,rI,&
+                    theta_1,omgn_tmp,df,correction_coeff,ktheta_temp,Theta_temp,&
+                    DTHETA0,NSIGMA,THETA_MAX_DEG,THETA_MAX
+    INTEGER :: kf,kff,kb,N_spec,ktotal,k_n,ktheta,mcenter
+    INTEGER, DIMENSION(mfreq) :: displace_theta
+    INTEGER :: idx_theta
+    ! inclusion of wave coherency
+    REAL(SP),INTENT(INOUT) :: alpha_c   ! wave coherence percentage
+
+
+
+    REAL(SP),allocatable,INTENT(OUT) :: Freq(:)
+    REAL(SP),allocatable,INTENT(OUT) :: D_gen(:,:),phi1(:,:),rlamda(:,:)
+    REAL(SP),allocatable,INTENT(OUT) :: beta_gen(:),omgn(:)
+    REAL(SP),allocatable :: theta(:)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      allocate(Freq(mfreq))
+      allocate(D_gen(mfreq,1))
+      allocate(phi1(mfreq,1))
+      allocate(rlamda(mfreq,1))
+      allocate(beta_gen(mfreq))
+      allocate(omgn(mfreq))
+      allocate(theta(mfreq))
+
+
+
+
+!     Replace old arrays with compacted versions
+      deallocate(Freq)      
+      deallocate(omgn)
+      deallocate(beta_gen)
+      deallocate(D_gen)
+      deallocate(phi1)
+      deallocate(rlamda)
+      deallocate(theta)
+      
+      allocate(Freq(nkeep))
+      allocate(omgn(nkeep))
+      allocate(beta_gen(nkeep))
+      allocate(D_gen(nkeep,1))
+      allocate(phi1(nkeep,1))
+      allocate(rlamda(nkeep,1))
+      allocate(theta(nkeep))
+      
+      Freq = Freq_new
+      omgn = 2*pi*Freq
+      beta_gen = beta_gen_new
+      D_gen= D_gen_new
+      phi1 = phi1_new
+      rlamda= rlamda_new
+      theta = theta_new

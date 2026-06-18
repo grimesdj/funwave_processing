@@ -261,6 +261,12 @@ MODULE GLOBAL
                   a0_Nwave = 1.0, &
                   gamma_Nwave = -3.0, &
                   dep_Nwave = 1.0
+!      for aggregating neighboring modes and (TBD) removing very small Energy modes (grimes)
+       INTEGER :: nkeep
+       REAL(SP),DIMENSION(:,:), ALLOCATABLE :: Hmo_each
+       REAL(SP),DIMENSION(:,:), ALLOCATABLE :: rlamda_new,D_gen_new,Phase_new
+       REAL(SP),DIMENSION(:), ALLOCATABLE :: beta_gen_new, omgn_new, mask0, theta, theta_mode
+       REAL(SP),DIMENSION(:), ALLOCATABLE :: Freq_new
 !      for measure time series
        REAL(SP),DIMENSION(:,:),ALLOCATABLE :: WAVE_COMP
        REAL(SP),DIMENSION(:),ALLOCATABLE :: Beta_genS,D_genS
