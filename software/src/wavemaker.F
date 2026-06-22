@@ -615,9 +615,9 @@ SUBROUTINE WAVEMAKER_INITIALIZATION
         omgn_ir = omgn_new
         Freq = Freq_new
         Nfreq = nkeep
-        if(myid.eq.0)then
-           WRITE(*,*) 'Number of aggregated freqs:', Nfreq
-        endif
+!        if(myid.eq.0)then
+!           WRITE(*,*) 'Number of aggregated freqs:', Nfreq
+!        endif
 
         deallocate(theta,mask0,Hmo_each,Freq_new,omgn_new,beta_gen_new,D_gen_new,rlamda_new,Phase_new)
 
@@ -3067,7 +3067,8 @@ SUBROUTINE WK_AGGREGATED_DFREQ_IRREGULAR_WAVE &
                 IF(tmp2.LT.tmp1)THEN
                     tmp3=-ASIN((I-1)*2.0_SP*pi/DY/(Nglob-1.0_SP)/tmp1)
                 ENDIF
-            ELSEIF (Theta_temp==0.0_SP)THEN
+             ELSEIF (Theta_temp==0.0_SP)THEN
+                I = 0
                 tmp3 = Theta_temp
             ENDIF ! IF(Theta_temp.GT.ZERO)THEN
 
@@ -3096,7 +3097,7 @@ SUBROUTINE WK_AGGREGATED_DFREQ_IRREGULAR_WAVE &
 !# endif
 
       Theta(kf) = tmp3
-      theta_mode(kf) = SIGN(I,int(tmp3))
+      theta_mode(kf) = SIGN(I,int(100*tmp3))
         ENDIF ! IF(PERIODIC)THEN
         rlamda(kf,1)=wkn*sin(theta(kf))
         beta_gen(kf)=80.0_SP/delta**2/wave_length**2
@@ -3118,6 +3119,10 @@ SUBROUTINE WK_AGGREGATED_DFREQ_IRREGULAR_WAVE &
 
 modeMin = minval(theta_mode)
 modeMax = maxval(theta_mode)
+
+      if(myid.eq.0)then
+        WRITE(*,*) 'The mode ranges from:', modeMin, ' -- ', modeMax
+      endif
 
 mask0 = 1
 
@@ -3166,6 +3171,11 @@ do mode = modeMin, modeMax
     deallocate(loc)
 end do
 
+do idx0 = 1,mfreq
+      if (Hmo_each(1,idx0)/2.0_SP/SQRT(2.0_SP)<1e-6_SP) then
+         mask0(idx0)=0
+      endif
+enddo      
 
 nkeep = count(mask0 /= 0)
 
@@ -3177,6 +3187,8 @@ nkeep = count(mask0 /= 0)
     tb=omgn_tmp*omgn_tmp*h_gen/grav
     tc=1.0_SP+tb*alpha
     wkn=SQRT((tc-SQRT(tc*tc-4.0_SP*alpha1*tb))/(2.0_SP*alpha1))/h_gen
+    C_phase=omgn_tmp/wkn
+    wave_length=C_phase/fm
     width=delta*wave_length/2.0_SP
       
       
@@ -3244,27 +3256,27 @@ do idx0 = 1, size(mask0)
             wave_length=C_phase/fm
         ENDIF
 
-        # if defined (INTEL)
-            phi1_new(kidx,1)=rand()*2.0_SP*pi
-        # elif defined (CRAY)
-            phi1_new(kidx,1)=rand()*2.0_SP*pi
-        # else
-            phi1_new(kidx,1)=rand(0)*2.0_SP*pi
-        # endif
+# if defined (INTEL)
+        phi1_new(kidx,1)=rand()*2.0_SP*pi
+# elif defined (CRAY)
+        phi1_new(kidx,1)=rand()*2.0_SP*pi
+# else
+        phi1_new(kidx,1)=rand(0)*2.0_SP*pi
+# endif
 
-        # if defined (PARALLEL)
-            if(myid.eq.0)then
-               WRITE(3,'(A40)') 'Freq,PBC Dire,Amplitude,Phase'
-               WRITE(3,'(4F12.4)')  Freq_new(kidx),theta_new(kidx)*180./pi,&
-                    Hmo_keep(1,kidx)/SQRT(2.0_SP)/2.0_SP,&
-                    phi1_new(kidx,1)*180/pi
-            endif
-         # else
-            WRITE(3,'(A40)') 'Freq,PBC Dire,Amplitude,Phase'
-            WRITE(3,'(4F12.5)')  Freq_new(kidx),theta_new(kidx)*180./pi,&
-                Hmo_keep(1,kidx)/SQRT(2.0_SP)/2.0_SP,&
-                phi1_new(kidx,1)*180/pi
-        # endif
+# if defined (PARALLEL)
+        if(myid.eq.0)then
+           WRITE(3,'(A40)') 'Freq,PBC Dire,Amplitude,Phase'
+           WRITE(3,'(4F12.4)')  Freq_new(kidx),theta_new(kidx)*180./pi,&
+           Hmo_keep(1,kidx)/SQRT(2.0_SP)/2.0_SP,&
+           phi1_new(kidx,1)*180/pi
+        endif
+# else
+        WRITE(3,'(A40)') 'Freq,PBC Dire,Amplitude,Phase'
+        WRITE(3,'(4F12.5)')  Freq_new(kidx),theta_new(kidx)*180./pi,&
+        Hmo_keep(1,kidx)/SQRT(2.0_SP)/2.0_SP,&
+        phi1_new(kidx,1)*180/pi
+# endif
 
         
         rlamda_new(kidx,1)=wkn*sin(theta_new(kidx))
