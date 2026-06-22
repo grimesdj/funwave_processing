@@ -615,6 +615,7 @@ SUBROUTINE WAVEMAKER_INITIALIZATION
         omgn_ir = omgn_new
         Freq = Freq_new
         Nfreq = nkeep
+        
 !        if(myid.eq.0)then
 !           WRITE(*,*) 'Number of aggregated freqs:', Nfreq
 !        endif
@@ -2892,12 +2893,6 @@ SUBROUTINE WK_AGGREGATED_DFREQ_IRREGULAR_WAVE &
       real(SP) :: thresh
       integer, intent(out) :: nkeep
 
-!      IF(myid==0)THEN
-!         WRITE(3,'(A40)') 'Inside WK_AGGREGATED_DFREQ_IRREGULAR_WAVE'
-!         WRITE(*,'(A40)') 'Inside WK_AGGREGATED_DFREQ_IRREGULAR_WAVE'
-!         CALL FLUSH(6)
-!      endif
-      
       
     !Grimes added variable limits on theta for narrow directional spread cases
     ! estimate angular resolution at peak frequency:
@@ -3187,8 +3182,9 @@ nkeep = count(mask0 /= 0)
     tb=omgn_tmp*omgn_tmp*h_gen/grav
     tc=1.0_SP+tb*alpha
     wkn=SQRT((tc-SQRT(tc*tc-4.0_SP*alpha1*tb))/(2.0_SP*alpha1))/h_gen
-    C_phase=omgn_tmp/wkn
-    wave_length=C_phase/fm
+! Salatin code did not use peak wavelength... so not using here. 
+!     C_phase=omgn_tmp/wkn
+!    wave_length=C_phase/fm
     width=delta*wave_length/2.0_SP
       
       
@@ -3232,6 +3228,13 @@ SUBROUTINE WK_AGGREGATE_DFREQ &
 !       WRITE(*,'(A40)') 'ENTERING: WK_AGGREGATE_DFREQ'
 !    endif
 
+      IF(myid==0)THEN
+         WRITE(3,*) 'Input variance: ', SUM(Hmo_each**2)
+         WRITE(3,*) 'Input D_gen: ', SUM(D_gen**2)         
+         WRITE(*,*) 'Input variance: ', SUM(Hmo_each**2)
+         WRITE(*,*) 'Input D_gen: ', SUM(D_gen**2)                  
+      endif
+      
       
 kidx = 0
 do idx0 = 1, size(mask0)
@@ -3289,6 +3292,14 @@ do idx0 = 1, size(mask0)
       end if
 end do
 
+      IF(myid==0)THEN
+         WRITE(3,*) 'Output variance: ', SUM(Hmo_keep**2)
+         WRITE(3,*) 'Output D_gen: ', SUM(D_gen_new**2)         
+         WRITE(*,*) 'Output variance: ', SUM(Hmo_keep**2)
+         WRITE(*,*) 'Output D_gen: ', SUM(D_gen**2)                  
+      endif
+
+      
 !      IF(myid.eq.0)THEN
 !         WRITE(3,'(A40)') 'RETURNING FROM: WK_AGGREGATE_DFREQ'
 !         WRITE(*,'(A40)') 'RETURNING FROM: WK_AGGREGATE_DFREQ'
