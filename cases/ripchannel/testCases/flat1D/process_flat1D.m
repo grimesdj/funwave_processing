@@ -3,18 +3,14 @@ close all
 
 addpath(genpath('~/git/funwave/code/'))
 %% compare wave statistics between 3 runs with different wavemaker discretizations:
-% run0 = standard -60:60
-% run1 = limit to +/-6 STDEV (over sampled)
-% run2 = use resolution at peak frequency... limit to 6-STDEV
-for run = 0:6
+for run = 0:15
     %% First create the "info" structure that has directory and file information for code:
     info = struct([]);
     info(1).runName   = sprintf('run%d',run);
     info.rootName  = info.runName;
-    info.gaugeFile = '/scratch/grimesdj/ripchannel/flat/gauge.txt';
-    info.bathyFile = '/scratch/grimesdj/ripchannel/flat/flatBathy.mat';
-    info.rootSim   = sprintf('/scratch/grimesdj/ripchannel/flat/sponge%d',run);
-    info.rootMat   = '/scratch/grimesdj/ripchannel/flat/mat_data/';
+    info.bathyFile = '/scratch/grimesdj/ripchannel/flat1D/flat1Dbathy.mat';
+    info.rootSim   = sprintf('/scratch/grimesdj/ripchannel/flat1D/run%d',run);
+    info.rootMat   = '/scratch/grimesdj/ripchannel/flat1D/mat_data/';
     info.fileName  = [info.rootMat,filesep,info.rootName,'_info.mat'];
 
     %% Read input spectrum from "LOG.txt"
@@ -33,7 +29,7 @@ for run = 0:6
 
     %% Read final Hs field (Mglob and Nglob from input file)
     Mglob = 1364;
-    Nglob = 2999;
+    Nglob = 2;
     HsFiles = dir([info.rootSim,filesep,'output',filesep,'Hsig_*']);
     info.Hs = 0;
     Nf      = length(HsFiles);
@@ -46,9 +42,9 @@ for run = 0:6
     end
     info.Hs = info.Hs/Nf;
 
-    info = process_FUNWAVE_virtual_moorings(info);
-    
+% $$$     info = process_FUNWAVE_virtual_moorings(info);
+    save(info.fileName,'-struct','info')
     out(run+1)=info;
 end
 
-save('/scratch/grimesdj/ripchannel/flat/mat_data/flat_sponge_runs.mat')
+save('/scratch/grimesdj/ripchannel/flat1D/mat_data/flat_1D_runs.mat')

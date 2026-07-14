@@ -3228,14 +3228,17 @@ SUBROUTINE WK_AGGREGATE_DFREQ &
 !       WRITE(*,'(A40)') 'ENTERING: WK_AGGREGATE_DFREQ'
 !    endif
 
-      IF(myid==0)THEN
-         WRITE(3,*) 'Input variance: ', SUM(Hmo_each**2)
-         WRITE(3,*) 'Input D_gen: ', SUM(D_gen**2)         
-         WRITE(*,*) 'Input variance: ', SUM(Hmo_each**2)
-         WRITE(*,*) 'Input D_gen: ', SUM(D_gen**2)                  
-      endif
+!      IF(myid==0)THEN
+!         WRITE(3,*) 'Input variance: ', SUM(Hmo_each**2)
+!         WRITE(3,*) 'Input D_gen: ', SUM(D_gen**2)         
+!         WRITE(*,*) 'Input variance: ', SUM(Hmo_each**2)
+!         WRITE(*,*) 'Input D_gen: ', SUM(D_gen**2)                  
+!      endif
       
-      
+
+alpha=-0.39_SP
+alpha1=alpha+1.0_SP/3.0_SP
+
 kidx = 0
 do idx0 = 1, size(mask0)
     if (mask0(idx0) /= 0) then
@@ -3292,12 +3295,12 @@ do idx0 = 1, size(mask0)
       end if
 end do
 
-      IF(myid==0)THEN
-         WRITE(3,*) 'Output variance: ', SUM(Hmo_keep**2)
-         WRITE(3,*) 'Output D_gen: ', SUM(D_gen_new**2)         
-         WRITE(*,*) 'Output variance: ', SUM(Hmo_keep**2)
-         WRITE(*,*) 'Output D_gen: ', SUM(D_gen**2)                  
-      endif
+!      IF(myid==0)THEN
+!         WRITE(3,*) 'Output variance: ', SUM(Hmo_keep**2)
+!         WRITE(3,*) 'Output D_gen: ', SUM(D_gen_new**2)         
+!         WRITE(*,*) 'Output variance: ', SUM(Hmo_keep**2)
+!         WRITE(*,*) 'Output D_gen: ', SUM(D_gen_new**2)                  
+!      endif
 
       
 !      IF(myid.eq.0)THEN

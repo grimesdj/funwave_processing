@@ -1,0 +1,104 @@
+DIFFUSION_SPONGE = F
+FRICTION_SPONGE = T 
+DIRECT_SPONGE = T
+Sponge_south_width = 0.0 
+Sponge_north_width = 0.0
+!
+!! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !!
+!! build function must supply the following fields:
+!! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !!
+!!CDsponge = 1.0
+!!R_sponge = 0.68
+!!A_sponge = 4.00
+!!Sponge_west_width  = 70.0 ! may not need this onshore sponge
+!!Sponge_east_width  = 70.0 ! increased to 0.95*peak_wavelength
+!! !! !! !! !! !! !! !! !!
+!
+!
+TITLE=flat0
+!DEPTH_FILE=../inputs/barRip0_depth.txt
+!! MAKING DEPTH FLAT !!
+DEPTH_TYPE=FLAT
+DEPTH_FLAT=9.0
+!!  !!  !!  !!  !!  !!  
+Mglob=1364
+Nglob=2
+DX=0.50
+DY=1.00
+Xc_WK=350.0
+DEP_WK=9.0
+Hmo=1.00
+FreqPeak=0.1000
+ThetaPeak=0.0000
+Sigma_Theta=0.0000
+NumberStations=0
+STATIONS_FILE=../gauge.txt
+!!! Example RUN SPECIFIC INFO !!!
+!!TITLE = SIG20
+!!DEPTH_FILE  = ../inputs/funwave_OSM2026_full1mres_bathy.ascii
+!!Hmo         = 1.0
+!!FreqPeak = 0.1
+!!Sigma_Theta = 10.0
+!!ThetaPeak   = 0.0
+!!NumberStations = 64
+!!STATIONS_FILE = ../inputs/gauges1mres.txt
+!!Mglob = 1274
+!!Nglob = 3000
+!!DX = 1.0 
+!!DY = 1.0
+!!DEP_WK = 9.0
+!!Xc_WK = 150.0
+!!!!!!!!!!!!!!!!!!!!!!!!
+FIELD_IO_TYPE=BINARY
+PX = 8
+PY = 1
+!!DEPTH_TYPE = DATA 
+RESULT_FOLDER = ./output/
+TOTAL_TIME = 5001.0
+PLOT_START_TIME = 1000.0
+PLOT_INTV       = 1.0
+SCREEN_INTV     = 30.0
+STEADY_TIME     = 1000.0
+T_INTV_mean     = 4000.0
+T_INTV_wavg     = 30.0
+WaterLevel = 0.0
+WAVEMAKER = WK_NEW_IRR
+Yc_WK = 0.0
+FreqMin = 0.04
+FreqMax = 0.25
+GammaTMA = 3.0
+Nfreq = 45
+Ntheta = 1     
+Delta_WK = 2.0
+alpha_c = 0.0  
+Time_ramp  = 0.25
+PERIODIC = T
+Cd  = 0.003
+CFL = 0.25 ! trying to get stability at wavemaker
+FroudeCap = 3.0 ! increased to 3 from 1 (was too small)
+SWE_ETA_DEP=8.0
+MinDepth=0.01
+MinDepthFrc=0.1
+VISCOSITY_BREAKING=T  
+Cbrk1 = 0.45 
+Cbrk2 = 0.35
+WAVEMAKER_Cbrk = 0.65
+PLOT_INTV_STATION = 0.125
+DEPTH_OUT = T
+U = F
+V = F 
+ETA = F
+BrkdisX=F
+BrkdisY=F
+OUT_NU=F
+MASK = F 
+P = F
+Q = F 
+Radiation=F
+WaveHeight=T  
+Umean=F
+Vmean=F
+ETAmean=F
+Uwavg=F
+Vwavg=F
+ETAwavg=F
