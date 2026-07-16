@@ -1,13 +1,18 @@
 #-----------BEGIN MAKEFILE---------------------------
 FUNWAVE_DIR = .
-WORK_DIR    = funwave-work
-COMPILER    = intel
+WORK_DIR    = belegaer-work
+COMPILER    = gnu
 PARALLEL    = true
 EXEC        = funwave
 PRECISION   = double
 
 #-----------DEFINE FLAGS-----------------------------
 #         uncomment to choose the model
+FLAG_1 = -DDOUBLE_PRECISION
+FLAG_2 = -DPARALLEL
+FLAG_3 = -DCARTESIAN
+FLAG_3 = -DMIXING
+FLAG_4 = -DSAMPLES
 #  FLAG_1  = -DCOUPLING
 # FLAG_2  = -DZALPHA
 # FLAG_3  = -DMANNING
@@ -20,10 +25,10 @@ PRECISION   = double
 # FLAG_10 = -DTRACKING
 #  FLAG_11 = -DDEEP_DRAFT_VESSEL
 #----------------uncommon options---------------------
-DEF_FC      = mpiifort
-DEF_FC_FLAG = -fc=ifx
+DEF_FC      = mpif90
+DEF_FC_FLAG = 
 SPHERICAL   = false
-MPI         = openmpi
+MPI         = mpich
 DEBUG       = false
 INCS        = $(IOINCS) $(GOTMINCS)
 LIBS        = $(PV3LIB) $(CLIB)  $(PARLIB) $(IOLIBS) $(MPILIB) $(GOTMLIB)

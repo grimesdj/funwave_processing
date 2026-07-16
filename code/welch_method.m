@@ -31,8 +31,9 @@ SX=zeros(stop,sd(2));
 for m=1:M
     inds   = ii+(m-1)*ds;% indices in current block
     x  = data(inds,:);% data from ...
-    s2i= var(x);% input variance, 
-    x  = win.*detrend(x);% detrend and window    
+    s2i= var(x,'omitnan');% input variance, 
+    x  = win.*detrend(x,'omitnan');% detrend and window
+    x(isnan(x))=0;
     s2f= var(x);% reduced variance
     x  = repmat((s2i./s2f).^.5,[Ns 1]).*x;
     %
@@ -42,4 +43,4 @@ for m=1:M
     A2(2:end-inyq,:)  = 2*A2(2:end-inyq,:);
     SX=SX+A2;
 end
-psd=SX*dt/M/Ns;
+psd=real(SX*dt/M/Ns);
