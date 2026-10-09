@@ -29,6 +29,8 @@ Urot     = ncread(info.rotVelFile,'Urot');
 Vrot     = ncread(info.rotVelFile,'Vrot');
 VORT     = ncread(info.rotVelFile,'VORT');
 ETA      = ncread(info.rotVelFile,'eta');
+Umean    = ncread(info.rotVelFile,'Urot_mean')+ncread(info.rotVelFile,'Urot_mean_residual');
+Vmean    = ncread(info.rotVelFile,'Vrot_mean')+ncread(info.rotVelFile,'Vrot_mean_residual');
 H        = max(h+ETA,0.1);
 %
 %% estimate eddy energy/exchange statistics
@@ -40,15 +42,18 @@ Uex_eddy      = sum( tmp.*tmp1 , [1 3],'omitnan')./sum( tmp1, [1 3], 'omitnan');
 %
 %% estimate the energy/exchange for the mean fields:
 momFile = [info.rootMat,info.rootName,'MomentumTerms.nc'];
-Umean   = ncread(momFile,'umean');
-Vmean   = ncread(momFile,'vmean');
 ETAmean = ncread(momFile,'etamean');
+% take the velocities from the rotVelFile, instead of MomentumTerms... as this has the stokes transport, too.
+% $$$ Umean   = ncread(momFile,'umean');
+% $$$ Vmean   = ncread(momFile,'vmean');
 %
-% remove stokes velocity from mean:
-H = h+ETAmean;
-T = mean(Umean.*H,1);
-Ustokes = T./mean(H,1);
-Umean   = Umean-Ustokes;
+% This is now done in velocity decomposition
+% $$$ % remove stokes velocity from mean:
+% $$$ H = h+ETAmean;
+% $$$ T = mean(Umean.*H,1);
+% $$$ Ustokes = T./mean(H,1);
+% $$$ Umean   = Umean-Ustokes;
+%
 Umean   = mean(Umean,3,'omitnan');
 Vmean   = mean(Vmean,3,'omitnan');
 ETAmean = mean(ETAmean,3,'omitnan');

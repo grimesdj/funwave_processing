@@ -17,7 +17,7 @@ function info = prep_info_structure(info);
     fid = fopen(fin);
     while ~feof(fid)
         line = fgetl(fid);
-        str  = split(line,'=');
+        str  = split(line,{'=','!'});
         if length(str)==1, continue, end
         var  = deblank(str{1});
         val  = str{2};
@@ -34,12 +34,13 @@ function info = prep_info_structure(info);
     end
     fclose(fid)
     % define subDomain for analysis... this is run specific!
-    Lx = 500;
-    fprintf('\nRestricting cross-shore analysis to x<=%f\n',Lx)
-    info.Lx = Lx;
-    info.subDomain = [1 info.Ny-1 1 round(Lx/info.dx)-1];
+    info.Lx = info.Nx*info.dx;
+    disp('***processing full cross-shore model domain***')
+    info.subDomain = [1 info.Ny-1 1 info.Nx-1];
     info.spanx = 1;
     info.spany = 1;
+    info.rngx  = [1 info.Nx];
+    info.rngy  = [1 info.Ny];
     %
     % remove the remote hostname from output directory
     rootOut = split(info.rootOut,':');

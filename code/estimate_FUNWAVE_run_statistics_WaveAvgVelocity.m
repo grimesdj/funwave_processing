@@ -80,7 +80,7 @@ for ii=1:Nf
     %
     eta=etawavg-ETAmean;
     u = uwavg-(Umean+Ustokes);
-    v = vwavg;
+    v = vwavg-Vmean;
     clear etawavg uwavg vwavg
     %
     % estimate vorticity
@@ -120,6 +120,12 @@ for ii=1:Nf
 end
 %
 save(info.fileName,'-struct','info')
+%
+%% need to keep track of residual between momentum-based (Umean,Vmean) and wave-avg mean(urot,vrot)
+Urot_mean_res = mean(Urot,3);
+Urot = Urot-Urot_mean_res;
+Vrot_mean_res = mean(Vrot,3);
+Vrot = Vrot-Vrot_mean_res;
 %
 % For debugging the netcdf write portion, uncomment this:
 % $$$ save('/scratch/grimesdj/ripchannel/planar2D/mat_data/debugging_code.mat','-v7.3')
@@ -169,6 +175,14 @@ nccreate  (info.rotVelFile,'eta','Dimensions',dim_yxt,'Format','netcdf4')
 ncwrite   (info.rotVelFile,'eta',eta0);
 ncwriteatt(info.rotVelFile,'eta','Description','low-pass sea-surface elevation');
 %
+nccreate  (info.rotVelFile,'dep','Dimensions',dim_yx,'Format','netcdf4')
+ncwrite   (info.rotVelFile,'dep',h);
+ncwriteatt(info.rotVelFile,'dep','Description','depth grid');
+%
+nccreate  (info.rotVelFile,'ETAmean','Dimensions',dim_yx,'Format','netcdf4')
+ncwrite   (info.rotVelFile,'ETAmean',ETAmean);
+ncwriteatt(info.rotVelFile,'ETAmean','Description','mean sea-surface elevation');
+%
 nccreate  (info.rotVelFile,'Urot_mean','Dimensions',dim_yx,'Format','netcdf4')
 ncwrite   (info.rotVelFile,'Urot_mean',Urot_mean);
 ncwriteatt(info.rotVelFile,'Urot_mean','Description','time-mean cross-shore rotational velocity');
@@ -180,6 +194,14 @@ ncwriteatt(info.rotVelFile,'Vrot_mean','Description','time-mean along-shore rota
 nccreate  (info.rotVelFile,'PSI_mean','Dimensions',dim_yx,'Format','netcdf4')
 ncwrite   (info.rotVelFile,'PSI_mean',PSI_mean);
 ncwriteatt(info.rotVelFile,'PSI_mean','Description','time-mean cross-shore rotational velocity');
+%
+nccreate  (info.rotVelFile,'Urot_mean_residual','Dimensions',dim_yx,'Format','netcdf4')
+ncwrite   (info.rotVelFile,'Urot_mean_residual',Urot_mean_res);
+ncwriteatt(info.rotVelFile,'Urot_mean_residual','Description','difference between momentum-term Umean and wave-averaged mean(u)');
+%
+nccreate  (info.rotVelFile,'Vrot_mean_residual','Dimensions',dim_yx,'Format','netcdf4')
+ncwrite   (info.rotVelFile,'Vrot_mean_residual',Vrot_mean_res);
+ncwriteatt(info.rotVelFile,'Vrot_mean_residual','Description','difference between momentum-term Vmean and wave-averaged mean(v)');
 %
 return
 % $$$ 
