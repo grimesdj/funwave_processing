@@ -12,8 +12,8 @@ sbatch --time=10080 \
        --job-name="$job_name" \
        --output="$output_file" \
        --chdir="$dir" \
-       --ntasks=1\
-       --cpus-per-task=8\
+       --ntasks=8\
+       --cpus-per-task=1\
        --mail-user=coastesthydro@gmail.com \
        --mail-type=BEGIN,END,FAIL       \
        mpirun -n 8 ../../../software/funwave/funwave--mpiifort-parallel-double input.txt

@@ -9,7 +9,7 @@ for dir in "${run_dirs[@]}"; do
     job_name="${dir##*_}"
     output_file="$dir.out"
 
-sbatch --time=20160 \
+sbatch --time=5760 \
        --job-name="$job_name" \
        --output="$output_file" \
        --chdir="$dir" \
@@ -17,6 +17,6 @@ sbatch --time=20160 \
        --cpus-per-task=1\
        --mail-user=coastesthydro@gmail.com \
        --mail-type=BEGIN,END,FAIL       \
-       mpirun -n 128 ../../../software/funwave/funwave--mpiifort-parallel-double input.txt
+       mpirun -n 128 ../../../software/funwave/funwave--mpiifort-parallel-double_vWaveAvg input.txt
 
 done
