@@ -3,14 +3,15 @@ close all
 
 addpath(genpath('~/git/funwave/code/'))
 %% compare wave statistics between 3 runs with different wavemaker discretizations:
-Nruns = 15;
-for run = 0:Nruns
+runDirs = {'newSponge','planar1D'}
+% $$$ run=0;
+for run = 0:1
     %% First create the "info" structure that has directory and file information for code:
     info = struct([]);
-    info(1).runName   = sprintf('run%d',run);
+    info(1).runName   = runDirs{run+1};
     info.rootName  = info.runName;
-    info.rootSim   = sprintf('/data2/ripchannel/planar1D/run%d',run);
-    info.rootMat   = '/data2/ripchannel/planar1D/mat_data_1D/';
+    info.rootSim   = ['/data2/ripchannel/planar1D/',info.runName];
+    info.rootMat   =  '/data2/ripchannel/planar1D/newSponge/mat_data/';
     info.fileName  = [info.rootMat,filesep,info.rootName,'_info.mat'];
 
     if ~exist(info.rootMat,'dir')
@@ -51,16 +52,4 @@ for run = 0:Nruns
     out(run+1)=info;
 end
 
-save('/data2/ripchannel/planar1D/mat_data_1D/planar_1D_runs.mat')
-
-figure,
-cm = cmocean('thermal',Nruns+2);
-x  = [0:size(out(1).Hs,2)-1]*0.5;
-ig = find(x>=300 & x<=450);
-stats = [];
-for jj=1:Nruns+1
-    plot(x,out(jj).Hs(1,:),'-','color',cm(jj,:))
-    hold on,
-    
-    stats = cat(1,stats,[mean(out(jj).Hs(1,ig)), std(out(jj).Hs(1,ig))]);
-end
+save('/data2/ripchannel/planar1D/newSponge/mat_data/planar_1D_runs.mat')
