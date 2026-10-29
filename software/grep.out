@@ -1,66 +1,66 @@
-.//fluxes_21v.F:     P=0.5_SP*(PR+PL)
-.//masks.F:     MASKtmp=MASK
-.//masks.F:!     ETAtmp=ETA
-.//masks.F:     ETAtmp=EtaScreen
-.//misc.F:    icp=0
-.//misc.F:      icp=icp+1
-.//misc.F:     DT_tmp=CFL*TMP3
-.//mod_tracer.F:        DO I_tmp=1,NumTracker
-.//mod_sediment.F:        Pickup=ZERO
-.//mod_param.F:       INTEGER, PARAMETER::SP=8
-.//mod_param.F:       INTEGER, PARAMETER::MPI_SP=MPI_DOUBLE_PRECISION
-.//mod_param.F:       INTEGER, PARAMETER::SP=SELECTED_REAL_KIND(6,30)
-.//mod_param.F:       INTEGER, PARAMETER::MPI_SP=MPI_REAL
-.//mod_global.F:       REAL(SP) :: FroudeCap=10.0_SP
-.//mod_global.F:       REAL(SP) :: SWE_ETA_DEP=0.7_SP
-.//mod_global.F:                  OUT_P=.FALSE., OUT_Q=.FALSE., &
-.//mod_global.F:                  OUT_TMP=.FALSE., OUT_AGE=.FALSE.,OUT_NU=.FALSE., &
-.//fluxes.F:     P=0.5_SP*(PR+PL)
-.//wavemaker.F:        omgn_tmp=2.0_SP*pi/PeakPeriod
-.//wavemaker.F:        ap=Hmo_each(ktheta)/SQRT(2.0_SP)/2.0_SP
-.//wavemaker.F:!        ap=Hmo_each(ktheta)/2.0_SP  ! Joes suggestion
-.//wavemaker.F:        ap=Hmo_each(ktheta,kf)/SQRT(2.0_SP)/2.0_SP
-.//wavemaker.F:!        ap=Hmo_each(ktheta)/2.0_SP  ! Joes suggestion
-.//wavemaker.F:         ap=Hmo_each(ktheta)/SQRT(2.0_SP)/2.0_SP
-.//wavemaker.F:!        ap=Hmo_each(ktheta)/2.0_SP  ! this is the one suggested by Geiman
-.//wavemaker.F:        omgn_tmp=2.0_SP*pi*fm
-.//wavemaker.F:         ap=Hmo_each(ktheta,kf)/SQRT(2.0_SP)/2.0_SP
-.//wavemaker.F:        omgn_tmp=2.0_SP*pi*fm
-.//wavemaker.F:        omgn_tmp=2.0_SP*pi/PeakPeriod
-.//wavemaker.F:            ELSEIF(Theta_temp==0.0_SP)THEN
-.//wavemaker.F:    omgn_tmp=2.0_SP*pi/PeakPeriod
-.//wavemaker.F:            ELSEIF (Theta_temp==0.0_SP)THEN
-.//wavemaker.F:    omgn_tmp=2.0_SP*pi*fm
-.//io.F:      if (myid.eq.0) WRITE(3,'(A5,F12.2)')'SLP=', SLP
-.//io.F:      if (myid.eq.0) WRITE(3,'(A6,F12.2)')'Xslp=', Xslp  
-.//io.F:      WRITE(3,'(A5,F12.2)')'SLP=', SLP
-.//io.F:      WRITE(3,'(A6,F12.2)')'Xslp=', Xslp  
-.//io.F:      if (myid.eq.0) WRITE(3,'(A11,F12.2)')'Time_ramp=', Time_ramp
-.//io.F:      WRITE(3,'(A11,F12.2)')'Time_ramp=', Time_ramp
-.//io.F:      if (myid.eq.0) WRITE(3,'(A11,F12.2)')'Time_ramp=', Time_ramp
-.//io.F:      WRITE(3,'(A11,F12.2)')'Time_ramp=', Time_ramp
-.//io.F:      if (myid.eq.0) WRITE(3,'(A12,F12.2)')'Time_ramp= ', Time_ramp
-.//io.F:      WRITE(3,'(A12,F12.2)')'Time_ramp= ', Time_ramp
-.//io.F:      if (myid.eq.0) WRITE(3,'(A12,F12.2)')'Time_ramp= ', Time_ramp
-.//io.F:      WRITE(3,'(A12,F12.2)')'Time_ramp= ', Time_ramp
-.//io.F:        if (myid.eq.0) WRITE(3,'(A22,F12.2)')'DIFFUSION_SPONGE Csp=', Csp
-.//io.F:        WRITE(3,'(A22,F12.2)')'DIFFUSION_SPONGE Csp=', Csp
-.//io.F:       if (myid.eq.0) WRITE(3,'(A13,F12.2)')'SWE_ETA_DEP=', SWE_ETA_DEP
-.//io.F:       WRITE(3,'(A13,F12.2)')'SWE_ETA_DEP=', SWE_ETA_DEP
-.//io.F:      if (myid.eq.0) WRITE(3,'(A12,F12.2)')'FroudeCap=', FroudeCap
-.//io.F:      WRITE(3,'(A12,F12.2)')'FroudeCap=', FroudeCap
-.//io.F:        if (myid.eq.0) WRITE(3,'(A12,F12.2)')'Time_ramp= ', Time_ramp
-.//io.F:        WRITE(3,'(A12,F12.2)')'Time_ramp= ', Time_ramp
-.//init.F:     P=0.0_SP
-.//init.F:     U1p=ZERO
-.//init.F:     V1p=ZERO
-.//init.F:     U1pp=ZERO
-.//init.F:     V1pp=ZERO
-.//samples.F:     IF(dep==ZERO)THEN
-.//fluxes_33v.F:     P=0.5_SP*(PR+PL)
-.//etauv_solver.F:     REAL(SP),PARAMETER::n_left=-1.0_SP,n_right=1.0_SP,n_bottom=-1.0_SP,n_top=1.0_SP
-.//etauv_solver.F:      F_top=Q(I,J+1)
-.//etauv_solver.F:      F_top=Fy(I,J+1)
-.//etauv_solver.F:      F_top=Gy(I,J+1)
-.//etauv_solver.F:       dep=Max(Depth(I,J),MinDepthFrc)
-.//etauv_solver.F:       dep=Max(Depth(I,J),MinDepthFrc)
+.//mod_time_spectra.F:                    WidthWaveMaker,R_sponge_wavemaker,A_sponge_wavemaker, &
+.//#sponge.F#:                            R_sponge,A_sponge,SPONGE)
+.//#sponge.F#:                          R_sponge,A_sponge
+.//#sponge.F#:!       ri = R_Sponge**(50*(i+npx*Mglob/px-1)/(Iwidth-1))
+.//#sponge.F#:	ri = R_Sponge**(50*(i + (iista - 1) -1)/(Iwidth-1))
+.//#sponge.F#:       ri=R_sponge**(50*(I-1)/(Iwidth-1))
+.//#sponge.F#:                            R_sponge,A_sponge,SPONGE)
+.//#sponge.F#:                          R_sponge,A_sponge
+.//#sponge.F#:                            R_sponge,A_sponge,SPONGE)
+.//#sponge.F#:                          R_sponge,A_sponge
+.//#sponge.F#:                            R_sponge,A_sponge,SPONGE)
+.//#sponge.F#:                          R_sponge,A_sponge
+.//#sponge.F#:!       ri = R_Sponge**(50*(i+npx*Mglob/px-1)/(Iwidth-1))
+.//#sponge.F#:       ri = R_Sponge**(50*(i+(iista-1)-1)/(Iwidth-1))
+.//#sponge.F#:       ri=R_sponge**(50*(I-1)/(Iwidth-1))
+.//#sponge.F#:!       ri = R_Sponge**(50*(M-i+(px-npx-1)*Mglob/px)/(Iwidth-1))
+.//#sponge.F#:       ri = R_Sponge**(50*(M-i+(px-npx-1)*(iiend - iista + 1))/(Iwidth-1))
+.//#sponge.F#:       ri=R_sponge**(50*(M-I)/(Iwidth-1))
+.//#sponge.F#:        IF(Sponge(I,J)<A_Sponge**(R_Sponge**50))Sponge(I,J)=1.0_SP
+.//#sponge.F#:!       ri=R_sponge**(50*(J+npy*Nglob/py-1)/(Iwidth-1))
+.//#sponge.F#:       ri=R_sponge**(50*(J+ (jjsta - 1) -1)/(Iwidth-1))
+.//#sponge.F#:       ri=R_sponge**(50*(J-1)/(Iwidth-1))
+.//#sponge.F#:!       ri = R_Sponge**(50*(N-J+(py-npy-1)*Nglob/py)/(Iwidth-1))
+.//#sponge.F#:       ri = R_Sponge**(50*(N-J+(py-npy-1)*(jjend - jjsta + 1) )/(Iwidth-1))
+.//#sponge.F#:       ri=R_sponge**(50*(N-J)/(Iwidth-1))	  
+.//#sponge.F#:        IF(Sponge(I,J)<A_Sponge**(R_Sponge**50))Sponge(I,J)=1.0_SP	  
+.//sponge.F:                            R_sponge,A_sponge,SPONGE)
+.//sponge.F:                          R_sponge,A_sponge
+.//sponge.F:!       ri = R_Sponge**(50*(i+npx*Mglob/px-1)/(Iwidth-1))
+.//sponge.F:	ri = R_Sponge**(50*(i + (iista - 1) -1)/(Iwidth-1))
+.//sponge.F:       ri=R_sponge**(50*(I-1)/(Iwidth-1))
+.//sponge.F:                            R_sponge,A_sponge,SPONGE)
+.//sponge.F:                          R_sponge,A_sponge
+.//sponge.F:                            R_sponge,A_sponge,SPONGE)
+.//sponge.F:                          R_sponge,A_sponge
+.//sponge.F:                            R_sponge,A_sponge,SPONGE)
+.//sponge.F:                          R_sponge,A_sponge
+.//sponge.F:!       ri = R_Sponge**(50*(i+npx*Mglob/px-1)/(Iwidth-1))
+.//sponge.F:       ri = R_Sponge**(50*(i+(iista-1)-1)/(Iwidth-1))
+.//sponge.F:       ri=R_sponge**(50*(I-1)/(Iwidth-1))
+.//sponge.F:!       ri = R_Sponge**(50*(M-i+(px-npx-1)*Mglob/px)/(Iwidth-1))
+.//sponge.F:       ri = R_Sponge**(50*(M-i+(px-npx-1)*(iiend - iista + 1))/(Iwidth-1))
+.//sponge.F:       ri=R_sponge**(50*(M-I)/(Iwidth-1))
+.//sponge.F:        IF(Sponge(I,J)<A_Sponge**(R_Sponge**50))Sponge(I,J)=1.0_SP
+.//sponge.F:!       ri=R_sponge**(50*(J+npy*Nglob/py-1)/(Iwidth-1))
+.//sponge.F:       ri=R_sponge**(50*(J+ (jjsta - 1) -1)/(Iwidth-1))
+.//sponge.F:       ri=R_sponge**(50*(J-1)/(Iwidth-1))
+.//sponge.F:!       ri = R_Sponge**(50*(N-J+(py-npy-1)*Nglob/py)/(Iwidth-1))
+.//sponge.F:       ri = R_Sponge**(50*(N-J+(py-npy-1)*(jjend - jjsta + 1) )/(Iwidth-1))
+.//sponge.F:       ri=R_sponge**(50*(N-J)/(Iwidth-1))	  
+.//sponge.F:        IF(Sponge(I,J)<A_Sponge**(R_Sponge**50))Sponge(I,J)=1.0_SP	  
+.//mod_global.F:                  R_sponge,A_sponge
+.//mod_global.F:                   R_sponge_wavemaker,A_sponge_wavemaker
+.//io.F:        CALL READ_FLOAT(R_sponge_wavemaker,FILE_NAME,'R_sponge_wavemaker',ierr)
+.//io.F:        CALL READ_FLOAT(R_sponge,FILE_NAME,'R_sponge',ierr)
+.//io.F:        R_sponge = 0.85_SP
+.//io.F:         WRITE(*,'(A40)')'R_sponge Default:  0.85'
+.//io.F:         WRITE(3,'(A40)')'R_sponge Default:  0.85'
+.//io.F:         WRITE(*,'(A40)')'R_sponge Default:  0.85'
+.//io.F:         WRITE(3,'(A40)')'R_sponge Default:  0.85'
+.//io.F:        if (myid.eq.0) WRITE(3,'(A20,F12.2)')'R_sponge          =', R_sponge
+.//io.F:        WRITE(3,'(A20,F12.2)')'R_sponge          =', R_sponge
+.//init.F:                            R_sponge,A_sponge,SPONGE)
+.//init.F:                            R_sponge,A_sponge,nu_sponge)
+.//init.F:                            R_sponge,A_sponge,CD_4_SPONGE)
+.//init.F:                            R_sponge_wavemaker,A_sponge_wavemaker,SpongeMaker)
