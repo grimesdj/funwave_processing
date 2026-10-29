@@ -14,7 +14,7 @@ rootDIR = '/scratch/grimesdj/ripchannel/';
 
 % code to be launched on cms-hpc "cuttlefish"
 % 0) requires the input bathymetry name as top-dir
-runBATHYlist = {'gapRip'};
+runBATHYlist = {'highRip1'};
 reproc  = 1;% 1=reprocess ascii/binary to netcdf
 rmfiles = 1;% 1=remove original ascii/binary files when finished
 recalc  = 1;% 1=recalculate run statistics
@@ -43,7 +43,7 @@ load([matDIR,filesep,'runs_to_process.mat'])
 % loop over run_dirs
 Ndirs  = length(run_dirs);
 % pre-OSM26 issue: disp('ONLY PROCESSING NON-ZERO SPREAD CASES [2:5,7:10,12:15]')
-for jj = 1:Ndirs
+for jj = 12:Ndirs
 % 1) get current run subdirectory to process:
 runID    = run_dirs{jj};
 fprintf('\n processing: %s %s \n', runBATHY,runID)    
