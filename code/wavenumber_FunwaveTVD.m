@@ -13,6 +13,7 @@ function k = wavenumber_FunwaveTVD(om,h);
 % if 2D, frequency runs down (om needs to be column) and cross-shore depth runs
 % across (h needs to be a row)
 
+% Match dimensions used by wavenumber_FunwaveTVD
 som=size(om);
 sh =size(h);
 
@@ -21,7 +22,7 @@ h =repmat(h ,[som(1) 1]);
 
 g = 9.81;
 
-
+% Nwogu/FUNWAVE coefficients
 a  = -0.39;
 a1 = (a + 1/3);
 b0 = om.^2.*h/g;
