@@ -12,10 +12,9 @@
 
 Let d(x,y) be the still-water depth, $\eta$ the mean water-level anomaly, $H=d+\eta$, and $\mathbf{U}=(u,v)$. The iterated equations are
 
-```latex
-\[\frac{\partial \eta}{\partial \tau}
+```math
+\frac{\partial \eta}{\partial \tau}
 +\nabla\cdot(H\mathbf{U})=0,
-\]
 ```
 
 ```latex
