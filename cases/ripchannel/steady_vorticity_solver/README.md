@@ -17,10 +17,8 @@ Let d(x,y) be the still-water depth, $\eta$ the mean water-level anomaly, $H=d+\
 +\nabla\cdot(H\mathbf{U})=0,
 ```
 
-```latex
-$
+```math
 \frac{\partial \mathbf{U}}{\partial \tau} +(\mathbf{U}\cdot\nabla)\mathbf{U}=-g\nabla\eta-\frac{1}{\rho H}\nabla\cdot\mathbf{S}-\frac{c_L}{H}\mathbf{U}+\nu\nabla^2\mathbf{U}.
-$
 ```
 
 Here, $\mathbf{S}$ is the wave radiation-stress tensor. Its divergence is computed from `Sxx`, `Sxy`, and `Syy`, as provided by `ripchannel_theory_circulation.m`.
