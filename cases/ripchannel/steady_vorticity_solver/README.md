@@ -10,14 +10,14 @@
 
 ## Model equations
 
-Let \(d(x,y)\) be the still-water depth, \(\eta\) the mean water-level anomaly, \(H=d+\eta\), and \(\mathbf{U}=(u,v)\). The iterated equations are
+Let \(d(x,y)\) be the still-water depth, \($\eta$\) the mean water-level anomaly, \($H=d+\eta$\), and \($\mathbf{U}=(u,v)$\). The iterated equations are
 
-\[
+$$
 \frac{\partial \eta}{\partial \tau}
 +\nabla\cdot(H\mathbf{U})=0,
-\]
+$$
 
-\[
+$$
 \frac{\partial \mathbf{U}}{\partial \tau}
 +(\mathbf{U}\cdot\nabla)\mathbf{U}
 =
@@ -25,15 +25,15 @@ Let \(d(x,y)\) be the still-water depth, \(\eta\) the mean water-level anomaly, 
 -\frac{1}{\rho H}\nabla\cdot\mathbf{S}
 -\frac{c_L}{H}\mathbf{U}
 +\nu\nabla^2\mathbf{U}.
-\]
+$$
 
-Here, \(\mathbf{S}\) is the wave radiation-stress tensor. Its divergence is computed from `Sxx`, `Sxy`, and `Syy`, as provided by `ripchannel_theory_circulation.m`.
+Here, \($\mathbf{S}$\) is the wave radiation-stress tensor. Its divergence is computed from `Sxx`, `Sxy`, and `Syy`, as provided by `ripchannel_theory_circulation.m`.
 
 The nonlinear advective terms are retained. In a steady, converged solution, the pseudo-time derivatives vanish, and the solver satisfies the steady continuity and momentum balances.
 
 ## Numerical method and boundary conditions
 
-The solver advances conservative perturbation variables using local Lax–Friedrichs/Rusanov face fluxes. The hydrostatic reference pressure flux is subtracted using the fixed bathymetry \(d\); this preserves the zero-flow rest state over the nonuniform bed.
+The solver advances conservative perturbation variables using local Lax–Friedrichs/Rusanov face fluxes. The hydrostatic reference pressure flux is subtracted using the fixed bathymetry \($d$\); this preserves the zero-flow rest state over the nonuniform bed.
 
 The algorithm uses explicit pseudo-time relaxation with both a CFL and a viscous time-step restriction.
 
