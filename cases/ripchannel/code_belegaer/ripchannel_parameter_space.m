@@ -32,7 +32,7 @@ switch runBATHY
     SPREAD = [10];
     grids  = {'barRip2','barRip3','terRip0','terRip2','terRip3'};
   case {'highRip1'}
-    HEIGHT = [0.5 1.0 1.5];
+    HEIGHT = [0.5 1.5];
     PERIOD = 10;
     DIR    = 0;
     SPREAD = [1 10];

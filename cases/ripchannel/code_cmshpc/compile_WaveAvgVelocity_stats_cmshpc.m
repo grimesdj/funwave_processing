@@ -26,15 +26,10 @@ ym = 2;
 pw = 2.5;% 400 in x
 ph = 6;% +/- 500 in y
 ag = 0.5;
-ppos1 = [xm ym pw ph];
-ppos2 = [xm+pw+ag ym pw ph];
-ppos3 = [xm+2*(pw+ag) ym pw ph];
-ppos4 = [xm+3*(pw+ag) ym pw ph];
-ppos5 = [xm+4*(pw+ag) ym pw ph];
-%
 %% 1.1) Preallocate archive variables:
 % INFO = struct([]);
 Uex = []; Uex_mean = []; Uex_eddy = [];
+Uex_vs_x = []; Uex_mean_vs_x = []; Uex_eddy_vs_x = [];
 Urms= []; Urms_mean= []; Urms_eddy= [];
 ENS = []; ENS_mean = []; ENS_eddy = [];
 dETA= []; Uscale   = [];
@@ -44,8 +39,11 @@ Umax_BP= []; Umax_mean_BP= []; Umax_eddy_BP= [];% at avg break-point
 Umax_vs_t      = []; Umax_vs_t_BP      = [];
 Umax_eddy_vs_t = []; Umax_eddy_vs_t_BP = [];                
 % mrkr= {}; sz = {}; cblbl = {}; cbttl = [];
-Uex_channel      = []; Uex_ambient = [];
+Uex_channel_vs_x = []; Uex_ambient_vs_x = [];
+Uex_channel = [];      Uex_ambient = [];
+Uex_mean_channel_vs_x = []; Uex_mean_ambient_vs_x = [];
 Uex_mean_channel = []; Uex_mean_ambient = [];
+Uex_eddy_channel_vs_x = []; Uex_eddy_ambient_vs_x = [];
 Uex_eddy_channel = []; Uex_eddy_ambient = [];
 Urms_channel     = []; Urms_ambient = [];
 Urms_mean_channel= []; Urms_mean_ambient = [];
@@ -106,6 +104,10 @@ for cc = 1:length(CASES)
         channel_length(iter)          = info.lc;
         channel_amplitude_ratio(iter) = info.rc;
 
+        %% create plot title string:
+        title_string{1} = sprintf(' %s, $x_c=$%3.0f m, $l_c=$%3.0f m', grid(1:3), info.xc,info.lc);
+        title_string{2,1} = sprintf(' $H=$%1.1f m, $T=$%2.0f s, $\\sigma_\\theta=$%d, $D=$%d ', height(iter),period(iter),spread(iter),direction(iter));
+
         %% 4.1.1) define label sizes/shapes/colors?
        
         %% 4.2) load post-processed variables:
@@ -141,9 +143,9 @@ for cc = 1:length(CASES)
         iOFF_eddy = (U)>0;
         %
         % !If domains are different, need to adjust array sizes after iter==1!
-        Uex(:,iter)       = mean( (Umean+U).*iOFF     .*H, [1 3]) ./ mean(Hmean, [1 3]);
-        Uex_mean(:,iter)  = mean( (Umean  ).*iOFF_mean.*H, [1 3]) ./ mean(Hmean, [1 3]);
-        Uex_eddy(:,iter)  = mean( (U      ).*iOFF_eddy.*H, [1 3]) ./ mean(Hmean, [1 3]);
+        Uex_vs_x(:,iter)       = mean( (Umean+U).*iOFF     .*H, [1 3]) ./ mean(Hmean, [1 3]);
+        Uex_mean_vs_x(:,iter)  = mean( (Umean  ).*iOFF_mean.*H, [1 3]) ./ mean(Hmean, [1 3]);
+        Uex_eddy_vs_x(:,iter)  = mean( (U      ).*iOFF_eddy.*H, [1 3]) ./ mean(Hmean, [1 3]);
         %
         Urms     (:,iter)      = sqrt(mean(sum( (Umean+U).^2.*H, 1,'omitnan'), 3,'omitnan') ./ sum(Hmean, 1,'omitnan'));
         Urms_mean(:,iter)      = sqrt(mean(sum( (Umean  ).^2.*H, 1,'omitnan'), 3,'omitnan') ./ sum(Hmean, 1,'omitnan'));
@@ -156,19 +158,32 @@ for cc = 1:length(CASES)
         %% 5) get locations for transects/bulk stats for each:
         iX0 = (x>0.5*(info.xc + mean(info.x_shoreline)) & x<info.xc)';
         iX1 = find(x>=info.xc,1,'first');
-        iX2 = find(x>=info.x_breakpoint,1,'first');        
-
+        iX2 = find(x>=info.x_breakpoint,1,'first');
+        %
         iY0 =  y<info.Ly/2 - 5*info.lc | y>info.Ly/2 + 5*info.lc;
         iY1 = (y>info.Ly/2 -   info.lc & y<info.Ly/2 +   info.lc);
 
         %% 5.1) extract/archive statistics:
-        Uex_channel     (:,iter)  = mean( (Umean(iY1,:,:)+U(iY1,:,:)).*iOFF(iY1,:,:)     .*H(iY1,:,:), [1 3]) ./ mean(Hmean(iY1,:,:), [1 3]);
-        Uex_mean_channel(:,iter)  = mean( (Umean(iY1,:,:)           ).*iOFF_mean(iY1,:,:).*H(iY1,:,:), [1 3]) ./ mean(Hmean(iY1,:,:), [1 3]);
-        Uex_eddy_channel(:,iter)  = mean( (U(iY1,:,:)               ).*iOFF_eddy(iY1,:,:).*H(iY1,:,:), [1 3]) ./ mean(Hmean(iY1,:,:), [1 3]);
+        Uex_channel_vs_x     (:,iter)  = mean( (Umean(iY1,:,:)+U(iY1,:,:)).*iOFF(iY1,:,:)     .*H(iY1,:,:), [1 3]) ./ mean(Hmean(iY1,:,:), [1 3]);
+        Uex_mean_channel_vs_x(:,iter)  = mean( (Umean(iY1,:,:)           ).*iOFF_mean(iY1,:,:).*H(iY1,:,:), [1 3]) ./ mean(Hmean(iY1,:,:), [1 3]);
+        Uex_eddy_channel_vs_x(:,iter)  = mean( (U(iY1,:,:)               ).*iOFF_eddy(iY1,:,:).*H(iY1,:,:), [1 3]) ./ mean(Hmean(iY1,:,:), [1 3]);
         %
-        Uex_ambient     (:,iter)  = mean( (Umean(iY0,:,:)+U(iY0,:,:)).*iOFF(iY0,:,:)     .*H(iY0,:,:), [1 3]) ./ mean(Hmean(iY0,:,:), [1 3]);
-        Uex_mean_ambient(:,iter)  = mean( (Umean(iY0,:,:)           ).*iOFF_mean(iY0,:,:).*H(iY0,:,:), [1 3]) ./ mean(Hmean(iY0,:,:), [1 3]);
-        Uex_eddy_ambient(:,iter)  = mean( (U(iY0,:,:)               ).*iOFF_eddy(iY0,:,:).*H(iY0,:,:), [1 3]) ./ mean(Hmean(iY0,:,:), [1 3]);
+        Uex_ambient_vs_x     (:,iter)  = mean( (Umean(iY0,:,:)+U(iY0,:,:)).*iOFF(iY0,:,:)     .*H(iY0,:,:), [1 3]) ./ mean(Hmean(iY0,:,:), [1 3]);
+        Uex_mean_ambient_vs_x(:,iter)  = mean( (Umean(iY0,:,:)           ).*iOFF_mean(iY0,:,:).*H(iY0,:,:), [1 3]) ./ mean(Hmean(iY0,:,:), [1 3]);
+        Uex_eddy_ambient_vs_x(:,iter)  = mean( (U(iY0,:,:)               ).*iOFF_eddy(iY0,:,:).*H(iY0,:,:), [1 3]) ./ mean(Hmean(iY0,:,:), [1 3]);
+        %
+        Uex(iter)       = Uex_vs_x(iX1,iter);
+        Uex_mean(iter)  = Uex_mean_vs_x(iX1,iter);
+        Uex_eddy(iter)  = Uex_eddy_vs_x(iX1,iter);
+        %
+        Uex_channel     (iter)  = Uex_channel_vs_x(iX1,iter);
+        Uex_mean_channel(iter)  = Uex_mean_channel_vs_x(iX1,iter);
+        Uex_eddy_channel(iter)  = Uex_eddy_channel_vs_x(iX1,iter);
+        %
+        Uex_ambient     (iter)  = Uex_ambient_vs_x(iX1,iter);
+        Uex_mean_ambient(iter)  = Uex_mean_ambient_vs_x(iX1,iter);
+        Uex_eddy_ambient(iter)  = Uex_eddy_ambient_vs_x(iX1,iter);
+        %
         %
         Urms_channel     (:,iter)  = sqrt(mean( (Umean(iY1,:,:)+U(iY1,:,:)).^2.*H(iY1,:,:), [1 3]) ./ mean(Hmean(iY1,:,:), [1 3]));
         Urms_mean_channel(:,iter)  = sqrt(mean( (Umean(iY1,:,:)           ).^2.*H(iY1,:,:), [1 3]) ./ mean(Hmean(iY1,:,:), [1 3]));
@@ -241,6 +256,10 @@ for cc = 1:length(CASES)
                 idx   = ismember(grids(:,1:end-1),grid(1:end-1),'rows');
                 Nax   = sum(idx);
                 %
+                fprintf('\t preparing %d-axes for grids: %sX \n', Nax, grid(1:end-1))    
+                for pp = 1:Nax
+                    eval(sprintf('ppos%d = [xm+%d*(pw+ag) ym pw ph];',pp,pp-1));
+                end
                 ps    = [2*xm+Nax*(pw+ag)+6*ag 2*ym+ph];
                 cbpos = [xm+Nax*(pw+ag)+ag, ym, ag, ph/2];
                 %
@@ -269,10 +288,10 @@ for cc = 1:length(CASES)
             imagesc((x-50)/(info.xc-50),(y-info.Ly/2)/info.lc,Umean), caxis([-0.5 0.5]), colormap(cmocean('balance'))
             hold on,
             contour((x-50)/(info.xc-50),(y-info.Ly/2)/info.lc,dep,[0:1:8],'-k','linewidth',0.5,'edgealpha',0.5)
-            xline(Xke_max(axisNum),'--m')
+            xline((x([iX1 iX2])-50)/(info.xc-50),'--m')
             yline([-2 2],'--g')
-            set(gca,'ticklabelinterpreter','latex','fontsize',8,'tickdir','out','ydir','normal','xlim',[0 450]/(info.xc-50),'ylim',0.5*ph/pw*450/info.lc*[-1 1])
-            title(RUN,'fontsize',8)
+            set(gca,'ticklabelinterpreter','latex','fontsize',8,'tickdir','out','ydir','normal','xlim',[0 450]/(info.xc-50),'ylim',[-5.5 5.5])%0.5*ph/pw*450/info.lc*[-1 1])
+            title(title_string,'fontsize',4,'interpreter','latex')
             if axisNum==1
                 ylabel('$(y-y_0)/l_c$ [~]','interpreter','latex')
                 xlabel('$(x-x_sl)/x_c$ [~]','interpreter','latex')                
@@ -286,11 +305,11 @@ for cc = 1:length(CASES)
             imagesc((x-50)/(info.xc-50),(y-info.Ly/2)/info.lc,rms(U,3,'omitnan')), caxis([0 0.5]), colormap(cmocean('amp'))
             hold on,
             contour((x-50)/(info.xc-50),(y-info.Ly/2)/info.lc,dep,[0:1:8],'-k','linewidth',0.5,'edgealpha',0.5)
-            xline(Xke_max(axisNum),'--m')
+            xline((x([iX1 iX2])-50)/(info.xc-50),'--m')
             yline([-2 2],'--g')
             pos = get(gca,'position');
-            set(gca,'ticklabelinterpreter','latex','fontsize',8,'tickdir','out','ydir','normal','xlim',[0 450]/(info.xc-50),'ylim',0.5*ph/pw*450/info.lc*[-1 1])
-            title(RUN,'fontsize',8)
+            set(gca,'ticklabelinterpreter','latex','fontsize',8,'tickdir','out','ydir','normal','xlim',[0 450]/(info.xc-50),'ylim',[-5.5 5.5])%,0.5*ph/pw*450/info.lc*[-1 1])
+            title(title_string,'fontsize',4,'interpreter','latex')%            title(RUN,'fontsize',8)
             if axisNum==1
                 ylabel('$(y-y_0)/l_c$ [~]','interpreter','latex')
                 xlabel('$(x-x_sl)/x_c$ [~]','interpreter','latex')                
@@ -305,12 +324,12 @@ for cc = 1:length(CASES)
             imagesc((x-50)/(info.xc-50),(y-info.Ly/2)/info.lc,Vmean), caxis([-0.5 0.5]), colormap(cmocean('balance'))
             hold on,
             contour((x-50)/(info.xc-50),(y-info.Ly/2)/info.lc,dep,[0:1:8],'-k','linewidth',0.5,'edgealpha',0.5)
-            xline( [x(find(iX0==1,1,'first')) x(find(iX0==1,1,'last'))],'--c')
+            xline( ([x(find(iX0==1,1,'first')) x(find(iX0==1,1,'last'))]-50)/(info.xc-50),'--c')
             yline([-1 1],'--b')
             yline([-5 5],'--c')
-            set(gca,'ticklabelinterpreter','latex','fontsize',8,'tickdir','out','ydir','normal','xlim',[0 450]/(info.xc-50),'ylim',0.5*ph/pw*450/info.lc*[-1 1])
+            set(gca,'ticklabelinterpreter','latex','fontsize',8,'tickdir','out','ydir','normal','xlim',[0 450]/(info.xc-50),'ylim',[-5.5 5.5])%,0.5*ph/pw*450/info.lc*[-1 1])
             %
-            title(RUN,'fontsize',8)
+            title(title_string,'fontsize',4,'interpreter','latex')%            title(RUN,'fontsize',8)
             if axisNum==1
                 ylabel('$(y-y_0)/l_c$ [~]','interpreter','latex')
                 xlabel('$(x-x_sl)/x_c$ [~]','interpreter','latex')                
@@ -324,12 +343,12 @@ for cc = 1:length(CASES)
             imagesc((x-50)/(info.xc-50),(y-info.Ly/2)/info.lc,rms(V,3,'omitnan')), caxis([0 0.5]), colormap(cmocean('amp'))
             hold on,
             contour((x-50)/(info.xc-50),(y-info.Ly/2)/info.lc,dep,[0:1:8],'-k','linewidth',0.5,'edgealpha',0.5)
-            xline( [x(find(iX0==1,1,'first')) x(find(iX0==1,1,'last'))],'--c')
+            xline( ([x(find(iX0==1,1,'first')) x(find(iX0==1,1,'last'))]-50)/(info.xc-50),'--c')
             yline([-1 1],'--b')
             pos = get(gca,'position');
-            set(gca,'ticklabelinterpreter','latex','fontsize',8,'tickdir','out','ydir','normal','xlim',[0 450]/(info.xc-50),'ylim',0.5*ph/pw*450/info.lc*[-1 1])
+            set(gca,'ticklabelinterpreter','latex','fontsize',8,'tickdir','out','ydir','normal','xlim',[0 450]/(info.xc-50),'ylim',[-5.5 5.5])%,0.5*ph/pw*450/info.lc*[-1 1])
             %
-            title(RUN,'fontsize',8)
+            title(title_string,'fontsize',4,'interpreter','latex')%            title(RUN,'fontsize',8)
             if axisNum==1
                 ylabel('$(y-y_0)/l_c$ [~]','interpreter','latex')
                 xlabel('$(x-x_sl)/x_c$ [~]','interpreter','latex')                
@@ -345,13 +364,13 @@ for cc = 1:length(CASES)
             hold on,
             [~,h] = contour((x-50)/(info.xc-50),(y-info.Ly/2)/info.lc,dep,[0:1:8],'-k','linewidth',0.5,'edgealpha',0.5);
             %% add quiver
-            spanx = round(20/info.dx);
-            spany = round(40/info.dy);
+            spanx = round(20*info.xc/(200*info.dx));
+            spany = round(40*info.lc/(100*info.dy));
             [xx,yy] = meshgrid((x(1:spanx:end)-50)/(info.xc-50),(y(1:spany:end)-info.Ly/2)/info.lc);
             uu = Umean(1:spany:end,1:spanx:end);
             vv = Vmean(1:spany:end,1:spanx:end);
             xlims = [0 450]/(info.xc-50);
-            ylims = 0.5*(ph/pw)*(400/info.lc)*[-1 1];
+            ylims = [-5.5 5.5]; % 0.5*(ph/pw)*(400/info.lc)*[-1 1];
             scalex = 30*(info.xc-50)/info.lc/(info.xc-50);
             scaley = 30*(diff(ylims)/diff(xlims))*(pw/ph)/(info.lc);
             quiver(xx(:),yy(:),uu(:)*scalex, vv(:)*scaley,'ShowArrowHead','off','Marker','.','markersize',1)
@@ -359,7 +378,7 @@ for cc = 1:length(CASES)
             text(  1.8,4.75,'0.5 m/s','interpreter','latex','fontsize',5)
             set(gca,'ticklabelinterpreter','latex','fontsize',8,'tickdir','out','ydir','normal','xlim',xlims,'ylim',ylims)
             %
-            title(RUN,'fontsize',8)
+            title(title_string,'fontsize',4,'interpreter','latex')            %            title(RUN,'fontsize',8)
             if axisNum==1
                 ylabel('$(y-y_0)/l_c$ [~]','interpreter','latex')
                 xlabel('$(x-x_sl)/x_c$ [~]','interpreter','latex')                
@@ -376,7 +395,7 @@ for cc = 1:length(CASES)
                 grid_waves = split(nextRUN,'_');
                 next_grid  = char(grid_waves{1});
                 if ~strcmp(next_grid(1:end-1),grid(1:end-1))
-                    plotFlat=1;
+                    plotFlag=1;
                 end
             end
             %
@@ -392,7 +411,7 @@ for cc = 1:length(CASES)
                        'fontsize',6,'tickdir','out')
                 xlabel('$\langle u\rangle$ [m/s]','interpreter','latex')
                 
-                figname = [figDIR,'mean_x_speed_',CASE,'_',RUN,'.pdf'];
+                figname = [figDIR,'mean_x_speed_',CASE,'_',RUN,'.png'];
                 exportgraphics(fig0,figname)
                 
                 figure(fig00);
@@ -405,7 +424,7 @@ for cc = 1:length(CASES)
                        'xtick',[],'xaxislocation','top','ticklength',2*get(cb,'ticklength'),...
                        'fontsize',6,'tickdir','out')
                 xlabel('rms$(\bar{u})$ [m/s]','interpreter','latex')
-                figname = [figDIR,'rms_x_speed_',CASE,'_',RUN,'.pdf'];
+                figname = [figDIR,'rms_x_speed_',CASE,'_',RUN,'.png'];
                 exportgraphics(fig00,figname)
                 %%
                 figure(fig000);
@@ -419,7 +438,7 @@ for cc = 1:length(CASES)
                        'fontsize',6,'tickdir','out')
                 xlabel('$\langle v\rangle$ [m/s]','interpreter','latex')
                 
-                figname = [figDIR,'mean_y_speed_',CASE,'_',RUN,'.pdf'];
+                figname = [figDIR,'mean_y_speed_',CASE,'_',RUN,'.png'];
                 exportgraphics(fig000,figname)
                 %
                 figure(fig0000);
@@ -432,7 +451,7 @@ for cc = 1:length(CASES)
                        'xtick',[],'xaxislocation','top','ticklength',2*get(cb,'ticklength'),...
                        'fontsize',6,'tickdir','out')
                 xlabel('rms$(\bar{v})$ [m/s]','interpreter','latex')
-                figname = [figDIR,'rms_y_speed_',CASE,'_',RUN,'.pdf'];
+                figname = [figDIR,'rms_y_speed_',CASE,'_',RUN,'.png'];
                 exportgraphics(fig0000,figname)
                 %
                 
@@ -447,7 +466,7 @@ for cc = 1:length(CASES)
                        'xtick',[],'xaxislocation','top','ticklength',2*get(cb,'ticklength'),...
                        'fontsize',6,'tickdir','out')
                 xlabel('$\langle\omega\rangle$ [1/s]','interpreter','latex')
-                figname = [figDIR,'vorticity_',CASE,'_',RUN,'.pdf'];
+                figname = [figDIR,'vorticity_',CASE,'_',RUN,'.png'];
                 exportgraphics(fig00000,figname)
                 %
                 plotFlag=0;
@@ -462,7 +481,8 @@ end
 fileOut = [outDIR,'BulkVelocityStats.mat'];
 save(fileOut, 'x',      'y' ,'INFO',...
        'dETA', 'Uscale'     , 'Uscale0',...     
-        'Uex','Uex_mean'    ,'Uex_eddy',...
+     'Uex','Uex_mean'    ,'Uex_eddy',...
+     'Uex_vs_x','Uex_mean_vs_x'    ,'Uex_eddy_vs_x',...     
         'ENS','ENS_mean'    ,'ENS_eddy',...
        'Umax','Umax_mean'   ,'Umax_eddy',...
      'Umax_vs_t','Umax_eddy_vs_t',...
@@ -471,8 +491,10 @@ save(fileOut, 'x',      'y' ,'INFO',...
      'Umax_vs_t_BP','Umax_eddy_vs_t_BP',...     
 'Vmean_trough','Veddy_trough','Umean_crest',...
  'Ueddy_crest','Umean_BP'    ,'Ueddy_BP',...
-'Uex_channel', 'Uex_mean_channel' , 'Uex_eddy_channel',...
-'Uex_ambient', 'Uex_mean_ambient' , 'Uex_eddy_ambient',...
+     'Uex_channel', 'Uex_mean_channel' , 'Uex_eddy_channel',...
+'Uex_channel_vs_x', 'Uex_mean_channel_vs_x' , 'Uex_eddy_channel_vs_x',...     
+     'Uex_ambient', 'Uex_mean_ambient' , 'Uex_eddy_ambient',...
+'Uex_ambient_vs_x', 'Uex_mean_ambient_vs_x' , 'Uex_eddy_ambient_vs_x',...     
 'Urms_channel', 'Urms_mean_channel' , 'Urms_eddy_channel',...
 'Urms_ambient', 'Urms_mean_ambient' , 'Urms_eddy_ambient',...
 'ENS_channel', 'ENS_mean_channel' , 'ENS_eddy_channel',...

@@ -1,10 +1,80 @@
 %% create compendium plot of exchange and enstrophy for a set of runs:
+%
+% 1) compare maximum rip-current velocity across runs:
+%    a) estimate a constant scaling parameter:
+%           U_moulton = c_zero_spread U_rip;
+%       coefficient c_zero_spread should be estimated for each grid based on
+%       the three varying wave-height runs h=0.5m, 1m, and 1.5m.
+%    b) create a graphing convention:
+%             grid (offshore / onshore) or just leave this?
+%             channel width -> shape
+%             wave height   -> size
+%             spread        -> color
+%
+% 2) same for exchange velocity:
+% 3) search for parameter to collapse directional spread
+%    c) in channel
+%    d) in ambient.
+%
 clear all
 close all
 %% 0) where are we looking? archiving?
-rootDIR  = '/data2/ripchannel/'
-figDIR   = '/data2/ripchannel/figures/'
-outDIR   = '/data2/ripchannel/mat_data/'
+rootDIR  = '/scratch/grimesdj/ripchannel/';
+figDIR   = '/scratch/grimesdj/ripchannel/figures/';
+outDIR   = '/scratch/grimesdj/ripchannel/mat_data/';
+
+fin = fullfile(outDIR,'BulkVelocityStats.mat');
+load(fin)
+
+%% 1) grid permutations:
+possible_heights  = unique(height);
+possible_channel_length = unique(channel_length);
+% the bar/terrace have unique x-shore locations:
+% possible_bar_location = unique(bar_location);
+% do not treat the bar location as a fitting parameter
+
+varNames = {'Channel Width','N','N-fit','c_max','c_ex'};
+varTypes = ["double", "double","double","double","double"];
+cff      = table('Size', [0, length(varNames)], 'VariableNames',varNames,'VariableTypes',varTypes);
+
+cff_max  = nan(size(Umax));
+cff_ex   = nan(size(Uex ));
+perm     = 0;
+for ii=1:length(possible_channel_length)
+    for jj=1:length(possible_bar_location)
+        perm = perm+1;
+        idx0 = find(...%bar_location==possible_bar_location(jj) & ...
+                    channel_length==possible_channel_length(ii));
+
+        idx  = find(...%bar_location==possible_bar_location(jj) & ...
+                    channel_length==possible_channel_length(ii) & ...
+                    spread<=1);
+
+        if numel(idx)==1
+            fprintf('\n only one zero-spread case: %s, setting coefficients to 1\n',INFO(idx).runName)
+            cff(perm,:) = {...%possible_bar_location(jj),...
+                           possible_channel_length(ii),...
+                           numel(idx0), numel(idx), 1, 1};
+            cff_max(idx0)= 1;
+            cff_ex(idx0) = 1;            
+        else
+            tmp1        = Umax(idx)'\Uscale0(idx)';
+            tmp2        = Uex_channel (dum,idx)'\Uscale0(idx)';
+            if tmp2==0;
+                return
+            end
+            cff(perm,:) = {...%possible_bar_location(jj),...
+                           possible_channel_length(ii),...
+                           numel(idx0), numel(idx), tmp1, tmp2};
+            cff_max(idx0)= tmp1;
+            cff_ex(idx0) = tmp2;            
+        end
+    end
+end
+    
+disp(cff)
+
+
 
 %% size for height
 possible_heights = [0.5 1.0 1.5];
