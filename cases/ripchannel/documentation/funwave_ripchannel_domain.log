@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/MacPorts 2023.66589_3) (preloaded format=pdflatex 2023.7.26)  9 OCT 2026 15:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/MacPorts 2023.66589_3) (preloaded format=pdflatex 2023.7.26)  24 NOV 2026 08:17
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -734,41 +734,42 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 19.
 
 (/opt/local/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [1
-
-{/opt/local/var/db/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (3.3067pt too wide) in paragraph at lines 303--304
+)
+Overfull \hbox (3.3067pt too wide) in paragraph at lines 297--298
  [][] 
  []
 
-[2] [3] [4] (./funwave_ripchannel_domain.aux) ) 
+[1
+
+{/opt/local/var/db/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
+[4] (./funwave_ripchannel_domain.aux) ) 
 Here is how much of TeX's memory you used:
  25017 strings out of 477139
  646692 string characters out of 5813068
- 1886388 words of memory out of 5000000
+ 1883388 words of memory out of 5000000
  44893 multiletter control sequences out of 15000+600000
  524122 words of font info for 80 fonts, out of 8000000 for 9000
  430 hyphenation exceptions out of 8191
  102i,19n,104p,796b,2175s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</opt/local/share/texmf-texlive/
-fonts/type1/public/amsfonts/cm/cmbx12.pfb></opt/local/share/texmf-texlive/fonts
-/type1/public/amsfonts/cm/cmex10.pfb></opt/local/share/texmf-texlive/fonts/type
-1/public/amsfonts/cm/cmmi10.pfb></opt/local/share/texmf-texlive/fonts/type1/pub
-lic/amsfonts/cm/cmmi6.pfb></opt/local/share/texmf-texlive/fonts/type1/public/am
-sfonts/cm/cmmi7.pfb></opt/local/share/texmf-texlive/fonts/type1/public/amsfonts
-/cm/cmmi8.pfb></opt/local/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cm
-mi9.pfb></opt/local/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pf
-b></opt/local/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></op
-t/local/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr17.pfb></opt/loca
-l/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr8.pfb></opt/local/share
-/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr9.pfb></opt/local/share/texmf-
-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></opt/local/share/texmf-texli
-ve/fonts/type1/public/amsfonts/cm/cmsy8.pfb></opt/local/share/texmf-texlive/fon
-ts/type1/public/amsfonts/cm/cmti10.pfb></opt/local/share/texmf-texlive/fonts/ty
-pe1/public/amsfonts/cm/cmtt10.pfb></opt/local/share/texmf-texlive/fonts/type1/p
-ublic/amsfonts/cm/cmtt12.pfb></opt/local/share/texmf-texlive/fonts/type1/public
-/amsfonts/symbols/msam10.pfb>
-Output written on funwave_ripchannel_domain.pdf (4 pages, 231653 bytes).
+</opt/local/share/texmf-texlive/fonts/ty
+pe1/public/amsfonts/cm/cmbx12.pfb></opt/local/share/texmf-texlive/fonts/type1/p
+ublic/amsfonts/cm/cmex10.pfb></opt/local/share/texmf-texlive/fonts/type1/public
+/amsfonts/cm/cmmi10.pfb></opt/local/share/texmf-texlive/fonts/type1/public/amsf
+onts/cm/cmmi6.pfb></opt/local/share/texmf-texlive/fonts/type1/public/amsfonts/c
+m/cmmi7.pfb></opt/local/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi
+8.pfb></opt/local/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi9.pfb>
+</opt/local/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></opt/
+local/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></opt/local/
+share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr17.pfb></opt/local/share/
+texmf-texlive/fonts/type1/public/amsfonts/cm/cmr8.pfb></opt/local/share/texmf-t
+exlive/fonts/type1/public/amsfonts/cm/cmr9.pfb></opt/local/share/texmf-texlive/
+fonts/type1/public/amsfonts/cm/cmsy10.pfb></opt/local/share/texmf-texlive/fonts
+/type1/public/amsfonts/cm/cmsy8.pfb></opt/local/share/texmf-texlive/fonts/type1
+/public/amsfonts/cm/cmti10.pfb></opt/local/share/texmf-texlive/fonts/type1/publ
+ic/amsfonts/cm/cmtt10.pfb></opt/local/share/texmf-texlive/fonts/type1/public/am
+sfonts/cm/cmtt12.pfb></opt/local/share/texmf-texlive/fonts/type1/public/amsfont
+s/symbols/msam10.pfb>
+Output written on funwave_ripchannel_domain.pdf (4 pages, 227333 bytes).
 PDF statistics:
  110 PDF objects out of 1000 (max. 8388607)
  67 compressed objects within 1 object stream

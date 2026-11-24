@@ -82,13 +82,7 @@ The wavemaker region is in $9~\unit{m}$ depth and the width is set to
 one wavelength, $W_\mathrm{\rm WM}=\lambda$. Onshore and offshore of the wavemaker are
 flat regions to allow the waves to adjust before approaching the slope
 and sponge, resulting in a cross-shore domain width of $W_x\approx682$ m and
-$x_{\rm WM}\approx505$ m. 
-
-\emph{where should I discuss the waves simulated for the analysis?
-  This section is just info pertinent to the grid...}
-
-
-Offshore of the wavemaker, a $70\mbox{-}\unit{m}$
+$x_{\rm WM}\approx505$ m.  Offshore of the wavemaker, a $70\mbox{-}\unit{m}$
 wide sponge layer is used to absorb incoming waves using a combination
 of the Larson-Dansy 1983 direct sponge and a friction/drag type
 sponge. To minimize wave reflections from the sponge layer,
@@ -358,7 +352,8 @@ Grid prefix & Feature family & $x_c$ [m] & $w_c$ [m] & $a_c$ [m]\\
 
 \section{Alongshore domain and rip-channel geometry}
 All two-dimensional rip-channel grids use $L_y=3000$ m, with periodic
-alongshore boundaries.  The channel is centered at $y=L_y/2$ and
+alongshore boundaries. The alongshore resolution is $\Delta y=1$ m and
+cross-shore resolution is $\Delta x = 0.5$ m. The channel is centered at $y=L_y/2$ and
 attenuates the Gaussian bar/terrace amplitude in $y$ following,
 \begin{align}
  B(x,y) &= B(x)\left[1-r_c\exp\left(-\frac{1}{2}\left(\frac{y-L_y/2}{\ell_c}\right)^2\right)\right],\\
@@ -367,56 +362,36 @@ attenuates the Gaussian bar/terrace amplitude in $y$ following,
 where $r_c=1$ for the rip-channel grids analyzed here. Consequently,
 the bar/terrace perturbation vanishes at the channel centerline.  The
 parameter $\ell_c$ is the Gaussian alongshore scale and varied from
-25m-150m (Figure~\ref{fig:ripchannel_geometry}b).
-
-% \begin{figure}[htbp]
-% \centering
-% \begin{tikzpicture}[x=0.015cm,y=0.003cm,>=Latex]
-%   \draw[thick] (0,0) rectangle (600,3000);
-%   \fill[gray!18] (100,0) rectangle (260,3000);
-%   \node[rotate=90] at (180,400) {bar/terrace zone};
-%   % gaussian channel represented as widening white cut through feature
-%   \fill[white] plot[smooth] coordinates {(100,1200) (130,1300) (180,1400) (250,1500) (180,1600) (130,1700) (100,1800)} -- (100,1200);
-%   \draw[dashed,thick] (0,1500)--(600,1500) node[right] {$y=L_y/2$};
-%   \draw[<->] (300,1500)--(300,1650) node[midway,right] {$\ell_c$ (schematic)};
-%   \draw[->] (420,500)--(520,500) node[midway,below] {$+x$};
-%   \draw[->] (420,500)--(420,900) node[midway,left] {$+y$};
-%   \node[align=center] at (470,2350) {$L_y=3000$ m\\periodic in $y$};
-% \end{tikzpicture}
-% \caption{Plan-view schematic of the alongshore domain.  The white indentation represents Gaussian removal of the bar/terrace feature at the rip centerline, not a hard-edged channel.}
-% \label{fig:alongshore}
-% \end{figure}
-
-The grid suffix maps to $\ell_c$ as
+25m-150m (Figure~\ref{fig:ripchannel_geometry}b). The grid suffix maps to $\ell_c$ as,
 \begin{equation}
 \texttt{Rip0}:100~\mathrm{m},\qquad
 \texttt{Rip1}:50~\mathrm{m},\qquad
 \texttt{Rip2}:25~\mathrm{m},\qquad
-\texttt{Rip3}:150~\mathrm{m}.
+\texttt{Rip3}:150~\mathrm{m},
 \end{equation}
-For intuition, the full width between the two $e^{-1/2}$ points is $2\ell_c$, while the Gaussian FWHM is $2\sqrt{2\ln2}\,\ell_c\approx2.355\ell_c$.  These are derived width measures; the model itself is parameterized by $\ell_c$.
+giving a full-width (between $e^{-1/2}$ points) of $2\ell_c$.
 
 \section{Analyzed parameter space}
 All five run families use $T_p=10$ s and normally incident waves
 ($\theta_p=0^\circ$).  Their parameter combinations are summarized in
-Table~\ref{tab:families}.  Each listed wave combination is crossed
-with every listed grid in that family.
-
-The irregular wavemaker option
-\texttt{WK\_NEW\_IRR} is used, but the source code is modified to use
-the maximum possible angular resolution at peak period by default and
-remove wave components whose amplitude is below
-$10^{-6}~\unit{m}$. When shifting directional wave components from a
-regular grid to the nearest allowable mode, pairs of wave components
-with the same alongshore mode and frequency difference
+Table~\ref{tab:families}.  The irregular wavemaker option
+\texttt{WK\_NEW\_IRR} was used, with $N_{\rm freq}=1364$ unique
+frequencies spread over $N_{\rm freq}=31$ directional bins. The source
+code was modified to use the maximum possible angular resolution at
+peak period by default and remove wave components whose amplitude is
+below $10^{-6}~\unit{m}$. When shifting directional wave components
+from a regular grid to the nearest allowable mode, pairs of wave
+components with the same alongshore mode and frequency difference
 $f_i-f_j<0.25(f_{\rm max}-f_{\rm min}) N_{\rm \theta}/N_{\rm freq}$
-are combined to conserve wave energy and reduce computational overhead.
+were combined to conserve wave energy and reduce computational
+overhead. For example, the $\sigma_{theta}=1^\circ$ runr retained 267
+wave-components and completed the $8500-$s run in 1.8 days, whereas
+$\sigma_{theta}=10^\circ$ run retained 1291 and took 6.4 days.
 
 \begin{table}[htbp]
 \centering
 \caption{Run-family matrix for the simulations currently being
-  analyzed. ***Need to add missing gapRip-barRip0 to complete
-  parameter space.}
+  analyzed.}
 \label{tab:families}
 \small
 \begin{tabularx}{\textwidth}{l c c c X}
@@ -425,7 +400,7 @@ Family & $H_s$ [m] & $T_p$ [s] & Spread [deg] & Bathymetric grids\\
 \midrule
 \texttt{spreadRip} & 1.0 & 10 & 1, 2, 4, 10, 20 & \texttt{barRip1}, \texttt{terRip1}\\
 \texttt{highRip}   & 1.5 & 10 & 1, 10 & \texttt{barRip1}, \texttt{terRip1}\\
-\texttt{gapRip}    & 1.0 & 10 & 1, 10 & \texttt{barRip2}, \texttt{barRip3}, \texttt{terRip0}, \texttt{terRip2}, \texttt{terRip3}\\
+\texttt{gapRip}    & 1.0 & 10 & 1, 10 & \texttt{barRip[0,2,3]}, \texttt{terRip[0,2,3]},\\
 \texttt{highRip1}  & 0.5, 1.0, 1.5 & 10 & 1, 10 & \texttt{bar1Rip1}, \texttt{ter1Rip1}\\
 \texttt{gapRip1}   & 1.0 & 10 & 1, 10 & \texttt{bar1Rip0--3}, \texttt{ter1Rip0--3}\\
 \bottomrule
@@ -450,7 +425,11 @@ Terrace & shoreward/lower (\texttt{ter1Rip*}) & $\checkmark$ & $\checkmark$ & $\
 \end{tabular}
 \end{table}
 
-The experiment therefore separates three principal controls: (i) cross-shore bathymetric morphology (bar versus terrace, including the shoreward/lower ``1'' variants), (ii) alongshore rip-channel scale $\ell_c$, and (iii) offshore wave forcing through $H_s$ and directional spread.  Peak period and mean direction are held fixed for the five analysis families considered here.
+The experiment therefore separates three principal controls: (i)
+cross-shore bathymetric morphology (bar versus terrace, including the
+shoreward/lower variants), (ii) alongshore rip-channel scale $\ell_c$,
+and (iii) offshore wave forcing through $H_s$ and directional spread.
+Peak period and mean direction are currently fixed.
 
 \section{Implementation notes}
 The run builder forms every permutation of the selected heights, periods, directional spreads, and directions, then combines these wave cases with each requested grid.  Bathymetry and gauge files are generated once per grid name and referenced by the FUNWAVE input file.  For the two-dimensional cases, $\Delta x=0.5$ m and $\Delta y=1$ m.  The generated input passes the grid dimensions, bathymetry file, wavemaker location/depth, $H_s$, $T_p$, peak direction, directional spread, and gauge definitions to FUNWAVE before appending the common sample-input controls.
